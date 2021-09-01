@@ -516,9 +516,9 @@
     "id": "GOURMAND",
     "name": { "str": "Gourmand" },
     "points": 2,
-    "consume_time_modifier": 1.25,
+    "consume_time_modifier": 0.8,
     "description": "You eat faster, and can eat and drink more, than anyone else!  You also enjoy food more; delicious food is better for your morale, and you don't mind unsavory meals as much.  Activate to skip prompt for overeating.",
-    "category": [ "MOUSE", "LUPINE" ],
+    "category": [ "MOUSE", "BEHEMOTH", "LUPINE" ],
     "valid": false,
     "active": true,
     "stomach_size_multiplier": 2.0
@@ -570,7 +570,7 @@
     "points": 1,
     "description": "There's something about you that creatures find frightening, and they are more likely to try to flee.",
     "starting_trait": true,
-    "category": [ "BEAST", "INSECT", "CHIMERA" ],
+    "category": [ "BEAST", "INSECT", "BEHEMOTH", "CHIMERA" ],
     "social_modifiers": { "intimidate": 15 }
   },
   {
@@ -581,7 +581,7 @@
     "description": "It's very unlikely that you will catch ambient diseases like the cold or flu.",
     "starting_trait": true,
     "changes_to": [ "DISIMMUNE" ],
-    "category": [ "CATTLE", "RAT", "MEDICAL" ]
+    "category": [ "CATTLE", "RAT", "BEHEMOTH", "MEDICAL" ]
   },
   {
     "type": "mutation",
@@ -696,6 +696,7 @@
     "description": "For your whole life you've been forbidden from indulging in your peculiar tastes.  Now the world's ended, and you'll be damned if anyone is going to tell you that you can't eat people.",
     "starting_trait": true,
     "valid": false,
+    "category": [ "BEHEMOTH" ],
     "cancels": [ "VEGETARIAN", "HERBIVORE", "RUMINANT", "GRAZER" ],
     "flags": [ "CANNIBAL" ]
   },
@@ -921,6 +922,7 @@
     "starting_trait": true,
     "valid": false,
     "purifiable": false,
+    "category": [ "BEHEMOTH" ],
     "types": [ "HEALING" ],
     "healing_resting": -0.9,
     "mending_modifier": 0.1
@@ -986,7 +988,7 @@
     "description": "Things just keep getting you down.  You tend to be unhappy, and it takes some doing to cheer you up.",
     "starting_trait": true,
     "cancels": [ "OPTIMISTIC" ],
-    "category": [ "URSINE", "LIZARD", "CHIMERA" ]
+    "category": [ "URSINE", "LIZARD", "BEHEMOTH", "CHIMERA" ]
   },
   {
     "type": "mutation",
@@ -1251,7 +1253,7 @@
     "starting_trait": true,
     "cancels": [ "ANIMALEMPATH" ],
     "changes_to": [ "ANIMALDISCORD2" ],
-    "category": [ "LUPINE", "BEAST", "RAPTOR", "INSECT" ]
+    "category": [ "LUPINE", "BEAST", "BEHEMOTH", "RAPTOR", "INSECT" ]
   },
   {
     "type": "mutation",
@@ -1741,7 +1743,7 @@
     "description": "Your teeth have grown into two-inch-long fangs, allowing you to make an extra attack when conditions favor it.",
     "types": [ "TEETH" ],
     "changes_to": [ "SABER_TEETH", "SHARKTEETH" ],
-    "category": [ "LIZARD", "FISH", "LUPINE", "FELINE", "CHIMERA" ],
+    "category": [ "LIZARD", "FISH", "LUPINE", "FELINE", "BEHEMOTH", "CHIMERA" ],
     "attacks": [
       {
         "attack_text_u": "You sink your fangs into %s",
@@ -3003,7 +3005,7 @@
     "description": "Your immune system is particularly good at resisting infections.  You have an increased chance for bad wounds and infections to heal on their own, and only suffer reduced penalties from them.",
     "starting_trait": true,
     "changes_to": [ "INFIMMUNE" ],
-    "category": [ "TROGLOBITE", "RAT", "MEDICAL" ]
+    "category": [ "TROGLOBITE", "RAT", "BEHEMOTH", "MEDICAL" ]
   },
   {
     "type": "mutation",
@@ -3035,7 +3037,7 @@
     "prereqs": [ "DISRESISTANT" ],
     "prereqs2": [ "INFRESIST" ],
     "flags": [ "PARAIMMUNE" ],
-    "category": [ "ELFA", "CHIMERA", "MEDICAL", "SLIME" ]
+    "category": [ "ELFA", "CHIMERA", "BEHEMOTH", "MEDICAL", "SLIME" ]
   },
   {
     "type": "mutation",
@@ -3224,7 +3226,7 @@
     "name": { "str": "Saprovore" },
     "points": 2,
     "description": "Your digestive system is specialized to allow you to consume decaying material.  You can eat rotten food, albeit for less nutrition than usual.",
-    "category": [ "TROGLOBITE", "CHIMERA" ],
+    "category": [ "TROGLOBITE", "BEHEMOTH", "CHIMERA" ],
     "flags": [ "IMMUNE_SPOIL" ]
   },
   {
@@ -3306,8 +3308,8 @@
     "prereqs": [ "NAUSEA", "VOMITOUS", "POISRESIST", "POISONOUS" ],
     "//": "Yes, you eventually got over the massive digestive upset.  Mutations aren't easy on a system!",
     "prereqs2": [ "SAPROVORE", "TOLERANCE" ],
-    "threshreq": [ "THRESH_TROGLOBITE", "THRESH_CHIMERA", "THRESH_RAPTOR", "THRESH_RAT", "THRESH_MOUSE" ],
-    "category": [ "TROGLOBITE", "RAPTOR", "RAT", "CHIMERA" ],
+    "threshreq": [ "THRESH_TROGLOBITE", "THRESH_CHIMERA", "THRESH_BEHEMOTH", "THRESH_RAPTOR", "THRESH_RAT", "THRESH_MOUSE" ],
+    "category": [ "TROGLOBITE", "RAPTOR", "RAT", "BEHEMOTH", "CHIMERA" ],
     "valid": false
   },
   {
@@ -3317,9 +3319,9 @@
     "points": 4,
     "description": "Eating rotting, long-dead flesh is good for the struggle, and safe--if still completely unappealing--for you.",
     "prereqs": [ "EATPOISON" ],
-    "threshreq": [ "THRESH_CHIMERA", "THRESH_RAT", "THRESH_MOUSE" ],
+    "threshreq": [ "THRESH_CHIMERA", "THRESH_RAT", "THRESH_BEHEMOTH", "THRESH_MOUSE" ],
     "cancels": [ "VEGETARIAN", "HERBIVORE", "RUMINANT", "GRAZER" ],
-    "category": [ "RAT", "CHIMERA", "MOUSE" ],
+    "category": [ "RAT", "CHIMERA", "BEHEMOTH", "MOUSE" ],
     "flags": [ "IMMUNE_SPOIL" ],
     "valid": false
   },
@@ -3369,8 +3371,8 @@
     "description": "Your particular metabolism allows you to burn calories at a prodigious rate to regenerate tissues in a matter of minutes; this is, however, a very wasteful process.  Activate to start healing.",
     "prereqs": [ "HUNGER3" ],
     "types": [ "METABOLISM" ],
-    "threshreq": [ "THRESH_CHIMERA" ],
-    "category": [ "CHIMERA" ],
+    "threshreq": [ "THRESH_BEHEMOTH", "THRESH_CHIMERA" ],
+    "category": [ "BEHEMOTH", "CHIMERA" ],
     "valid": false,
     "active": true,
     "transform": {
@@ -3391,7 +3393,8 @@
     "hunger": true,
     "healing_awake": 300.0,
     "healing_resting": 350.0,
-    "transform": { "target": "EATHEALTH", "msg_transform": "Your hyper-metabolism slows down.", "active": false, "moves": 0 }
+    "transform": { "target": "EATHEALTH", "msg_transform": "Your hyper-metabolism slows down.", "active": false, "moves": 0 },
+    "delete": { "category": [ "BEHEMOTH", "CHIMERA" ] }
   },
   {
     "type": "mutation",
@@ -3696,10 +3699,18 @@
     "description": "You can survive injuries that would incapacitate humans: you get a 20% bonus to all hit points.  Stacks with Tough, etc.",
     "social_modifiers": { "intimidate": 2 },
     "prereqs": [ "LARGE_OK", "HUGE_OK", "STR_UP_3", "STR_UP_4", "MASOCHIST_MED" ],
-    "threshreq": [ "THRESH_URSINE", "THRESH_CATTLE", "THRESH_CHIMERA", "THRESH_MEDICAL", "THRESH_LIZARD", "THRESH_BEAST" ],
+    "threshreq": [
+      "THRESH_URSINE",
+      "THRESH_CATTLE",
+      "THRESH_CHIMERA",
+      "THRESH_BEHEMOTH",
+      "THRESH_MEDICAL",
+      "THRESH_LIZARD",
+      "THRESH_BEAST"
+    ],
     "cancels": [ "FLIMSY", "FLIMSY2", "FLIMSY3", "GLASSJAW" ],
     "changes_to": [ "MUT_TOUGH2" ],
-    "category": [ "URSINE", "CATTLE", "CHIMERA", "BEAST", "LIZARD", "MEDICAL" ],
+    "category": [ "URSINE", "CATTLE", "CHIMERA", "BEAST", "LIZARD", "BEHEMOTH", "MEDICAL" ],
     "hp_modifier_secondary": 0.2
   },
   {
@@ -3711,10 +3722,10 @@
     "social_modifiers": { "intimidate": 3 },
     "valid": false,
     "prereqs": [ "MUT_TOUGH" ],
-    "threshreq": [ "THRESH_URSINE", "THRESH_CATTLE", "THRESH_CHIMERA", "THRESH_MEDICAL" ],
+    "threshreq": [ "THRESH_URSINE", "THRESH_CATTLE", "THRESH_CHIMERA", "THRESH_BEHEMOTH", "THRESH_MEDICAL" ],
     "cancels": [ "FLIMSY", "FLIMSY2", "FLIMSY3", "GLASSJAW" ],
     "changes_to": [ "MUT_TOUGH3" ],
-    "category": [ "URSINE", "CATTLE", "CHIMERA", "MEDICAL" ],
+    "category": [ "URSINE", "CATTLE", "CHIMERA", "BEHEMOTH", "MEDICAL" ],
     "hp_modifier_secondary": 0.3
   },
   {
@@ -3852,10 +3863,11 @@
       "THRESH_FELINE",
       "THRESH_URSINE",
       "THRESH_LIZARD",
+      "THRESH_BEHEMOTH",
       "THRESH_SPIDER"
     ],
     "cancels": [ "PACIFIST" ],
-    "category": [ "BEAST", "RAPTOR", "CHIMERA", "LUPINE", "FELINE", "URSINE", "LIZARD", "SPIDER" ],
+    "category": [ "BEAST", "RAPTOR", "CHIMERA", "LUPINE", "FELINE", "URSINE", "LIZARD", "BEHEMOTH", "SPIDER" ],
     "flags": [ "PRED1" ]
   },
   {
@@ -3877,10 +3889,11 @@
       "THRESH_FELINE",
       "THRESH_URSINE",
       "THRESH_LIZARD",
+      "THRESH_BEHEMOTH",
       "THRESH_SPIDER"
     ],
     "cancels": [ "PACIFIST" ],
-    "category": [ "BEAST", "RAPTOR", "CHIMERA", "LUPINE", "FELINE", "URSINE", "LIZARD", "SPIDER" ],
+    "category": [ "BEAST", "RAPTOR", "CHIMERA", "LUPINE", "FELINE", "URSINE", "LIZARD", "BEHEMOTH", "SPIDER" ],
     "flags": [ "PRED2" ]
   },
   {
@@ -3904,10 +3917,11 @@
       "THRESH_FELINE",
       "THRESH_URSINE",
       "THRESH_LIZARD",
+      "THRESH_BEHEMOTH",
       "THRESH_SPIDER"
     ],
     "cancels": [ "PACIFIST" ],
-    "category": [ "BEAST", "RAPTOR", "CHIMERA", "LUPINE", "FELINE", "URSINE", "LIZARD", "SPIDER" ],
+    "category": [ "BEAST", "RAPTOR", "CHIMERA", "LUPINE", "FELINE", "URSINE", "LIZARD", "BEHEMOTH", "SPIDER" ],
     "passive_mods": { "int_mod": -1 },
     "flags": [ "PRED3" ]
   },
@@ -3923,8 +3937,8 @@
     "prereqs": [ "CARNIVORE", "THRESH_URSINE" ],
     "prereqs2": [ "PRED3" ],
     "cancels": [ "PACIFIST" ],
-    "threshreq": [ "THRESH_BEAST", "THRESH_RAPTOR", "THRESH_CHIMERA", "THRESH_URSINE" ],
-    "category": [ "BEAST", "RAPTOR", "CHIMERA", "URSINE" ],
+    "threshreq": [ "THRESH_BEAST", "THRESH_RAPTOR", "THRESH_CHIMERA", "THRESH_BEHEMOTH", "THRESH_URSINE" ],
+    "category": [ "BEAST", "RAPTOR", "CHIMERA", "BEHEMOTH", "URSINE" ],
     "passive_mods": { "int_mod": -3 },
     "flags": [ "PRED4" ]
   },
@@ -4004,6 +4018,71 @@
     "hunger": true,
     "thirst": true,
     "movecost_modifier": 0.75
+  },
+  {
+    "type": "mutation",
+    "id": "AUTODIGESTION",
+    "name": { "str": "Autodigestion" },
+    "points": -6,
+    "description": "Your digestive system has vastly expanded.  On the downside, if you don't feed yourself regularly, your body begins to digest itself.",
+    "valid": false,
+    "purifiable": false,
+    "cost": -1,
+    "time": 10,
+    "hunger": true,
+    "stomach_size_multiplier": 3.0,
+    "leads_to": [ "MOUTH_BEHEMOTH" ],
+    "category": [ "BEHEMOTH" ],
+    "triggers": [
+      [
+        {
+          "trigger_type": "HUNGER",
+          "threshold_low": 200,
+          "msg_on": { "text": "A sharp, acidic pain strikes from your empty stomach!", "rating": "bad" }
+        }
+      ]
+    ],
+    "transform": { "target": "AUTODIGESTION_active", "msg_transform": "You begin digesting yourself.", "active": true, "moves": 1 }
+  },
+  {
+    "type": "mutation",
+    "id": "AUTODIGESTION_active",
+    "name": { "str": "Autodigestion (on)" },
+    "points": -6,
+    "description": "Your extensive digestive system is in uproar, starting to eat you alive.",
+    "copy-from": "AUTODIGESTION",
+    "valid": false,
+    "triggers": [
+      [
+        {
+          "trigger_type": "HUNGER",
+          "threshold_low": 110,
+          "msg_off": { "text": "You've sated yourself... for now.", "rating": "mixed" }
+        }
+      ]
+    ],
+    "transform": { "target": "AUTODIGESTION", "msg_transform": "You stop digesting yourself.", "active": false, "moves": 1 },
+    "healing_awake": -80.0,
+    "healing_resting": -25.0,
+    "delete": { "category": [ "BEHEMOTH" ] }
+  },
+  {
+    "type": "mutation",
+    "id": "MOUTH_BEHEMOTH",
+    "name": { "str": "Consuming Maw" },
+    "points": 8,
+    "visibility": 10,
+    "ugliness": 10,
+    "butchering_quality": 18,
+    "consume_time_modifier": 0.1,
+    "description": "Your ribs and intestines have realigned and torn open, giving you a horrendous maw to supplement and surpass your pathetic human mouth.",
+    "valid": false,
+    "purifiable": false,
+    "prereqs": [ "AUTODIGESTION" ],
+    "prereqs2": [ "VOMITOUS", "EATPOISON", "EATDEAD" ],
+    "threshreq": [ "THRESH_BEHEMOTH" ],
+    "category": [ "BEHEMOTH" ],
+    "enchantments": [ { "condition": "ALWAYS", "modified_bodyparts": [ { "gain": "behemoth_mouth" } ] } ]
   },
   {
     "type": "mutation",
@@ -4241,7 +4320,7 @@
     "mixed_effect": true,
     "description": "You've put on some additional weight around your body.  It slows you down a little, but helps your swimming and warmth.",
     "prereqs": [ "STR_UP", "STR_UP_2", "STR_UP_3", "STR_UP_4" ],
-    "leads_to": [ "HIBERNATE" ],
+    "leads_to": [ "HIBERNATE", "FATTANK" ],
     "category": [ "URSINE" ],
     "movecost_swim_modifier": 0.95,
     "armor": [
@@ -4251,6 +4330,23 @@
       }
     ],
     "movecost_modifier": 1.05
+  },
+  {
+    "type": "mutation",
+    "id": "FATTANK",
+    "name": { "str": "Immensity" },
+    "points": 6,
+    "visibility": 10,
+    "ugliness": 8,
+    "valid": false,
+    "purifiable": false,
+    "description": "The more you feast, the more you grow, the more meat you have to discard.  With your increased constitution, it's very difficult to strike you down, but incredibly easy to hit you.",
+    "prereqs": [ "FAT" ],
+    "prereqs2": [ "HUGE", "HUGE_OK" ],
+    "threshreq": [ "THRESH_BEHEMOTH" ],
+    "category": [ "BEHEMOTH" ],
+    "fat_to_max_hp": 3.0,
+    "dodge_modifier": -3
   },
   {
     "type": "mutation",
@@ -4266,7 +4362,7 @@
     "prereqs": [ "STR_UP", "STR_UP_2", "STR_UP_3", "STR_UP_4" ],
     "cancels": [ "SMALL", "SMALL2" ],
     "changes_to": [ "LARGE_OK", "HUGE" ],
-    "category": [ "URSINE", "CATTLE", "LIZARD", "CHIMERA" ],
+    "category": [ "URSINE", "CATTLE", "LIZARD", "BEHEMOTH", "CHIMERA" ],
     "passive_mods": { "str_mod": 2 },
     "stomach_size_multiplier": 1.5,
     "weight_capacity_modifier": 1.05
@@ -4304,7 +4400,7 @@
     "prereqs2": [ "STR_UP_3", "STR_UP_4" ],
     "cancels": [ "SMALL", "SMALL2" ],
     "changes_to": [ "HUGE_OK" ],
-    "category": [ "URSINE", "CATTLE" ],
+    "category": [ "URSINE", "BEHEMOTH", "CATTLE" ],
     "passive_mods": { "str_mod": 4 },
     "hp_adjustment": -6,
     "fatigue_modifier": 0.15,
@@ -4328,7 +4424,7 @@
     "cancels": [ "SMALL", "SMALL2" ],
     "threshreq": [ "THRESH_URSINE", "THRESH_CATTLE" ],
     "leads_to": [ "MUT_TOUGH" ],
-    "category": [ "URSINE", "CATTLE" ],
+    "category": [ "URSINE", "BEHEMOTH", "CATTLE" ],
     "passive_mods": { "str_mod": 4 },
     "restricts_gear": [ "torso", "leg_l", "leg_r", "arm_l", "arm_r", "hand_l", "hand_r", "head", "foot_l", "foot_r" ],
     "destroys_gear": true,
@@ -4366,7 +4462,7 @@
     "prereqs": [ "STR_UP_2" ],
     "changes_to": [ "STR_UP_4" ],
     "leads_to": [ "MUT_TOUGH" ],
-    "category": [ "CHIMERA", "LUPINE", "TROGLOBITE" ],
+    "category": [ "CHIMERA", "LUPINE", "BEHEMOTH", "TROGLOBITE" ],
     "passive_mods": { "str_mod": 4 }
   },
   {
@@ -4868,7 +4964,7 @@
     "description": "Your visage is disgusting and liable to induce vomiting.  People will not want to interact with you unless they have a very good reason to.",
     "cancels": [ "PRETTY", "BEAUTIFUL", "BEAUTIFUL2", "BEAUTIFUL3" ],
     "prereqs": [ "DEFORMED2" ],
-    "category": [ "SLIME", "RAT", "CHIMERA" ]
+    "category": [ "SLIME", "RAT", "BEHEMOTH", "CHIMERA" ]
   },
   {
     "type": "mutation",
@@ -5078,7 +5174,7 @@
     "starting_trait": true,
     "types": [ "METABOLISM" ],
     "changes_to": [ "HUNGER2", "MET_RAT" ],
-    "category": [ "RAT", "ALPHA", "MEDICAL", "ELFA", "BEAST", "SLIME", "RAPTOR", "CHIMERA", "MOUSE" ],
+    "category": [ "BEHEMOTH", "RAT", "ALPHA", "MEDICAL", "ELFA", "BEAST", "SLIME", "RAPTOR", "CHIMERA", "MOUSE" ],
     "metabolism_modifier": 0.5,
     "stamina_regen_modifier": 0.1
   },
@@ -5109,7 +5205,7 @@
     "prereqs": [ "HUNGER" ],
     "changes_to": [ "HUNGER3" ],
     "types": [ "METABOLISM" ],
-    "category": [ "BEAST", "SLIME", "RAPTOR" ],
+    "category": [ "BEHEMOTH", "BEAST", "SLIME", "RAPTOR" ],
     "metabolism_modifier": 1.0,
     "stamina_regen_modifier": 0.3
   },
@@ -5122,7 +5218,7 @@
     "prereqs": [ "HUNGER2" ],
     "leads_to": [ "EATHEALTH" ],
     "types": [ "METABOLISM" ],
-    "category": [ "CHIMERA" ],
+    "category": [ "BEHEMOTH", "CHIMERA" ],
     "metabolism_modifier": 2.0,
     "stamina_regen_modifier": 0.5
   },
@@ -5581,7 +5677,7 @@
     "description": "Your body's ability to digest fruits, vegetables, grains and nuts is severely hampered.  You cannot eat anything besides meat.",
     "cancels": [ "VEGETARIAN", "HERBIVORE", "RUMINANT", "GRAZER" ],
     "leads_to": [ "SAPROVORE" ],
-    "category": [ "LIZARD", "BEAST", "SPIDER", "CHIMERA", "RAPTOR", "FELINE" ],
+    "category": [ "LIZARD", "BEAST", "SPIDER", "BEHEMOTH", "CHIMERA", "RAPTOR", "FELINE" ],
     "vitamin_rates": [ [ "vitC", -1200 ] ]
   },
   {
@@ -5856,7 +5952,7 @@
     "mixed_effect": true,
     "description": "You have a threatening snarl in your voice.  Persuading NPCs will be near impossible, but threatening them will be much easier.",
     "prereqs": [ "GROWL" ],
-    "category": [ "BEAST", "CHIMERA", "FELINE", "LUPINE" ],
+    "category": [ "BEAST", "CHIMERA", "BEHEMOTH", "FELINE", "LUPINE" ],
     "social_modifiers": { "persuade": -60, "lie": -40, "intimidate": 20 }
   },
   {
@@ -6381,6 +6477,16 @@
     "name": { "str": "Diminutive" },
     "points": 1,
     "description": "So much food, everywhere!  And nobody's even guarding it anymore!  These are good times.",
+    "valid": false,
+    "purifiable": false,
+    "threshold": true
+  },
+  {
+    "type": "mutation",
+    "id": "THRESH_BEHEMOTH",
+    "name": { "str": "Behemoth" },
+    "points": 1,
+    "description": "Engorged on flesh and bone, you've practically become one of them.  The apocalypse is delicious.",
     "valid": false,
     "purifiable": false,
     "threshold": true

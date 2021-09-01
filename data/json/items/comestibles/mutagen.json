@@ -114,6 +114,16 @@
     "use_action": { "type": "mutagen_iv", "mutation_category": "CHIMERA" }
   },
   {
+    "id": "iv_mutagen_behemoth",
+    "copy-from": "iv_mutagen_flavor",
+    "type": "COMESTIBLE",
+    "name": { "str_sp": "behemoth serum" },
+    "description": "A super-concentrated mutagen the sickening color of bile.  You need a syringe to inject it… if you really want to?",
+    "color": "red",
+    "healthy": -5,
+    "use_action": { "type": "mutagen_iv", "mutation_category": "BEHEMOTH" }
+  },
+  {
     "id": "iv_mutagen_elfa",
     "copy-from": "iv_mutagen_flavor",
     "type": "COMESTIBLE",
@@ -264,13 +274,13 @@
     "id": "mutagen_jabberblood",
     "copy-from": "mutagen",
     "type": "COMESTIBLE",
-    "name": { "str": "congealed blood" },
+    "name": { "str": "behemoth blood" },
     "description": "A thick, soupy red liquid.  It looks and smells disgusting, and seems to bubble with an intelligence of its own…",
     "color": "red",
     "addiction_potential": 0,
     "charges": 5,
     "fun": -10,
-    "use_action": { "type": "mutagen", "mutation_category": "BEAST" }
+    "use_action": { "type": "mutagen", "mutation_category": "BEHEMOTH" }
   },
   {
     "id": "mutagen_alpha",
