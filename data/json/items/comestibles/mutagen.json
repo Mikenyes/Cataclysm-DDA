@@ -63,7 +63,8 @@
     "price": 2500000,
     "color": "red",
     "healthy": -4,
-    "use_action": { "type": "mutagen_iv", "mutation_category": "ALPHA" }
+    "use_action": { "type": "mutagen_iv", "mutation_category": "ALPHA" },
+    "vitamins": [ [ "mutagen_alpha", 500 ] ]
   },
   {
     "id": "iv_mutagen_beast",
@@ -189,7 +190,8 @@
     "price": 300000,
     "color": "light_red",
     "healthy": -4,
-    "use_action": { "type": "mutagen_iv", "mutation_category": "MEDICAL" }
+    "use_action": { "type": "mutagen_iv", "mutation_category": "MEDICAL" },
+    "vitamins": [ [ "mutagen_medical", 500 ] ]
   },
   {
     "id": "iv_mutagen_plant",
@@ -321,7 +323,8 @@
     "description": "An extremely rare mutagen cocktail.",
     "price": 500000,
     "//": "*May* have gotten a dose smuggled out.",
-    "use_action": { "type": "mutagen", "mutation_category": "ALPHA" }
+    "use_action": { "type": "mutagen", "mutation_category": "ALPHA" },
+    "vitamins": [ [ "mutagen_alpha", 250 ] ]
   },
   {
     "id": "mutagen_beast",
@@ -422,7 +425,8 @@
     "name": { "str": "medical mutagen" },
     "price": 150000,
     "//": "*May* have been considered for commercial trading.",
-    "use_action": { "type": "mutagen", "mutation_category": "MEDICAL" }
+    "use_action": { "type": "mutagen", "mutation_category": "MEDICAL" },
+    "vitamins": [ [ "mutagen_medical", 500 ] ]
   },
   {
     "id": "mutagen_plant",
@@ -505,7 +509,8 @@
     "copy-from": "mutagen_flavor",
     "type": "COMESTIBLE",
     "name": { "str": "mouse mutagen" },
-    "use_action": { "type": "mutagen", "mutation_category": "MOUSE" }
+    "use_action": { "type": "mutagen", "mutation_category": "MOUSE" },
+    "vitamins": [ [ "mutagen_mouse", 250 ] ]
   },
   {
     "id": "iv_mutagen_rabbit",
@@ -513,7 +518,8 @@
     "type": "COMESTIBLE",
     "name": { "str": "rabbit serum" },
     "description": "An orange colored serum.  You need a syringe to inject it… if you really want to?",
-    "use_action": { "type": "mutagen_iv", "mutation_category": "RABBIT" }
+    "use_action": { "type": "mutagen_iv", "mutation_category": "RABBIT" },
+    "vitamins": [ [ "mutagen_rabbit", 500 ] ]
   },
   {
     "id": "mutagen_rabbit",
@@ -521,7 +527,8 @@
     "type": "COMESTIBLE",
     "name": { "str": "rabbit mutagen" },
     "description": "A white, clear colored mutagen.  You can drink it… if you really want to?",
-    "use_action": { "type": "mutagen", "mutation_category": "RABBIT" }
+    "use_action": { "type": "mutagen", "mutation_category": "RABBIT" },
+    "vitamins": [ [ "mutagen_rabbit", 250 ] ]
   },
   {
     "id": "purifier",

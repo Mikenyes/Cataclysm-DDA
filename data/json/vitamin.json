@@ -71,6 +71,17 @@
     "disease_excess": [ [ 100, 499 ], [ 500, 1000 ] ]
   },
   {
+    "id": "mutagen_alpha",
+    "type": "vitamin",
+    "vit_type": "counter",
+    "name": { "str": "Alpha Mutagen" },
+    "excess": "mutagen_alpha",
+    "min": 0,
+    "max": 1000,
+    "rate": "0 s",
+    "disease_excess": [ [ 100, 499 ], [ 500, 1000 ] ]
+  },
+  {
     "id": "mutagen_batrachian",
     "type": "vitamin",
     "vit_type": "counter",
@@ -203,11 +214,44 @@
     "disease_excess": [ [ 100, 499 ], [ 500, 1000 ] ]
   },
   {
+    "id": "mutagen_medical",
+    "type": "vitamin",
+    "vit_type": "counter",
+    "name": { "str": "Medical Mutagen" },
+    "excess": "mutagen_medical",
+    "min": 0,
+    "max": 1000,
+    "rate": "0 s",
+    "disease_excess": [ [ 100, 499 ], [ 500, 1000 ] ]
+  },
+  {
+    "id": "mutagen_mouse",
+    "type": "vitamin",
+    "vit_type": "counter",
+    "name": { "str": "Mouse Mutagen" },
+    "excess": "mutagen_mouse",
+    "min": 0,
+    "max": 1000,
+    "rate": "0 s",
+    "disease_excess": [ [ 100, 499 ], [ 500, 1000 ] ]
+  },
+  {
     "id": "mutagen_plant",
     "type": "vitamin",
     "vit_type": "counter",
     "name": { "str": "Plant Mutagen" },
     "excess": "mutagen_plant",
+    "min": 0,
+    "max": 1000,
+    "rate": "0 s",
+    "disease_excess": [ [ 100, 499 ], [ 500, 1000 ] ]
+  },
+  {
+    "id": "mutagen_rabbit",
+    "type": "vitamin",
+    "vit_type": "counter",
+    "name": { "str": "Rabbit Mutagen" },
+    "excess": "mutagen_rabbit",
     "min": 0,
     "max": 1000,
     "rate": "0 s",

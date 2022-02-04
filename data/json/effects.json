@@ -754,6 +754,13 @@
   },
   {
     "type": "effect_type",
+    "id": "mutagen_alpha",
+    "//name": [ "Alpha Mutagen" ],
+    "desc": [ "You consumed alpha mutagen.", "You feel better.  So much better." ],
+    "max_intensity": 2
+  },
+  {
+    "type": "effect_type",
     "id": "mutagen_batrachian",
     "//name": [ "Frog Mutagen" ],
     "desc": [ "You consumed frog mutagen.", "Now, to find a quiet pond and settle for the wait…" ],
@@ -838,6 +845,20 @@
   },
   {
     "type": "effect_type",
+    "id": "mutagen_medical",
+    "//name": [ "Medical Mutagen" ],
+    "desc": [ "You consumed medical mutagen.", "You consumed medical mutagen.  You should do that again." ],
+    "max_intensity": 2
+  },
+  {
+    "type": "effect_type",
+    "id": "mutagen_mouse",
+    "//name": [ "Mouse Mutagen" ],
+    "desc": [ "You consumed mouse mutagen.", "Your heart pounds, knowing that predators could approach at any second!" ],
+    "max_intensity": 2
+  },
+  {
+    "type": "effect_type",
     "id": "mutagen_plant",
     "//name": [ "Plant Mutagen" ],
     "desc": [
@@ -851,6 +872,13 @@
     "id": "mutagen_raptor",
     "//name": [ "Raptor Mutagen" ],
     "desc": [ "You consumed raptor mutagen.", "Sharpen your talons and clean your feathers.  Your prey won't give itself easily." ],
+    "max_intensity": 2
+  },
+  {
+    "type": "effect_type",
+    "id": "mutagen_rabbit",
+    "//name": [ "Rabbit Mutagen" ],
+    "desc": [ "You consumed rabbit mutagen.", "So much to do!  Better hop to it!" ],
     "max_intensity": 2
   },
   {

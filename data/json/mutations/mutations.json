@@ -945,6 +945,7 @@
     "name": { "str": "Skilled Liar" },
     "points": 1,
     "description": "You have no qualms about bending the truth, and have practically no tells.  Telling lies and otherwise bluffing will be much easier for you.",
+    "category": [ "ALPHA" ],
     "cancels": [ "TRUTHTELLER" ],
     "social_modifiers": { "lie": 40 }
   },
@@ -5641,8 +5642,74 @@
     "description": "Your body is slowly wasting away!",
     "types": [ "HEALING" ],
     "prereqs": [ "ROT2" ],
+    "changes_to": [ "ROT4", "ROT4_ON" ],
     "category": [ "ALPHA" ],
-    "healing_awake": -0.08
+    "healing_awake": -0.12,
+    "healing_resting": 0
+  },
+  {
+    "type": "mutation",
+    "id": "ROT4",
+    "purifiable": false,
+    "name": { "str": "Prime Dependance" },
+    "points": 10,
+    "bodytemp_modifiers": [ -1200, -1200 ],
+    "description": "Your body metabolizes alpha mutagen to sustain a wide array of enhanced functions, but will rapidly decompose when that runs out.",
+    "types": [ "HEALING" ],
+    "prereqs": [ "ROT3" ],
+    "threshreq": [ "THRESH_ALPHA" ],
+    "category": [ "ALPHA" ],
+    "cardio_multiplier": 1.25,
+    "metabolism_modifier": -0.25,
+    "vitamin_rates": [ [ "mutagen_alpha", 700 ] ],
+    "triggers": [
+      [
+        {
+          "condition": { "compare_int": [ { "u_val": "vitamin", "name": "mutagen_alpha" }, { "const": 100 } ], "op": "<=" },
+          "msg_on": { "text": "The agony has started again.  You need more alpha mutagen.  Now.", "rating": "bad" }
+        }
+      ]
+    ],
+    "enchantments": [
+      { "condition": "ALWAYS", "values": [ { "value": "LEARNING_FOCUS", "add": 10 } ] },
+      { "condition": "ALWAYS", "values": [ { "value": "SPEED", "multiply": 0.05 } ] }
+    ],
+    "transform": {
+      "target": "ROT4_ON",
+      "msg_transform": "Your bones are melting, your skin flaking to dust, and every organ you have left screams in need.",
+      "active": false,
+      "moves": 0
+    }
+  },
+  {
+    "type": "mutation",
+    "id": "ROT4_ON",
+    "valid": false,
+    "purifiable": false,
+    "name": { "str": "Prime Decomposition" },
+    "points": -20,
+    "bodytemp_modifiers": [ -3000, -3000 ],
+    "description": "Your body is rapidly dismantling itself, turning your cells to ash for lack of alpha mutagen.",
+    "types": [ "HEALING" ],
+    "vitamin_rates": [ [ "redcells", 2 ] ],
+    "thirst_modifier": 2.0,
+    "cardio_multiplier": 0.3,
+    "healing_awake": -10,
+    "healing_resting": -2,
+    "triggers": [
+      [
+        {
+          "condition": { "compare_int": [ { "u_val": "vitamin", "name": "mutagen_alpha" }, { "const": 250 } ], "op": ">" },
+          "msg_on": { "text": "The alpha mutagen coursing through your veins is enough to keep you gloriously alive.", "rating": "good" }
+        }
+      ]
+    ],
+    "transform": {
+      "target": "ROT4",
+      "msg_transform": "You can never let this happen again, you can never feel that pain again.  You need more mutagen.",
+      "active": false,
+      "moves": 0
+    }
   },
   {
     "type": "mutation",
