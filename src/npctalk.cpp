@@ -3502,23 +3502,18 @@ void talk_effect_fun_t::set_weighted_list_eocs( const JsonObject &jo,
         const std::string &member )
 {
     weighted_int_list<effect_on_condition_id> eocs;
+    dialogue d( get_talker_for( get_avatar() ), nullptr );
     for( JsonArray pair : jo.get_array( member ) ) {
-        effect_on_condition_id eoc;
-        int weight = 1;
-        for( JsonValue jv : pair ) {
-            if( jv.test_int() ) {
-                weight = jv.get_int();
-            } else {
-                eoc = effect_on_conditions::load_inline_eoc( jv, "" );
-            }
-        }
-        eocs.add( eoc, weight );
+        JsonValue jv = pair.next_value();
+        std::function<int( const dialogue & )> get_weight = conditional_t< dialogue >::get_get_int(
+                    pair.next_object() );
+        eocs.add( effect_on_conditions::load_inline_eoc( jv, "" ), get_weight( d ) );
     }
-    function = [eocs]( const dialogue & ) {
-        dialogue d( get_talker_for( get_avatar() ), nullptr );
 
+    function = [eocs]( const dialogue & ) {
+        dialogue d2( get_talker_for( get_avatar() ), nullptr );
         effect_on_condition_id eoc = *eocs.pick();
-        eoc->activate( d );
+        eoc->activate( d2 );
     };
 }
 

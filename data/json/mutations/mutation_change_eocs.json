@@ -1,0 +1,133 @@
+[
+  {
+    "type": "effect_on_condition",
+    "id": "changing_initiate_check",
+    "//": "Give player a CHANGING trait, maybe.  Should be based on blood levels of mutagen",
+    "recurrence_min": "30 s",
+    "recurrence_max": "45 s",
+    "condition": {
+      "and": [
+        { "compare_int": [ { "u_val": "vitamin", "name": "mutagen" }, ">=", { "const": 200 } ] },
+        { "not": { "u_has_any_trait": [ "CHANGING_GENERIC", "CHANGING_ECTO" ] } }
+      ]
+    },
+    "deactivate_condition": { "u_has_any_trait": [ "CHANGING_GENERIC", "CHANGING_ECTO" ] },
+    "effect": [
+      { "u_add_var": "mutation_temp", "type": "number", "context": "mutation", "value": "500" },
+      { "u_add_var": "mutation_progress", "type": "number", "context": "mutation", "value": "0" },
+      { "arithmetic": [ { "u_val": "vitamin", "name": "mutagen" }, "-=", { "const": 30 } ] },
+      { "arithmetic": [ { "u_val": "vitamin", "name": "mutagen" }, "-=", { "rand": 20 } ] },
+      {  "u_adjust_var": "mutation_temp", "type": "number", "context": "mutation", "adjustment": 1 },
+      {
+        "set_weighted_list_eocs": [
+          [ "changing_failure", { "const": 1000 } ],
+          [
+            { "id": "changing_successful_ecto", "effect": [ { "u_message": "You feel a strange chill come over you, filling every part of your body." }, { "u_add_trait": "CHANGING_ECTO" } ] },
+            { "const": 500 }
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "changing_failure",
+    "effect": [ { "u_message": "You feel a shift in your body, but it quickly reverts." } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "changing_ecto",
+    "//": "Ectothermic progression tier one",
+    "recurrence_min": "10 s",
+    "recurrence_max": "30 s",
+    "condition": {
+      "and": [
+        { "u_has_trait": "CHANGING_ECTO" },
+        { "compare_int": [ { "u_val": "vitamin", "name": "mutagen" }, ">=", { "const": 100 } ] }
+      ]
+    },
+    "deactivate_condition": { "not": { "u_has_trait": "CHANGING_ECTO" } },
+    "effect": [
+      {
+          "u_adjust_var": "mutation_progress", "type": "number", "context": "mutation", "adjustment": 1
+      },
+      { "arithmetic": [ { "u_val": "vitamin", "name": "mutagen" }, "-=", { "const": 1 } ] },
+      { "set_queue_effect_on_condition": [ "changing_ecto2" ] }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "changing_ecto2",
+    "//": "Ectothermic progression tier two",
+    "condition": {
+      "and": [
+        { "u_compare_var": "mutation_progress", "type": "number", "context": "mutation", "op": ">=", "value": 10 },
+        { "compare_int": [ { "u_val": "vitamin", "name": "mutagen" }, ">=", { "const": 400 } ] }
+      ]
+    },
+    "effect": [
+      {
+        "set_queue_effect_on_condition": [
+          {
+            "id": "changing_ecto2_add",
+            "//": "First mutation.  Should weight based on blood levels of various mutagens, in future", 
+            "condition": { "u_compare_var": "mutation_progress", "type": "number", "context": "mutation", "op": "==", "value": 10 },
+            "effect": [
+              { "u_add_var": "mutation_temp", "type": "number", "context": "mutation", "value": "500" },
+              { "u_add_var": "mutation_temp2", "type": "number", "context": "mutation", "value": "500" },
+              {
+                "u_adjust_var": "mutation_temp", "type": "number", "context": "mutation", "adjustment": 1
+              },
+              {
+                "u_adjust_var": "mutation_temp2", "type": "number", "context": "mutation", "adjustment": 1
+              },
+              {
+                "arithmetic": [
+                  { "u_val": "var", "var_name": "mutation_temp2", "type": "number", "context": "mutation" },
+                  "+=",
+                  { "u_val": "vitamin", "name": "mutagen_alpha" }
+                ]
+              },
+              {
+                "set_weighted_list_eocs": [
+                  [
+                    {
+                      "id": "changing_ecto_COLDBLOOD",
+                      "effect": [
+                        { "u_add_trait": "COLDBLOOD" },
+                        { "arithmetic": [ { "u_val": "vitamin", "name": "mutagen_lizard" }, "-=", { "const": 600 } ] }
+                      ]
+                    },
+                    { "u_val": "var", "var_name": "mutation_temp", "type": "number", "context": "mutation" }
+                  ],
+                  [
+                    {
+                      "id": "changing_ecto_ROT1",
+                      "effect": [
+                        { "u_add_trait": "ROT1" },
+                        { "arithmetic": [ { "u_val": "vitamin", "name": "mutagen_alpha" }, "-=", { "const": 600 } ] }
+                      ]
+                    },
+                    { "u_val": "var", "var_name": "mutation_temp2", "type": "number", "context": "mutation" }
+                  ]
+                ]
+              }
+            ],
+            "false_effect": [
+              { "u_message": "You feel the possibility to change, but you just can't quite reach it.", "type": "bad" },
+              { "u_add_var": "mutation_progress", "type": "number", "context": "mutation", "value": "5" }
+            ]
+          },
+          "changing_ecto3"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "changing_ecto3",
+    "//": "Ectothermic progression tier three - currently empty",
+    "condition": { "u_compare_var": "mutation_progress", "type": "integer", "context": "mutation", "op": ">", "value": 100 },
+    "effect": [  ]
+  }
+]

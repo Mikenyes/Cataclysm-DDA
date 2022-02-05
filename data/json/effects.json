@@ -753,8 +753,9 @@
       "You can feel your insides shifting.  It feels… nice.",
       "Your innards churn in an unnatural fashion- if you survive this, you'll be a changed… something."
     ],
+    "main_parts_only": true,
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -103 ], "hurt_tick": [ 125 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 125 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -767,6 +768,7 @@
       "You feel better.  So much better.",
       "The world needs you, surely this won't kill you.  It better not."
     ],
+    "main_parts_only": true,
     "max_intensity": 3,
     "base_mods": {
       "str_mod": [ 0.4 ],
@@ -776,8 +778,9 @@
       "vomit_chance": [ 1100 ],
       "vomit_tick": [ 120 ],
       "hurt_min": [ 1 ],
-      "hurt_chance": [ -43 ],
-      "hurt_tick": [ 25 ]
+      "hurt_max": [ 2 ],
+      "hurt_chance": [ -22 ],
+      "hurt_tick": [ 60 ]
     },
     "scaling_mods": {
       "str_mod": [ 0.8 ],
@@ -799,7 +802,7 @@
       "You feel like you're about to croak… if you don't keel over first."
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -813,7 +816,7 @@
       "Primal instincts overwhelm your mind, and your saliva has turned to froth."
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -827,7 +830,7 @@
       "Goosebumps stand across your entire body.  You keep feeling that you're falling."
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -841,7 +844,7 @@
       "Dull fog clouds your mind, and you feel close to vomiting."
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -855,7 +858,7 @@
       "Your skin crawls and your extremities twitch and jerk."
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -869,7 +872,7 @@
       "Your body heaving and changing is a rough time, but what doesn't kill you makes you stronger."
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -883,7 +886,7 @@
       "You see stars.  You see so many stars."
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -897,7 +900,7 @@
       "If this overdose kills you, you've got a few more lives… right?"
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -911,7 +914,7 @@
       "You feel clammy yet dry, absolutely parched no matter how much you drink."
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -925,7 +928,7 @@
       "You can't stop shivering and twitching.  Life is so short."
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -939,7 +942,7 @@
       "Your limbs slump, almost ready to tear right out of their sockets."
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -953,7 +956,7 @@
       "You pant, unable to stop pacing and full of hunger."
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -967,7 +970,7 @@
       "You're tearing yourself apart.  Need to get fixed back up.  Should put some stitches in you."
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -981,7 +984,7 @@
       "Your heart hammers away with a rapid, irregular beat."
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -995,7 +998,7 @@
       "Your processes are slowing.  You would make great fertilizer."
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -1009,7 +1012,7 @@
       "Delusions fill your head… is it true?  Did you die long ago?"
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -1023,7 +1026,7 @@
       "Will you have a future?  Will any new generations be born… your pounding head is full of worry."
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -1037,7 +1040,7 @@
       "Dull aches fill your stomach, and every smell seems offensive."
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -1047,7 +1050,7 @@
     "name": [ "Slime Mutagen", "High Slime Mutagen", "Slime Mutagen Overdose" ],
     "desc": [ "You consumed slime mutagen.", "Plop.", "Brain… melting…" ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -1061,7 +1064,7 @@
       "You itch terribly, and your tongue feels salty and dry."
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -1075,7 +1078,7 @@
       "Perhaps you should curl up, just curl up and give in."
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -1089,7 +1092,7 @@
       "Deep and dark, your bones ache and twist."
     ],
     "max_intensity": 3,
-    "base_mods": { "hurt_min": [ 1 ], "hurt_chance": [ -43 ], "hurt_tick": [ 75 ] },
+    "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 75 ] },
     "scaling_mods": { "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
@@ -1108,10 +1111,11 @@
       "fatigue_min": [ 1 ],
       "fatigue_chance": [ 1100 ],
       "hurt_min": [ 1 ],
-      "hurt_chance": [ -103 ],
+      "hurt_max": [ 2 ],
+      "hurt_chance": [ -22 ],
       "hurt_tick": [ 75 ]
     },
-    "scaling_mods": { "per_mod": [ -1 ], "dex_mod": [ -1 ], "fatigue_chance": [ -500 ], "hurt_chance": [ 51 ] },
+    "scaling_mods": { "per_mod": [ -1 ], "dex_mod": [ -1 ], "fatigue_chance": [ -500 ], "hurt_chance": [ 21 ] },
     "blood_analysis_description": "Mutagen Contamination"
   },
   {

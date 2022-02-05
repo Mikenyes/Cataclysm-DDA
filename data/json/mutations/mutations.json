@@ -1,6 +1,23 @@
 [
   {
     "type": "mutation",
+    "id": "CHANGING_GENERIC",
+    "name": { "str": "Changing" },
+    "points": 0,
+    "mixed_effect": true,
+    "description": "You can feel your body changing, slowly becoming something else."
+  },
+  {
+    "type": "mutation",
+    "id": "CHANGING_ECTO",
+    "name": { "str": "Low Body Heat" },
+    "points": 1,
+    "mixed_effect": true,
+    "bodytemp_modifiers": [ -200, -200 ],
+    "description": "Your body temperature seems a bit lower, though not enough to slow your daily routine."
+  },
+  {
+    "type": "mutation",
     "id": "FLEET",
     "name": { "str": "Fleet-Footed" },
     "points": 2,
