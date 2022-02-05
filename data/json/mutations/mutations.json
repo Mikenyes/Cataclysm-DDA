@@ -5665,7 +5665,7 @@
     "triggers": [
       [
         {
-          "condition": { "compare_int": [ { "u_val": "vitamin", "name": "mutagen_alpha" }, { "const": 100 } ], "op": "<=" },
+          "condition": { "compare_int": [ { "u_val": "vitamin", "name": "mutagen_alpha" }, "<=", { "const": 100 } ] },
           "msg_on": { "text": "The agony has started again.  You need more alpha mutagen.  Now.", "rating": "bad" }
         }
       ]
@@ -5699,7 +5699,7 @@
     "triggers": [
       [
         {
-          "condition": { "compare_int": [ { "u_val": "vitamin", "name": "mutagen_alpha" }, { "const": 250 } ], "op": ">" },
+          "condition": { "compare_int": [ { "u_val": "vitamin", "name": "mutagen_alpha" }, ">", { "const": 250 } ] },
           "msg_on": { "text": "The alpha mutagen coursing through your veins is enough to keep you gloriously alive.", "rating": "good" }
         }
       ]
@@ -6859,7 +6859,39 @@
     "description": "You're the perfect candidate to tidy this mess.",
     "valid": false,
     "purifiable": false,
-    "threshold": true
+    "threshold": true,
+    "vitamins_absorb_multi": [
+      [
+        "all",
+        [
+          [ "mutagen", 0.9 ],
+          [ "mutagen_alpha", 1.2 ],
+          [ "mutagen_batrachian", 0.4 ],
+          [ "mutagen_beast", 0.4 ],
+          [ "mutagen_bird", 0.4 ],
+          [ "mutagen_cattle", 0.4 ],
+          [ "mutagen_cephalopod", 0.4 ],
+          [ "mutagen_chimera", 0.2 ],
+          [ "mutagen_elfa", 0.6 ],
+          [ "mutagen_feline", 0.4 ],
+          [ "mutagen_fish", 0.4 ],
+          [ "mutagen_insect", 0.4 ],
+          [ "mutagen_lizard", 0.4 ],
+          [ "mutagen_lupine", 0.4 ],
+          [ "mutagen_medical", 0.6 ],
+          [ "mutagen_mouse", 0.4 ],
+          [ "mutagen_plant", 0.4 ],
+          [ "mutagen_rabbit", 0.4 ],
+          [ "mutagen_raptor", 0.4 ],
+          [ "mutagen_rat", 0.4 ],
+          [ "mutagen_slime", 0.4 ],
+          [ "mutagen_snail", 0.4 ],
+          [ "mutagen_spider", 0.4 ],
+          [ "mutagen_trog", 0.1 ],
+          [ "mutagen_ursine", 0.4 ]
+        ]
+      ]
+    ]
   },
   {
     "type": "mutation",
