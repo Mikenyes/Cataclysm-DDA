@@ -52,7 +52,7 @@
     "stim": -10,
     "addiction_potential": 12,
     "use_action": { "type": "mutagen_iv" },
-    "vitamins": [ [ "mutagen", 500 ] ]
+    "vitamins": [ [ "mutagen", 800 ] ]
   },
   {
     "id": "iv_mutagen_alpha",
@@ -300,7 +300,7 @@
     "name": { "str": "mutagen" },
     "addiction_potential": 6,
     "use_action": { "type": "mutagen", "is_strong": true },
-    "vitamins": [ [ "mutagen", 250 ], [ "mutagen", 125 ] ]
+    "vitamins": [ [ "mutagen", 400 ] ]
   },
   {
     "id": "mutagen_jabberblood",

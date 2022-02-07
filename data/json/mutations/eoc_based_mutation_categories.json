@@ -1,0 +1,10 @@
+[
+  {
+    "type": "mutation_category",
+    "id": "LEAF_ECTO",
+    "name": "Ectotherm",
+    "threshold_mut": "",
+    "mutagen_message": "You feel cold.",
+    "iv_message": "The injection feels ice cold."
+  }
+]

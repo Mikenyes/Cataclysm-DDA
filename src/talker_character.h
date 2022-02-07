@@ -156,6 +156,7 @@ class talker_character: public talker_character_const
         void set_mana_cur( int value ) override;
         void set_mutation( const trait_id &new_trait ) override;
         void unset_mutation( const trait_id &old_trait ) override;
+        void mutate_category( const mutation_category_id &mut_cat ) override;
         void set_skill_level( const skill_id &skill, int value ) override;
 
         void add_effect( const efftype_id &new_effect, const time_duration &dur,

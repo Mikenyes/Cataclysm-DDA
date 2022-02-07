@@ -2047,6 +2047,15 @@ void talk_effect_fun_t::set_remove_trait( const JsonObject &jo, const std::strin
     };
 }
 
+void talk_effect_fun_t::set_mutate_category( const JsonObject &jo, const std::string &member,
+                                       bool is_npc )
+{
+    str_or_var mut_cat = get_str_or_var( jo, member, true, "" );
+    function = [is_npc, mut_cat]( const dialogue & d ) {
+        d.actor( is_npc )->mutate_category( mutation_category_id( mut_cat.evaluate( d.actor( mut_cat.is_npc() ) ) ) );
+    };
+}
+
 void talk_effect_fun_t::set_add_bionic( const JsonObject &jo, const std::string &member,
                                         bool is_npc )
 {
@@ -3877,6 +3886,10 @@ void talk_effect_t::parse_sub_effect( const JsonObject &jo )
         subeffect_fun.set_remove_trait( jo, "u_lose_trait" );
     } else if( jo.has_string( "npc_lose_trait" ) ) {
         subeffect_fun.set_remove_trait( jo, "npc_lose_trait", is_npc );
+    } else if( jo.has_member( "u_mutate_category" ) ) {
+        subeffect_fun.set_mutate_category( jo, "u_mutate_category" );
+    } else if( jo.has_member( "npc_mutate_category" ) ) {
+        subeffect_fun.set_mutate_category( jo, "npc_mutate_category", is_npc );
     } else if( jo.has_int( "u_spend_cash" ) ) {
         int cash_change = jo.get_int( "u_spend_cash" );
         subeffect_fun.set_u_spend_cash( cash_change );
@@ -4044,6 +4057,10 @@ void talk_effect_t::parse_sub_effect( const JsonObject &jo )
         subeffect_fun.set_queue_effect_on_condition( jo, "npc_set_queue_eoc", true );
     } else if( jo.has_array( "set_weighted_list_eocs" ) ) {
         subeffect_fun.set_weighted_list_eocs( jo, "set_weighted_list_eocs", false );
+    } else if( jo.has_array( "u_set_weighted_list_eocs" ) ) {
+        subeffect_fun.set_queue_effect_on_condition( jo, "u_set_weighted_list_eocs", false );
+    } else if( jo.has_array( "npc_set_weighted_list_eocs" ) ) {
+        subeffect_fun.set_queue_effect_on_condition( jo, "npc_set_weighted_list_eocs", true );
     } else if( jo.has_member( "u_mod_healthy" ) ) {
         subeffect_fun.set_mod_healthy( jo, "u_mod_healthy", false );
     } else if( jo.has_member( "npc_mod_healthy" ) ) {
