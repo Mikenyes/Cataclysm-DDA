@@ -3499,21 +3499,22 @@ void talk_effect_fun_t::set_queue_effect_on_condition( const JsonObject &jo,
 }
 
 void talk_effect_fun_t::set_weighted_list_eocs( const JsonObject &jo,
-        const std::string &member )
+        const std::string &member, bool is_npc )
 {
-    weighted_int_list<effect_on_condition_id> eocs;
-    dialogue d( get_talker_for( get_avatar() ), nullptr );
-    for( JsonArray pair : jo.get_array( member ) ) {
-        JsonValue jv = pair.next_value();
-        std::function<int( const dialogue & )> get_weight = conditional_t< dialogue >::get_get_int(
-                    pair.next_object() );
-        eocs.add( effect_on_conditions::load_inline_eoc( jv, "" ), get_weight( d ) );
+    std::vector<std::pair<effect_on_condition_id, std::function<int( const dialogue & )>>> eoc_pairs;
+    for( JsonArray ja : jo.get_array( member ) ) {
+        JsonValue eoc = ja.next_value();
+        JsonObject weight = ja.next_object();
+        eoc_pairs.emplace_back( effect_on_conditions::load_inline_eoc( eoc, "" ), conditional_t< dialogue >::get_get_int( weight ) );
     }
-
-    function = [eocs]( const dialogue & ) {
-        dialogue d2( get_talker_for( get_avatar() ), nullptr );
-        effect_on_condition_id eoc = *eocs.pick();
-        eoc->activate( d2 );
+    function = [eoc_pairs, is_npc]( const dialogue & d ) {
+        weighted_int_list<effect_on_condition_id> eocs;
+        for( std::pair<effect_on_condition_id, std::function<int( const dialogue & )>> eoc_pair : eoc_pairs ) {
+            eocs.add( eoc_pair.first, eoc_pair.second( d ) );
+        }
+        effect_on_condition_id picked_eoc = *eocs.pick();
+        dialogue d2( get_talker_for( d.actor( is_npc )->get_character() ), nullptr );
+        picked_eoc->activate( d2 );
     };
 }
 
@@ -4042,7 +4043,7 @@ void talk_effect_t::parse_sub_effect( const JsonObject &jo )
     } else if( jo.has_array( "npc_set_queue_eoc" ) ) {
         subeffect_fun.set_queue_effect_on_condition( jo, "npc_set_queue_eoc", true );
     } else if( jo.has_array( "set_weighted_list_eocs" ) ) {
-        subeffect_fun.set_weighted_list_eocs( jo, "set_weighted_list_eocs" );
+        subeffect_fun.set_weighted_list_eocs( jo, "set_weighted_list_eocs", false );
     } else if( jo.has_member( "u_mod_healthy" ) ) {
         subeffect_fun.set_mod_healthy( jo, "u_mod_healthy", false );
     } else if( jo.has_member( "npc_mod_healthy" ) ) {

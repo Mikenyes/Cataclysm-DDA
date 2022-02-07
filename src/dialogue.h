@@ -110,7 +110,7 @@ struct talk_effect_fun_t {
         void set_make_sound( const JsonObject &jo, const std::string &member, bool is_npc );
         void set_queue_effect_on_condition( const JsonObject &jo, const std::string &member,
                                             bool is_npc = false );
-        void set_weighted_list_eocs( const JsonObject &jo, const std::string &member );
+        void set_weighted_list_eocs( const JsonObject &jo, const std::string &member, bool is_npc );
         void set_mod_healthy( const JsonObject &jo, const std::string &member, bool is_npc );
         void set_cast_spell( const JsonObject &jo, const std::string &member, bool is_npc,
                              bool targeted = false );

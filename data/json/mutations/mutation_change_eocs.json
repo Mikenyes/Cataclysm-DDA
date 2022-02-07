@@ -13,17 +13,24 @@
     },
     "deactivate_condition": { "u_has_any_trait": [ "CHANGING_GENERIC", "CHANGING_ECTO" ] },
     "effect": [
-      { "u_add_var": "mutation_temp", "type": "number", "context": "mutation", "value": "500" },
-      { "u_add_var": "mutation_progress", "type": "number", "context": "mutation", "value": "0" },
+      { "u_add_var": "mutation_temp", "type": "temp", "context": "mutation", "value": "500" },
+      { "u_lose_var": "mutation_progress", "type": "counter", "context": "mutation" },
+      { "u_lose_var": "mutation_progress2", "type": "counter", "context": "mutation" },
       { "arithmetic": [ { "u_val": "vitamin", "name": "mutagen" }, "-=", { "const": 30 } ] },
       { "arithmetic": [ { "u_val": "vitamin", "name": "mutagen" }, "-=", { "rand": 20 } ] },
-      {  "u_adjust_var": "mutation_temp", "type": "number", "context": "mutation", "adjustment": 1 },
+      { "arithmetic": [ { "u_val": "var", "var_name": "mutation_temp", "type": "temp", "context": "mutation" }, "+=", { "u_val": "vitamin", "name": "mutagen" } ] },
       {
         "set_weighted_list_eocs": [
-          [ "changing_failure", { "const": 1000 } ],
+          [ "changing_failure", { "const": 3000 } ],
           [
-            { "id": "changing_successful_ecto", "effect": [ { "u_message": "You feel a strange chill come over you, filling every part of your body." }, { "u_add_trait": "CHANGING_ECTO" } ] },
-            { "const": 500 }
+            {
+              "id": "changing_successful_ecto",
+              "effect": [
+                { "u_message": "You feel a strange chill come over you, filling every part of your body." },
+                { "u_add_trait": "CHANGING_ECTO" }
+              ]
+            },
+            { "u_val": "vitamin", "name": "mutagen" }
           ]
         ]
       }
@@ -33,6 +40,15 @@
     "type": "effect_on_condition",
     "id": "changing_failure",
     "effect": [ { "u_message": "You feel a shift in your body, but it quickly reverts." } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "changing_failure2",
+    "condition": { "u_has_var": "mutation_progress2", "type": "counter", "context": "mutation" },
+    "false_effect": [
+      { "u_message": "You feel the possibility to change, but you just can't quite reach it.", "type": "bad" },
+      { "u_add_var": "mutation_progress", "type": "counter", "context": "mutation", "value": "4" }
+    ]
   },
   {
     "type": "effect_on_condition",
@@ -48,9 +64,7 @@
     },
     "deactivate_condition": { "not": { "u_has_trait": "CHANGING_ECTO" } },
     "effect": [
-      {
-          "u_adjust_var": "mutation_progress", "type": "number", "context": "mutation", "adjustment": 1
-      },
+      { "u_adjust_var": "mutation_progress", "type": "counter", "context": "mutation", "adjustment": 1 },
       { "arithmetic": [ { "u_val": "vitamin", "name": "mutagen" }, "-=", { "const": 1 } ] },
       { "set_queue_effect_on_condition": [ "changing_ecto2" ] }
     ]
@@ -60,65 +74,54 @@
     "id": "changing_ecto2",
     "//": "Ectothermic progression tier two",
     "condition": {
-      "and": [
-        { "u_compare_var": "mutation_progress", "type": "number", "context": "mutation", "op": ">=", "value": 10 },
-        { "compare_int": [ { "u_val": "vitamin", "name": "mutagen" }, ">=", { "const": 400 } ] }
-      ]
+      "and": [ { "u_compare_var": "mutation_progress", "type": "counter", "context": "mutation", "op": ">=", "value": 10 } ]
     },
     "effect": [
       {
         "set_queue_effect_on_condition": [
           {
-            "id": "changing_ecto2_add",
-            "//": "First mutation.  Should weight based on blood levels of various mutagens, in future", 
-            "condition": { "u_compare_var": "mutation_progress", "type": "number", "context": "mutation", "op": "==", "value": 10 },
+            "id": "changing_ecto2_mutate",
+            "//": "First mutation.  Should weight based on blood levels of various mutagens, in future",
+            "condition": {
+              "and": [
+                { "u_compare_var": "mutation_progress", "type": "counter", "context": "mutation", "op": "==", "value": 10 },
+                { "compare_int": [ { "u_val": "vitamin", "name": "mutagen" }, ">=", { "const": 400 } ] }
+              ]
+            },
             "effect": [
-              { "u_add_var": "mutation_temp", "type": "number", "context": "mutation", "value": "500" },
-              { "u_add_var": "mutation_temp2", "type": "number", "context": "mutation", "value": "500" },
-              {
-                "u_adjust_var": "mutation_temp", "type": "number", "context": "mutation", "adjustment": 1
-              },
-              {
-                "u_adjust_var": "mutation_temp2", "type": "number", "context": "mutation", "adjustment": 1
-              },
-              {
-                "arithmetic": [
-                  { "u_val": "var", "var_name": "mutation_temp2", "type": "number", "context": "mutation" },
-                  "+=",
-                  { "u_val": "vitamin", "name": "mutagen_alpha" }
-                ]
-              },
+              { "u_add_var": "mutation_temp", "type": "temp", "context": "mutation", "value": "750" },
+              { "u_add_var": "mutation_temp2", "type": "temp", "context": "mutation", "value": "750" },
+              { "arithmetic": [ { "u_val": "var", "var_name": "mutation_temp", "type": "temp", "context": "mutation" }, "+=", { "u_val": "vitamin", "name": "mutagen_lizard" } ] },
+              { "arithmetic": [ { "u_val": "var", "var_name": "mutation_temp2", "type": "temp", "context": "mutation" }, "+=", { "u_val": "vitamin", "name": "mutagen_alpha" } ] },
               {
                 "set_weighted_list_eocs": [
                   [
                     {
-                      "id": "changing_ecto_COLDBLOOD",
+                      "id": "changing_ecto_LIGHTEATER",
                       "effect": [
-                        { "u_add_trait": "COLDBLOOD" },
+                        { "u_add_trait": "LIGHTEATER" },
+                        { "u_message": "You feel a tightening sensation in your stomach.", "type": "good" },
                         { "arithmetic": [ { "u_val": "vitamin", "name": "mutagen_lizard" }, "-=", { "const": 600 } ] }
                       ]
                     },
-                    { "u_val": "var", "var_name": "mutation_temp", "type": "number", "context": "mutation" }
+                    { "u_val": "var", "var_name": "mutation_temp", "type": "temp", "context": "mutation" }
                   ],
                   [
                     {
                       "id": "changing_ecto_ROT1",
                       "effect": [
                         { "u_add_trait": "ROT1" },
+                        { "u_message": "You feel a terrible muscle ache coming on.", "type": "bad" },
                         { "arithmetic": [ { "u_val": "vitamin", "name": "mutagen_alpha" }, "-=", { "const": 600 } ] }
                       ]
                     },
-                    { "u_val": "var", "var_name": "mutation_temp2", "type": "number", "context": "mutation" }
+                    { "u_val": "var", "var_name": "mutation_temp2", "type": "temp", "context": "mutation" }
                   ]
                 ]
               }
             ],
-            "false_effect": [
-              { "u_message": "You feel the possibility to change, but you just can't quite reach it.", "type": "bad" },
-              { "u_add_var": "mutation_progress", "type": "number", "context": "mutation", "value": "5" }
-            ]
-          },
-          "changing_ecto3"
+            "false_effect": [ { "set_queue_effect_on_condition": [ "changing_failure2" ] } ]
+          }
         ]
       }
     ]
