@@ -117,6 +117,30 @@
   },
   {
     "type": "mutation_type",
+    "id": "BUILD"
+  },
+  {
+    "type": "mutation_type",
+    "id": "SIZE"
+  },
+  {
+    "type": "mutation_type",
+    "id": "DURABILITY"
+  },
+  {
+    "type": "mutation_type",
+    "id": "SUNLIGHT"
+  },
+  {
+    "type": "mutation_type",
+    "id": "FLEXIBILITY"
+  },
+  {
+    "type": "mutation_type",
+    "id": "THIRST"
+  },
+  {
+    "type": "mutation_type",
     "id": "METABOLISM"
   },
   {

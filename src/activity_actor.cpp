@@ -171,6 +171,7 @@ static const itype_id itype_pseudo_bio_picklock( "pseudo_bio_picklock" );
 static const itype_id itype_splinter( "splinter" );
 static const itype_id itype_stick_long( "stick_long" );
 
+static const json_character_flag json_flag_KALUPTIC( "KALUPTIC" );
 static const json_character_flag json_flag_SUPER_HEARING( "SUPER_HEARING" );
 
 static const move_mode_id move_mode_prone( "prone" );
@@ -203,8 +204,6 @@ static const ter_str_id ter_t_underbrush_harvested_autumn( "t_underbrush_harvest
 static const ter_str_id ter_t_underbrush_harvested_spring( "t_underbrush_harvested_spring" );
 static const ter_str_id ter_t_underbrush_harvested_summer( "t_underbrush_harvested_summer" );
 static const ter_str_id ter_t_underbrush_harvested_winter( "t_underbrush_harvested_winter" );
-
-static const trait_id trait_SCHIZOPHRENIC( "SCHIZOPHRENIC" );
 
 std::string activity_actor::get_progress_message( const player_activity &act ) const
 {
@@ -1581,7 +1580,7 @@ bool read_activity_actor::player_read( avatar &you )
             }
 
             if( ( skill_level == islotbook->level || !skill_level.can_train() ) ||
-                ( learner->has_trait( trait_SCHIZOPHRENIC ) && !learner->has_effect( effect_took_thorazine ) &&
+                ( learner->count_trait_flag( json_flag_KALUPTIC ) > 0 && !learner->has_effect( effect_took_thorazine ) &&
                   one_in( 25 ) ) ) {
                 if( learner->is_avatar() ) {
                     add_msg( m_info, _( "You can no longer learn from %s." ), book->type_name() );
@@ -1720,7 +1719,7 @@ bool read_activity_actor::npc_read( npc &learner )
 
         if( display_messages &&
             ( ( skill_level == islotbook->level || !skill_level.can_train() ) ||
-              ( learner.has_trait( trait_SCHIZOPHRENIC ) && !learner.has_effect( effect_took_thorazine ) &&
+              ( learner.count_trait_flag( json_flag_KALUPTIC ) > 0 && !learner.has_effect( effect_took_thorazine ) &&
                 one_in( 25 ) ) ) ) {
             add_msg( m_info, _( "%s can no longer learn from %s." ), learner.disp_name(),
                      book->type_name() );

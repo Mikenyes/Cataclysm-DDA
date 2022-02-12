@@ -113,6 +113,7 @@ static const itype_id itype_smoxygen_tank( "smoxygen_tank" );
 
 static const json_character_flag json_flag_GILLS( "GILLS" );
 static const json_character_flag json_flag_GLARE_RESIST( "GLARE_RESIST" );
+static const json_character_flag json_flag_KALUPTIC( "KALUPTIC" );
 static const json_character_flag json_flag_MEND_ALL( "MEND_ALL" );
 static const json_character_flag json_flag_MEND_LIMB( "MEND_LIMB" );
 static const json_character_flag json_flag_RAD_DETECT( "RAD_DETECT" );
@@ -146,11 +147,7 @@ static const trait_id trait_NONADDICTIVE( "NONADDICTIVE" );
 static const trait_id trait_NOPAIN( "NOPAIN" );
 static const trait_id trait_PER_SLIME( "PER_SLIME" );
 static const trait_id trait_PYROMANIA( "PYROMANIA" );
-static const trait_id trait_RADIOACTIVE1( "RADIOACTIVE1" );
-static const trait_id trait_RADIOACTIVE2( "RADIOACTIVE2" );
-static const trait_id trait_RADIOACTIVE3( "RADIOACTIVE3" );
 static const trait_id trait_RADIOGENIC( "RADIOGENIC" );
-static const trait_id trait_SCHIZOPHRENIC( "SCHIZOPHRENIC" );
 static const trait_id trait_SHARKTEETH( "SHARKTEETH" );
 static const trait_id trait_SHELL2( "SHELL2" );
 static const trait_id trait_SHOUT1( "SHOUT1" );
@@ -158,7 +155,6 @@ static const trait_id trait_SHOUT2( "SHOUT2" );
 static const trait_id trait_SHOUT3( "SHOUT3" );
 static const trait_id trait_SNAIL_TRAIL( "SNAIL_TRAIL" );
 static const trait_id trait_SORES( "SORES" );
-static const trait_id trait_SUNBURN( "SUNBURN" );
 static const trait_id trait_TROGLO( "TROGLO" );
 static const trait_id trait_TROGLO2( "TROGLO2" );
 static const trait_id trait_TROGLO3( "TROGLO3" );
@@ -360,7 +356,7 @@ void suffer::while_awake( Character &you, const int current_stim )
     if( you.has_trait( trait_CHEMIMBALANCE ) ) {
         suffer::from_chemimbalance( you );
     }
-    if( you.has_trait( trait_SCHIZOPHRENIC ) &&
+    if( you.count_trait_flag( json_flag_KALUPTIC ) > 0 &&
         !you.has_effect( effect_took_thorazine ) ) {
         suffer::from_schizophrenia( you );
     }
@@ -814,7 +810,7 @@ void suffer::in_sunlight( Character &you )
     }
 
     if( you.has_trait( trait_ALBINO ) || you.has_effect( effect_datura ) ||
-        you.has_trait( trait_SUNBURN ) ) {
+        you.has_trait( trait_TROGLO3 ) ) {
         suffer::from_sunburn( you );
     }
 
@@ -860,7 +856,7 @@ std::map<bodypart_id, float> Character::bodypart_exposure()
 void suffer::from_sunburn( Character &you )
 {
     if( !you.has_trait( trait_ALBINO ) && !you.has_effect( effect_datura ) &&
-        !you.has_trait( trait_SUNBURN ) ) {
+        !you.has_trait( trait_TROGLO3 ) ) {
         return;
     }
 
@@ -869,7 +865,7 @@ void suffer::from_sunburn( Character &you )
         if( !one_turn_in( 1_minutes ) ) {
             return;
         }
-    } else if( you.has_trait( trait_SUNBURN ) ) {
+    } else if( you.has_trait( trait_TROGLO3 ) ) {
         // Sunburn effects occur about 3 times per minute
         if( !one_turn_in( 20_seconds ) ) {
             return;
@@ -953,7 +949,7 @@ void suffer::from_sunburn( Character &you )
         message = n_gettext( "The sunlight is really irritating your %s.",
                              "The sunlight is really irritating your %s.",
                              affected_bodyparts.size() );
-    } else if( you.has_trait( trait_SUNBURN ) ) {
+    } else if( you.has_trait( trait_TROGLO3 ) ) {
         //~ %s is a list of body parts.  The plurality integer is the total
         //~ number of body parts
         message = n_gettext( "The sunlight burns your %s.",
@@ -968,7 +964,7 @@ void suffer::from_sunburn( Character &you )
     }
 
     // Solar Sensitivity (SUNBURN) trait causes injury to exposed parts
-    if( you.has_trait( trait_SUNBURN ) ) {
+    if( you.has_trait( trait_TROGLO3 ) ) {
         you.mod_pain( 1 );
         // Check exposure of all body parts
         for( const std::pair<const bodypart_id, float> &bp_exp : bp_exposure ) {
@@ -1127,43 +1123,9 @@ void suffer::from_radiation( Character &you )
     const int map_radiation = here.get_radiation( you.pos() );
     float rads = map_radiation / 100.0f + item_radiation / 10.0f;
 
-    int rad_mut = 0;
-    if( you.has_trait( trait_RADIOACTIVE3 ) ) {
-        rad_mut = 3;
-    } else if( you.has_trait( trait_RADIOACTIVE2 ) ) {
-        rad_mut = 2;
-    } else if( you.has_trait( trait_RADIOACTIVE1 ) ) {
-        rad_mut = 1;
-    }
-
-    // Spread less radiation when sleeping (slower metabolism etc.)
-    // Otherwise it can quickly get to the point where you simply can't sleep at all
-    const bool rad_mut_proc = rad_mut > 0 && x_in_y( rad_mut, to_turns<int>( you.in_sleep_state() ?
-                              3_hours : 30_minutes ) );
-
     bool has_helmet = false;
     const bool power_armored = you.is_wearing_power_armor( &has_helmet );
-    const bool rad_resist = power_armored || you.worn_with_flag( flag_RAD_RESIST );
-
-    if( rad_mut > 0 ) {
-        const bool kept_in = you.is_rad_immune() || ( rad_resist && !one_in( 4 ) );
-        if( kept_in ) {
-            // As if standing on a map tile with radiation level equal to rad_mut
-            rads += rad_mut / 100.0f;
-        }
-
-        if( rad_mut_proc && !kept_in ) {
-            // Irradiate a random nearby point
-            // If you can't, irradiate the player instead
-            tripoint rad_point = you.pos() + point( rng( -3, 3 ), rng( -3, 3 ) );
-            // TODO: Radioactive vehicles?
-            if( here.get_radiation( rad_point ) < rad_mut ) {
-                here.adjust_radiation( rad_point, 1 );
-            } else {
-                rads += rad_mut;
-            }
-        }
-    }
+    const bool rad_resist = power_armored || you.worn_with_flag( flag_RAD_RESIST )
 
     // Used to control vomiting from radiation to make it not-annoying
     bool radiation_increasing = you.irradiate( rads );
@@ -1594,15 +1556,6 @@ void Character::suffer()
 
 bool Character::irradiate( float rads, bool bypass )
 {
-    int rad_mut = 0;
-    if( has_trait( trait_RADIOACTIVE3 ) ) {
-        rad_mut = 3;
-    } else if( has_trait( trait_RADIOACTIVE2 ) ) {
-        rad_mut = 2;
-    } else if( has_trait( trait_RADIOACTIVE1 ) ) {
-        rad_mut = 1;
-    }
-
     if( rads > 0 ) {
         bool has_helmet = false;
         const bool power_armored = is_wearing_power_armor( &has_helmet );
