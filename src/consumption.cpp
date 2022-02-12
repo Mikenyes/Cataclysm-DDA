@@ -90,6 +90,7 @@ static const itype_id itype_dab_pen_on( "dab_pen_on" );
 static const itype_id itype_syringe( "syringe" );
 
 static const json_character_flag json_flag_IMMUNE_SPOIL( "IMMUNE_SPOIL" );
+static const json_character_flag json_flag_KALUPTIC( "KALUPTIC" );
 static const json_character_flag json_flag_PARAIMMUNE( "PARAIMMUNE" );
 static const json_character_flag json_flag_PRED1( "PRED1" );
 static const json_character_flag json_flag_PRED2( "PRED2" );
@@ -132,7 +133,6 @@ static const trait_id trait_RUMINANT( "RUMINANT" );
 static const trait_id trait_SAPIOVORE( "SAPIOVORE" );
 static const trait_id trait_SAPROPHAGE( "SAPROPHAGE" );
 static const trait_id trait_SAPROVORE( "SAPROVORE" );
-static const trait_id trait_SCHIZOPHRENIC( "SCHIZOPHRENIC" );
 static const trait_id trait_SLIMESPAWNER( "SLIMESPAWNER" );
 static const trait_id trait_SPIRITUAL( "SPIRITUAL" );
 static const trait_id trait_STIMBOOST( "STIMBOOST" );
@@ -986,7 +986,7 @@ static bool eat( item &food, Character &you, bool force )
         you.add_msg_player_or_npc( _( "You assimilate your %s." ), _( "<npcname> assimilates a %s." ),
                                    food.tname() );
     } else if( drinkable ) {
-        if( you.has_trait( trait_SCHIZOPHRENIC ) &&
+        if( you.count_trait_flag( json_flag_KALUPTIC ) > 0 &&
             !you.has_effect( effect_took_thorazine ) && one_in( 50 ) && !spoiled && food.goes_bad() &&
             you.is_avatar() ) {
 
@@ -997,7 +997,7 @@ static bool eat( item &food, Character &you, bool force )
                                        food.tname() );
         }
     } else if( chew ) {
-        if( you.has_trait( trait_SCHIZOPHRENIC ) &&
+        if( you.count_trait_flag( json_flag_KALUPTIC ) > 0  &&
             !you.has_effect( effect_took_thorazine ) && one_in( 50 ) && !spoiled && food.goes_bad() &&
             you.is_avatar() ) {
 

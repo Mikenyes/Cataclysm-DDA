@@ -477,7 +477,6 @@
       { "trait": "TROGLO", "prob": 50 },
       { "trait": "WEBBED", "prob": 50 },
       { "trait": "UNSTABLE", "prob": 10 },
-      { "trait": "RADIOACTIVE1", "prob": 0 },
       { "trait": "SLIMY", "prob": 50 },
       { "trait": "INT_SLIME" },
       { "trait": "BENDY3" },
@@ -698,7 +697,6 @@
       { "trait": "HUNGER", "prob": 50 },
       { "trait": "THIRST", "prob": 50 },
       { "trait": "ROT1", "prob": 50 },
-      { "trait": "RADIOACTIVE2", "prob": 0 },
       { "trait": "BENDY1" }
     ]
   },

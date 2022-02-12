@@ -1,0 +1,58 @@
+[
+  {
+    "type": "effect_on_condition",
+    "id": "eoc_thresh_troglobite",
+    "//": "Outside?  What's that?",
+    "recurrence_min": "30 m",
+    "recurrence_max": "45 m",
+    "condition": { "u_has_trait": "THRESH_TROGLOBITE" },
+    "deactivate_condition": { "not": { "u_has_trait": "THRESH_TROGLOBITE" } },
+    "effect": [
+      {
+        "run_eocs": [
+          {
+            "id": "eoc_thresh_troglobite_surface",
+            "condition": { "u_is_outside" },
+            "effect": [
+              { "u_add_morale": "morale_troglobite_surface", "bonus": -20, "max_bonus": -90, "duration": "4 h", "decay_start": "1 h" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "eoc_thresh_elfa",
+    "//": "Happy little amphetamine spores.  NPCs that remain near you do not sleep, at the cost of sleep deprivation.",
+    "recurrence_min": "30 m",
+    "recurrence_max": "1 h",
+    "condition": { "u_has_trait": "THRESH_ELFA" },
+    "deactivate_condition": { "not": { "u_has_trait": "THRESH_ELFA" } },
+    "effect": [
+      {
+        "u_run_npc_eocs": [
+          {
+            "id": "eoc_thresh_elfa_sleep",
+            "effect": [
+              { "u_add_morale": "morale_support", "bonus": 5, "max_bonus": 30, "duration": "4 h", "decay_start": "2 h" },
+              { "arithmetic": [ { "u_val": "fatigue" }, "-=", { "const": 20 } ], "min": 0 },
+              { "arithmetic": [ { "u_val": "sleep_deprivation" }, "+=", { "const": 45 } ] }
+            ]
+          }
+        ],
+        "npc_range": 25
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "eoc_thresh_chimera",
+    "//": "Change daily with no need for catalyst.",
+    "recurrence_min": "2 h",
+    "recurrence_max": "3 h",
+    "condition": { "u_has_trait": "THRESH_CHIMERA" },
+    "deactivate_condition": { "not": { "u_has_trait": "THRESH_CHIMERA" } },
+    "effect": [ { "u_message": "You're changing again.  How fun!", "type": "good" }, { "u_mutate": 0, "use_vitamins": false } ]
+  }
+]

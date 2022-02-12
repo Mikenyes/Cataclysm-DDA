@@ -249,6 +249,7 @@
     "description": "Your body's efficiency is like that of a tiny furnace, greatly increasing your cardio and stamina.",
     "valid": false,
     "prereqs": [ "GOODCARDIO" ],
+    "prereqs2": [ "JITTERY" ],
     "cancels": [ "BADCARDIO" ],
     "threshreq": [ "THRESH_MOUSE", "THRESH_RABBIT" ],
     "category": [ "MOUSE", "RABBIT" ],
@@ -263,35 +264,6 @@
     "starting_trait": true,
     "category": [ "FISH", "BIRD", "INSECT", "TROGLOBITE", "CHIMERA", "RAPTOR", "MOUSE", "RABBIT" ],
     "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "SPEED", "multiply": 0.1 } ] } ]
-  },
-  {
-    "type": "mutation",
-    "id": "TUNNEL_FIGHTER",
-    "name": { "str": "Tunnel Fighter" },
-    "points": 3,
-    "description": "You know how to fight in cramped tunnels at risk of collapse.  You gain bonuses when fighting underground.",
-    "leads_to": [ "NIGHT_RAIDER" ],
-    "category": [ "INSECT", "TROGLOBITE", "RAT" ],
-    "enchantments": [
-      {
-        "condition": { "compare_int": [ { "u_val": "pos_z" }, "<", { "const": 0 } ] },
-        "values": [ { "value": "BONUS_BLOCK", "add": 1 }, { "value": "BONUS_DODGE", "add": 1 } ]
-      }
-    ]
-  },
-  {
-    "type": "mutation",
-    "id": "NIGHT_RAIDER",
-    "name": { "str": "Night Raider" },
-    "points": 3,
-    "description": "Your body is one with the night.  You make less noise when the moon is up in the sky, even when you cannot see it.",
-    "category": [ "TROGLOBITE" ],
-    "enchantments": [
-      {
-        "condition": { "not": "is_day" },
-        "values": [ { "value": "FOOTSTEP_NOISE", "multiply": 0.5 }, { "value": "ATTACK_NOISE", "multiply": 0.8 } ]
-      }
-    ]
   },
   {
     "type": "mutation",
@@ -349,31 +321,6 @@
     "changes_to": [ "GIZZARD", "COLDBLOOD" ],
     "category": [ "FISH", "BIRD", "INSECT", "TROGLOBITE", "GASTROPOD" ],
     "metabolism_modifier": -0.333
-  },
-  {
-    "type": "mutation",
-    "id": "EASYSLEEPER",
-    "name": { "str": "Accomplished Sleeper" },
-    "points": 1,
-    "description": "You have always been able to fall asleep easily, even when sleeping in less than ideal circumstances.",
-    "changes_to": [ "EASYSLEEPER2" ],
-    "starting_trait": true,
-    "valid": false,
-    "cancels": [ "INSOMNIA" ],
-    "category": [ "MOUSE", "INSECT", "GASTROPOD" ],
-    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "SLEEPY", "add": 24 } ] } ]
-  },
-  {
-    "type": "mutation",
-    "id": "EASYSLEEPER2",
-    "name": { "str": "Practiced Sleeper" },
-    "points": 2,
-    "description": "Your body's demanding energy needs mean you can fall asleep just about anywhere.",
-    "prereqs": [ "MET_RAT" ],
-    "cancels": [ "INSOMNIA" ],
-    "threshreq": [ "THRESH_MOUSE", "THRESH_RABBIT" ],
-    "category": [ "MOUSE", "RABBIT" ],
-    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "SLEEPY", "add": 40 } ] } ]
   },
   {
     "type": "mutation",
@@ -454,70 +401,6 @@
     "description": "The bottoms of your feet are tough, and you are accustomed to going barefoot.  You receive no movement penalty for not wearing shoes.",
     "starting_trait": true,
     "valid": false
-  },
-  {
-    "type": "mutation",
-    "id": "BOVINE_BULK",
-    "name": { "str": "Bovine Bulk" },
-    "points": 2,
-    "description": "You've added a lot of weight, much of it muscle!  You get a 10% bonus to all hit points.  Swimming will be more difficult from now on.",
-    "cancels": [ "FLIMSY", "FLIMSY2", "FLIMSY3", "GLASSJAW" ],
-    "changes_to": [ "BOVINE_BULK2" ],
-    "category": [ "CATTLE" ],
-    "movecost_modifier": 1.02,
-    "movecost_swim_modifier": 1.3,
-    "hp_modifier": 0.1
-  },
-  {
-    "type": "mutation",
-    "id": "BOVINE_BULK2",
-    "name": { "str": "Bull Roids" },
-    "points": 4,
-    "description": "There is no way you'd be allowed to compete in pre-Cataclysm sports.  You get a 20% bonus to all hit points.  Swimming is no longer recommended for someone built like you.",
-    "cancels": [ "FLIMSY", "FLIMSY2", "FLIMSY3", "GLASSJAW" ],
-    "prereqs": [ "BOVINE_BULK" ],
-    "category": [ "CATTLE" ],
-    "movecost_modifier": 1.04,
-    "movecost_swim_modifier": 1.7,
-    "hp_modifier": 0.2
-  },
-  {
-    "type": "mutation",
-    "id": "TOUGH",
-    "name": { "str": "Tough" },
-    "points": 2,
-    "description": "It takes a lot to bring you down!  You get a 20% bonus to all hit points.",
-    "starting_trait": true,
-    "valid": false,
-    "cancels": [ "FLIMSY", "FLIMSY2", "FLIMSY3", "GLASSJAW" ],
-    "changes_to": [ "TOUGH2" ],
-    "social_modifiers": { "intimidate": 2 },
-    "hp_modifier": 0.2
-  },
-  {
-    "type": "mutation",
-    "id": "TOUGH2",
-    "name": { "str": "Durable" },
-    "points": 3,
-    "description": "You can shrug off almost anything!  You get a 30% bonus to all hit points.",
-    "valid": false,
-    "cancels": [ "FLIMSY", "FLIMSY2", "FLIMSY3", "GLASSJAW" ],
-    "prereqs": [ "TOUGH" ],
-    "changes_to": [ "TOUGH3" ],
-    "social_modifiers": { "intimidate": 3 },
-    "hp_modifier": 0.3
-  },
-  {
-    "type": "mutation",
-    "id": "TOUGH3",
-    "name": { "str": "Unbreakable" },
-    "points": 4,
-    "description": "Nothing can break you!  You get a 40% bonus to all hit points.",
-    "valid": false,
-    "cancels": [ "FLIMSY", "FLIMSY2", "FLIMSY3", "GLASSJAW" ],
-    "prereqs": [ "TOUGH2" ],
-    "social_modifiers": { "intimidate": 4 },
-    "hp_modifier": 0.4
   },
   {
     "type": "mutation",
@@ -699,7 +582,8 @@
     "points": 1,
     "description": "There's something about you that creatures find frightening, and they are more likely to try to flee.",
     "starting_trait": true,
-    "category": [ "BEAST", "INSECT", "CHIMERA" ],
+    "category": [ "RAPTOR", "INSECT", "CHIMERA" ],
+    "prereqs": [ "ANIMALDISCORD" ],
     "social_modifiers": { "intimidate": 15 }
   },
   {
@@ -1009,6 +893,7 @@
     "name": { "str": "Strong Knees" },
     "points": 1,
     "description": "Your knees are strong and capable of angles that you couldn't imagine previously.  Moving over rough terrain will slow you down less than normal.",
+    "changes_to": [ "FELINE_FLEXIBILITY" ],
     "category": [ "BATRACHIAN" ],
     "valid": false,
     "movecost_obstacle_modifier": 0.9
@@ -1032,7 +917,6 @@
     "description": "Without glasses, your seeing radius is severely reduced!  However, you are guaranteed to start with a pair of glasses.",
     "starting_trait": true,
     "cancels": [ "URSINE_EYE" ],
-    "category": [ "BEAST", "TROGLOBITE" ],
     "flags": [ "MYOPIC" ]
   },
   {
@@ -1088,23 +972,52 @@
     "id": "HEAVYSLEEPER",
     "name": { "str": "Heavy Sleeper" },
     "points": -1,
-    "description": "You're quite the heavy sleeper.  Noises are unlikely to wake you up.",
+    "description": "You're quite the heavy sleeper.  Noises are unlikely to wake you up, but you recover from exhaustion 5% faster.",
     "changes_to": [ "HEAVYSLEEPER2" ],
     "starting_trait": true,
-    "category": [ "INSECT", "PLANT", "MEDICAL", "LUPINE" ]
+    "category": [ "INSECT", "PLANT", "MEDICAL", "LUPINE" ],
+    "fatigue_regen_modifier": 0.05
+  },
+  {
+    "type": "mutation",
+    "id": "HEAVYSLEEPER2",
+    "name": { "str": "Very Heavy Sleeper" },
+    "points": -2,
+    "description": "You could probably sleep through a firefight, but at least you recover from exhaustion 10% faster.",
+    "prereqs": [ "HEAVYSLEEPER" ],
+    "category": [ "BEAST", "LUPINE" ],
+    "fatigue_regen_modifier": 0.1
   },
   {
     "type": "mutation",
     "id": "SLEEPY",
     "name": { "str": "Sleepy" },
     "points": -1,
-    "description": "You need sleep more often, but still spend most of your time awake.",
-    "changes_to": [ "SLEEPY2", "MET_RAT" ],
+    "description": "You need sleep more often and in shorter periods, but still spend most of your time awake.",
+    "changes_to": [ "SLEEPY2" ],
     "starting_trait": true,
     "types": [ "SLEEP" ],
-    "category": [ "BEAST", "CHIMERA", "MOUSE", "RABBIT" ],
+    "leads_to": [ "MET_RAT" ],
+    "category": [ "BEAST", "CHIMERA", "MOUSE", "RABBIT", "FELINE", "GASTROPOD" ],
     "fatigue_modifier": 0.333,
-    "fatigue_regen_modifier": 0.333
+    "fatigue_regen_modifier": 0.333,
+    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "SLEEPY", "add": 24 } ] } ]
+  },
+  {
+    "type": "mutation",
+    "id": "SLEEPY2",
+    "name": { "str": "Frequent Sleeper" },
+    "points": -2,
+    "description": "You find yourself needing to sleep quite often.  You'll need naps frequently, but typically won't need to sleep for long.",
+    "prereqs": [ "SLEEPY" ],
+    "types": [ "SLEEP" ],
+    "cancels": [ "INSOMNIA" ],
+    "leads_to": [ "MET_RAT" ],
+    "threshreq": [ "THRESH_MOUSE", "THRESH_RABBIT", "THRESH_FELINE" ],
+    "category": [ "MOUSE", "RABBIT", "FELINE" ],
+    "fatigue_modifier": 1.0,
+    "fatigue_regen_modifier": 1.0,
+    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "SLEEPY", "add": 40 } ] } ]
   },
   {
     "type": "mutation",
@@ -1134,8 +1047,7 @@
     "points": -2,
     "description": "Things just keep getting you down.  You tend to be unhappy, and it takes some doing to cheer you up.",
     "starting_trait": true,
-    "cancels": [ "OPTIMISTIC" ],
-    "category": [ "URSINE", "LIZARD", "CHIMERA" ]
+    "cancels": [ "OPTIMISTIC" ]
   },
   {
     "type": "mutation",
@@ -1164,7 +1076,6 @@
     "points": -2,
     "description": "Your hearing is poor, and you may not hear quiet or far-off noises.",
     "starting_trait": true,
-    "category": [ "PLANT", "GASTROPOD" ],
     "cancels": [ "GOODHEARING" ],
     "changes_to": [ "DEAF" ],
     "hearing_modifier": 0.5
@@ -1200,7 +1111,6 @@
     "description": "You have a hard time falling asleep, even under the best circumstances!",
     "starting_trait": true,
     "valid": false,
-    "category": [ "MEDICAL" ],
     "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "SLEEPY", "add": -12 } ] } ],
     "cancels": [ "EASYSLEEPER" ]
   },
@@ -1316,20 +1226,36 @@
     "description": "Your head can't take much abuse.  Its maximum HP is 20% lower than usual.",
     "starting_trait": true,
     "social_modifiers": { "intimidate": -2 },
-    "category": [ "BIRD", "RAPTOR" ],
-    "cancels": [ "TOUGH" ]
+    "category": [ "BIRD", "RAPTOR" ]
+  },
+  {
+    "type": "mutation",
+    "id": "ADAPTIVE",
+    "name": { "str": "Adaptive" },
+    "points": 5,
+    "description": "Though you forget things very quickly, you learn faster and easily switch your focus.  Your skills will erode much faster, but you learn much faster.",
+    "skill_rust_multiplier": 0.4,
+    "prereqs": [ "FORGETFUL" ],
+    "starting_trait": true,
+    "category": [ "BEAST", "MEDICAL", "CHIMERA", "MOUSE", "INSECT", "RABBIT" ],
+    "cancels": [ "GOODMEMORY" ],
+    "enchantments": [
+      { "condition": "ALWAYS", "values": [ { "value": "MAP_MEMORY", "multiply": -0.5 } ] },
+      { "condition": "ALWAYS", "values": [ { "value": "LEARNING_FOCUS", "multiply": 1.6 } ] }
+    ]
   },
   {
     "type": "mutation",
     "id": "FORGETFUL",
     "name": { "str": "Forgetful" },
-    "points": -3,
+    "points": -2,
     "description": "You have a hard time remembering things.  Your skills will erode slightly faster than usual, and you can remember less terrain.",
     "social_modifiers": { "lie": -5 },
     "skill_rust_multiplier": 0.66,
     "starting_trait": true,
     "category": [ "BEAST", "MEDICAL", "CHIMERA", "MOUSE", "INSECT", "RABBIT" ],
     "cancels": [ "GOODMEMORY" ],
+    "changes_to": [ "ADAPTIVE" ],
     "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "MAP_MEMORY", "multiply": -0.5 } ] } ]
   },
   {
@@ -1382,8 +1308,8 @@
     "description": "Most animals don't like you, and aggressive animals are more likely to attack you.  This only applies to natural animals such as woodland creatures.",
     "starting_trait": true,
     "cancels": [ "ANIMALEMPATH" ],
-    "changes_to": [ "ANIMALDISCORD2" ],
-    "category": [ "LUPINE", "BEAST", "RAPTOR", "INSECT" ]
+    "changes_to": [ "ANIMALDISCORD2", "TERRIFYING" ],
+    "category": [ "BEAST", "RAPTOR", "INSECT" ]
   },
   {
     "type": "mutation",
@@ -1414,7 +1340,7 @@
     "description": "Ever since the sky first broke, you have felt unwell, your head split by alien thoughts.  You will periodically suffer from delusions, ranging from minor effects to full visual hallucinations.  Some of these effects may be controlled through the use of antipsychotics.",
     "starting_trait": true,
     "valid": false,
-    "category": [ "MEDICAL" ]
+    "flags": [ "KALUPTIC" ]
   },
   {
     "type": "mutation",
@@ -1423,8 +1349,7 @@
     "points": -3,
     "description": "You randomly fall asleep without any reason.",
     "starting_trait": true,
-    "valid": false,
-    "category": [ "MEDICAL" ]
+    "valid": false
   },
   {
     "type": "mutation",
@@ -1545,7 +1470,7 @@
     "points": -1,
     "description": "You lack skin pigmentation due to a genetic problem.  You sunburn extremely easily, and typically use an umbrella and sunglasses when going out in the sun.",
     "starting_trait": true,
-    "changes_to": [ "SUNBURN" ],
+    "changes_to": [ "TROGLO3" ],
     "category": [ "TROGLOBITE", "MOUSE", "RABBIT" ],
     "types": [ "skin_tone" ]
   },
@@ -1844,7 +1769,7 @@
     "valid": false,
     "purifiable": false,
     "description": "Your broken limbs mend themselves without significant difficulty.  You do not require splints and broken limbs heal 20 times faster than usual.",
-    "cancels": [ "ROT1", "ROT2", "ROT3" ],
+    "cancels": [ "ROT1", "ROT2" ],
     "prereqs": [ "FASTHEALER" ],
     "threshreq": [ "THRESH_LIZARD" ],
     "category": [ "LIZARD" ],
@@ -1861,7 +1786,7 @@
     "types": [ "SLEEP" ],
     "prereqs": [ "WAKEFUL" ],
     "changes_to": [ "WAKEFUL3" ],
-    "threshreq": [ "THRESH_ALPHA", "THRESH_ELFA", "THRESH_BATRACHIAN" ],
+    "threshreq": [ "THRESH_ALPHA", "THRESH_ALPHA_DYING", "THRESH_ELFA", "THRESH_BATRACHIAN" ],
     "category": [ "ALPHA", "ELFA", "BATRACHIAN" ],
     "fatigue_modifier": -0.25
   },
@@ -2270,11 +2195,24 @@
     "ugliness": 3,
     "bodytemp_modifiers": [ 500, 1000 ],
     "bodytemp_sleep": 300,
-    "description": "You've grown sleek brown fur, providing some protection from cold.",
+    "description": "You've grown sleek fur, providing some protection from cold.  You can't stand getting it wet, though.",
     "types": [ "SKIN" ],
     "prereqs": [ "LIGHTFUR" ],
     "leads_to": [ "LYNX_FUR" ],
-    "category": [ "BEAST", "FELINE", "MOUSE" ]
+    "category": [ "FELINE", "MOUSE" ],
+    "cancels": [ "OUTDOORSMAN" ],
+    "wet_protection": [
+      { "part": "head", "good": -12 },
+      { "part": "leg_l", "good": -16 },
+      { "part": "leg_r", "good": -16 },
+      { "part": "foot_l", "good": -4 },
+      { "part": "foot_r", "good": -4 },
+      { "part": "arm_l", "good": -16 },
+      { "part": "arm_r", "good": -16 },
+      { "part": "hand_l", "good": -16 },
+      { "part": "hand_r", "good": -16 },
+      { "part": "torso", "good": -30 }
+    ]
   },
   {
     "type": "mutation",
@@ -2543,7 +2481,7 @@
   {
     "type": "mutation",
     "id": "BARBS",
-    "name": { "str": "Assault barbs" },
+    "name": { "str": "Assault Barbs" },
     "points": 2,
     "visibility": 2,
     "ugliness": 3,
@@ -3414,11 +3352,12 @@
     "points": 0,
     "visibility": 3,
     "ugliness": 2,
-    "description": "Your frame has adapted for life in confined spaces.  You seem a little shorter and bulkier, trading mobility for muscle mass.  (+2 Strength, -2 Dexterity)",
+    "description": "Your body has adapted for life in confined spaces.  You seem a little shorter and much bulkier, trading mobility for muscle mass, and can no longer see far without glasses.  (+2 Strength, -2 Dexterity)",
     "//": "Trading X for Y usually means reducing X to gain Y, so I switched the order.",
     "threshreq": [ "THRESH_TROGLOBITE" ],
     "category": [ "TROGLOBITE" ],
-    "passive_mods": { "str_mod": 2, "dex_mod": -2 }
+    "passive_mods": { "str_mod": 2, "dex_mod": -2 },
+    "flags": [ "MYOPIC" ]
   },
   {
     "type": "mutation",
@@ -3910,22 +3849,71 @@
   },
   {
     "type": "mutation",
-    "id": "MUT_TOUGH",
-    "name": { "str": "Resilient" },
-    "points": 2,
-    "description": "You can survive injuries that would incapacitate humans: you get a 20% bonus to all hit points.  Stacks with Tough, etc.",
+    "id": "LARGE",
+    "flags": [ "LARGE" ],
+    "name": { "str": "Inconveniently Large" },
+    "points": -1,
+    "visibility": 3,
+    "ugliness": 4,
+    "mixed_effect": true,
+    "description": "You have grown noticeably taller and broader.  Some of it is useful muscle mass (Strength +1), but you find it throws off your balance and you get in your own way (+10 torso and arm encumbrance).",
+    "types": [ "SIZE" ],
+    "prereqs": [ "STR_UP", "STR_UP_2", "STR_UP_3", "STR_UP_4" ],
+    "prereqs2": [ "TOUGH" ],
+    "changes_to": [ "MUT_TOUGH2" ],
+    "category": [ "URSINE", "CATTLE", "LIZARD", "CHIMERA" ],
+    "encumbrance_always": [ [ "torso", 10 ], [ "arm_l", 10 ], [ "arm_r", 10 ] ],
+    "passive_mods": { "str_mod": 3 },
+    "stomach_size_multiplier": 1.4,
+    "weight_capacity_modifier": 1.05
+  },
+  {
+    "type": "mutation",
+    "id": "HUGE",
+    "flags": [ "HUGE" ],
+    "name": { "str": "Freakishly Huge" },
+    "points": -2,
+    "visibility": 9,
+    "ugliness": 9,
+    "mixed_effect": true,
+    "description": "You have grown even more massive, to the point where you cannot usefully fit into human-sized clothing or roofed vehicles.  Some of it is powerful muscle mass (Strength +1), but it's a real pain to haul around (+15 torso and arm encumbrance).",
+    "types": [ "SIZE" ],
+    "prereqs": [ "STR_UP_3", "STR_UP_4" ],
+    "prereqs2": [ "MUT_TOUGH2" ],
+    "changes_to": [ "MUT_TOUGH3" ],
+    "threshreq": [ "THRESH_URSINE", "THRESH_CATTLE" ],
+    "category": [ "URSINE", "CATTLE" ],
+    "encumbrance_always": [ [ "torso", 15 ], [ "arm_l", 15 ], [ "arm_r", 15 ] ],
+    "passive_mods": { "str_mod": 4 },
+    "fatigue_modifier": 0.2,
+    "restricts_gear": [ "torso", "leg_l", "leg_r", "arm_l", "arm_r", "hand_l", "hand_r", "head", "foot_l", "foot_r" ],
+    "destroys_gear": true,
+    "stomach_size_multiplier": 1.8,
+    "weight_capacity_modifier": 1.15
+  },
+  {
+    "type": "mutation",
+    "id": "TOUGH",
+    "name": { "str": "Tough" },
+    "points": 1,
+    "description": "It takes a lot to bring you down!  You gain a 10% bonus to all hit points.",
+    "starting_trait": true,
     "social_modifiers": { "intimidate": 2 },
-    "prereqs": [ "LARGE_OK", "HUGE_OK", "STR_UP_3", "STR_UP_4", "MASOCHIST_MED" ],
-    "threshreq": [
-      "THRESH_URSINE",
-      "THRESH_CATTLE",
-      "THRESH_CHIMERA",
-      "THRESH_MEDICAL",
-      "THRESH_LIZARD",
-      "THRESH_BEAST",
-      "THRESH_BATRACHIAN"
-    ],
-    "cancels": [ "FLIMSY", "FLIMSY2", "FLIMSY3", "GLASSJAW" ],
+    "types": [ "DURABILITY" ],
+    "category": [ "URSINE", "CATTLE", "CHIMERA", "BEAST", "LIZARD", "MEDICAL", "BATRACHIAN" ],
+    "hp_modifier_secondary": 0.1
+  },
+  {
+    "type": "mutation",
+    "id": "MUT_TOUGH",
+    "name": { "str": "Mutant Durability" },
+    "points": 2,
+    "visibility": 1,
+    "ugliness": 1,
+    "description": "You can survive injuries that would incapacitate humans.  You gain a 20% bonus to all hit points.",
+    "social_modifiers": { "intimidate": 4 },
+    "types": [ "DURABILITY" ],
+    "prereqs": [ "TOUGH" ],
     "changes_to": [ "MUT_TOUGH2" ],
     "category": [ "URSINE", "CATTLE", "CHIMERA", "BEAST", "LIZARD", "MEDICAL", "BATRACHIAN" ],
     "hp_modifier_secondary": 0.2
@@ -3933,31 +3921,45 @@
   {
     "type": "mutation",
     "id": "MUT_TOUGH2",
-    "name": { "str": "Solidly Built" },
+    "flags": [ "LARGE" ],
+    "name": { "str": "Superior Size" },
     "points": 3,
-    "description": "Not much scares you.  You get a 30% bonus to all hit points.  Stacks with Tough, etc.",
-    "social_modifiers": { "intimidate": 3 },
-    "valid": false,
+    "visibility": 5,
+    "ugliness": 2,
+    "description": "You are much larger, stronger, and tougher than a mere human, and your towering body can withstand wounds that would kill them.  You gain a 30% bonus to all hit points and +3 Strength, but your outsized torso and arms have +15 encumbrance when wearing clothing.",
+    "social_modifiers": { "intimidate": 7 },
+    "types": [ "DURABILITY" ],
     "prereqs": [ "MUT_TOUGH" ],
-    "threshreq": [ "THRESH_URSINE", "THRESH_CATTLE", "THRESH_CHIMERA", "THRESH_MEDICAL" ],
-    "cancels": [ "FLIMSY", "FLIMSY2", "FLIMSY3", "GLASSJAW" ],
+    "threshreq": [ "THRESH_URSINE", "THRESH_CATTLE", "THRESH_CHIMERA" ],
     "changes_to": [ "MUT_TOUGH3" ],
-    "category": [ "URSINE", "CATTLE", "CHIMERA", "MEDICAL" ],
-    "hp_modifier_secondary": 0.3
+    "category": [ "URSINE", "CATTLE", "CHIMERA" ],
+    "encumbrance_covered": [ [ "torso", 15 ], [ "arm_l", 15 ], [ "arm_r", 15 ] ],
+    "hp_modifier_secondary": 0.3,
+    "passive_mods": { "str_mod": 3 },
+    "stomach_size_multiplier": 1.5,
+    "weight_capacity_modifier": 1.1
   },
   {
     "type": "mutation",
     "id": "MUT_TOUGH3",
-    "name": { "str": "TAAANK" },
+    "flags": [ "HUGE" ],
+    "name": { "str": "Inhuman Immensity" },
     "points": 4,
-    "description": "You can simply take the punishment from lesser beings and keep going.  You get a 40% bonus to all hit points.  Stacks with Tough, etc.",
-    "social_modifiers": { "intimidate": 4 },
-    "valid": false,
+    "visibility": 10,
+    "ugliness": 4,
+    "description": "You are truly titanic, and can simply take the punishment from lesser beings and keep going.  You gain a 40% bonus to all hit points and +4 Strength, but can't fit into roofed vehicles or wear most clothing.",
+    "social_modifiers": { "intimidate": 12 },
+    "types": [ "DURABILITY", "SIZE" ],
     "prereqs": [ "MUT_TOUGH2" ],
+    "prereqs2": [ "HUGE" ],
     "threshreq": [ "THRESH_URSINE", "THRESH_CATTLE" ],
-    "cancels": [ "FLIMSY", "FLIMSY2", "FLIMSY3", "GLASSJAW" ],
     "category": [ "URSINE", "CATTLE" ],
-    "hp_modifier_secondary": 0.4
+    "restricts_gear": [ "torso", "leg_l", "leg_r", "arm_l", "arm_r", "hand_l", "hand_r", "head", "foot_l", "foot_r" ],
+    "destroys_gear": true,
+    "hp_modifier_secondary": 0.4,
+    "passive_mods": { "str_mod": 4 },
+    "stomach_size_multiplier": 2.0,
+    "weight_capacity_modifier": 1.2
   },
   {
     "type": "mutation",
@@ -4023,7 +4025,7 @@
     "id": "NOPAIN",
     "name": { "str": "Deadened" },
     "points": 2,
-    "description": "Nothing hurts anymore.  Those bites tickle and the wounds itch a bit, but that's it.",
+    "description": "Nothing hurts anymore.  Those bites tickle and the wounds itch a bit, but that's it.  The emptiness keeps you up at night.",
     "valid": false,
     "purifiable": false,
     "prereqs": [ "MASOCHIST", "PAINRESIST" ],
@@ -4031,7 +4033,8 @@
     "cancels": [ "MORE_PAIN", "MORE_PAIN2", "MORE_PAIN3" ],
     "threshreq": [ "THRESH_MEDICAL" ],
     "//": "MASOCHIST_MED, CENOBITE, and NOPAIN don't cancel each other.  By design.  Poor painless people...",
-    "category": [ "MEDICAL" ]
+    "category": [ "MEDICAL" ],
+    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "SLEEPY", "add": -15 } ] } ]
   },
   {
     "type": "mutation",
@@ -4309,7 +4312,7 @@
     "name": { "str": "Gastropod Foot" },
     "points": 1,
     "mixed_effect": true,
-    "description": "Your legs have consolidated into a single muscular 'foot' that goes up into your belly.  You move about a fourth of your previous speed and can no longer wear pants or shoes, on the other hand you make significantly less noise.  In addition to being harder to knock down, you can move through sludge-covered surfaces easily.",
+    "description": "Your legs have consolidated into a single muscular 'foot' that goes up into your belly.  You move 25% slower and can no longer wear pants or shoes, but on the other hand you make significantly less noise.  In addition to being harder to knock down, you can move through sludge-covered surfaces easily.",
     "category": [ "GASTROPOD" ],
     "prereqs": [ "SLIMY" ],
     "threshreq": [ "THRESH_GASTROPOD" ],
@@ -4561,89 +4564,6 @@
   },
   {
     "type": "mutation",
-    "id": "LARGE",
-    "flags": [ "LARGE" ],
-    "name": { "str": "Inconveniently Large" },
-    "points": 0,
-    "visibility": 1,
-    "ugliness": 1,
-    "mixed_effect": true,
-    "encumbrance_always": [ [ "torso", 10 ], [ "arm_l", 10 ], [ "arm_r", 10 ] ],
-    "description": "You have grown noticeably taller and broader.  Much of it is useful muscle mass (Strength +2), but you find it throws off your balance and you get in your own way (+10 torso and arm encumbrance).",
-    "prereqs": [ "STR_UP", "STR_UP_2", "STR_UP_3", "STR_UP_4" ],
-    "cancels": [ "SMALL", "SMALL2" ],
-    "changes_to": [ "LARGE_OK", "HUGE" ],
-    "category": [ "URSINE", "CATTLE", "LIZARD", "CHIMERA" ],
-    "passive_mods": { "str_mod": 2 },
-    "stomach_size_multiplier": 1.5,
-    "weight_capacity_modifier": 1.05
-  },
-  {
-    "type": "mutation",
-    "id": "LARGE_OK",
-    "flags": [ "LARGE" ],
-    "name": { "str": "Large" },
-    "points": 2,
-    "visibility": 1,
-    "description": "You carry your rugged body with the dignity you deserve.  Strength +2.",
-    "prereqs": [ "LARGE" ],
-    "prereqs2": [ "STR_UP", "STR_UP_2", "STR_UP_3", "STR_UP_4" ],
-    "cancels": [ "SMALL", "SMALL2" ],
-    "threshreq": [ "THRESH_URSINE", "THRESH_CATTLE", "THRESH_LIZARD", "THRESH_CHIMERA" ],
-    "changes_to": [ "HUGE" ],
-    "leads_to": [ "MUT_TOUGH" ],
-    "category": [ "URSINE", "CATTLE", "LIZARD", "CHIMERA" ],
-    "passive_mods": { "str_mod": 2 },
-    "stomach_size_multiplier": 1.5,
-    "weight_capacity_modifier": 1.05
-  },
-  {
-    "type": "mutation",
-    "id": "HUGE",
-    "flags": [ "HUGE" ],
-    "name": { "str": "Freakishly Huge" },
-    "points": -2,
-    "visibility": 4,
-    "ugliness": 4,
-    "mixed_effect": true,
-    "description": "You have grown even more massive, to the point where you cannot usefully fit into human-sized clothing or vehicles.  Much of it is powerful muscle mass (Strength +4), but it's a real pain to haul around.",
-    "prereqs": [ "LARGE", "LARGE_OK" ],
-    "prereqs2": [ "STR_UP_3", "STR_UP_4" ],
-    "cancels": [ "SMALL", "SMALL2" ],
-    "changes_to": [ "HUGE_OK" ],
-    "category": [ "URSINE", "CATTLE" ],
-    "passive_mods": { "str_mod": 4 },
-    "hp_adjustment": -6,
-    "fatigue_modifier": 0.15,
-    "restricts_gear": [ "torso", "leg_l", "leg_r", "arm_l", "arm_r", "hand_l", "hand_r", "head", "foot_l", "foot_r" ],
-    "destroys_gear": true,
-    "stomach_size_multiplier": 2.0,
-    "weight_capacity_modifier": 1.1
-  },
-  {
-    "type": "mutation",
-    "id": "HUGE_OK",
-    "flags": [ "HUGE" ],
-    "name": { "str": "Huge" },
-    "points": 2,
-    "visibility": 4,
-    "ugliness": 3,
-    "mixed_effect": true,
-    "description": "Your cardiovascular system has caught up with your muscular physique, so who needs pathetic human cars?  Strength +4.",
-    "prereqs": [ "HUGE" ],
-    "prereqs2": [ "STR_UP_3", "STR_UP_4" ],
-    "cancels": [ "SMALL", "SMALL2" ],
-    "threshreq": [ "THRESH_URSINE", "THRESH_CATTLE" ],
-    "leads_to": [ "MUT_TOUGH" ],
-    "category": [ "URSINE", "CATTLE" ],
-    "passive_mods": { "str_mod": 4 },
-    "restricts_gear": [ "torso", "leg_l", "leg_r", "arm_l", "arm_r", "hand_l", "hand_r", "head", "foot_l", "foot_r" ],
-    "destroys_gear": true,
-    "stomach_size_multiplier": 2.0,
-    "weight_capacity_modifier": 1.1
-  },
-  {
-    "type": "mutation",
     "id": "STR_UP",
     "name": { "str": "Strong" },
     "points": 1,
@@ -4673,7 +4593,7 @@
     "prereqs": [ "STR_UP_2" ],
     "changes_to": [ "STR_UP_4" ],
     "leads_to": [ "MUT_TOUGH" ],
-    "category": [ "CHIMERA", "LUPINE", "TROGLOBITE" ],
+    "category": [ "CHIMERA", "LUPINE", "TROGLOBITE", "URSINE" ],
     "passive_mods": { "str_mod": 4 }
   },
   {
@@ -4686,8 +4606,8 @@
     "description": "Your muscles are noticeably bulging.  +7 Strength.",
     "prereqs": [ "STR_UP_3" ],
     "leads_to": [ "MUT_TOUGH" ],
-    "threshreq": [ "THRESH_BEAST", "THRESH_URSINE" ],
-    "category": [ "BEAST", "URSINE" ],
+    "threshreq": [ "THRESH_BEAST" ],
+    "category": [ "BEAST" ],
     "passive_mods": { "str_mod": 7 }
   },
   {
@@ -4698,7 +4618,7 @@
     "description": "Your muscles are perfectly developed.",
     "valid": false,
     "prereqs": [ "STR_UP_2" ],
-    "threshreq": [ "THRESH_ALPHA" ],
+    "threshreq": [ "THRESH_ALPHA", "THRESH_ALPHA_DYING" ],
     "category": [ "ALPHA" ],
     "passive_mods": { "str_mod": 2 }
   },
@@ -4753,7 +4673,7 @@
     "description": "You're perfectly coordinated.",
     "valid": false,
     "prereqs": [ "DEX_UP" ],
-    "threshreq": [ "THRESH_ALPHA" ],
+    "threshreq": [ "THRESH_ALPHA", "THRESH_ALPHA_DYING" ],
     "category": [ "ALPHA" ],
     "passive_mods": { "dex_mod": 1 }
   },
@@ -4811,7 +4731,7 @@
     "description": "You understand almost everything about which you think, with minimal effort.",
     "valid": false,
     "prereqs": [ "INT_UP" ],
-    "threshreq": [ "THRESH_ALPHA" ],
+    "threshreq": [ "THRESH_ALPHA", "THRESH_ALPHA_DYING" ],
     "category": [ "ALPHA" ],
     "passive_mods": { "int_mod": 1 }
   },
@@ -4888,7 +4808,7 @@
     "description": "Your senses are keenly honed.",
     "valid": false,
     "prereqs": [ "PER_UP_2" ],
-    "threshreq": [ "THRESH_ALPHA" ],
+    "threshreq": [ "THRESH_ALPHA", "THRESH_ALPHA_DYING" ],
     "category": [ "ALPHA" ],
     "passive_mods": { "per_mod": 2 }
   },
@@ -4932,12 +4852,13 @@
     "id": "SMALL",
     "flags": [ "SMALL" ],
     "name": { "str": "Little" },
-    "points": -2,
+    "points": 1,
     "visibility": 5,
     "mixed_effect": true,
     "description": "You've noticeably shrunk in size.  You're able to move with increased litheness, but your smaller stature prevents you from carrying as much.",
-    "cancels": [ "LARGE", "LARGE_OK", "HUGE", "HUGE_OK" ],
+    "types": [ "SIZE" ],
     "changes_to": [ "SMALL2" ],
+    "prereqs": [ "ANIMALDISCORD2" ],
     "category": [ "MOUSE", "RABBIT" ],
     "stomach_size_multiplier": 0.5,
     "hp_modifier": -0.05,
@@ -4954,7 +4875,7 @@
     "mixed_effect": true,
     "description": "You're only half as tall as you used to be!  The weight of things you once found easy to carry is now unbearable, clothes are now twice as encumbering for you unless you refit them (since you're half their size), and your hit points are heavily reduced.  However, your movement is silent, and your dodge skill is a little higher.",
     "prereqs": [ "SMALL" ],
-    "cancels": [ "LARGE", "LARGE_OK", "HUGE", "HUGE_OK" ],
+    "types": [ "SIZE" ],
     "changes_to": [ "SMALL_OK" ],
     "category": [ "MOUSE" ],
     "stomach_size_multiplier": 0.5,
@@ -4972,7 +4893,7 @@
     "mixed_effect": true,
     "description": "You've mastered your tiny form!  Item encumbrance and carry weight penalties are reduced, and you've learned to use your increased nimbleness to offset your reduced capacity to absorb damage.",
     "prereqs": [ "SMALL2" ],
-    "cancels": [ "LARGE", "LARGE_OK", "HUGE", "HUGE_OK" ],
+    "types": [ "SIZE" ],
     "valid": false,
     "purifiable": false,
     "threshreq": [ "THRESH_MOUSE" ],
@@ -5440,7 +5361,7 @@
     "movecost_modifier": 0.8,
     "attackcost_modifier": 0.8,
     "weight_capacity_modifier": 0.6,
-    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "EXTRA_BASH", "multiply": 0.8 } ] } ]
+    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "EXTRA_BASH", "multiply": 0.5 } ] } ]
   },
   {
     "type": "mutation",
@@ -5500,7 +5421,8 @@
     "description": "You require more food than most people, but recover stamina slightly faster.",
     "starting_trait": true,
     "types": [ "METABOLISM" ],
-    "changes_to": [ "HUNGER2", "MET_RAT" ],
+    "changes_to": [ "HUNGER2" ],
+    "leads_to": [ "MET_RAT" ],
     "category": [ "RAT", "ALPHA", "MEDICAL", "ELFA", "BEAST", "SLIME", "RAPTOR", "CHIMERA", "MOUSE", "RABBIT" ],
     "metabolism_modifier": 0.5,
     "stamina_regen_modifier": 0.1
@@ -5508,20 +5430,17 @@
   {
     "type": "mutation",
     "id": "MET_RAT",
-    "name": { "str": "Rapid Metabolism" },
-    "points": -2,
-    "valid": false,
-    "description": "You require more resources than most, but heal more rapidly as well.  Provides weak regeneration even when not asleep.",
-    "types": [ "HEALING" ],
-    "cancels": [ "LIGHTEATER", "COLDBLOOD", "COLDBLOOD2", "COLDBLOOD3", "COLDBLOOD4", "WAKEFUL", "WAKEFUL2", "WAKEFUL3" ],
-    "prereqs": [ "HUNGER" ],
-    "prereqs2": [ "SLEEPY" ],
+    "name": { "str": "Churning Metabolism" },
+    "points": 2,
+    "description": "You require more resources than most, but recover more rapidly as well.  Provides weak regeneration even when not asleep.",
+    "prereqs": [ "HUNGER", "HUNGER2" ],
+    "prereqs2": [ "SLEEPY", "SLEEPY2" ],
     "category": [ "RAT", "MOUSE", "RABBIT" ],
     "healing_awake": 0.2,
     "healing_resting": 0.5,
-    "fatigue_modifier": 0.5,
-    "fatigue_regen_modifier": 0.333,
-    "metabolism_modifier": 0.333
+    "fatigue_modifier": 0.2,
+    "fatigue_regen_modifier": 0.2,
+    "metabolism_modifier": 0.3
   },
   {
     "type": "mutation",
@@ -5531,6 +5450,7 @@
     "description": "You need about twice as much food as the average human to maintain your expanded cardiovascular and respiratory systems.  On the plus side, it doesn't take you much time to recover from any strenuous activity.",
     "prereqs": [ "HUNGER" ],
     "changes_to": [ "HUNGER3" ],
+    "leads_to": [ "MET_RAT" ],
     "types": [ "METABOLISM" ],
     "category": [ "BEAST", "SLIME", "RAPTOR" ],
     "metabolism_modifier": 1.0,
@@ -5556,6 +5476,7 @@
     "points": -2,
     "description": "Your body dries out easily; you need to drink more water.",
     "starting_trait": true,
+    "types": [ "THIRST" ],
     "changes_to": [ "THIRST2" ],
     "cancels": [ "NO_THIRST" ],
     "category": [ "SLIME", "CEPHALOPOD", "CHIMERA", "ELFA", "GASTROPOD" ],
@@ -5567,22 +5488,12 @@
     "name": { "str": "Very Thirsty" },
     "points": -3,
     "description": "Ugh, out of water already?  You need about twice the fluids of an average human.",
+    "types": [ "THIRST" ],
     "prereqs": [ "THIRST" ],
-    "changes_to": [ "THIRST3" ],
-    "cancels": [ "NO_THIRST" ],
-    "category": [ "FISH", "SLIME", "CEPHALOPOD" ],
+    "changes_to": [ "AMPHIBIAN" ],
+    "leads_to": [ "VISCOUS", "GILLS_CEPH" ],
+    "category": [ "FISH", "SLIME", "CEPHALOPOD", "GASTROPOD" ],
     "thirst_modifier": 1.0
-  },
-  {
-    "type": "mutation",
-    "id": "THIRST3",
-    "name": { "str": "Extremely Thirsty" },
-    "points": -5,
-    "description": "You dry out seriously quickly, requiring three times as much liquid to stay hydrated.",
-    "cancels": [ "NO_THIRST" ],
-    "prereqs": [ "THIRST2" ],
-    "category": [ "BATRACHIAN" ],
-    "thirst_modifier": 2.0
   },
   {
     "type": "mutation",
@@ -5590,32 +5501,11 @@
     "name": { "str": "Metabolic Rehydration" },
     "points": 6,
     "description": "Your body gets everything it needs from the food that you eat!  You no longer need hydration from fluids.",
+    "types": [ "THIRST" ],
     "threshreq": [ "THRESH_MOUSE" ],
     "category": [ "MOUSE" ],
-    "cancels": [ "THIRST", "THIRST2", "THIRST3" ],
     "flags": [ "NO_THIRST" ],
     "purifiable": false
-  },
-  {
-    "type": "mutation",
-    "id": "HEAVYSLEEPER2",
-    "name": { "str": "Very Heavy Sleeper" },
-    "points": -2,
-    "description": "You could probably sleep through a firefight.",
-    "valid": false,
-    "prereqs": [ "HEAVYSLEEPER" ],
-    "category": [ "BEAST", "LUPINE" ]
-  },
-  {
-    "type": "mutation",
-    "id": "SLEEPY2",
-    "name": { "str": "Very Sleepy" },
-    "points": -3,
-    "description": "You find yourself needing to sleep quite often.  You'll spend about half of your time in or around a bed.",
-    "prereqs": [ "SLEEPY" ],
-    "types": [ "SLEEP" ],
-    "category": [ "FELINE" ],
-    "fatigue_modifier": 1.0
   },
   {
     "type": "mutation",
@@ -5639,32 +5529,8 @@
     "description": "Your body is very slowly wasting away.",
     "types": [ "HEALING" ],
     "prereqs": [ "ROT1" ],
-    "changes_to": [ "ROT3" ],
-    "category": [ "CHIMERA" ],
+    "category": [ "CHIMERA", "ALPHA" ],
     "healing_awake": -0.02
-  },
-  {
-    "type": "mutation",
-    "id": "ROT3",
-    "name": { "str": "Disintegration" },
-    "points": -10,
-    "bodytemp_modifiers": [ -1500, -1500 ],
-    "description": "Your body is slowly wasting away!",
-    "types": [ "HEALING" ],
-    "prereqs": [ "ROT2" ],
-    "category": [ "ALPHA" ],
-    "healing_awake": -0.08
-  },
-  {
-    "type": "mutation",
-    "id": "SUNBURN",
-    "name": { "str": "Solar Sensitivity" },
-    "points": -3,
-    "description": "Your skin simply cannot handle ultraviolet radiation, such as sunlight.  It will seriously burn you.",
-    "prereqs": [ "ALBINO" ],
-    "prereqs2": [ "TROGLO2", "TROGLO3" ],
-    "category": [ "TROGLOBITE" ],
-    "types": [ "skin_tone" ]
   },
   {
     "type": "mutation",
@@ -5680,33 +5546,66 @@
   {
     "type": "mutation",
     "id": "TROGLO",
-    "name": { "str": "Light Sensitive" },
-    "points": -2,
-    "description": "Sunlight makes you uncomfortable.  If you are outdoors and the weather is Sunny, you suffer -1 to all stats.",
-    "cancels": [ "SUNLIGHT_DEPENDENT" ],
+    "name": { "str": "Shade Dependent" },
+    "points": -1,
+    "description": "Sunlight makes you uncomfortable.  If you are outdoors and the weather is Sunny, you suffer -1 to all stats.  However, your combat capabilities are slightly enhanced at night.",
+    "types": [ "SUNLIGHT" ],
     "changes_to": [ "TROGLO2" ],
-    "category": [ "LIZARD", "BEAST", "INSECT", "SLIME", "SPIDER", "BATRACHIAN" ]
+    "category": [ "LIZARD", "BEAST", "INSECT", "SLIME", "SPIDER", "TROGLOBITE", "BATRACHIAN" ],
+    "enchantments": [
+      {
+        "condition": { "not": "is_day" },
+        "values": [
+          { "value": "FOOTSTEP_NOISE", "multiply": 0.7 },
+          { "value": "ATTACK_NOISE", "multiply": 0.9 },
+          { "value": "BONUS_BLOCK", "add": 1 }
+        ]
+      }
+    ]
   },
   {
     "type": "mutation",
     "id": "TROGLO2",
-    "name": { "str": "Very Light Sensitive" },
-    "points": -3,
-    "description": "Sunlight makes you very uncomfortable.  If you are outdoors during the day, you suffer -1 to all stats; -2 if the weather is Sunny.",
-    "cancels": [ "SUNLIGHT_DEPENDENT" ],
+    "name": { "str": "Very Shade Dependent" },
+    "points": -2,
+    "description": "Sunlight makes you very uncomfortable.  If you are outdoors during the day, you suffer -1 to all stats; -2 if the weather is Sunny.  Your combat capabilities are enhanced at night.",
+    "types": [ "SUNLIGHT" ],
     "prereqs": [ "TROGLO" ],
     "changes_to": [ "TROGLO3" ],
-    "category": [ "RAT" ]
+    "category": [ "INSECT", "RAT", "TROGLOBITE" ],
+    "enchantments": [
+      {
+        "condition": { "not": "is_day" },
+        "values": [
+          { "value": "FOOTSTEP_NOISE", "multiply": 0.55 },
+          { "value": "ATTACK_NOISE", "multiply": 0.8 },
+          { "value": "BONUS_BLOCK", "add": 1 }
+        ]
+      }
+    ]
   },
   {
     "type": "mutation",
     "id": "TROGLO3",
     "name": { "str": "Troglobite" },
-    "points": -5,
-    "description": "Sunlight makes you extremely uncomfortable, resulting in large penalties to all stats.",
-    "cancels": [ "SUNLIGHT_DEPENDENT" ],
-    "prereqs": [ "TROGLO2" ],
-    "category": [ "TROGLOBITE" ]
+    "points": -2,
+    "description": "Sunlight makes you extremely uncomfortable, resulting in -4 penalties to all stats and serious burns.  However, at night, your combat capabilities are greatly enhanced.",
+    "types": [ "SUNLIGHT" ],
+    "prereqs": [ "ALBINO" ],
+    "prereqs2": [ "TROGLO2" ],
+    "category": [ "TROGLOBITE" ],
+    "enchantments": [
+      {
+        "condition": { "not": "is_day" },
+        "values": [
+          { "value": "FOOTSTEP_NOISE", "multiply": 0.4 },
+          { "value": "ATTACK_NOISE", "multiply": 0.6 },
+          { "value": "BONUS_BLOCK", "add": 1 },
+          { "value": "BONUS_DODGE", "add": 1 },
+          { "value": "MOVE_COST", "multiply": 0.9 }
+        ]
+      }
+    ]
   },
   {
     "type": "mutation",
@@ -5861,36 +5760,6 @@
   },
   {
     "type": "mutation",
-    "id": "RADIOACTIVE1",
-    "name": { "str": "Minor Radioactivity" },
-    "points": -2,
-    "bodytemp_modifiers": [ 250, 250 ],
-    "description": "Your body has become radioactive!  You continuously emit low levels of radiation, which slowly contaminates the world around you.",
-    "changes_to": [ "RADIOACTIVE2" ],
-    "category": [ "SLIME" ]
-  },
-  {
-    "type": "mutation",
-    "id": "RADIOACTIVE2",
-    "name": { "str": "Radioactivity" },
-    "points": -4,
-    "bodytemp_modifiers": [ 750, 750 ],
-    "description": "Your body has become radioactive!  You continuously emit moderate levels of radiation, which contaminates the world around you.",
-    "prereqs": [ "RADIOACTIVE1" ],
-    "changes_to": [ "RADIOACTIVE3" ],
-    "category": [ "ELFA" ]
-  },
-  {
-    "type": "mutation",
-    "id": "RADIOACTIVE3",
-    "name": { "str": "Severe Radioactivity" },
-    "points": -6,
-    "bodytemp_modifiers": [ 1500, 1500 ],
-    "description": "Your body has become radioactive!  You continuously emit heavy levels of radiation, making your surroundings unlivable.",
-    "prereqs": [ "RADIOACTIVE2" ]
-  },
-  {
-    "type": "mutation",
     "id": "SLIMY",
     "name": { "str": "Slimy" },
     "points": 2,
@@ -5923,6 +5792,7 @@
     "description": "Your body's slime output has become sticky and gel-like.  Somewhat protects from acid.  Greatly increases wet benefits.",
     "leads_to": [ "AMORPHOUS" ],
     "prereqs": [ "SLIMY" ],
+    "prereqs2": [ "THIRST2" ],
     "threshreq": [ "THRESH_SLIME", "THRESH_GASTROPOD" ],
     "category": [ "SLIME", "GASTROPOD" ],
     "wet_protection": [
@@ -6001,41 +5871,47 @@
     "cancels": [ "VEGETARIAN", "HERBIVORE", "RUMINANT", "GRAZER" ],
     "leads_to": [ "SAPROVORE" ],
     "category": [ "LIZARD", "SPIDER", "CHIMERA", "RAPTOR", "FELINE", "BATRACHIAN" ],
-    "vitamin_rates": [ [ "vitC", -1200 ] ]
+    "vitamin_rates": [ [ "vitC", -300 ] ]
   },
   {
     "type": "mutation",
     "id": "PONDEROUS1",
-    "name": { "str": "Ponderous" },
-    "points": -3,
-    "description": "Your muscles are generally slow to move.  You move 10% slower.",
-    "types": [ "RUNNING" ],
+    "name": { "str": "Slow Bulk" },
+    "points": 2,
+    "description": "Your bulky body is somewhat slow to move.  You gain a 10% bonus to all hit points, but move 10% slower.  Swimming is difficult for someone built like you.",
+    "types": [ "BUILD" ],
     "changes_to": [ "PONDEROUS2" ],
     "category": [ "URSINE" ],
-    "movecost_modifier": 1.1
+    "movecost_modifier": 1.1,
+    "movecost_swim_modifier": 1.2,
+    "hp_modifier": 0.1
   },
   {
     "type": "mutation",
     "id": "PONDEROUS2",
-    "name": { "str": "Very Ponderous" },
-    "points": -5,
-    "description": "Your muscles are quite slow to move.  You move 20% slower.",
-    "types": [ "RUNNING" ],
+    "name": { "str": "Lethargic Bulk" },
+    "points": 3,
+    "description": "Your very bulky body is slow to move.  You gain a 20% bonus to all hit points, but move 20% slower.  Swimming is not recommended for someone built like you.",
+    "types": [ "BUILD" ],
     "prereqs": [ "PONDEROUS1" ],
     "changes_to": [ "PONDEROUS3" ],
     "category": [ "CATTLE" ],
-    "movecost_modifier": 1.2
+    "movecost_modifier": 1.2,
+    "movecost_swim_modifier": 1.7,
+    "hp_modifier": 0.2
   },
   {
     "type": "mutation",
     "id": "PONDEROUS3",
-    "name": { "str": "Extremely Ponderous" },
+    "name": { "str": "Ponderous Bulk" },
     "points": -6,
-    "description": "Your muscles are very slow to move.  You move 30% slower.",
-    "types": [ "RUNNING" ],
+    "description": "Your hugely brawny body is very slow to move.  You gain a 30% bonus to all hit points, but move 30% slower.  You will almost certainly drown if you attempt to swim.",
+    "types": [ "BUILD" ],
     "prereqs": [ "PONDEROUS2" ],
     "category": [ "PLANT" ],
-    "movecost_modifier": 1.3
+    "movecost_modifier": 1.3,
+    "movecost_swim_modifier": 2.2,
+    "hp_modifier": 0.3
   },
   {
     "type": "mutation",
@@ -6043,7 +5919,7 @@
     "name": { "str": "Sunlight Dependent" },
     "points": -5,
     "description": "You feel very sluggish when not in direct sunlight.  You suffer a 5% drop in speed when in shade, and a 10% drop in speed when in the dark.",
-    "cancels": [ "TROGLO", "TROGLO2", "TROGLO3" ],
+    "types": [ "SUNLIGHT" ],
     "category": [ "PLANT" ]
   },
   {
@@ -6743,17 +6619,28 @@
     "description": "What was that old advertisement?  'Paint the planet'?  That might be a good long-term goal, but for now…",
     "valid": false,
     "purifiable": false,
-    "threshold": true
+    "threshold": true,
+    "vitamin_rates": [ [ "mutagen", -700 ] ]
   },
   {
     "type": "mutation",
     "id": "THRESH_TROGLOBITE",
     "name": { "str": "Subterranean" },
     "points": 1,
-    "description": "Not much point to rebuilding up in that horribly bright, roofless wasteland.  Now that you've become accustomed to your new digs, there's the beginning of a great empire right here, underground.",
+    "description": "Not much point to rebuilding up in that horribly bright, roofless wasteland.  Now that you've become accustomed to your new digs, there's the beginning of a great empire right here, underground.  Besides, that foul surface air makes you feel terrible.",
     "valid": false,
     "purifiable": false,
-    "threshold": true
+    "threshold": true,
+    "enchantments": [
+      {
+        "condition": { "compare_int": [ { "u_val": "pos_z" }, ">=", { "const": 0 } ] },
+        "values": [ { "value": "MOD_HEALTH", "add": -2 }, { "value": "MOD_HEALTH_CAP", "add": -90 } ]
+      },
+      {
+        "condition": { "compare_int": [ { "u_val": "pos_z" }, "<", { "const": 0 } ] },
+        "values": [ { "value": "MOD_HEALTH", "add": 2 }, { "value": "MOD_HEALTH_CAP", "add": 50 } ]
+      }
+    ]
   },
   {
     "type": "mutation",
@@ -6790,27 +6677,91 @@
     "id": "THRESH_MEDICAL",
     "name": { "str": "Prototype" },
     "points": 1,
-    "description": "After all those experiments, what's a few more, hmm?",
+    "description": "You've become a perfectly broken experiment, and the substances that created you keep whispering beautiful secrets to you.  Though you can't make out the words, your cells follow the commands when the voices get loud enough.",
     "valid": false,
     "purifiable": false,
-    "threshold": true
+    "threshold": true,
+    "triggers": [
+      [
+        {
+          "condition": { "compare_int": [ { "u_val": "vitamin", "name": "mutagen_medical" }, ">=", { "const": 1500 } ] },
+          "msg_on": { "text": "The drugs are fixing you up.", "rating": "good" },
+          "msg_off": { "text": "You need more medicine.", "rating": "bad" }
+        }
+      ]
+    ],
+    "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "EFFECTIVE_HEALTH_MOD", "add": 120 } ] } ],
+    "flags": [ "KALUPTIC" ]
   },
   {
     "type": "mutation",
     "id": "THRESH_ALPHA",
     "name": { "str": "Prime" },
     "points": 1,
-    "description": "You're the perfect candidate to tidy this mess.",
+    "description": "You're the perfect candidate to tidy this mess.  Just need to keep plenty of alpha mutagen in you, to keep you perfect.  And alive, since you'll rapidly decompose without that to sustain your superior functions.",
     "valid": false,
     "purifiable": false,
-    "threshold": true
+    "threshold": true,
+    "cancels": [ "ROT1", "ROT2" ],
+    "bodytemp_modifiers": [ -800, -800 ],
+    "cardio_multiplier": 1.25,
+    "vitamin_rates": [ [ "mutagen_alpha", 1800 ] ],
+    "triggers": [
+      [
+        {
+          "condition": { "compare_int": [ { "u_val": "vitamin", "name": "mutagen_alpha" }, "<=", { "const": 100 } ] },
+          "msg_on": { "text": "The agony has started again.  You need more alpha mutagen.  Now.", "rating": "bad" }
+        }
+      ]
+    ],
+    "enchantments": [
+      { "condition": "ALWAYS", "values": [ { "value": "LEARNING_FOCUS", "add": 10 } ] },
+      { "condition": "ALWAYS", "values": [ { "value": "SPEED", "multiply": 0.05 } ] }
+    ],
+    "transform": {
+      "target": "THRESH_ALPHA_DYING",
+      "msg_transform": "Your bones are melting, your skin flaking to dust, and every organ you have left screams in need.",
+      "active": false,
+      "moves": 0
+    }
   },
+  {
+    "type": "mutation",
+    "id": "THRESH_ALPHA_DYING",
+    "valid": false,
+    "purifiable": false,
+    "threshold": true,
+    "name": { "str": "Prime Decomposition" },
+    "points": -20,
+    "bodytemp_modifiers": [ -2700, -2700 ],
+    "description": "Your body is rapidly dismantling itself, turning your cells to ash for lack of alpha mutagen.  This wasn't supposed to happen.  The world needs you.",
+    "types": [ "HEALING" ],
+    "vitamin_rates": [ [ "redcells", 2 ] ],
+    "thirst_modifier": 1.0,
+    "cardio_multiplier": 0.3,
+    "healing_awake": -2,
+    "healing_resting": -1,
+    "triggers": [
+      [
+        {
+          "condition": { "compare_int": [ { "u_val": "vitamin", "name": "mutagen_alpha" }, ">", { "const": 250 } ] },
+          "msg_on": { "text": "The alpha mutagen coursing through your veins is enough to keep you gloriously alive.", "rating": "good" }
+        }
+      ]
+    ],
+    "transform": {
+      "target": "THRESH_ALPHA",
+      "msg_transform": "You can never let this happen again, you can never feel that pain again.  You need more mutagen.",
+      "active": false,
+      "moves": 0
+    }
+  },  
   {
     "type": "mutation",
     "id": "THRESH_ELFA",
     "name": { "str": "Fey" },
     "points": 1,
-    "description": "You are the tree under which humankind will shelter during these dark times.",
+    "description": "You are the tree under which humankind will shelter during these dark times.  Your pollen will keep them alert, and your branches will protect them.",
     "valid": false,
     "purifiable": false,
     "threshold": true
@@ -6851,6 +6802,16 @@
     "name": { "str": "Diminutive" },
     "points": 1,
     "description": "So much food, everywhere!  And nobody's even guarding it anymore!  These are good times.",
+    "valid": false,
+    "purifiable": false,
+    "threshold": true
+  },
+  {
+    "type": "mutation",
+    "id": "THRESH_RABBIT",
+    "name": { "str": "Lagomorph" },
+    "points": 1,
+    "description": "You really want to eat some carrots.  Welcome to the Lagomorpha family.",
     "valid": false,
     "purifiable": false,
     "threshold": true
@@ -6911,10 +6872,12 @@
     "id": "AMPHIBIAN",
     "name": { "str": "Amphibious" },
     "points": 5,
-    "description": "You're as comfortable in water as on land, and your body has adapted around that fact.  Your base swimming speed is greatly increased, and weight will hinder you much less while swimming.",
+    "description": "You're as comfortable in water as on land, and your body has adapted around that fact.  Your base swimming speed is greatly increased, and weight will hinder you much less while swimming.  Unfortunately, you need almost three times the water of a normal human to survive on land.",
+    "prereqs": [ "THIRST2" ],
     "category": [ "FISH", "BATRACHIAN" ],
     "threshreq": [ "THRESH_FISH", "THRESH_BATRACHIAN" ],
     "movecost_swim_modifier": 0.45,
+    "thirst_modifier": 1.5,
     "purifiable": false
   },
   {
@@ -6956,10 +6919,11 @@
     "id": "FRESHWATEROSMOSIS",
     "name": { "str": "Freshwater Osmosis" },
     "points": 4,
-    "description": "Your gills and skin are highly permeable to moisture, and you can hydrate your body through osmosis.  While submerged in fresh water, any thirst you might have will be slaked.",
+    "description": "Your gills and skin are highly permeable to moisture, and you can hydrate your body through osmosis.  While submerged in fresh water, any thirst you might have will be slaked, but will always need 50% more water.",
     "prereqs": [ "GILLS" ],
     "category": [ "FISH", "BATRACHIAN" ],
-    "threshreq": [ "THRESH_FISH", "THRESH_BATRACHIAN" ]
+    "threshreq": [ "THRESH_FISH", "THRESH_BATRACHIAN" ],
+    "thirst_modifier": 0.5
   },
   {
     "type": "mutation",
@@ -7486,29 +7450,32 @@
     "id": "NOMAD",
     "name": { "str": "Nomad" },
     "points": -1,
-    "description": "You're too adventurous for your own good.  The more time you spend somewhere, the unhappier it makes you to be there.",
+    "description": "You're too adventurous for your own good.  The more time you spend somewhere, the unhappier it makes you to be there.  You are better at noting terrain than most.",
     "starting_trait": true,
     "changes_to": [ "NOMAD2" ],
-    "category": [ "BIRD", "FISH", "CHIMERA" ]
+    "category": [ "BIRD", "FISH", "CHIMERA" ],
+    "overmap_sight": 2
   },
   {
     "type": "mutation",
     "id": "NOMAD2",
-    "name": { "str": "Antsy" },
+    "name": { "str": "Wanderer" },
     "points": -2,
-    "description": "You can't bear to stay still for long.  Your morale will suffer unless you constantly explore new territory.",
+    "description": "You can't bear to stay still for long.  Your morale will suffer unless you constantly explore new territory, but you find it easy to identify terrain.",
     "prereqs": [ "NOMAD" ],
     "changes_to": [ "NOMAD3" ],
-    "category": [ "BIRD", "FISH", "CHIMERA" ]
+    "category": [ "BIRD", "FISH", "CHIMERA" ],
+    "overmap_sight": 4
   },
   {
     "type": "mutation",
     "id": "NOMAD3",
-    "name": { "str": "Restless" },
-    "points": -4,
-    "description": "Spending any amount of time in familiar places makes you miserable.  Must.  Keep.  Moving.",
+    "name": { "str": "Adventurer" },
+    "points": 1,
+    "description": "Spending any amount of time in familiar places makes you miserable.  You need to keep moving, need to keep finding new places.  Your knowledge of the land is unmatched.",
     "prereqs": [ "NOMAD2" ],
-    "category": [ "CHIMERA" ]
+    "category": [ "CHIMERA" ],
+    "overmap_sight": 7
   },
   {
     "type": "mutation",
@@ -7531,22 +7498,12 @@
   },
   {
     "type": "mutation",
-    "id": "THRESH_RABBIT",
-    "name": { "str": "Lagomorph" },
-    "points": 1,
-    "description": "You really want to eat some carrots.  Welcome to the Lagomorpha family.",
-    "valid": false,
-    "purifiable": false,
-    "threshold": true
-  },
-  {
-    "type": "mutation",
     "id": "RABBIT_EARS",
     "name": { "str": "Rabbit Ears" },
     "points": 1,
     "visibility": 9,
     "ugliness": -1,
-    "description": "Your ears have grown into tall, flexible and pretty rabbit ears.  They're are slender and enhance your hearing beyond the normal range.",
+    "description": "Your ears have grown into tall, flexible and pretty rabbit ears.  They're slender and enhance your hearing beyond the normal range.",
     "valid": false,
     "types": [ "EARS" ],
     "category": [ "RABBIT" ],
@@ -7664,31 +7621,9 @@
     "description": "Your muscles, joints, and the movement center of your brain have changed internally somewhat, allowing you to traverse obstacles with ease.",
     "valid": false,
     "purifiable": false,
+    "prereqs": [ "STRONGKNEES" ],
     "threshreq": [ "THRESH_FELINE" ],
     "category": [ "FELINE" ],
     "movecost_obstacle_modifier": 0.5
-  },
-  {
-    "type": "mutation",
-    "id": "HATES_WATER",
-    "name": { "str": "Hates Water" },
-    "points": -2,
-    "description": "You really hate getting your fur all wet.  This increases morale penalties for being wet, and you will get them even when wearing appropriate clothing.",
-    "valid": false,
-    "prereqs": [ "FELINE_FUR" ],
-    "category": [ "FELINE" ],
-    "cancels": [ "OUTDOORSMAN" ],
-    "wet_protection": [
-      { "part": "head", "good": -12 },
-      { "part": "leg_l", "good": -16 },
-      { "part": "leg_r", "good": -16 },
-      { "part": "foot_l", "good": -4 },
-      { "part": "foot_r", "good": -4 },
-      { "part": "arm_l", "good": -16 },
-      { "part": "arm_r", "good": -16 },
-      { "part": "hand_l", "good": -16 },
-      { "part": "hand_r", "good": -16 },
-      { "part": "torso", "good": -30 }
-    ]
   }
 ]

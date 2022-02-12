@@ -110,6 +110,7 @@ static const efftype_id effect_crushed( "crushed" );
 
 static const field_type_str_id field_fd_clairvoyant( "fd_clairvoyant" );
 
+static const json_character_flag json_flag_KALUPTIC( "KALUPTIC" );
 static const flag_id json_flag_PRESERVE_SPAWN_OMT( "PRESERVE_SPAWN_OMT" );
 
 static const item_group_id Item_spawn_data_default_zombie_clothes( "default_zombie_clothes" );
@@ -134,8 +135,6 @@ static const ter_str_id ter_t_tree_dead( "t_tree_dead" );
 static const ter_str_id ter_t_tree_deadpine( "t_tree_deadpine" );
 static const ter_str_id ter_t_tree_hickory_dead( "t_tree_hickory_dead" );
 static const ter_str_id ter_t_tree_willow_harvested( "t_tree_willow_harvested" );
-
-static const trait_id trait_SCHIZOPHRENIC( "SCHIZOPHRENIC" );
 
 #define dbg(x) DebugLog((x),D_MAP) << __FILE__ << ":" << __LINE__ << ": "
 
@@ -4009,7 +4008,7 @@ bool map::open_door( const tripoint &p, const bool inside, const bool check_only
                            "open_door", ter.id.str() );
             ter_set( p, ter.open );
 
-            if( player_character.has_trait( trait_SCHIZOPHRENIC ) &&
+            if( player_character.count_trait_flag( json_flag_KALUPTIC ) > 0 &&
                 one_in( 50 ) && !ter.has_flag( ter_furn_flag::TFLAG_TRANSPARENT ) ) {
                 tripoint mp = p + -2 * player_character.pos().xy() + tripoint( 2 * p.x, 2 * p.y, p.z );
                 g->spawn_hallucination( mp );

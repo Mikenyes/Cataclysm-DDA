@@ -98,6 +98,7 @@ static const efftype_id effect_weak_antibiotic( "weak_antibiotic" );
 static const efftype_id effect_winded( "winded" );
 
 static const json_character_flag json_flag_ALARMCLOCK( "ALARMCLOCK" );
+static const json_character_flag json_flag_KALUPTIC( "KALUPTIC" );
 static const json_character_flag json_flag_SEESLEEP( "SEESLEEP" );
 
 static const mongroup_id GROUP_NETHER( "GROUP_NETHER" );
@@ -119,7 +120,6 @@ static const trait_id trait_INFRESIST( "INFRESIST" );
 static const trait_id trait_M_IMMUNE( "M_IMMUNE" );
 static const trait_id trait_M_SKIN3( "M_SKIN3" );
 static const trait_id trait_NOPAIN( "NOPAIN" );
-static const trait_id trait_SCHIZOPHRENIC( "SCHIZOPHRENIC" );
 static const trait_id trait_THRESH_MYCUS( "THRESH_MYCUS" );
 static const trait_id trait_WATERSLEEP( "WATERSLEEP" );
 
@@ -1100,7 +1100,7 @@ static void eff_fun_sleep( Character &u, effect &it )
                 }
             }
         }
-        if( u.has_trait( trait_SCHIZOPHRENIC ) && !u.has_effect( effect_took_thorazine ) &&
+        if( u.count_trait_flag( json_flag_KALUPTIC ) > 0 && !u.has_effect( effect_took_thorazine ) &&
             one_in( 43200 ) && u.is_avatar() ) {
             if( one_in( 2 ) ) {
                 u.sound_hallu();
