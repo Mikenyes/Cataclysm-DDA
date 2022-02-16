@@ -2863,12 +2863,12 @@ void Item_factory::load( islot_comestible &slot, const JsonObject &jo, const std
             for( const std::string &vitamin : ja.get_array(0) ) {
                 generation_vits.emplace_back( vitamin_id( vitamin ) );
             }
-            std::array<int,4> generation_ints;
+            std::array<int,6> generation_ints;
             JsonArray int_values = ja.get_array(1);
-            for( int iter = 0; iter < 4; iter++ ) {
+            for( int iter = 0; iter < 6; iter++ ) {
                 generation_ints[iter] = int_values.get_int(iter);
             }
-            slot.generatable_vitamins.push_back( std::pair<std::vector<vitamin_id>,std::array<int,4>> (generation_vits, generation_ints) );
+            slot.generatable_vitamins.push_back( std::pair<std::vector<vitamin_id>,std::array<int,6>> (generation_vits, generation_ints) );
         }
     }
 

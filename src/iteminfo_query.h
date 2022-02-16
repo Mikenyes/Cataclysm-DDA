@@ -42,6 +42,8 @@ enum class iteminfo_parts : size_t {
     FOOD_VITAMINS,
     FOOD_VIT_EFFECTS,
     FOOD_VIT_MUTAGEN,
+    FOOD_VIT_COLORS,
+    FOOD_VIT_SAMPLES,
     FOOD_CANNIBALISM,
     FOOD_TAINT,
     FOOD_POISON,

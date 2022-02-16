@@ -75,12 +75,12 @@ class vitamin
         }
 
         /** Color of this vitamin */
-        int color() const {
+        std::string color() const {
             return color_;
         }
 
         /** Scent of this vitamin */
-        int scent() const {
+        std::string scent() const {
             return scent_;
         }
 

@@ -894,7 +894,7 @@ void item::generate_vitamins()
         std::random_shuffle(vitamin_generation.first.begin(), vitamin_generation.first.end());
         const int selections = rng( vitamin_generation.second[0], vitamin_generation.second[1] );
         for (int i = 0; i < selections; i++) {
-            generated_vitamins[ vitamin_generation.first[ i ] ] += rng( 0, vitamin_generation.second[2] + i * vitamin_generation.second[3] );
+            generated_vitamins[ vitamin_generation.first[ i ] ] += std::max( 0, rng( vitamin_generation.second[2] + i * vitamin_generation.second[3], vitamin_generation.second[4] + i * vitamin_generation.second[5] ) );
         }
     }
 }
@@ -2340,17 +2340,19 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
     if( !max_nutr_mutagen.empty() ) {
         insert_separation_line( info );
 
+        /** 
         auto format_mutagen = [&]( const std::pair<vitamin_id, int> &v, const bool has_analysis, const bool has_concentration, const bool has_fine_distillation ) {
             if( debug ) {
                 return string_format( "%s (%i)", v.first->name(), v.second );
             }
-            int lab_quality = ( has_analysis ? 25 : 50 ) * ( has_fine_distillation ? 1 : 2 ) + ( has_concentration ? 0 : 50 );
-            if( v.second < lab_quality ) {
+            int lab_shabbiness = ( has_analysis ? 25 : 50 ) * ( has_fine_distillation ? 1 : 2 ) * ( has_concentration ? 1 : 2 );
+            if( v.second < lab_shabbiness ) {
                 return std::string();
             }
-            int value = v.second / lab_quality;
-            return string_format( "%s (%i-%i)", has_analysis ? v.first->name() : "???", value * lab_quality, ( value + 1 ) * lab_quality );
+            int value = v.second / lab_shabbiness;
+            return string_format( "%s (%i-%i)", "???", value * lab_shabbiness, ( value + 1 ) * lab_shabbiness );
         };
+        */
 
         inventory map_inv;
         map_inv.form_from_map( player_character.pos(), PICKUP_RANGE, &player_character );
@@ -2358,16 +2360,70 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
         const bool has_concentration = player_character.has_quality( qual_CONCENTRATE, 1 ) || map_inv.has_quality( qual_CONCENTRATE, 1 );
         const bool has_fine_distillation = player_character.has_quality( qual_FINE_DISTILL, 1 ) || map_inv.has_quality( qual_FINE_DISTILL, 1 );
         
-        //std::sort( max_nutr_mutagen.begin(), max_nutr_mutagen.end(), bool sort_mutagen (const std::pair<vitamin_id, int> &a,const std::pair<vitamin_id, int> &b) { return (a.second>b.second); } )
+        std::sort( max_nutr_mutagen.begin(), max_nutr_mutagen.end(), [](std::pair<vitamin_id, int> a, std::pair<vitamin_id, int> b) { return (a.second>b.second); } );
+        /**
         const std::string mutagen_vits = enumerate_as_string(
                                               max_nutr_mutagen.begin(),
                                               max_nutr_mutagen.end(),
         [&]( const std::pair<vitamin_id, int> &v ) {
             return format_mutagen( v, has_analysis, has_concentration, has_fine_distillation );
         } );
+        */
         
+        int summed_vits = 0;
+        for( const std::pair<vitamin_id, int> &v : max_nutr_mutagen ) {
+            summed_vits += v.second;
+        }
+        int lab_shabbiness = ( has_analysis ? 25 : 50 ) * ( has_fine_distillation ? 1 : 2 ) * ( has_concentration ? 1 : 2 );
+        summed_vits /= lab_shabbiness;
+        std::string mutagen_vits = string_format( "%i-%i cM", summed_vits * lab_shabbiness, ( summed_vits + 1 ) * lab_shabbiness );
+            
         if( !mutagen_vits.empty() && parts->test( iteminfo_parts::FOOD_VIT_MUTAGEN ) ) {
-            info.emplace_back( "FOOD", _( "Mutagen (cM): " ), mutagen_vits );
+            
+            info.emplace_back( "FOOD", _( "Active mutagen: " ), mutagen_vits );
+        }
+        
+        std::map<std::string,int> color_map;
+        int sum_color = 0;
+        for( const std::pair<vitamin_id, int> &v : max_nutr_mutagen ) {
+            std::string vit_color = v.first->color();
+            if( !vit_color.empty() ) {
+                color_map[vit_color] += v.second;
+                sum_color += v.second;
+            }
+        }
+        
+        if( parts->test( iteminfo_parts::FOOD_VIT_SAMPLES ) ) {
+            info.emplace_back( "FOOD", _( "Distinct mutagen samples: " ), max_nutr_mutagen.size() );
+        }
+        
+        std::string mutagen_colors;
+        if( sum_color > 0 && parts->test( iteminfo_parts::FOOD_VIT_COLORS ) ) {
+            std::vector<std::pair<std::string,int>> mutagen_color_list;
+            for( auto const &vc : color_map ) {
+                mutagen_color_list.push_back( { vc.first, 100 * vc.second / sum_color} );
+            }
+            std::sort( mutagen_color_list.begin(), mutagen_color_list.end(), [](std::pair<std::string, int> a, std::pair<std::string, int> b) { return (a.second>b.second); } );
+            for( std::pair<std::string, int> cw : mutagen_color_list ) {
+                if( cw.second == 100 ) {
+                    mutagen_colors += " entirely " + cw.first + ",";
+                    break;
+                } else if( cw.second > 50 ) {
+                    mutagen_colors += " mostly " + cw.first + ",";
+                } else if( cw.second > 35 ) {
+                    mutagen_colors += " partially " + cw.first + ",";
+                } else if( cw.second > 10 ) {
+                    mutagen_colors += " slightly " + cw.first + ",";
+                } else {
+                    break;
+                }
+            }
+            if( mutagen_colors.empty() ) {
+                mutagen_colors = "muddled slop";
+            } else {
+                mutagen_colors.pop_back();
+            }
+            info.emplace_back( "FOOD", _( "Mutagen hues:" ), mutagen_colors );
         }
     }
     

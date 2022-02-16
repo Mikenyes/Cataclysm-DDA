@@ -82,7 +82,7 @@
           "mutagen_troglobite",
           "mutagen_ursine"
         ],
-        [ 1, 4, 200, -50 ]
+        [ 2, 4, 151, -50, 200, -50 ]
       ]
     ]
   },
