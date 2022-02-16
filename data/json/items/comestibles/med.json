@@ -1706,9 +1706,9 @@
     "flags": [ "IRREPLACEABLE_CONSUMABLE", "WATER_DISSOLVE", "EDIBLE_FROZEN" ],
     "use_action": {
       "type": "consume_drug",
-      "activation_message": "You take the %s.",
+      "activation_message": "You take the %s."
+    },
       "vitamins": [ [ "calcium", 24, 48 ], [ "iron", 24, 48 ], [ "vitA", 24, 48 ], [ "vitB", 24, 48 ], [ "vitC", 24, 48 ] ]
-    }
   },
   {
     "id": "calcium_tablet",
@@ -1726,7 +1726,7 @@
     "symbol": "!",
     "color": "magenta",
     "container": "bottle_plastic_pill_supplement",
-    "use_action": { "type": "consume_drug", "activation_message": "You take the %s.", "vitamins": [ [ "calcium", 75 ] ] }
+    "use_action": { "type": "consume_drug", "activation_message": "You take the %s." }, "vitamins": [ [ "calcium", 75 ] ]
   },
   {
     "id": "bonemeal_tablet",
@@ -1746,7 +1746,7 @@
     "color": "white",
     "looks_like": "calcium_tablet",
     "flags": [ "EDIBLE_FROZEN" ],
-    "use_action": { "type": "consume_drug", "activation_message": "You take the %s.", "vitamins": [ [ "calcium", 24 ] ] }
+    "use_action": { "type": "consume_drug", "activation_message": "You take the %s." }, "vitamins": [ [ "calcium", 24 ] ]
   },
   {
     "id": "flavored_bonemeal_tablet",
@@ -1766,7 +1766,7 @@
     "color": "yellow",
     "looks_like": "calcium_tablet",
     "flags": [ "EDIBLE_FROZEN" ],
-    "use_action": { "type": "consume_drug", "activation_message": "You take the %s.", "vitamins": [ [ "calcium", 23 ] ] }
+    "use_action": { "type": "consume_drug", "activation_message": "You take the %s." }, "vitamins": [ [ "calcium", 23 ] ]
   },
   {
     "id": "gummy_vitamins",
@@ -1844,9 +1844,9 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You inject some vitamin B.",
-      "tools_needed": { "syringe": -1 },
+      "tools_needed": { "syringe": -1 }
+    },
       "vitamins": [ [ "vitB", 100 ] ]
-    }
   },
   {
     "id": "inj_iron",
@@ -1866,9 +1866,9 @@
     "use_action": {
       "type": "consume_drug",
       "activation_message": "You inject some iron.",
-      "tools_needed": { "syringe": -1 },
+      "tools_needed": { "syringe": -1 }
+    },
       "vitamins": [ [ "iron", 100 ] ]
-    }
   },
   {
     "id": "weed",

@@ -61,6 +61,8 @@ void vitamin::load_vitamin( const JsonObject &jo )
     vit.min_ = jo.get_int( "min" );
     vit.max_ = jo.get_int( "max", 0 );
     vit.rate_ = read_from_json_string<time_duration>( jo.get_member( "rate" ), time_duration::units );
+    vit.color_ = jo.get_string( "color" );
+    vit.scent_ = jo.get_string( "scent" );
 
     if( !jo.has_string( "vit_type" ) ) {
         jo.throw_error( "vitamin must have a vitamin type", "vit_type" );

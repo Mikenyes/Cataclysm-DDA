@@ -2856,6 +2856,21 @@ void Item_factory::load( islot_comestible &slot, const JsonObject &jo, const std
             slot.default_nutrition.vitamins[ vit ] += pair.get_int( 1 );
         }
     }
+    
+    if( jo.has_array( "generatable_vitamins" ) ) {
+        for( const JsonArray ja : jo.get_array( "generatable_vitamins" ) ) {
+            std::vector<vitamin_id> generation_vits;
+            for( const std::string &vitamin : ja.get_array(0) ) {
+                generation_vits.emplace_back( vitamin_id( vitamin ) );
+            }
+            std::array<int,4> generation_ints;
+            JsonArray int_values = ja.get_array(1);
+            for( int iter = 0; iter < 4; iter++ ) {
+                generation_ints[iter] = int_values.get_int(iter);
+            }
+            slot.generatable_vitamins.push_back( std::pair<std::vector<vitamin_id>,std::array<int,4>> (generation_vits, generation_ints) );
+        }
+    }
 
     if( jo.has_string( "rot_spawn" ) ) {
         slot.rot_spawn = mongroup_id( jo.get_string( "rot_spawn" ) );

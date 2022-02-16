@@ -177,7 +177,10 @@ static const mtype_id mon_zombie_survivor( "mon_zombie_survivor" );
 
 static const npc_class_id NC_BOUNTY_HUNTER( "NC_BOUNTY_HUNTER" );
 
+static const quality_id qual_ANALYSIS( "ANALYSIS" );
 static const quality_id qual_BOIL( "BOIL" );
+static const quality_id qual_CONCENTRATE( "CONCENTRATE" );
+static const quality_id qual_FINE_DISTILL( "FINE_DISTILL" );
 static const quality_id qual_JACK( "JACK" );
 static const quality_id qual_LIFT( "LIFT" );
 
@@ -202,6 +205,7 @@ static const trait_id trait_WOOLALLERGY( "WOOLALLERGY" );
 
 // vitamin flags
 static const std::string flag_NO_DISPLAY( "NO_DISPLAY" );
+static const std::string flag_MUTAGEN_DISPLAY( "MUTAGEN_DISPLAY" );
 
 // fault flags
 static const std::string flag_BLACKPOWDER_FOULING_DAMAGE( "BLACKPOWDER_FOULING_DAMAGE" );
@@ -288,6 +292,10 @@ item::item( const itype *type, time_point turn, int qty ) : type( type ), bday( 
         } else {
             charges = type->charges_default();
         }
+    }
+    
+    if( type->comestible && !type->comestible->generatable_vitamins.empty() ) {
+        generate_vitamins();
     }
 
     if( has_flag( flag_SPAWN_ACTIVE ) ) {
@@ -880,6 +888,30 @@ body_part_set item::get_covered_body_parts( const side s ) const
     return res;
 }
 
+void item::generate_vitamins()
+{
+    for( auto &vitamin_generation : type->comestible->generatable_vitamins ) {
+        std::random_shuffle(vitamin_generation.first.begin(), vitamin_generation.first.end());
+        const int selections = rng( vitamin_generation.second[0], vitamin_generation.second[1] );
+        for (int i = 0; i < selections; i++) {
+            generated_vitamins[ vitamin_generation.first[ i ] ] += rng( 0, vitamin_generation.second[2] + i * vitamin_generation.second[3] );
+        }
+    }
+}
+
+void item::merge_generated_vitamins( const std::map<vitamin_id, int> rhs_generated_vitamins, const int rhs_charges )
+{
+    for (auto &vitamin : generated_vitamins) {
+        vitamin.second *= charges;
+    }
+    for (auto const &vitamin : rhs_generated_vitamins) {
+        generated_vitamins[vitamin.first] += vitamin.second * rhs_charges;
+    }
+    for (auto &vitamin : generated_vitamins) {
+        vitamin.second /= charges + rhs_charges;
+    }
+}
+
 namespace
 {
 
@@ -1183,7 +1215,9 @@ bool item::combine( const item &rhs )
                     weight() ) + to_gram( rhs.weight() ) );
             set_item_specific_energy( combined_specific_energy );
         }
-
+    }
+    if( !generated_vitamins.empty() && !rhs.generated_vitamins.empty() ) {
+        merge_generated_vitamins( rhs.generated_vitamins, rhs.charges );
     }
     charges += rhs.charges;
     return true;
@@ -1382,6 +1416,9 @@ bool item::merge_charges( const item &rhs )
     if( item_counter > 0 || rhs.item_counter > 0 ) {
         item_counter = ( static_cast<double>( item_counter ) * charges + static_cast<double>
                          ( rhs.item_counter ) * rhs.charges ) / ( charges + rhs.charges );
+    }
+    if( !generated_vitamins.empty() && !rhs.generated_vitamins.empty() ) {
+        merge_generated_vitamins( rhs.generated_vitamins, rhs.charges );
     }
     charges += rhs.charges;
     return true;
@@ -2161,42 +2198,9 @@ void item::debug_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
 }
 
 void item::med_info( const item *med_item, std::vector<iteminfo> &info, const iteminfo_query *parts,
-                     int batch, bool ) const
+                     int batch, bool debug ) const
 {
-    const cata::value_ptr<islot_comestible> &med_com = med_item->get_comestible();
-    if( med_com->quench != 0 && parts->test( iteminfo_parts::MED_QUENCH ) ) {
-        info.emplace_back( "MED", _( "Quench: " ), med_com->quench );
-    }
-
-    Character &player_character = get_player_character();
-    if( med_item->get_comestible_fun() != 0 && parts->test( iteminfo_parts::MED_JOY ) ) {
-        info.emplace_back( "MED", _( "Enjoyability: " ),
-                           player_character.fun_for( *med_item ).first );
-    }
-
-    if( parts->test( iteminfo_parts::FOOD_HEALTH ) && med_com->healthy != 0 ) {
-        info.emplace_back( "MED", _( "Health: " ), healthy_bar( med_com->healthy ) );
-    }
-
-    if( med_com->stim != 0 && parts->test( iteminfo_parts::MED_STIMULATION ) ) {
-        std::string name = string_format( "%s <stat>%s</stat>", _( "Stimulation:" ),
-                                          med_com->stim > 0 ? _( "Upper" ) : _( "Downer" ) );
-        info.emplace_back( "MED", name );
-    }
-
-    if( parts->test( iteminfo_parts::MED_PORTIONS ) ) {
-        info.emplace_back( "MED", _( "Portions: " ),
-                           std::abs( static_cast<int>( med_item->charges ) * batch ) );
-    }
-
-    if( parts->test( iteminfo_parts::MED_CONSUME_TIME ) ) {
-        info.emplace_back( "MED", _( "Consume time: " ),
-                           to_string( player_character.get_consume_time( *med_item ) ) );
-    }
-
-    if( med_com->addict && parts->test( iteminfo_parts::DESCRIPTION_MED_ADDICTING ) ) {
-        info.emplace_back( "DESCRIPTION", _( "* Consuming this item is <bad>addicting</bad>." ) );
-    }
+    food_info( med_item, info, parts, batch, debug );
 }
 
 void item::food_info( const item *food_item, std::vector<iteminfo> &info,
@@ -2204,6 +2208,7 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
 {
     nutrients min_nutr;
     nutrients max_nutr;
+    const cata::value_ptr<islot_comestible> &food_com = food_item->get_comestible();
 
     Character &player_character = get_player_character();
     std::string recipe_exemplar = get_var( "recipe_exemplar", "" );
@@ -2226,7 +2231,7 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
         }
     }
 
-    if( max_nutr.kcal() != 0 || food_item->get_comestible()->quench != 0 ) {
+    if( max_nutr.kcal() != 0 || food_com->quench != 0 ) {
         if( parts->test( iteminfo_parts::FOOD_NUTRITION ) ) {
             info.emplace_back( "FOOD", _( "<bold>Calories (kcal)</bold>: " ),
                                "", iteminfo::no_newline, min_nutr.kcal() );
@@ -2238,7 +2243,7 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
         if( parts->test( iteminfo_parts::FOOD_QUENCH ) ) {
             const std::string space = "  ";
             info.emplace_back( "FOOD", space + _( "Quench: " ),
-                               food_item->get_comestible()->quench );
+                               food_com->quench );
         }
         if( parts->test( iteminfo_parts::FOOD_SATIATION ) ) {
 
@@ -2261,9 +2266,15 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
         info.emplace_back( "FOOD", _( "Enjoyability: " ), fun_for_food_item.first );
     }
 
-    if( parts->test( iteminfo_parts::FOOD_HEALTH ) && food_item->get_comestible()->healthy != 0 ) {
+    if( parts->test( iteminfo_parts::FOOD_HEALTH ) && food_com->healthy != 0 ) {
         info.emplace_back( "MED", _( "Health: " ),
-                           healthy_bar( food_item->get_comestible()->healthy ) );
+                           healthy_bar( food_com->healthy ) );
+    }
+    
+    if( food_com->stim != 0 && parts->test( iteminfo_parts::MED_STIMULATION ) ) {
+        std::string name = string_format( "%s <stat>%s</stat>", _( "Stimulation:" ),
+                                          food_com->stim > 0 ? _( "Upper" ) : _( "Downer" ) );
+        info.emplace_back( "MED", name );
     }
 
     if( parts->test( iteminfo_parts::FOOD_PORTIONS ) ) {
@@ -2284,7 +2295,7 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
         const bool is_vitamin = v.first->type() == vitamin_type::VITAMIN;
         // only display vitamins that we actually require
         if( player_character.vitamin_rate( v.first ) == 0_turns || v.second == 0 ||
-            display_vitamins != is_vitamin || v.first->has_flag( flag_NO_DISPLAY ) ) {
+            display_vitamins != is_vitamin || v.first->has_flag( flag_NO_DISPLAY ) || v.first->has_flag( flag_MUTAGEN_DISPLAY ) ) {
             return std::string();
         }
         const double multiplier = player_character.vitamin_rate( v.first ) / 1_days * 100;
@@ -2295,8 +2306,9 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
         const std::string format = min_rda == max_rda ? "%s (%i%%)" : "%s (%i-%i%%)";
         return string_format( format, v.first->name(), min_value, max_value );
     };
-
-    const auto max_nutr_vitamins = sorted_lex( max_nutr.vitamins );
+    
+    const std::map<vitamin_id, int> generated_vitamins = food_item->generated_vitamins;
+    const auto max_nutr_vitamins = sorted_lex( generated_vitamins.empty() ? max_nutr.vitamins : generated_vitamins );
     const std::string required_vits = enumerate_as_string(
                                           max_nutr_vitamins.begin(),
                                           max_nutr_vitamins.end(),
@@ -2318,8 +2330,52 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
     if( !effect_vits.empty() && parts->test( iteminfo_parts::FOOD_VIT_EFFECTS ) ) {
         info.emplace_back( "FOOD", _( "Other contents: " ), effect_vits );
     }
+    
+    std::vector<std::pair<vitamin_id, int>> max_nutr_mutagen;
+    for( const std::pair<vitamin_id, int> &v : max_nutr_vitamins ) {
+        if( v.first->has_flag( flag_MUTAGEN_DISPLAY ) ) {
+            max_nutr_mutagen.emplace_back( v );
+        }
+    }
+    if( !max_nutr_mutagen.empty() ) {
+        insert_separation_line( info );
 
+        auto format_mutagen = [&]( const std::pair<vitamin_id, int> &v, const bool has_analysis, const bool has_concentration, const bool has_fine_distillation ) {
+            if( debug ) {
+                return string_format( "%s (%i)", v.first->name(), v.second );
+            }
+            int lab_quality = ( has_analysis ? 25 : 50 ) * ( has_fine_distillation ? 1 : 2 ) + ( has_concentration ? 0 : 50 );
+            if( v.second < lab_quality ) {
+                return std::string();
+            }
+            int value = v.second / lab_quality;
+            return string_format( "%s (%i-%i)", has_analysis ? v.first->name() : "???", value * lab_quality, ( value + 1 ) * lab_quality );
+        };
+
+        inventory map_inv;
+        map_inv.form_from_map( player_character.pos(), PICKUP_RANGE, &player_character );
+        const bool has_analysis = player_character.has_quality( qual_ANALYSIS, 1 ) || map_inv.has_quality( qual_ANALYSIS, 1 );
+        const bool has_concentration = player_character.has_quality( qual_CONCENTRATE, 1 ) || map_inv.has_quality( qual_CONCENTRATE, 1 );
+        const bool has_fine_distillation = player_character.has_quality( qual_FINE_DISTILL, 1 ) || map_inv.has_quality( qual_FINE_DISTILL, 1 );
+        
+        //std::sort( max_nutr_mutagen.begin(), max_nutr_mutagen.end(), bool sort_mutagen (const std::pair<vitamin_id, int> &a,const std::pair<vitamin_id, int> &b) { return (a.second>b.second); } )
+        const std::string mutagen_vits = enumerate_as_string(
+                                              max_nutr_mutagen.begin(),
+                                              max_nutr_mutagen.end(),
+        [&]( const std::pair<vitamin_id, int> &v ) {
+            return format_mutagen( v, has_analysis, has_concentration, has_fine_distillation );
+        } );
+        
+        if( !mutagen_vits.empty() && parts->test( iteminfo_parts::FOOD_VIT_MUTAGEN ) ) {
+            info.emplace_back( "FOOD", _( "Mutagen (cM): " ), mutagen_vits );
+        }
+    }
+    
     insert_separation_line( info );
+
+    if( food_com->addict && parts->test( iteminfo_parts::DESCRIPTION_MED_ADDICTING ) ) {
+        info.emplace_back( "DESCRIPTION", _( "* Consuming this item is <bad>addicting</bad>." ) );
+    }
 
     if( parts->test( iteminfo_parts::FOOD_ALLERGEN )
         && player_character.allergy_type( *food_item ) != morale_null ) {
@@ -5266,11 +5322,7 @@ std::string item::info( std::vector<iteminfo> &info, const iteminfo_query *parts
 
         } else if( blockname == "big_block_of_stuff" ) {
 
-            if( is_medication() ) {
-                med_info( this, info, parts, batch, debug );
-            }
-
-            if( is_food() ) {
+            if( is_food() || is_medication() ) {
                 food_info( this, info, parts, batch, debug );
             }
 

@@ -774,35 +774,12 @@ void consume_drug_iuse::load( const JsonObject &obj )
     obj.read( "fields_produced", fields_produced );
     obj.read( "moves", moves );
 
-    for( JsonArray vit : obj.get_array( "vitamins" ) ) {
-        int lo = vit.get_int( 1 );
-        int hi = vit.size() >= 3 ? vit.get_int( 2 ) : lo;
-        vitamins.emplace( vitamin_id( vit.get_string( 0 ) ), std::make_pair( lo, hi ) );
-    }
-
     used_up_item = obj.get_string( "used_up_item", used_up_item );
 
 }
 
 void consume_drug_iuse::info( const item &, std::vector<iteminfo> &dump ) const
 {
-    const std::string vits = enumerate_as_string( vitamins.begin(), vitamins.end(),
-    []( const decltype( vitamins )::value_type & v ) {
-        const time_duration rate = get_player_character().vitamin_rate( v.first );
-        if( rate <= 0_turns ) {
-            return std::string();
-        }
-        const int lo = static_cast<int>( v.second.first  * rate / 1_days * 100 );
-        const int hi = static_cast<int>( v.second.second * rate / 1_days * 100 );
-
-        return string_format( lo == hi ? "%s (%i%%)" : "%s (%i-%i%%)", v.first.obj().name(), lo,
-                              hi );
-    } );
-
-    if( !vits.empty() ) {
-        dump.emplace_back( "TOOL", _( "Vitamins (RDA): " ), vits );
-    }
-
     if( tools_needed.count( itype_syringe ) ) {
         dump.emplace_back( "TOOL", _( "You need a <info>syringe</info> to inject this drug." ) );
     }
@@ -861,8 +838,8 @@ cata::optional<int> consume_drug_iuse::use( Character &p, item &it, bool, const 
         }
     }
 
-    for( const auto &v : vitamins ) {
-        p.vitamin_mod( v.first, rng( v.second.first, v.second.second ) );
+    for( const auto &v : p.compute_effective_nutrients( it ).vitamins ) {
+        p.vitamin_mod( v.first, v.second );
     }
 
     // Output message.

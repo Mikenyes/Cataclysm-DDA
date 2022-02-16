@@ -2812,6 +2812,9 @@ void item::io( Archive &archive )
     archive.io( "light_width", light.width, nolight.width );
     archive.io( "light_dir", light.direction, nolight.direction );
 
+    static const std::map<vitamin_id,int> no_vits_generated = {};
+    archive.io( "generated_vitamins", generated_vitamins, no_vits_generated );
+    
     static const cata::value_ptr<relic> null_relic_ptr = nullptr;
     archive.io( "relic_data", relic_data, null_relic_ptr );
 

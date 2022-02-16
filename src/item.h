@@ -277,6 +277,16 @@ class item : public visitable
         item &ammo_unset();
 
         /**
+         * Generate randomized vitamins for this item
+         */
+        void generate_vitamins();
+        
+        /**
+         * Merge randomized vitamins when combining charges
+         */
+        void merge_generated_vitamins( const std::map<vitamin_id, int> rhs_generated_vitamins, const int rhs_charges );
+        
+        /**
          * Filter setting damage constrained by @ref min_damage and @ref max_damage
          * @note this method does not invoke the @ref on_damage callback
          * @return same instance to allow method chaining
@@ -2728,7 +2738,7 @@ class item : public visitable
         const mtype *corpse = nullptr;
         std::string corpse_name;       // Name of the late lamented
         std::set<matec_id> techniques; // item specific techniques
-
+        std::map<vitamin_id, int> generated_vitamins; // Randomized vitamins
         // Select a random variant from the possibilities
         // Intended to be called when no explicit variant is set
         void select_itype_variant();

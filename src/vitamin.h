@@ -74,6 +74,16 @@ class vitamin
             return max_;
         }
 
+        /** Color of this vitamin */
+        int color() const {
+            return color_;
+        }
+
+        /** Scent of this vitamin */
+        int scent() const {
+            return scent_;
+        }
+
         /**
          * Usage rate of vitamin (time to consume unit)
          * Lower bound is zero whereby vitamin is not required (but may still accumulate)
@@ -106,6 +116,8 @@ class vitamin
         int min_ = 0;
         int max_ = 0;
         time_duration rate_ = 0_turns;
+        std::string color_ = "";
+        std::string scent_ = "";
         std::vector<std::pair<int, int>> disease_;
         std::vector<std::pair<int, int>> disease_excess_;
         std::set<std::string> flags_;
