@@ -187,7 +187,7 @@ int vehicle::print_part_list( const catacurses::window &win, int y1, const int m
                 } else {
                     const itype *pt_ammo_cur = item::find_type( vp.ammo_current() );
                     partname += string_format( _( " (%.1fL %s)" ),
-                                               round_up( units::to_liter( vp.ammo_remaining() * pt_ammo_cur->volume ),
+                                               round_up( units::to_liter( vp.ammo_remaining() * pt_ammo_cur->volume / pt_ammo_cur->stack_size ),
                                                          1 ), pt_ammo_cur->nname(1) );
                 }
             } else {
