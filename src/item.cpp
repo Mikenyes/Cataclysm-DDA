@@ -295,7 +295,7 @@ item::item( const itype *type, time_point turn, int qty ) : type( type ), bday( 
     }
     
     if( type->comestible && !type->comestible->generatable_vitamins.empty() ) {
-        generate_vitamins();
+        generate_vitamins( type->comestible->generatable_vitamins );
     }
 
     if( has_flag( flag_SPAWN_ACTIVE ) ) {
@@ -888,9 +888,9 @@ body_part_set item::get_covered_body_parts( const side s ) const
     return res;
 }
 
-void item::generate_vitamins()
+void item::generate_vitamins( std::vector<std::pair<std::vector<vitamin_id>,std::array<int,6>>> vitamin_generattions )
 {
-    for( auto &vitamin_generation : type->comestible->generatable_vitamins ) {
+    for( auto &vitamin_generation : vitamin_generattions ) {
         std::random_shuffle(vitamin_generation.first.begin(), vitamin_generation.first.end());
         const int selections = rng( vitamin_generation.second[0], vitamin_generation.second[1] );
         for (int i = 0; i < selections; i++) {
@@ -2333,7 +2333,7 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
     
     std::vector<std::pair<vitamin_id, int>> max_nutr_mutagen;
     for( const std::pair<vitamin_id, int> &v : max_nutr_vitamins ) {
-        if( v.first->has_flag( flag_MUTAGEN_DISPLAY ) ) {
+        if( v.first->has_flag( flag_MUTAGEN_DISPLAY ) && v.second > 0 ) {
             max_nutr_mutagen.emplace_back( v );
         }
     }

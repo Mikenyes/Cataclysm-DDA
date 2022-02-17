@@ -44,14 +44,59 @@
     "flags": [ "NO_INGEST" ]
   },
   {
+    "id": "mutagen_random",
+    "copy-from": "mutagen_flavor",
+    "type": "COMESTIBLE",
+    "name": { "str": "stabilized mutagen" },
+    "description": "A toxic mixture of mutagen.  This could be anything, but at least it's stabilized.",
+    "container": "canister_class6",
+    "price": 600000,
+    "price_postapoc": 20,
+    "weight": "1 kg",
+    "volume": "1 L",
+    "generatable_vitamins": [
+      [
+        [
+          "mutagen_alpha",
+          "mutagen_batrachian",
+          "mutagen_beast",
+          "mutagen_bird",
+          "mutagen_cattle",
+          "mutagen_cephalopod",
+          "mutagen_chimera",
+          "mutagen_elfa",
+          "mutagen_feline",
+          "mutagen_fish",
+          "mutagen_gastropod",
+          "mutagen_human",
+          "mutagen_insect",
+          "mutagen_lizard",
+          "mutagen_lupine",
+          "mutagen_medical",
+          "mutagen_mouse",
+          "mutagen_plant",
+          "mutagen_rabbit",
+          "mutagen_raptor",
+          "mutagen_rat",
+          "mutagen_slime",
+          "mutagen_spider",
+          "mutagen_troglobite",
+          "mutagen_ursine"
+        ],
+        [ 12, 15, 8, 0, 12, 0 ]
+      ]
+    ]
+  },
+  {
     "id": "iv_mutagen_random",
     "copy-from": "iv_mutagen_flavor",
     "type": "COMESTIBLE",
-    "name": { "str": "unlabeled mutagen" },
-    "description": "Oh no, unlabeled mutagen.  You need a syringe to inject it and jumpstart mutation.",
+    "name": { "str": "concentrated mutagen" },
+    "description": "Mutagen that has been concentrated into an injectable form.  You need a syringe to inject it and jumpstart mutation.",
     "healthy": -10,
     "stim": -10,
     "addiction_potential": 12,
+    "container": "canister_class6",
     "use_action": { "type": "consume_drug", "activation_message": "You inject the unlabeled mutagen.", "tools_needed": { "syringe": -1 } },
     "generatable_vitamins": [
       [

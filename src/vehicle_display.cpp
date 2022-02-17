@@ -186,10 +186,9 @@ int vehicle::print_part_list( const catacurses::window &win, int y1, const int m
                                                vp.ammo_capacity( ammo_battery ) );
                 } else {
                     const itype *pt_ammo_cur = item::find_type( vp.ammo_current() );
-                    auto stack = units::legacy_volume_factor / pt_ammo_cur->stack_size;
                     partname += string_format( _( " (%.1fL %s)" ),
-                                               round_up( units::to_liter( vp.ammo_remaining() * stack ),
-                                                         1 ), item::nname( vp.ammo_current() ) );
+                                               round_up( units::to_liter( vp.ammo_remaining() * pt_ammo_cur->volume ),
+                                                         1 ), pt_ammo_cur->nname(1) );
                 }
             } else {
                 partname += string_format( " (%s)", item::nname( vp.ammo_current() ) );

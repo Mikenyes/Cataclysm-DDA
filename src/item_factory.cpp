@@ -544,7 +544,9 @@ void Item_factory::finalize_pre( itype &obj )
                 if( !vitamins.count( v.first ) ) {
                     for( const auto &m : mat ) {
                         double amount = m.first->vitamin( v.first ) * healthy / mat.size();
-                        vitamins[v.first] += std::ceil( amount );
+                        if( amount != 0 ) {
+                            vitamins[v.first] += std::ceil( amount );
+                        }
                     }
                 }
             }

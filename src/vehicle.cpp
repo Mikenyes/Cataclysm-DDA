@@ -3262,7 +3262,7 @@ int vehicle::fuel_left( const itype_id &ftype, bool recurse,
               part.base.legacy_front().made_of( phase_id::SOLID ) ) || !filter( part ) ) {
             continue;
         }
-        fl += part.ammo_remaining();
+        fl += units::to_milliliter( part.ammo_remaining() * ftype.obj().volume );
     }
 
     if( recurse && ftype == fuel_type_battery ) {

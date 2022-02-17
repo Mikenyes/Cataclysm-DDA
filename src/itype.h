@@ -133,7 +133,7 @@ struct islot_comestible {
          * components */
         nutrients default_nutrition;
         
-        // Randomizable 
+        // Default pattern of randomizable vitamins
         std::vector<std::pair<std::vector<vitamin_id>,std::array<int,6>>> generatable_vitamins;
 
         /** Time until becomes rotten at standard temperature, or zero if never spoils */

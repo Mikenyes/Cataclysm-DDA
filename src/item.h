@@ -279,7 +279,7 @@ class item : public visitable
         /**
          * Generate randomized vitamins for this item
          */
-        void generate_vitamins();
+        void generate_vitamins( std::vector<std::pair<std::vector<vitamin_id>,std::array<int,6>>> vitamin_generations );
         
         /**
          * Merge randomized vitamins when combining charges
