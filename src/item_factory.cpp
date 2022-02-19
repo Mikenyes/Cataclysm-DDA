@@ -2776,12 +2776,14 @@ void Item_factory::load( islot_comestible &slot, const JsonObject &jo, const std
         float specific_heat_liquid = 0.0f;
         float latent_heat = 0.0f;
         int mat_total = 0;
+        int calories = 0;
 
         auto add_spi = [&]( const material_id & m, int portion ) {
             specific_heat_solid += m->specific_heat_solid() * portion;
             specific_heat_liquid += m->specific_heat_liquid() * portion;
             latent_heat += m->latent_heat() * portion;
             mat_total += portion;
+            calories += m->calories() * portion;
             is_not_boring = is_not_boring || m == material_junk;
         };
 
@@ -2800,6 +2802,9 @@ void Item_factory::load( islot_comestible &slot, const JsonObject &jo, const std
         slot.specific_heat_liquid = specific_heat_liquid / mat_total;
         slot.specific_heat_solid = specific_heat_solid / mat_total;
         slot.latent_heat = latent_heat / mat_total;
+        units::volume comestible_volume;
+        assign( jo, "volume", comestible_volume );
+        slot.default_nutrition.calories = calories * units::to_milliliter( comestible_volume ) / mat_total;
     }
 
     // Junk food never gets old by default, but this can still be overridden.
@@ -3572,9 +3577,16 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
     if( jo.has_string( "color" ) ) {
         def.color = color_from_string( jo.get_string( "color" ) );
     }
+    
+    if( jo.has_array( "base_material_makeup" ) ) {
+        for( const JsonArray material_array : jo.get_array( "base_material_makeup" ) ) {
+            def.base_material_makeup[material_id( material_array.get_string(0) )] += material_array.get_int(1);
+        }
+    }
 
     if( jo.has_member( "material" ) ) {
         def.materials.clear();
+        def.base_material_makeup.clear();
         def.mat_portion_total = 0;
         auto add_mat = [&def]( const material_id & m, int portion ) {
             const auto res = def.materials.emplace( m, portion );
@@ -3591,6 +3603,12 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
                     first = false;
                 }
             }
+            // test
+            for( JsonObject mat : jo.get_array( "material" ) ) {
+                add_mat( material_id( mat.get_string( "type" ) ), mat.get_int( "portion", 1 ) );
+                def.base_material_makeup[ material_id( mat.get_string( "type" ) ) ] = 1000000000 / def.mat_portion_total * mat.get_int( "portion", 1 );
+            }
+            // end test
         } else {
             for( const std::string &mat : jo.get_tags( "material" ) ) {
                 add_mat( material_id( mat ), 1 );
@@ -3599,6 +3617,11 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
                     first = false;
                 }
             }
+            // test
+            for( const std::string &mat : jo.get_tags( "material" ) ) {
+                def.base_material_makeup[ material_id( mat ) ] = 1000000000 / def.mat_portion_total;
+            }
+            // end test
         }
     }
 

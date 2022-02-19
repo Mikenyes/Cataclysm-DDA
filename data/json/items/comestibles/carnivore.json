@@ -4,7 +4,7 @@
     "type": "COMESTIBLE",
     "comestible_type": "FOOD",
     "name": { "str_sp": "meat/fish" },
-    "material": [ "flesh" ],
+    "material": [ { "type": "water", "portion": 70 }, { "type": "animal_protein", "portion": 14 }, { "type": "animal_fat", "portion": 16 } ],
     "symbol": "%",
     "color": "red",
     "parasites": 32,
@@ -25,8 +25,8 @@
     "spoils_in": "12 hours",
     "flags": [ "SMOKABLE", "RAW" ],
     "smoking_result": "fish_smoked",
-    "vitamins": [ [ "vitA", 2 ], [ "vitC", 2 ], [ "calcium", 6 ], [ "iron", 14 ], [ "vitB", 154 ] ],
-    "calories": 260
+    "material": [ { "type": "water", "portion": 73 }, { "type": "animal_protein", "portion": 18 }, { "type": "animal_fat", "portion": 9 } ],
+    "vitamins": [ [ "vitA", 2 ], [ "vitC", 2 ], [ "calcium", 6 ], [ "iron", 14 ], [ "vitB", 154 ] ]
   },
   {
     "id": "fish_cooked",
@@ -115,7 +115,6 @@
     "price": 500,
     "price_postapoc": 50,
     "spoils_in": "1 day",
-    "calories": 402,
     "healthy": -1,
     "fun": -10,
     "cooks_like": "meat_cooked",
@@ -530,6 +529,7 @@
     "price_postapoc": 25,
     "price": 200,
     "spoils_in": "8 hours",
+    "material": [ { "type": "water", "portion": 87 }, { "type": "animal_protein", "portion": 9 }, { "type": "animal_fat", "portion": 4 } ],
     "calories": 60,
     "quench": 1,
     "healthy": -1,
@@ -542,7 +542,7 @@
     "type": "COMESTIBLE",
     "name": { "str": "large stomach" },
     "description": "The stomach of a large woodland creature.  It is surprisingly durable.",
-    "proportional": { "weight": 2.0, "volume": 2.0, "price": 1.5, "calories": 2.0 }
+    "proportional": { "weight": 2.0, "volume": 2.0, "price": 1.5 }
   },
   {
     "id": "jerky",
@@ -636,6 +636,7 @@
     "quench": 2,
     "fun": -10,
     "calories": 50,
+    "material": [ { "type": "void", "portion": 70 }, { "type": "water", "portion": 70 }, { "type": "animal_protein", "portion": 14 }, { "type": "animal_fat", "portion": 16 } ],
     "vitamins": [ [ "vitA", 0 ], [ "vitC", 9 ], [ "calcium", 0 ], [ "iron", 14 ], [ "vitB", 22 ] ],
     "extend": { "flags": [ "PREDATOR_FUN" ] }
   },

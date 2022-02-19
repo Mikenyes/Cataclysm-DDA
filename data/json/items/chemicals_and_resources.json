@@ -1178,6 +1178,7 @@
     "healthy": -2,
     "description": "Turbid liquid from the sewers with an awful stench.",
     "volume": "250 ml",
+    "material": [ { "type": "water", "portion": 5 }, { "type": "feces", "portion": 3 }, { "type": "soil", "portion": 2 } ],
     "phase": "liquid",
     "category": "chems",
     "fun": -20

@@ -3260,13 +3260,24 @@ bool cata_tiles::draw_vpart( const tripoint &p, lit_level ll, int &height_3d,
         }
         if( !overridden ) {
             const cata::optional<vpart_reference> cargopart = vp.part_with_feature( "CARGO", true );
-            const bool draw_highlight = cargopart &&
-                                        !veh.get_items( cargopart->part_index() ).empty();
             const bool ret =
                 draw_from_id_string( vpname, TILE_CATEGORY::VEHICLE_PART, empty_string, p,
                                      subtile, rotation, ll, nv_goggles_activated, height_3d );
-            if( ret && draw_highlight ) {
-                draw_item_highlight( p );
+            if( ret && cargopart ) {
+                if( cargopart ) {
+                    const vehicle_stack cargo_items = veh.get_items( cargopart->part_index() );
+                    for( const item &i : cargo_items ) {
+                        if( draw_from_id_string( i.typeId().str(), TILE_CATEGORY::ITEM, i.type->get_item_type_string(), p, 0,
+                                                          0, ll, nv_goggles_activated, height_3d ) ) {
+                            break;
+                        }
+                    }
+                    if( cargo_items.size() > 1 ) {
+                        draw_item_highlight( p );
+                    }
+                } else {
+                    draw_item_highlight( p );
+                }
             }
             return ret;
         }

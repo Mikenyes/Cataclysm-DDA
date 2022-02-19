@@ -1271,7 +1271,7 @@ void Character::complete_craft( item &craft, const cata::optional<tripoint> &loc
         } else if( food_contained.is_food() && !food_contained.has_flag( flag_NUTRIENT_OVERRIDE ) ) {
             // use a copy of the used list so that the byproducts don't build up over iterations (#38071)
             std::list<item> usedbp;
-
+            
             // if a component item has "cooks_like" it will be replaced by that item as a component
             for( item &comp : used ) {
                 // only comestibles have cooks_like.  any other type of item will throw an exception, so filter those out
@@ -1298,6 +1298,11 @@ void Character::complete_craft( item &craft, const cata::optional<tripoint> &loc
                 }
 
                 usedbp.emplace_back( comp );
+                
+                // if the component had generated vitamins, pass them on
+                if( !comp.get_generated_vitamins().empty() ) {
+                    food_contained.add_generated_vitamins( comp.get_generated_vitamins() );
+                }
             }
 
             // byproducts get stored as a "component" but with a byproduct flag for consumption purposes

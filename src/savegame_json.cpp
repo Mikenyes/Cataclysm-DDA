@@ -2815,6 +2815,9 @@ void item::io( Archive &archive )
     static const std::map<vitamin_id,int> no_vits_generated = {};
     archive.io( "generated_vitamins", generated_vitamins, no_vits_generated );
     
+    static const std::map<material_id,int> no_material_makeup = {};
+    archive.io( "material_makeup", material_makeup, no_material_makeup );
+    
     static const cata::value_ptr<relic> null_relic_ptr = nullptr;
     archive.io( "relic_data", relic_data, null_relic_ptr );
 

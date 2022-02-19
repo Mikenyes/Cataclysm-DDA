@@ -83,6 +83,11 @@ int itype::charges_per_volume( const units::volume &vol ) const
     return ( count_by_charges() ? stack_size : 1 ) * vol / volume;
 }
 
+std::map<material_id,int> itype::get_base_material_makeup() const
+{
+    return base_material_makeup;
+}
+
 // Members of iuse struct, which is slowly morphing into a class.
 bool itype::has_use() const
 {

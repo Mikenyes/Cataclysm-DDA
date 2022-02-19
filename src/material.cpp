@@ -73,6 +73,8 @@ void material_type::load( const JsonObject &jsobj, const std::string & )
 
     assign( jsobj, "salvaged_into", _salvaged_into );
     optional( jsobj, was_loaded, "repaired_with", _repaired_with, itype_id::NULL_ID() );
+    optional( jsobj, was_loaded, "denaturation_temp", _denaturation_temp );
+    optional( jsobj, was_loaded, "calories", _calories, 0 );
     optional( jsobj, was_loaded, "edible", _edible, false );
     optional( jsobj, was_loaded, "rotting", _rotting, false );
     optional( jsobj, was_loaded, "soft", _soft, false );
@@ -203,6 +205,11 @@ int material_type::chip_resist() const
     return _chip_resist;
 }
 
+int material_type::calories() const
+{
+    return _calories;
+}
+
 float material_type::specific_heat_liquid() const
 {
     return _specific_heat_liquid;
@@ -223,7 +230,7 @@ float material_type::freeze_point() const
     return _freeze_point;
 }
 
-int material_type::density() const
+float material_type::density() const
 {
     return _density;
 }
