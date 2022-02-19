@@ -73,10 +73,12 @@ void material_type::load( const JsonObject &jsobj, const std::string & )
 
     assign( jsobj, "salvaged_into", _salvaged_into );
     optional( jsobj, was_loaded, "repaired_with", _repaired_with, itype_id::NULL_ID() );
-    optional( jsobj, was_loaded, "denaturation_temp", _denaturation_temp );
+    optional( jsobj, was_loaded, "denaturation_point", _denaturation_point );
+    optional( jsobj, was_loaded, "denatures_into", _denatures_into );
     optional( jsobj, was_loaded, "calories", _calories, 0 );
     optional( jsobj, was_loaded, "edible", _edible, false );
     optional( jsobj, was_loaded, "rotting", _rotting, false );
+    optional( jsobj, was_loaded, "contaminated", _contaminated, false );
     optional( jsobj, was_loaded, "soft", _soft, false );
     optional( jsobj, was_loaded, "reinforces", _reinforces, false );
 
@@ -240,6 +242,16 @@ cata::optional<int> material_type::wind_resist() const
     return _wind_resist;
 }
 
+cata::optional<float> material_type::denaturation_point() const
+{
+    return _denaturation_point;
+}
+
+cata::optional<material_id> material_type::denatures_into() const
+{
+    return _denatures_into;
+}
+
 bool material_type::edible() const
 {
     return _edible;
@@ -248,6 +260,11 @@ bool material_type::edible() const
 bool material_type::rotting() const
 {
     return _rotting;
+}
+
+bool material_type::contaminated() const
+{
+    return _contaminated;
 }
 
 bool material_type::soft() const

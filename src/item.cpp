@@ -2038,17 +2038,17 @@ void item::basic_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
                     return string_format( "%s (%i ppb, %f.7%%)", m.first->name(), m.second,
                                           static_cast<float>( m.second ) / 10000000 );
                 } else {
-                    int bracket_width = 5000000;
+                    int bracket_width = 1000000;
                     if( m.second < bracket_width ) {
                         return std::string();
                     } else if( m.second + bracket_width >= 1000000000 ) {
                         return string_format( "%s (100%%)", m.first->name() );
                     } else {
-                        int lower_bound = m.second / bracket_width;
-                        int precision = 2;
-                        return string_format( "%s (%f.*-%f.*%%)", m.first->name(), precision,
-                                              static_cast<float>( lower_bound * bracket_width ) / 1000000000, precision,
-                                              static_cast<float>( ( lower_bound + 1 ) * bracket_width ) / 1000000000 );
+                        int nearest_bound = ( m.second + bracket_width / 2 ) / bracket_width;
+                        int precision = 1;
+                        return string_format( "%s (%.*f-%.*f%%)", m.first->name(), precision,
+                                              static_cast<float>( nearest_bound - 1 ) * bracket_width / 10000000, precision,
+                                              static_cast<float>( nearest_bound + 1 ) * bracket_width / 10000000 );
                     }
                 }
             } );
@@ -2510,9 +2510,14 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
         }
     }
 
-    if( food_item->is_tainted() && parts->test( iteminfo_parts::FOOD_CANNIBALISM ) ) {
+    if( food_item->is_tainted() && parts->test( iteminfo_parts::FOOD_TAINT ) ) {
         info.emplace_back( "DESCRIPTION",
                            _( "* This food is <bad>tainted</bad> and will poison you." ) );
+    }
+    
+    if( food_item->contamination() > 1000000 && parts->test( iteminfo_parts::FOOD_CONTAMINATION ) ) {
+        info.emplace_back( "DESCRIPTION",
+                           _( "* This food is <bad>contaminated</bad> and will poison you." ) );
     }
 
     ///\EFFECT_SURVIVAL >=3 allows detection of poisonous food
@@ -11992,9 +11997,16 @@ void item::set_temp_flags( float new_temperature, float freeze_percentage )
         set_flag( flag_COLD );
     }
 
-    // Convert water into clean water if it starts boiling
-    if( typeId() == itype_water && new_temperature > temp_to_kelvin( temperatures::boiling ) ) {
-        convert( itype_water_clean ).poison = 0;
+    // Denature materials if they reach the right temperature
+    for( auto &m : material_makeup ) {
+        cata::optional<float> denaturation_point = m.first->denaturation_point();
+        if( denaturation_point && *denaturation_point <= new_temperature ) {
+            cata::optional<material_id> denatures_into = m.first->denatures_into();
+            if( denatures_into ) {
+                material_makeup[*denatures_into] += m.second;
+            }
+            m.second = 0;
+        }
     }
 }
 
@@ -12700,6 +12712,17 @@ bool item::is_dangerous() const
 bool item::is_tainted() const
 {
     return corpse && corpse->has_flag( MF_POISON );
+}
+
+int item::contamination() const
+{
+    int summed_contamination = 0;
+    for( auto const &m : material_makeup ) {
+        if( m.first->contaminated() ) {
+            summed_contamination += m.second;
+        }
+    }
+    return summed_contamination;
 }
 
 bool item::is_soft() const

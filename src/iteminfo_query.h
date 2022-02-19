@@ -46,6 +46,7 @@ enum class iteminfo_parts : size_t {
     FOOD_VIT_SAMPLES,
     FOOD_CANNIBALISM,
     FOOD_TAINT,
+    FOOD_CONTAMINATION,
     FOOD_POISON,
     FOOD_ALLERGEN,
     FOOD_HALLUCINOGENIC,

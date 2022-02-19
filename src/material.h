@@ -72,7 +72,8 @@ class material_type
         int _calories = 0;                            // Calories per milliliter
         // How resistant this material is to wind as a percentage - 0 to 100
         cata::optional<int> _wind_resist;
-        cata::optional<float> _denaturation_temp;
+        cata::optional<float> _denaturation_point;
+        cata::optional<material_id> _denatures_into;
         float _density = 1.0f;                             // relative to "powder", which is 1
         float _specific_heat_liquid = 4.186f;
         float _specific_heat_solid = 2.108f;
@@ -80,6 +81,7 @@ class material_type
         float _freeze_point = 0; // Celsius
         bool _edible = false;
         bool _rotting = false;
+        bool _contaminated = false;
         bool _soft = false;
         bool _reinforces = false;
 
@@ -130,8 +132,11 @@ class material_type
         float freeze_point() const;
         float density() const;
         cata::optional<int> wind_resist() const;
+        cata::optional<float> denaturation_point() const;
+        cata::optional<material_id> denatures_into() const;
         bool edible() const;
         bool rotting() const;
+        bool contaminated() const;
         bool soft() const;
         bool reinforces() const;
 

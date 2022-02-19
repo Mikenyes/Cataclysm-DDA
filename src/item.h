@@ -1546,6 +1546,9 @@ class item : public visitable
 
         /** Is item derived from a zombie? */
         bool is_tainted() const;
+        
+        /** How visibly toxic is item? */
+        int contamination() const;
 
         /**
          * Is this item flexible enough to be worn on body parts like antlers?
