@@ -279,23 +279,24 @@ class item : public visitable
         /**
          * Generate randomized vitamins for this item
          */
-        void generate_vitamins( std::vector<std::pair<std::vector<vitamin_id>,std::array<int,6>>> vitamin_generations );
-        
+        void generate_vitamins( std::vector<std::pair<std::vector<vitamin_id>, std::array<int, 6>>>
+                                vitamin_generations );
+
         /**
          * Merge randomized vitamins when combining charges
          */
         void merge_generated_vitamins( const item &rhs );
-        
+
         /**
          * Add vitamins, used when crafting
          */
         void add_generated_vitamins( const std::map<vitamin_id, int> &new_vitamins );
-        
+
         /**
          * Merge materials when combining charges
          */
         void merge_material_makeup( const item &rhs );
-        
+
         /**
          * Filter setting damage constrained by @ref min_damage and @ref max_damage
          * @note this method does not invoke the @ref on_damage callback
@@ -2443,12 +2444,12 @@ class item : public visitable
          * Returns name of deceased being if it had any or empty string if not
          **/
         std::string get_corpse_name() const;
-        
+
         /**
          * Returns any non-standard vitamins
          **/
-        std::map<vitamin_id,int> get_generated_vitamins() const;
-        
+        std::map<vitamin_id, int> get_generated_vitamins() const;
+
         /**
          * Returns the translated item name for the item with given id.
          * The name is in the proper plural form as specified by the
@@ -2755,7 +2756,8 @@ class item : public visitable
         std::string corpse_name;       // Name of the late lamented
         std::set<matec_id> techniques; // item specific techniques
         std::map<vitamin_id, int> generated_vitamins; // Randomized vitamins
-        std::map<material_id, int> material_makeup; // Materials that make up this item, inherits from itype at creation
+        std::map<material_id, int>
+        material_makeup; // Materials that make up this item, inherits from itype at creation
         // Select a random variant from the possibilities
         // Intended to be called when no explicit variant is set
         void select_itype_variant();

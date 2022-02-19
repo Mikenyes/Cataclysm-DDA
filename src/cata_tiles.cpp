@@ -3267,8 +3267,9 @@ bool cata_tiles::draw_vpart( const tripoint &p, lit_level ll, int &height_3d,
                 if( cargopart ) {
                     const vehicle_stack cargo_items = veh.get_items( cargopart->part_index() );
                     for( const item &i : cargo_items ) {
-                        if( draw_from_id_string( i.typeId().str(), TILE_CATEGORY::ITEM, i.type->get_item_type_string(), p, 0,
-                                                          0, ll, nv_goggles_activated, height_3d ) ) {
+                        if( draw_from_id_string( i.typeId().str(), TILE_CATEGORY::ITEM, i.type->get_item_type_string(), p,
+                                                 0,
+                                                 0, ll, nv_goggles_activated, height_3d ) ) {
                             break;
                         }
                     }

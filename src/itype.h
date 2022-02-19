@@ -132,9 +132,9 @@ struct islot_comestible {
         /** Nutrition values to use for this type when they aren't calculated from
          * components */
         nutrients default_nutrition;
-        
+
         // Default pattern of randomizable vitamins
-        std::vector<std::pair<std::vector<vitamin_id>,std::array<int,6>>> generatable_vitamins;
+        std::vector<std::pair<std::vector<vitamin_id>, std::array<int, 6>>> generatable_vitamins;
 
         /** Time until becomes rotten at standard temperature, or zero if never spoils */
         time_duration spoils = 0_turns;
@@ -1146,9 +1146,9 @@ struct itype {
 
     private:
         FlagsSetType item_tags;
-        
+
         // Default material makeup, in ppb
-        std::map<material_id,int> base_material_makeup;
+        std::map<material_id, int> base_material_makeup;
 
     public:
         // How should the item explode
@@ -1297,8 +1297,8 @@ struct itype {
         std::string nname( unsigned int quantity ) const;
 
         // Returns the base material makeup of an unaltered item of this type
-        std::map<material_id,int> get_base_material_makeup() const;
-        
+        std::map<material_id, int> get_base_material_makeup() const;
+
         // Allow direct access to the type id for the few cases that need it.
         itype_id get_id() const {
             return id;

@@ -293,11 +293,11 @@ item::item( const itype *type, time_point turn, int qty ) : type( type ), bday( 
             charges = type->charges_default();
         }
     }
-    
+
     if( type->comestible && !type->comestible->generatable_vitamins.empty() ) {
         generate_vitamins( type->comestible->generatable_vitamins );
     }
-    
+
     if( material_makeup.empty() ) {
         material_makeup = type->get_base_material_makeup();
     }
@@ -892,13 +892,16 @@ body_part_set item::get_covered_body_parts( const side s ) const
     return res;
 }
 
-void item::generate_vitamins( std::vector<std::pair<std::vector<vitamin_id>,std::array<int,6>>> vitamin_generattions )
+void item::generate_vitamins( std::vector<std::pair<std::vector<vitamin_id>, std::array<int, 6>>>
+                              vitamin_generattions )
 {
     for( auto &vitamin_generation : vitamin_generattions ) {
-        std::random_shuffle(vitamin_generation.first.begin(), vitamin_generation.first.end());
+        std::random_shuffle( vitamin_generation.first.begin(), vitamin_generation.first.end() );
         const int selections = rng( vitamin_generation.second[0], vitamin_generation.second[1] );
-        for (int i = 0; i < selections; i++) {
-            generated_vitamins[ vitamin_generation.first[ i ] ] += std::max( 0, rng( vitamin_generation.second[2] + i * vitamin_generation.second[3], vitamin_generation.second[4] + i * vitamin_generation.second[5] ) );
+        for( int i = 0; i < selections; i++ ) {
+            generated_vitamins[ vitamin_generation.first[ i ] ] += std::max( 0,
+                    rng( vitamin_generation.second[2] + i * vitamin_generation.second[3],
+                         vitamin_generation.second[4] + i * vitamin_generation.second[5] ) );
         }
     }
 }
@@ -907,10 +910,10 @@ void item::merge_generated_vitamins( const item &rhs )
 {
     float it_volume = units::to_milliliter( volume() );
     float rhs_volume = units::to_milliliter( rhs.volume() );
-    for (auto &vitamin : generated_vitamins) {
+    for( auto &vitamin : generated_vitamins ) {
         vitamin.second *= it_volume / ( it_volume + rhs_volume );
     }
-    for (auto const &vitamin : rhs.generated_vitamins) {
+    for( auto const &vitamin : rhs.generated_vitamins ) {
         generated_vitamins[vitamin.first] += vitamin.second * rhs_volume / ( it_volume + rhs_volume );
     }
 }
@@ -919,17 +922,17 @@ void item::merge_material_makeup( const item &rhs )
 {
     float it_volume = units::to_milliliter( volume() );
     float rhs_volume = units::to_milliliter( rhs.volume() );
-    for (auto &material : material_makeup) {
+    for( auto &material : material_makeup ) {
         material.second *= it_volume / ( it_volume + rhs_volume );
     }
-    for (auto const &material : rhs.material_makeup) {
+    for( auto const &material : rhs.material_makeup ) {
         material_makeup[material.first] += material.second * rhs_volume / ( it_volume + rhs_volume );
     }
 }
 
 void item::add_generated_vitamins( const std::map<vitamin_id, int> &new_vitamins )
 {
-    for (auto const &vitamin : new_vitamins) {
+    for( auto const &vitamin : new_vitamins ) {
         generated_vitamins[vitamin.first] += vitamin.second;
     }
 }
@@ -1269,7 +1272,8 @@ bool item::same_for_rle( const item &rhs ) const
 
 bool item::stacks_with( const item &rhs, bool check_components, bool combine_liquid ) const
 {
-    if( type != rhs.type && !( made_of_from_type( phase_id::LIQUID ) && rhs.made_of_from_type( phase_id::LIQUID) ) ) {
+    if( type != rhs.type && !( made_of_from_type( phase_id::LIQUID ) &&
+                               rhs.made_of_from_type( phase_id::LIQUID ) ) ) {
         return false;
     }
     if( is_relic() && rhs.is_relic() && !( *relic_data == *rhs.relic_data ) ) {
@@ -2027,12 +2031,25 @@ void item::basic_info( std::vector<iteminfo> &info, const iteminfo_query *parts,
     const std::string space = "  ";
     if( parts->test( iteminfo_parts::BASE_MATERIAL ) ) {
         if( !material_makeup.empty() ) {
-            const std::string material_list = enumerate_as_string( material_makeup.begin(), material_makeup.end(),
+            const std::string material_list = enumerate_as_string( material_makeup.begin(),
+                                              material_makeup.end(),
             [debug]( const std::pair<material_id, int> &m ) {
                 if( debug ) {
-                    return string_format( "%s (%i ppb)", m.first->name(), m.second );
+                    return string_format( "%s (%i ppb, %f.7%%)", m.first->name(), m.second,
+                                          static_cast<float>( m.second ) / 10000000 );
                 } else {
-                    return string_format( "%s (%i%%)", m.first->name(), m.second / 10000000 );
+                    int bracket_width = 5000000;
+                    if( m.second < bracket_width ) {
+                        return std::string();
+                    } else if( m.second + bracket_width >= 1000000000 ) {
+                        return string_format( "%s (100%%)", m.first->name() );
+                    } else {
+                        int lower_bound = m.second / bracket_width;
+                        int precision = 2;
+                        return string_format( "%s (%f.*-%f.*%%)", m.first->name(), precision,
+                                              static_cast<float>( lower_bound * bracket_width ) / 1000000000, precision,
+                                              static_cast<float>( ( lower_bound + 1 ) * bracket_width ) / 1000000000 );
+                    }
                 }
             } );
             info.emplace_back( "BASE", string_format( _( "Material: %s" ), material_list ) );
@@ -2301,7 +2318,7 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
         info.emplace_back( "MED", _( "Health: " ),
                            healthy_bar( food_com->healthy ) );
     }
-    
+
     if( food_com->stim != 0 && parts->test( iteminfo_parts::MED_STIMULATION ) ) {
         std::string name = string_format( "%s <stat>%s</stat>", _( "Stimulation:" ),
                                           food_com->stim > 0 ? _( "Upper" ) : _( "Downer" ) );
@@ -2326,7 +2343,8 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
         const bool is_vitamin = v.first->type() == vitamin_type::VITAMIN;
         // only display vitamins that we actually require
         if( player_character.vitamin_rate( v.first ) == 0_turns || v.second == 0 ||
-            display_vitamins != is_vitamin || v.first->has_flag( flag_NO_DISPLAY ) || v.first->has_flag( flag_MUTAGEN_DISPLAY ) ) {
+            display_vitamins != is_vitamin || v.first->has_flag( flag_NO_DISPLAY ) ||
+            v.first->has_flag( flag_MUTAGEN_DISPLAY ) ) {
             return std::string();
         }
         const double multiplier = player_character.vitamin_rate( v.first ) / 1_days * 100;
@@ -2337,9 +2355,10 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
         const std::string format = min_rda == max_rda ? "%s (%i%%)" : "%s (%i-%i%%)";
         return string_format( format, v.first->name(), min_value, max_value );
     };
-    
+
     const std::map<vitamin_id, int> generated_vitamins = food_item->generated_vitamins;
-    const auto max_nutr_vitamins = sorted_lex( generated_vitamins.empty() ? max_nutr.vitamins : generated_vitamins );
+    const auto max_nutr_vitamins = sorted_lex( generated_vitamins.empty() ? max_nutr.vitamins :
+                                   generated_vitamins );
     const std::string required_vits = enumerate_as_string(
                                           max_nutr_vitamins.begin(),
                                           max_nutr_vitamins.end(),
@@ -2361,7 +2380,7 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
     if( !effect_vits.empty() && parts->test( iteminfo_parts::FOOD_VIT_EFFECTS ) ) {
         info.emplace_back( "FOOD", _( "Other vitamins: " ), effect_vits );
     }
-    
+
     int summed_materials = 0;
     std::vector<std::pair<vitamin_id, int>> max_nutr_mutagen;
     for( const std::pair<vitamin_id, int> &v : max_nutr_vitamins ) {
@@ -2371,35 +2390,44 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
     }
     if( !max_nutr_mutagen.empty() ) {
         insert_separation_line( info );
-        
-        auto format_mutagen = [&]( const std::pair<vitamin_id, int> &v, const bool has_analysis, const bool has_concentration, const bool has_fine_distillation ) {
+
+        auto format_mutagen = [&]( const std::pair<vitamin_id, int> &v, const bool has_analysis,
+        const bool has_concentration, const bool has_fine_distillation ) {
             summed_materials += v.second;
             if( debug ) {
                 return string_format( "%s (%i ppb)", v.first->name(), v.second );
             }
-            int lab_shabbiness = ( has_analysis ? 2 : 5 ) * ( has_fine_distillation ? 1 : 2 ) * ( has_concentration ? 1 : 2 );
+            int lab_shabbiness = ( has_analysis ? 2 : 5 ) * ( has_fine_distillation ? 1 : 2 ) *
+                                 ( has_concentration ? 1 : 2 );
             if( v.second < lab_shabbiness ) {
                 return std::string();
             }
             int value = v.second / 10000000 / lab_shabbiness;
-            return string_format( "%s (%i-%i%%)", "???", value * lab_shabbiness, ( value + 1 ) * lab_shabbiness );
+            return string_format( "%s (%i-%i%%)", "???", value * lab_shabbiness,
+                                  ( value + 1 ) * lab_shabbiness );
         };
 
         inventory map_inv;
         map_inv.form_from_map( player_character.pos(), PICKUP_RANGE, &player_character );
-        const bool has_analysis = player_character.has_quality( qual_ANALYSIS, 1 ) || map_inv.has_quality( qual_ANALYSIS, 1 );
-        const bool has_concentration = player_character.has_quality( qual_CONCENTRATE, 1 ) || map_inv.has_quality( qual_CONCENTRATE, 1 );
-        const bool has_fine_distillation = player_character.has_quality( qual_FINE_DISTILL, 1 ) || map_inv.has_quality( qual_FINE_DISTILL, 1 );
-        
-        std::sort( max_nutr_mutagen.begin(), max_nutr_mutagen.end(), [](std::pair<vitamin_id, int> a, std::pair<vitamin_id, int> b) { return (a.second>b.second); } );
-        
+        const bool has_analysis = player_character.has_quality( qual_ANALYSIS, 1 ) ||
+                                  map_inv.has_quality( qual_ANALYSIS, 1 );
+        const bool has_concentration = player_character.has_quality( qual_CONCENTRATE, 1 ) ||
+                                       map_inv.has_quality( qual_CONCENTRATE, 1 );
+        const bool has_fine_distillation = player_character.has_quality( qual_FINE_DISTILL, 1 ) ||
+                                           map_inv.has_quality( qual_FINE_DISTILL, 1 );
+
+        std::sort( max_nutr_mutagen.begin(), max_nutr_mutagen.end(), []( std::pair<vitamin_id, int> a,
+        std::pair<vitamin_id, int> b ) {
+            return ( a.second > b.second );
+        } );
+
         const std::string mutagen_vits = enumerate_as_string(
-                                              max_nutr_mutagen.begin(),
-                                              max_nutr_mutagen.end(),
+                                             max_nutr_mutagen.begin(),
+                                             max_nutr_mutagen.end(),
         [&]( const std::pair<vitamin_id, int> &v ) {
             return format_mutagen( v, has_analysis, has_concentration, has_fine_distillation );
         } );
-        
+
         /**
         int summed_vits = 0;
         for( const std::pair<vitamin_id, int> &v : max_nutr_mutagen ) {
@@ -2408,31 +2436,34 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
         int lab_shabbiness = ( has_analysis ? 25 : 50 ) * ( has_fine_distillation ? 1 : 2 ) * ( has_concentration ? 1 : 2 );
         summed_vits /= lab_shabbiness;
         std::string mutagen_vits = string_format( "%i", summed_vits ); */
-            
+
         if( !mutagen_vits.empty() && parts->test( iteminfo_parts::FOOD_VIT_MUTAGEN ) ) {
-            
+
             info.emplace_back( "FOOD", _( "Active mutagen: " ), mutagen_vits );
         }
-        
+
         if( parts->test( iteminfo_parts::FOOD_VIT_SAMPLES ) ) {
             info.emplace_back( "FOOD", _( "Distinct mutagen samples: " ), max_nutr_mutagen.size() );
         }
-        
-        std::map<std::string,int> color_map;
+
+        std::map<std::string, int> color_map;
         for( const std::pair<vitamin_id, int> &v : max_nutr_mutagen ) {
             std::string vit_color = v.first->color();
             if( !vit_color.empty() ) {
                 color_map[vit_color] += v.second;
             }
         }
-        
+
         std::string mutagen_colors;
         if( !color_map.empty() && parts->test( iteminfo_parts::FOOD_VIT_COLORS ) ) {
-            std::vector<std::pair<std::string,int>> mutagen_color_list;
+            std::vector<std::pair<std::string, int>> mutagen_color_list;
             for( auto const &vc : color_map ) {
                 mutagen_color_list.push_back( { vc.first, vc.second } );
             }
-            std::sort( mutagen_color_list.begin(), mutagen_color_list.end(), [](std::pair<std::string, int> a, std::pair<std::string, int> b) { return (a.second>b.second); } );
+            std::sort( mutagen_color_list.begin(), mutagen_color_list.end(), []( std::pair<std::string, int> a,
+            std::pair<std::string, int> b ) {
+                return ( a.second > b.second );
+            } );
             for( std::pair<std::string, int> cw : mutagen_color_list ) {
                 if( cw.second > 990000000 ) {
                     mutagen_colors += " entirely " + cw.first + ",";
@@ -2455,7 +2486,7 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
             info.emplace_back( "FOOD", _( "Mutagen hues:" ), mutagen_colors );
         }
     }
-    
+
     insert_separation_line( info );
 
     if( food_com->addict && parts->test( iteminfo_parts::DESCRIPTION_MED_ADDICTING ) ) {
@@ -12802,7 +12833,7 @@ std::string item::get_corpse_name() const
     return corpse_name;
 }
 
-std::map<vitamin_id,int> item::get_generated_vitamins() const
+std::map<vitamin_id, int> item::get_generated_vitamins() const
 {
     return generated_vitamins;
 }

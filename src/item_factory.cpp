@@ -2863,19 +2863,20 @@ void Item_factory::load( islot_comestible &slot, const JsonObject &jo, const std
             slot.default_nutrition.vitamins[ vit ] += pair.get_int( 1 );
         }
     }
-    
+
     if( jo.has_array( "generatable_vitamins" ) ) {
         for( const JsonArray ja : jo.get_array( "generatable_vitamins" ) ) {
             std::vector<vitamin_id> generation_vits;
-            for( const std::string &vitamin : ja.get_array(0) ) {
+            for( const std::string &vitamin : ja.get_array( 0 ) ) {
                 generation_vits.emplace_back( vitamin_id( vitamin ) );
             }
-            std::array<int,6> generation_ints;
-            JsonArray int_values = ja.get_array(1);
+            std::array<int, 6> generation_ints;
+            JsonArray int_values = ja.get_array( 1 );
             for( int iter = 0; iter < 6; iter++ ) {
-                generation_ints[iter] = int_values.get_int(iter);
+                generation_ints[iter] = int_values.get_int( iter );
             }
-            slot.generatable_vitamins.push_back( std::pair<std::vector<vitamin_id>,std::array<int,6>> (generation_vits, generation_ints) );
+            slot.generatable_vitamins.push_back( std::pair<std::vector<vitamin_id>, std::array<int, 6>>
+                                                 ( generation_vits, generation_ints ) );
         }
     }
 
@@ -3577,10 +3578,11 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
     if( jo.has_string( "color" ) ) {
         def.color = color_from_string( jo.get_string( "color" ) );
     }
-    
+
     if( jo.has_array( "base_material_makeup" ) ) {
         for( const JsonArray material_array : jo.get_array( "base_material_makeup" ) ) {
-            def.base_material_makeup[material_id( material_array.get_string(0) )] += material_array.get_int(1);
+            def.base_material_makeup[material_id( material_array.get_string( 0 ) )] += material_array.get_int(
+                        1 );
         }
     }
 
@@ -3606,7 +3608,8 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
             // test
             for( JsonObject mat : jo.get_array( "material" ) ) {
                 add_mat( material_id( mat.get_string( "type" ) ), mat.get_int( "portion", 1 ) );
-                def.base_material_makeup[ material_id( mat.get_string( "type" ) ) ] = 1000000000 / def.mat_portion_total * mat.get_int( "portion", 1 );
+                def.base_material_makeup[ material_id( mat.get_string( "type" ) ) ] = 1000000000 /
+                        def.mat_portion_total * mat.get_int( "portion", 1 );
             }
             // end test
         } else {

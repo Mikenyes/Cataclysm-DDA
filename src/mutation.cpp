@@ -875,7 +875,8 @@ void Character::mutate( const int &highest_category_chance, const bool use_vitam
     weighted_int_list<mutation_category_id> cat_list = get_vitamin_weighted_categories();
     const float instability = vitamin_get( vitamin_INSTABILITY );
     const bool terminal = instability >= 9500;
-    const int flaw = rng( 0, ( cat_list.size() == 1 ? 0 : 10 ) + sqrt( instability ) ) + ( instability / 900 );
+    const int flaw = rng( 0, ( cat_list.size() == 1 ? 0 : 10 ) + sqrt( instability ) ) +
+                     ( instability / 900 );
     bool force_good = flaw < 10;
     bool force_bad = flaw >= 30;
 
@@ -1026,13 +1027,13 @@ void Character::mutate_category( const mutation_category_id &cat, const bool use
         mutate( 0, use_vitamins );
         return;
     }
-    
+
     const float instability = vitamin_get( vitamin_INSTABILITY );
     const bool terminal = instability >= 9500;
     const int flaw = rng( 0, sqrt( instability ) ) + ( instability / 900 );
     bool force_good = flaw < 10;
     bool force_bad = flaw >= 30;
-    
+
     // Pull the category's list for valid mutations
     std::vector<trait_id> valid = mutations_category[cat];
 
