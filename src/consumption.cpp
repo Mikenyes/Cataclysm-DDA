@@ -166,7 +166,7 @@ static int compute_default_effective_kcal( const item &comest, const Character &
     }
 
     // As float to avoid rounding too many times
-    float kcal = comest.get_comestible()->default_nutrition.kcal();
+    float kcal = comest.type->default_nutrition.kcal();
 
     // Many raw foods give less calories, as your body has expends more energy digesting them.
     bool cooked = comest.has_flag( flag_COOKED ) || extra_flags.count( flag_COOKED );
@@ -210,7 +210,7 @@ static std::map<vitamin_id, int> compute_default_effective_vitamins(
         return {};
     }
 
-    std::map<vitamin_id, int> res = it.get_comestible()->default_nutrition.vitamins;
+    std::map<vitamin_id, int> res = it.type->default_nutrition.vitamins;
 
     for( const trait_id &trait : you.get_mutations() ) {
         const auto &mut = trait.obj();
@@ -388,7 +388,7 @@ std::pair<nutrients, nutrients> Character::compute_nutrient_range(
 
 int Character::nutrition_for( const item &comest ) const
 {
-    return compute_effective_nutrients( comest ).kcal() / islot_comestible::kcal_per_nutr;
+    return compute_effective_nutrients( comest ).kcal() / itype::kcal_per_nutr;
 }
 
 std::pair<int, int> Character::fun_for( const item &comest, bool ignore_already_ate ) const
@@ -1417,7 +1417,7 @@ bool Character::consume_effects( item &food )
         const float rottedness = clamp( 2 * relative_rot - 2.0f, 0.1f, 1.0f );
         // ~-1 health per 1 nutrition at halfway-rotten-away, ~0 at "just got rotten"
         // But always round down
-        int h_loss = -rottedness * comest.get_default_nutr();
+        int h_loss = -rottedness * food.type->get_default_nutr();
         mod_healthy_mod( h_loss, -200 );
         add_msg_debug( debugmode::DF_FOOD, "%d health from %0.2f%% rotten food", h_loss, rottedness );
     }

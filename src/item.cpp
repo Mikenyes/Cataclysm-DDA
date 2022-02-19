@@ -9012,34 +9012,22 @@ const mtype *item::get_mtype() const
 
 float item::get_specific_heat_liquid() const
 {
-    if( is_comestible() ) {
-        return get_comestible()->specific_heat_liquid;
-    }
-    return made_of_types()[0]->specific_heat_liquid();
+    return type->specific_heat_liquid;
 }
 
 float item::get_specific_heat_solid() const
 {
-    if( is_comestible() ) {
-        return get_comestible()->specific_heat_solid;
-    }
-    return made_of_types()[0]->specific_heat_solid();
+    return type->specific_heat_solid;
 }
 
 float item::get_latent_heat() const
 {
-    if( is_comestible() ) {
-        return get_comestible()->latent_heat;
-    }
-    return made_of_types()[0]->latent_heat();
+    return type->latent_heat;
 }
 
 float item::get_freeze_point() const
 {
-    if( is_comestible() ) {
-        return get_comestible()->freeze_point;
-    }
-    return made_of_types()[0]->freeze_point();
+    return type->freeze_point;
 }
 
 void item::set_mtype( const mtype *const m )
@@ -12000,7 +11988,7 @@ void item::set_temp_flags( float new_temperature, float freeze_percentage )
     // Denature materials if they reach the right temperature
     for( auto &m : material_makeup ) {
         cata::optional<float> denaturation_point = m.first->denaturation_point();
-        if( denaturation_point && *denaturation_point <= new_temperature ) {
+        if( denaturation_point && temp_to_kelvin( *denaturation_point ) <= new_temperature ) {
             cata::optional<material_id> denatures_into = m.first->denatures_into();
             if( denatures_into ) {
                 material_makeup[*denatures_into] += m.second;

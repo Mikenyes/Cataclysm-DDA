@@ -518,7 +518,7 @@ void Item_factory::finalize_pre( itype &obj )
     npc_implied_flags( obj );
 
     if( obj.comestible ) {
-        std::map<vitamin_id, int> &vitamins = obj.comestible->default_nutrition.vitamins;
+        std::map<vitamin_id, int> &vitamins = obj.default_nutrition.vitamins;
         if( get_option<bool>( "NO_VITAMINS" ) ) {
             for( auto &vit : vitamins ) {
                 if( vit.first->type() == vitamin_type::VITAMIN ) {
@@ -2753,7 +2753,6 @@ void Item_factory::load( islot_comestible &slot, const JsonObject &jo, const std
     assign( jo, "healthy", slot.healthy, strict );
     assign( jo, "parasites", slot.parasites, strict, 0 );
     assign( jo, "radiation", slot.radiation, strict );
-    assign( jo, "freezing_point", slot.freeze_point, strict );
     assign( jo, "spoils_in", slot.spoils, strict, 1_hours );
     assign( jo, "cooks_like", slot.cooks_like, strict );
     assign( jo, "smoking_result", slot.smoking_result, strict );
@@ -2765,47 +2764,13 @@ void Item_factory::load( islot_comestible &slot, const JsonObject &jo, const std
     }
 
     bool is_not_boring = false;
-    if( jo.has_member( "primary_material" ) ) {
+    /* if( jo.has_member( "primary_material" ) ) {
         std::string mat = jo.get_string( "primary_material" );
         slot.specific_heat_solid = material_id( mat )->specific_heat_solid();
         slot.specific_heat_liquid = material_id( mat )->specific_heat_liquid();
         slot.latent_heat = material_id( mat )->latent_heat();
         is_not_boring = is_not_boring || mat == "junk";
-    } else if( jo.has_member( "material" ) ) {
-        float specific_heat_solid = 0.0f;
-        float specific_heat_liquid = 0.0f;
-        float latent_heat = 0.0f;
-        int mat_total = 0;
-        int calories = 0;
-
-        auto add_spi = [&]( const material_id & m, int portion ) {
-            specific_heat_solid += m->specific_heat_solid() * portion;
-            specific_heat_liquid += m->specific_heat_liquid() * portion;
-            latent_heat += m->latent_heat() * portion;
-            mat_total += portion;
-            calories += m->calories() * portion;
-            is_not_boring = is_not_boring || m == material_junk;
-        };
-
-        if( jo.has_array( "material" ) && jo.get_array( "material" ).test_object() ) {
-            for( JsonObject m : jo.get_array( "material" ) ) {
-                const material_id mat_id( m.get_string( "type" ) );
-                int portion = m.get_int( "portion", 1 );
-                add_spi( mat_id, portion );
-            }
-        } else {
-            for( const std::string &m : jo.get_tags( "material" ) ) {
-                add_spi( material_id( m ), 1 );
-            }
-        }
-        // Average based on number of materials.
-        slot.specific_heat_liquid = specific_heat_liquid / mat_total;
-        slot.specific_heat_solid = specific_heat_solid / mat_total;
-        slot.latent_heat = latent_heat / mat_total;
-        units::volume comestible_volume;
-        assign( jo, "volume", comestible_volume );
-        slot.default_nutrition.calories = calories * units::to_milliliter( comestible_volume ) / mat_total;
-    }
+    } */
 
     // Junk food never gets old by default, but this can still be overridden.
     if( is_not_boring ) {
@@ -2819,6 +2784,7 @@ void Item_factory::load( islot_comestible &slot, const JsonObject &jo, const std
 
     assign( jo, "addiction_potential", slot.addict, strict );
 
+    /*
     bool got_calories = false;
 
     if( jo.has_member( "calories" ) ) {
@@ -2842,26 +2808,13 @@ void Item_factory::load( islot_comestible &slot, const JsonObject &jo, const std
                                           1000;
     }
 
-    for( JsonValue jv : jo.get_array( "consumption_effect_on_conditions" ) ) {
-        slot.consumption_eocs.push_back( effect_on_conditions::load_inline_eoc( jv, "" ) );
-    }
-
     if( jo.has_member( "nutrition" ) && got_calories ) {
         jo.throw_error( "cannot specify both nutrition and calories", "nutrition" );
     }
-
-    // any specification of vitamins suppresses use of material defaults @see Item_factory::finalize
-    if( jo.has_array( "vitamins" ) ) {
-        for( JsonArray pair : jo.get_array( "vitamins" ) ) {
-            vitamin_id vit( pair.get_string( 0 ) );
-            slot.default_nutrition.vitamins[ vit ] = pair.get_int( 1 );
-        }
-
-    } else if( relative.has_array( "vitamins" ) ) {
-        for( JsonArray pair : relative.get_array( "vitamins" ) ) {
-            vitamin_id vit( pair.get_string( 0 ) );
-            slot.default_nutrition.vitamins[ vit ] += pair.get_int( 1 );
-        }
+    */
+    
+    for( JsonValue jv : jo.get_array( "consumption_effect_on_conditions" ) ) {
+        slot.consumption_eocs.push_back( effect_on_conditions::load_inline_eoc( jv, "" ) );
     }
 
     if( jo.has_array( "generatable_vitamins" ) ) {
@@ -3502,6 +3455,7 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
     assign( jo, "insulation", def.insulation_factor );
     assign( jo, "solar_efficiency", def.solar_efficiency );
     assign( jo, "ascii_picture", def.picture_id );
+    assign( jo, "freezing_point", def.freeze_point, strict );
 
     if( jo.has_member( "thrown_damage" ) ) {
         def.thrown_damage = load_damage_instance( jo.get_array( "thrown_damage" ) );
@@ -3585,17 +3539,34 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
                         1 );
         }
     }
-
+    
+    if( jo.has_member( "calories" ) ) {
+        // The value here is in kcal, but is stored as simply calories
+        def.default_nutrition.calories = 1000 * jo.get_int( "calories" );
+    }
+    
     if( jo.has_member( "material" ) ) {
         def.materials.clear();
         def.base_material_makeup.clear();
         def.mat_portion_total = 0;
-        auto add_mat = [&def]( const material_id & m, int portion ) {
+        float specific_heat_liquid = 0;
+        float specific_heat_solid = 0;
+        float density = 0;
+        int latent_heat = 0;
+        int calories = 0;
+        
+        auto add_mat = [&def,&specific_heat_liquid,&specific_heat_solid,&density,&latent_heat,&calories]( const material_id & m, int portion ) {
             const auto res = def.materials.emplace( m, portion );
             if( res.second ) {
                 def.mat_portion_total += portion;
+                specific_heat_liquid += m->specific_heat_liquid() * portion;
+                specific_heat_solid += m->specific_heat_solid() * portion;
+                density += m->density() * portion;
+                latent_heat += m->latent_heat() * portion;
+                calories += m->calories() * portion;
             }
         };
+        
         bool first = true;
         if( jo.has_array( "material" ) && jo.get_array( "material" ).test_object() ) {
             for( JsonObject mat : jo.get_array( "material" ) ) {
@@ -3605,13 +3576,11 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
                     first = false;
                 }
             }
-            // test
             for( JsonObject mat : jo.get_array( "material" ) ) {
                 add_mat( material_id( mat.get_string( "type" ) ), mat.get_int( "portion", 1 ) );
                 def.base_material_makeup[ material_id( mat.get_string( "type" ) ) ] = 1000000000 /
                         def.mat_portion_total * mat.get_int( "portion", 1 );
             }
-            // end test
         } else {
             for( const std::string &mat : jo.get_tags( "material" ) ) {
                 add_mat( material_id( mat ), 1 );
@@ -3620,11 +3589,27 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
                     first = false;
                 }
             }
-            // test
             for( const std::string &mat : jo.get_tags( "material" ) ) {
                 def.base_material_makeup[ material_id( mat ) ] = 1000000000 / def.mat_portion_total;
             }
-            // end test
+        }
+        // Average based on number of materials.
+        def.specific_heat_liquid = specific_heat_liquid / def.mat_portion_total;
+        def.specific_heat_solid = specific_heat_solid / def.mat_portion_total;
+        def.latent_heat = latent_heat / def.mat_portion_total;
+        if( def.default_nutrition.calories == 0 ) {
+            def.default_nutrition.calories = calories * units::to_milliliter( def.volume ) / def.mat_portion_total;
+        }
+        if( def.weight == 0_gram ) {
+            def.weight = units::from_milligram( density * units::to_milliliter( def.volume ) / def.mat_portion_total );
+        }
+    }
+    
+    // any specification of vitamins suppresses use of material defaults @see Item_factory::finalize
+    if( jo.has_array( "vitamins" ) ) {
+        for( JsonArray pair : jo.get_array( "vitamins" ) ) {
+            vitamin_id vit( pair.get_string( 0 ) );
+            def.default_nutrition.vitamins[ vit ] = pair.get_int( 1 );
         }
     }
 

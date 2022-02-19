@@ -3769,7 +3769,7 @@ static float rate_food( const item &it, int want_nutr, int want_quench )
     }
 
     // TODO: Use the actual nutrition for this food, rather than the default?
-    int nutr = food->get_default_nutr();
+    int nutr = it.type->get_default_nutr();
     int quench = food->quench;
 
     if( nutr <= 0 && quench <= 0 ) {

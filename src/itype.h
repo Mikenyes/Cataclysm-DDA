@@ -129,10 +129,6 @@ struct islot_comestible {
         /** effect on character thirst (may be negative) */
         int quench = 0;
 
-        /** Nutrition values to use for this type when they aren't calculated from
-         * components */
-        nutrients default_nutrition;
-
         // Default pattern of randomizable vitamins
         std::vector<std::pair<std::vector<vitamin_id>, std::array<int, 6>>> generatable_vitamins;
 
@@ -166,9 +162,6 @@ struct islot_comestible {
         /**Amount of radiation you get from this comestible*/
         int radiation = 0;
 
-        /** freezing point in degrees celsius, below this temperature item can freeze */
-        float freeze_point = 0;
-
         /** pet food category */
         std::set<std::string> petfood;
 
@@ -178,24 +171,8 @@ struct islot_comestible {
         /**List of diseases carried by this comestible and their associated probability*/
         std::map<diseasetype_id, int> contamination;
 
-        //** specific heats in J/(g K) and latent heat in J/g */
-        float specific_heat_liquid = 4.186f;
-        float specific_heat_solid = 2.108f;
-        float latent_heat = 333.0f;
-
         /** A penalty applied to fun for every time this food has been eaten in the last 48 hours */
         int monotony_penalty = 2;
-
-        /** 1 nutr ~= 8.7kcal (1 nutr/5min = 288 nutr/day at 2500kcal/day) */
-        static constexpr float kcal_per_nutr = 2500.0f / ( 12 * 24 );
-
-        bool has_calories() const {
-            return default_nutrition.calories > 0;
-        }
-
-        int get_default_nutr() const {
-            return default_nutrition.kcal() / kcal_per_nutr;
-        }
 
         /** The monster group that is drawn from when the item rots away */
         mongroup_id rot_spawn = mongroup_id::NULL_ID();
@@ -1165,6 +1142,18 @@ struct itype {
         // Total of item's material portions (materials->second)
         int mat_portion_total = 0;
 
+        //** specific heats in J/(g K) and latent heat in J/g */
+        float specific_heat_liquid = 4.186f;
+        float specific_heat_solid = 2.108f;
+        float latent_heat = 333.0f;
+        
+        /** freezing point in degrees celsius, below this temperature item can freeze */
+        float freeze_point = 0;
+
+        /** Nutrition values to use for this type when they aren't calculated from
+         * components */
+        nutrients default_nutrition;
+
         int min_str = 0;
         int min_dex = 0;
         int min_int = 0;
@@ -1354,6 +1343,17 @@ struct itype {
 
         bool can_use( const std::string &iuse_name ) const;
         const use_function *get_use( const std::string &iuse_name ) const;
+        
+        /** 1 nutr ~= 8.7kcal (1 nutr/5min = 288 nutr/day at 2500kcal/day) */
+        static constexpr float kcal_per_nutr = 2500.0f / ( 12 * 24 );
+
+        bool has_calories() const {
+            return default_nutrition.calories > 0;
+        }
+
+        int get_default_nutr() const {
+            return default_nutrition.kcal() / kcal_per_nutr;
+        }
 
         // Here "invoke" means "actively use". "Tick" means "active item working"
         cata::optional<int> invoke( Character &p, item &it,
