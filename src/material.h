@@ -70,6 +70,7 @@ class material_type
         int _bullet_resist = 0;
         int _chip_resist = 0;                         // Resistance to physical damage of the item itself
         int _calories = 0;                            // Calories per milliliter
+        int _quench = 0;                              // Quench per liter
         // How resistant this material is to wind as a percentage - 0 to 100
         cata::optional<int> _wind_resist;
         cata::optional<float> _denaturation_point;
@@ -126,6 +127,7 @@ class material_type
         int fire_resist() const;
         int chip_resist() const;
         int calories() const;
+        int quench() const;
         float specific_heat_liquid() const;
         float specific_heat_solid() const;
         float latent_heat() const;

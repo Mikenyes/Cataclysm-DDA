@@ -301,6 +301,8 @@ item::item( const itype *type, time_point turn, int qty ) : type( type ), bday( 
     if( material_makeup.empty() ) {
         material_makeup = type->get_base_material_makeup();
     }
+    
+    compute_quench();
 
     if( has_flag( flag_SPAWN_ACTIVE ) ) {
         activate();
@@ -918,6 +920,22 @@ void item::merge_generated_vitamins( const item &rhs )
     }
 }
 
+void item::add_generated_vitamins( const std::map<vitamin_id, int> &new_vitamins )
+{
+    for( auto const &vitamin : new_vitamins ) {
+        generated_vitamins[vitamin.first] += vitamin.second;
+    }
+}
+
+void item::compute_quench()
+{
+    float summed_quench = 0;
+    for( auto &material : material_makeup ) {
+        summed_quench += static_cast<float>(material.second) / 1000000000 * material.first->quench();
+    }
+    quench = summed_quench * units::to_milliliter( volume( false, true, 1 ) ) / 1000;
+}
+
 void item::merge_material_makeup( const item &rhs )
 {
     float it_volume = units::to_milliliter( volume() );
@@ -928,13 +946,7 @@ void item::merge_material_makeup( const item &rhs )
     for( auto const &material : rhs.material_makeup ) {
         material_makeup[material.first] += material.second * rhs_volume / ( it_volume + rhs_volume );
     }
-}
-
-void item::add_generated_vitamins( const std::map<vitamin_id, int> &new_vitamins )
-{
-    for( auto const &vitamin : new_vitamins ) {
-        generated_vitamins[vitamin.first] += vitamin.second;
-    }
+    compute_quench();
 }
 
 namespace
@@ -2279,7 +2291,7 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
         }
     }
 
-    if( max_nutr.kcal() != 0 || food_com->quench != 0 ) {
+    if( max_nutr.kcal() != 0 || quench != 0 ) {
         if( parts->test( iteminfo_parts::FOOD_NUTRITION ) ) {
             info.emplace_back( "FOOD", _( "<bold>Calories (kcal)</bold>: " ),
                                "", iteminfo::no_newline, min_nutr.kcal() );
@@ -2290,8 +2302,7 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
         }
         if( parts->test( iteminfo_parts::FOOD_QUENCH ) ) {
             const std::string space = "  ";
-            info.emplace_back( "FOOD", space + _( "Quench: " ),
-                               food_com->quench );
+            info.emplace_back( "FOOD", space + _( "Quench: " ), quench );
         }
         if( parts->test( iteminfo_parts::FOOD_SATIATION ) ) {
 

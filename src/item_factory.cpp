@@ -3601,7 +3601,7 @@ void Item_factory::load_basic_info( const JsonObject &jo, itype &def, const std:
             def.default_nutrition.calories = calories * units::to_milliliter( def.volume ) / def.mat_portion_total;
         }
         if( def.weight == 0_gram ) {
-            def.weight = units::from_milligram( density * units::to_milliliter( def.volume ) / def.mat_portion_total );
+            def.weight = units::from_milligram( 1000 * density * units::to_milliliter( def.volume ) / def.mat_portion_total );
         }
     }
     

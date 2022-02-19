@@ -296,6 +296,8 @@ class item : public visitable
          * Merge materials when combining charges
          */
         void merge_material_makeup( const item &rhs );
+        
+        void compute_quench();
 
         /**
          * Filter setting damage constrained by @ref min_damage and @ref max_damage
@@ -2842,6 +2844,8 @@ class item : public visitable
         time_point last_temp_check = calendar::turn_zero;
         /// The time the item was created.
         time_point bday;
+        /// 5 ml of water equivalent
+        int quench = 0;
         /**
          * Current phase state, inherits a default at room temperature from
          * itype and can be changed through item processing.  This is a static

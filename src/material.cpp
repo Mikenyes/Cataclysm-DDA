@@ -76,6 +76,7 @@ void material_type::load( const JsonObject &jsobj, const std::string & )
     optional( jsobj, was_loaded, "denaturation_point", _denaturation_point );
     optional( jsobj, was_loaded, "denatures_into", _denatures_into );
     optional( jsobj, was_loaded, "calories", _calories, 0 );
+    optional( jsobj, was_loaded, "quench", _quench, 0 );
     optional( jsobj, was_loaded, "edible", _edible, false );
     optional( jsobj, was_loaded, "rotting", _rotting, false );
     optional( jsobj, was_loaded, "contaminated", _contaminated, false );
@@ -210,6 +211,11 @@ int material_type::chip_resist() const
 int material_type::calories() const
 {
     return _calories;
+}
+
+int material_type::quench() const
+{
+    return _quench;
 }
 
 float material_type::specific_heat_liquid() const
