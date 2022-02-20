@@ -160,6 +160,7 @@ struct talk_effect_fun_t {
         void set_add_faction_trust( const JsonObject &jo, const std::string &member );
         void set_lose_faction_trust( const JsonObject &jo, const std::string &member );
         void set_arithmetic( const JsonObject &jo, const std::string &member );
+        void set_set_string_var( const JsonObject &jo, const std::string &member );
         void set_custom_light_level( const JsonObject &jo, const std::string &member );
         void set_spawn_monster( const JsonObject &jo, const std::string &member, bool is_npc );
         void set_field( const JsonObject &jo, const std::string &member, bool is_npc );
@@ -454,7 +455,7 @@ struct str_or_var {
     }
 };
 
-struct int_or_var {
+struct int_or_var_part {
     cata::optional<int> int_val;
     cata::optional<std::string> var_val;
     cata::optional<int> default_val;
@@ -478,7 +479,23 @@ struct int_or_var {
     }
 };
 
-struct duration_or_var {
+struct int_or_var {
+    bool pair = false;
+    int_or_var_part min;
+    int_or_var_part max;
+    bool is_npc() const {
+        return min.type == var_type::npc || max.type == var_type::npc;
+    }
+    int evaluate( talker *talk ) const {
+        if( pair ) {
+            return rng( min.evaluate( talk ), max.evaluate( talk ) );
+        } else {
+            return min.evaluate( talk );
+        }
+    }
+};
+
+struct duration_or_var_part {
     cata::optional<time_duration> dur_val;
     cata::optional<std::string> var_val;
     cata::optional<time_duration> default_val;
@@ -500,6 +517,22 @@ struct duration_or_var {
         } else {
             debugmsg( "No valid value." );
             return 0_seconds;
+        }
+    }
+};
+
+struct duration_or_var {
+    bool pair = false;
+    duration_or_var_part min;
+    duration_or_var_part max;
+    bool is_npc() const {
+        return min.type == var_type::npc || max.type == var_type::npc;
+    }
+    time_duration evaluate( talker *talk ) const {
+        if( pair ) {
+            return rng( min.evaluate( talk ), max.evaluate( talk ) );
+        } else {
+            return min.evaluate( talk );
         }
     }
 };
