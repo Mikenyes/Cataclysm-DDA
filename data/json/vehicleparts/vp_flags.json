@@ -357,6 +357,10 @@
     "type": "json_flag"
   },
   {
+    "id": "OVEN",
+    "type": "json_flag"
+  },
+  {
     "id": "FULL_BOARD",
     "type": "json_flag"
   },

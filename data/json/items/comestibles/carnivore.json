@@ -8,8 +8,7 @@
     "symbol": "%",
     "color": "red",
     "parasites": 32,
-    "vitamins": [  ],
-    "flags": [ "RAW" ]
+    "vitamins": [  ]
   },
   {
     "id": "fish",
@@ -22,8 +21,8 @@
     "price": 500,
     "price_postapoc": 50,
     "spoils_in": "12 hours",
-    "flags": [ "SMOKABLE", "RAW" ],
     "smoking_result": "fish_smoked",
+    "parasites": 2,
     "material": [ { "type": "water", "portion": 73 }, { "type": "animal_protein", "portion": 18 }, { "type": "animal_fat", "portion": 9 } ],
     "vitamins": [ [ "vitA", 2 ], [ "vitC", 2 ], [ "calcium", 6 ], [ "iron", 14 ], [ "vitB", 154 ] ]
   },
@@ -118,7 +117,6 @@
     "material": [ { "type": "water", "portion": 70 }, { "type": "animal_protein", "portion": 14 }, { "type": "animal_fat", "portion": 16 } ],
     "cooks_like": "meat_cooked",
     "vitamins": [ [ "calcium", 2 ], [ "iron", 12 ], [ "vitB", 80 ] ],
-    "flags": [ "SMOKABLE", "RAW", "PREDATOR_FUN" ],
     "smoking_result": "meat_smoked"
   },
   {

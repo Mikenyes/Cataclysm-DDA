@@ -92,6 +92,8 @@ class material_type
 
         std::map<vitamin_id, double> _vitamins;
 
+        std::vector<flag_id> _mat_flags;
+        
         std::vector<mat_burn_data> _burn_data;
 
         fuel_data fuel;
@@ -149,6 +151,8 @@ class material_type
 
         fuel_data get_fuel_data() const;
 
+        std::vector<flag_id> mat_flags() const;
+        
         const mat_burn_data &burn_data( size_t intensity ) const;
         const mat_burn_products &burn_products() const;
 };

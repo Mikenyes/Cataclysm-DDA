@@ -102,6 +102,7 @@ enum class temperature_flag : int {
     HEATER,
     FRIDGE,
     FREEZER,
+    OVEN,
     ROOT_CELLAR
 };
 

@@ -119,6 +119,13 @@
     "bindings": [ { "input_method": "keyboard_any", "key": "r" } ]
   },
   {
+    "id": "TOGGLE_OVEN",
+    "type": "keybinding",
+    "category": "VEHICLE",
+    "name": "Toggle oven",
+    "bindings": [ { "input_method": "keyboard_any", "key": "v" } ]
+  },
+  {
     "id": "TOGGLE_SPACE_HEATER",
     "type": "keybinding",
     "category": "VEHICLE",

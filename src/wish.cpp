@@ -649,6 +649,7 @@ static item wishitem_produce( const itype &type, std::string &flags, bool incont
             granted.set_flag( flag_id( tag ) );
         }
     }
+    granted.material_cleanup();
 
     if( incontainer ) {
         granted = granted.in_its_container();

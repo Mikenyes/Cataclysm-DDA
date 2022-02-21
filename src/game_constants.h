@@ -101,6 +101,9 @@ constexpr int cold = 40; // ~4.4 C
 // Temperature inside an active freezer in Fahrenheit.
 constexpr int freezer = 23; // -5 Celsius
 
+// Temperature inside an active oven in Fahrenheit.
+constexpr int oven = 325; // 162.8 Celsius
+
 // Temperature in which water freezes in Fahrenheit.
 constexpr int freezing = 32; // 0 Celsius
 

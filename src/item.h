@@ -297,7 +297,12 @@ class item : public visitable
          */
         void merge_material_makeup( const item &rhs );
         
-        void compute_quench();
+        /**
+         * Ensure materials sum and apply flags
+         */
+        void material_cleanup();
+        
+        void compute_nutrients();
 
         /**
          * Filter setting damage constrained by @ref min_damage and @ref max_damage
@@ -2849,6 +2854,7 @@ class item : public visitable
         time_point bday;
         /// 5 ml of water equivalent
         int quench = 0;
+        int calories = 0;
         /**
          * Current phase state, inherits a default at room temperature from
          * itype and can be changed through item processing.  This is a static

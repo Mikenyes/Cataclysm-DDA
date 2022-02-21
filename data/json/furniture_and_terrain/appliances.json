@@ -63,10 +63,9 @@
     "damage_modifier": 10,
     "damage_reduction": { "all": 30 },
     "durability": 80,
-    "flags": [ "CARGO", "OBSTACLE", "COVERED", "FLAT_SURF", "APPLIANCE" ],
+    "flags": [ "CARGO", "OBSTACLE", "OVEN", "COVERED", "FLAT_SURF", "ENABLED_DRAINS_EPOWER", "APPLIANCE", "CTRL_ELECTRONIC" ],
     "pseudo_tools": [ { "id": "hotplate", "hotkey": "h" } ],
-    "//": "Doesn't draw power at baseline, only when cooking.",
-    "epower": 0,
+    "epower": -2000,
     "item": "oven",
     "looks_like": "f_oven",
     "breaks_into": [

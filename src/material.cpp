@@ -86,6 +86,10 @@ void material_type::load( const JsonObject &jsobj, const std::string & )
     for( JsonArray pair : jsobj.get_array( "vitamins" ) ) {
         _vitamins.emplace( vitamin_id( pair.get_string( 0 ) ), pair.get_float( 1 ) );
     }
+    
+    for( std::string flag_string : jsobj.get_array( "mat_flags" ) ) {
+        _mat_flags.push_back( flag_id( flag_string ) );
+    }
 
     mandatory( jsobj, was_loaded, "bash_dmg_verb", _bash_dmg_verb );
     mandatory( jsobj, was_loaded, "cut_dmg_verb", _cut_dmg_verb );
@@ -281,6 +285,11 @@ bool material_type::soft() const
 bool material_type::reinforces() const
 {
     return _reinforces;
+}
+
+std::vector<flag_id> material_type::mat_flags() const
+{
+    return _mat_flags;
 }
 
 fuel_data material_type::get_fuel_data() const

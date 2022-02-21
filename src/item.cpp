@@ -301,8 +301,6 @@ item::item( const itype *type, time_point turn, int qty ) : type( type ), bday( 
     if( material_makeup.empty() ) {
         material_makeup = type->get_base_material_makeup();
     }
-    
-    compute_quench();
 
     if( has_flag( flag_SPAWN_ACTIVE ) ) {
         activate();
@@ -362,6 +360,8 @@ item::item( const itype *type, time_point turn, int qty ) : type( type ), bday( 
     if( type->relic_data ) {
         relic_data = type->relic_data;
     }
+    
+    material_cleanup();
 }
 
 item::item( const itype_id &id, time_point turn, int qty )
@@ -927,12 +927,15 @@ void item::add_generated_vitamins( const std::map<vitamin_id, int> &new_vitamins
     }
 }
 
-void item::compute_quench()
+void item::compute_nutrients()
 {
     float summed_quench = 0;
+    float summed_calories = 0;
     for( auto &material : material_makeup ) {
         summed_quench += static_cast<float>(material.second) / 1000000000 * material.first->quench();
+        summed_calories += static_cast<float>(material.second) / 1000000000 * material.first->calories();
     }
+    calories = summed_calories * units::to_milliliter( volume( false, true, 1 ) ) / 1000;
     quench = summed_quench * units::to_milliliter( volume( false, true, 1 ) ) / 1000;
 }
 
@@ -946,7 +949,35 @@ void item::merge_material_makeup( const item &rhs )
     for( auto const &material : rhs.material_makeup ) {
         material_makeup[material.first] += material.second * rhs_volume / ( it_volume + rhs_volume );
     }
-    compute_quench();
+    material_cleanup();
+}
+
+void item::material_cleanup()
+{   
+    int summed_material = 0;
+    std::vector<flag_id> to_set;
+    std::vector<flag_id> to_unset;
+    for(auto mat = material_makeup.begin(); mat != material_makeup.end(); ) {
+        if(mat->second == 0) {
+            std::vector<flag_id> mat_flags = mat->first->mat_flags();
+            to_unset.insert(to_unset.end(), mat_flags.begin(), mat_flags.end());
+            mat = material_makeup.erase(mat);
+        } else {
+            summed_material += mat->second;
+            std::vector<flag_id> mat_flags = mat->first->mat_flags();
+            to_set.insert(to_set.end(), mat_flags.begin(), mat_flags.end());
+            ++mat;
+        }
+    }
+    for( const flag_id &f : to_unset ) {
+        unset_flag( f );
+    }
+    for( const flag_id &f : to_set ) {
+        set_flag( f );
+    }
+    //if( summed_material < 9990000000 ) {  
+    //}
+    compute_nutrients();
 }
 
 namespace
@@ -2291,14 +2322,15 @@ void item::food_info( const item *food_item, std::vector<iteminfo> &info,
         }
     }
 
-    if( max_nutr.kcal() != 0 || quench != 0 ) {
+    if( calories != 0 || quench != 0 ) {
         if( parts->test( iteminfo_parts::FOOD_NUTRITION ) ) {
             info.emplace_back( "FOOD", _( "<bold>Calories (kcal)</bold>: " ),
-                               "", iteminfo::no_newline, min_nutr.kcal() );
+                               "", iteminfo::no_newline, calories );
+            /* 
             if( max_nutr.kcal() != min_nutr.kcal() ) {
                 info.emplace_back( "FOOD", _( "-" ),
                                    "", iteminfo::no_newline, max_nutr.kcal() );
-            }
+            } */
         }
         if( parts->test( iteminfo_parts::FOOD_QUENCH ) ) {
             const std::string space = "  ";
@@ -11734,6 +11766,9 @@ bool item::process_temperature_rot( float insulation, const tripoint &pos,
         case temperature_flag::HEATER:
             temp = std::max( temp, temperatures::normal );
             break;
+        case temperature_flag::OVEN:
+            temp = std::max( temp, temperatures::oven );
+            break;
         case temperature_flag::ROOT_CELLAR:
             temp = AVERAGE_ANNUAL_TEMPERATURE;
             break;
@@ -12033,6 +12068,7 @@ void item::set_temp_flags( float new_temperature, float freeze_percentage )
             m.second = 0;
         }
     }
+    material_cleanup();
 }
 
 float item::get_item_thermal_energy() const
