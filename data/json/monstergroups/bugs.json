@@ -218,6 +218,24 @@
     ]
   },
   {
+    "name": "GROUP_APHID_SMALL",
+    "type": "monstergroup",
+    "default": "mon_aphid",
+    "monsters": [
+      { "monster": "mon_aphid_hungry", "weight": 200 },
+      { "monster": "mon_aphid_black", "weight": 50 }
+    ]
+  },
+  {
+    "name": "GROUP_APHID",
+    "type": "monstergroup",
+    "default": "mon_aphid",
+    "monsters": [
+      { "monster": "mon_aphid_boomer", "weight": 25 },
+      { "monster": "mon_aphid_hungry", "weight": 25 }
+    ]
+  },
+  {
     "type": "monstergroup",
     "name": "GROUP_WORM",
     "is_animal": true,

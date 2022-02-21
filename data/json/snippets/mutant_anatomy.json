@@ -415,6 +415,40 @@
   },
   {
     "type": "snippet",
+    "category": "<bug_harvest_aphid_skin>",
+    "text": [
+      "The paper thin skin of the corpse peels away like wrapping paper, dry and crisp, but each of the three layers beneath it gets thicker and wetter",
+      "Beneath its outer skin, the aphid has coarse, knotted fur, and had it not met an untimely demise it would have withstood winter with ease",
+      "Before you can even start cutting it apart, you have to pull off dozens of nodules that are either parasites, vestigial organs, or the former become the latter",
+      "Two thick ducts connect to the surface, and you would start the cutting there were it not for the twin waterfalls of bottlecap-sized offspring fleeing via them",
+      "Velcro-like hooks blanket the bug's body, making it far more difficult to remove the skin"
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "<bug_harvest_aphid_deeper>",
+    "text": [
+      "There are no eggs within, only dozens of half-formed young with no shell, placenta, or obvious source of nutrients",
+      "Honeydew and viscera have mixed into a toxic stew in the bloated digestive tract of this aphid, and you feel strangely compelled to... to just taste a little bit",
+      "Tiny chunks of fur and bone rest undigested in the corpse's stomach, suggesting that it had begun to sample meatier cuisine",
+      "There is no digestive system whatsoever within this aphid, only fungal tumors and dozens of rudimentary eyes positioned to stare inwards",
+      "There are no organs or systems inside of the aphid that aren't dedicated to eating, and you have no clue how it was once ambulatory",
+      "As you work, you find your progress undone by slow upheavals of regrowth, only stopped once you find and remove a fist-sized clump of fungus that squirms where the aphid's brain should be"
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "<bug_harvest_aphid_descriptive>",
+    "text": [
+      "A color you dont recognize tinges the honeydew found in numerous clear cysts within, but thankfully the painful hue fades when they are popped",
+      "Chopping through this aphid has been surprisingly tiring.  Perhaps you should just... lay down.  Drink deep, listen to the stars, and dream",
+      "Your mind keeps drifting as you butcher the surprisingly aromatic insect, wondering how long the monoliths of man will stand, and what fiends will be left to behold them",
+      "Inside the aphid, massive spirals of brain matter bloom into fleshy fascimiles of lotuses, water lilies, and flowery shapes clearly not native to this world",
+      "When you finish, you find tiny gray mushrooms growing everywhere the aphid's lifeblood spilled.  Crushing them releases clouds of spores, so fine you can't make out the individual particles"
+    ]
+  },
+  {
+    "type": "snippet",
     "category": "<bug_harvest_centipede_chitin>",
     "text": [
       "Its legs contain no muscles, just sinews hanging in yellow-green ichor",
@@ -621,6 +655,24 @@
   },
   {
     "type": "snippet",
+    "category": "<insect_harvest>",
+    "text": [
+      "<bug_harvest_general_chitin>.",
+      "<bug_harvest_general_chitin>.  <bug_harvest_general_deeper>.",
+      "<bug_harvest_general_chitin>.  <bug_harvest_general_deeper>.  <bug_harvest_general_descriptive>."
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "<aphid_harvest>",
+    "text": [
+      "<bug_harvest_aphid_skin>.",
+      "<bug_harvest_aphid_skin>.  <bug_harvest_aphid_deeper>.",
+      "<bug_harvest_aphid_skin>.  <bug_harvest_aphid_deeper>.  <bug_harvest_aphid_descriptive>."
+    ]
+  },
+  {
+    "type": "snippet",
     "category": "<centipede_harvest>",
     "text": [
       "<bug_harvest_centipede_chitin>.",
@@ -653,7 +705,7 @@
   },
   {
     "type": "snippet",
-    "category": "<arachnid_flying_harvest>",
+    "category": "<insect_flying_harvest>",
     "text": [
       "<bug_harvest_flying_chitin>.",
       "<bug_harvest_flying_chitin>. <bug_harvest_general_descriptive>.",
@@ -664,7 +716,7 @@
     "type": "snippet",
     "category": "<wasp_harvest>",
     "text": [
-      "<arachnid_flying_harvest> <bug_harvest_wasp_deeper>.",
+      "<insect_flying_harvest> <bug_harvest_wasp_deeper>.",
       "<bug_harvest_wasp_chitin>.",
       "<bug_harvest_wasp_chitin>. <bug_harvest_general_descriptive>. ",
       "<bug_harvest_wasp_chitin>. <bug_harvest_general_descriptive>. <bug_harvest_wasp_deeper>."

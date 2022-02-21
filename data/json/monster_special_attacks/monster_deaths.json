@@ -348,6 +348,26 @@
     "shape": "blast"
   },
   {
+    "id": "death_explosion_mon_aphid_boomer",
+    "type": "SPELL",
+    "name": { "str": "Fiery Death" },
+    "valid_targets": [ "self", "ally", "hostile", "ground" ],
+    "description": "A burst of flaming gas.  The main effect is fire.",
+    "effect": "attack",
+    "field_id": "fd_fire",
+    "field_chance": 2,
+    "min_field_intensity": 1,
+    "max_field_intensity": 2,
+    "min_aoe": 2,
+    "max_aoe": 2,
+    "min_damage": 2,
+    "max_damage": 2,
+    "min_duration": 1000,
+    "max_duration": 1000,
+    "damage_type": "bash",
+    "shape": "blast"
+  },
+  {
     "id": "death_explosion_mon_spider_jumping_mega",
     "type": "SPELL",
     "name": { "str": "Death Explosion Huge" },
