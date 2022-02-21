@@ -60,18 +60,6 @@
   },
   {
     "type": "item_group",
-    "id": "passive_malign_drops",
-    "subtype": "distribution",
-    "entries": [
-      {
-        "group": "amigara_items",
-        "artifact": { "procgen_id": "passive_malign", "rules": { "power_level": 625, "max_attributes": 4, "max_negative_power": -1500 } },
-        "prob": 100
-      }
-    ]
-  },
-  {
-    "type": "item_group",
     "subtype": "collection",
     "//": "items for zombie reenactor",
     "id": "zombie_reenactor_drops",
