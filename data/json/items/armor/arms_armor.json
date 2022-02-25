@@ -32,6 +32,398 @@
     ]
   },
   {
+    "id": "spaulder_chitin_molt",
+    "type": "ARMOR",
+    "copy-from": "spaulder_chitin",
+    "name": { "str": "molt chitin spaulder" },
+    "description": "Epicuticle armor for the shoulder and armpit, with pale fresh chitin over the shoulder.  It probably needs some time to harden.",
+    "color": "light_gray",
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "material": [
+          { "type": "chitin_molt", "covered_by_mat": 70, "thickness": 3.25 },
+          { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 6,
+        "coverage": 100,
+        "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l" ]
+      }
+    ],
+    "countdown_interval": 216000,
+    "countdown_action": { "type": "transform", "target": "spaulder_chitin_light", "msg": "The molt chitin spaulder has noticeably hardened." },
+    "extend": { "flags": [ "FRAGILE", "SPAWN_ACTIVE" ] },
+    "delete": { "flags": [ "STURDY" ] }
+  },
+  {
+    "id": "spaulder_chitin_light",
+    "type": "ARMOR",
+    "copy-from": "vest_chitin",
+    "name": { "str": "light chitin spaulder" },
+    "description": "Epicuticle armor for the shoulder and armpit, with dull brown chitin plates over the shoulder.",
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "material": [
+          { "type": "chitin_light", "covered_by_mat": 70, "thickness": 3.25 },
+          { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 3,
+        "coverage": 100,
+        "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l" ]
+      }
+    ],
+    "countdown_interval": 216000,
+    "countdown_action": { "type": "transform", "target": "spaulder_chitin", "msg": "The light chitin spaulder has noticeably hardened." },
+    "extend": { "flags": [ "SPAWN_ACTIVE" ] },
+    "delete": { "flags": [ "STURDY" ] }
+  },
+  {
+    "id": "spaulder_chitin",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str": "hard chitin spaulder" },
+    "description": "Epicuticle armor for the shoulder and armpit, with glossy brown chitin plates over the shoulder.",
+    "weight": "392 g",
+    "volume": "2500 ml",
+    "price": 20000,
+    "price_postapoc": 750,
+    "to_hit": 1,
+    "symbol": "[",
+    "looks_like": "armguard_hard",
+    "color": "brown",
+    "warmth": 4,
+    "sided": true,
+    "environmental_protection": 5,
+    "flags": [ "STURDY", "WATERPROOF" ],
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "material": [
+          { "type": "chitin", "covered_by_mat": 70, "thickness": 3.25 },
+          { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 3,
+        "coverage": 100,
+        "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l" ]
+      }
+    ]
+  },
+  {
+    "id": "spaulder_sclerotin_light",
+    "type": "ARMOR",
+    "copy-from": "spaulder_chitin",
+    "name": { "str": "light sclerotin spaulder" },
+    "description": "Epicuticle armor for the shoulder and armpit, with glossy black sclerotin plates over the shoulder.",
+    "color": "black",
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "material": [
+          { "type": "sclerotin_light", "covered_by_mat": 70, "thickness": 3.25 },
+          { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 4,
+        "coverage": 100,
+        "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l" ]
+      }
+    ]
+  },
+  {
+    "id": "sleeve_chitin_molt",
+    "type": "ARMOR",
+    "copy-from": "sleeve_chitin",
+    "name": { "str": "molt chitin sleeve" },
+    "description": "A sleeve of epicuticle, wrapping the upper arm in insect leather with plates of fresh white chitin to provide additional protection.  It probably needs some time to harden.",
+    "color": "light_gray",
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "material": [
+          { "type": "chitin_molt", "covered_by_mat": 85, "thickness": 3.0 },
+          { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 5,
+        "coverage": 100,
+        "specifically_covers": [ "arm_upper_r", "arm_upper_l" ]
+      }
+    ],
+    "countdown_interval": 216000,
+    "countdown_action": { "type": "transform", "target": "sleeve_chitin_light", "msg": "The molt chitin sleeve has noticeably hardened." },
+    "extend": { "flags": [ "FRAGILE", "SPAWN_ACTIVE" ] },
+    "delete": { "flags": [ "STURDY" ] }
+  },
+  {
+    "id": "sleeve_chitin_light",
+    "type": "ARMOR",
+    "copy-from": "vest_chitin",
+    "name": { "str": "light chitin sleeve" },
+    "description": "A sleeve of epicuticle, wrapping the upper arm in insect leather with plates of dull brown chitin to provide additional protection.",
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "material": [
+          { "type": "chitin_light", "covered_by_mat": 85, "thickness": 3.0 },
+          { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 2,
+        "coverage": 100,
+        "specifically_covers": [ "arm_upper_r", "arm_upper_l" ]
+      }
+    ],
+    "countdown_interval": 216000,
+    "countdown_action": { "type": "transform", "target": "sleeve_chitin", "msg": "The light chitin sleeve has noticeably hardened." },
+    "extend": { "flags": [ "SPAWN_ACTIVE" ] },
+    "delete": { "flags": [ "STURDY" ] }
+  },
+  {
+    "id": "sleeve_chitin",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str": "hard chitin sleeve" },
+    "description": "A sleeve of epicuticle, wrapping the upper arm in insect leather with plates of glossy brown chitin to provide additional protection.",
+    "weight": "392 g",
+    "volume": "2500 ml",
+    "price": 20000,
+    "price_postapoc": 750,
+    "to_hit": 1,
+    "symbol": "[",
+    "looks_like": "armguard_hard",
+    "color": "brown",
+    "warmth": 4,
+    "sided": true,
+    "environmental_protection": 5,
+    "flags": [ "STURDY", "WATERPROOF" ],
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "material": [
+          { "type": "chitin", "covered_by_mat": 85, "thickness": 3.0 },
+          { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 2,
+        "coverage": 100,
+        "specifically_covers": [ "arm_upper_r", "arm_upper_l" ]
+      }
+    ]
+  },
+  {
+    "id": "sleeve_sclerotin_light",
+    "type": "ARMOR",
+    "copy-from": "sleeve_chitin",
+    "name": { "str": "light sclerotin sleeve" },
+    "description": "A sleeve of epicuticle, wrapping the upper arm in insect leather with plates of glossy black sclerotin to provide additional protection.",
+    "color": "black",
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "material": [
+          { "type": "sclerotin_light", "covered_by_mat": 85, "thickness": 3.0 },
+          { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 2,
+        "coverage": 100,
+        "specifically_covers": [ "arm_upper_r", "arm_upper_l" ]
+      }
+    ]
+  },
+  {
+    "id": "elbowpad_chitin_molt",
+    "type": "ARMOR",
+    "copy-from": "elbowpad_chitin",
+    "name": { "str": "molt chitin elbow pad" },
+    "description": "A light and flexible epicuticle elbow sleeve with fresh white chitin plates to protect the most important parts.  It probably needs some time to harden.",
+    "color": "light_gray",
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "material": [
+          { "type": "chitin_molt", "covered_by_mat": 70, "thickness": 3.25 },
+          { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 6,
+        "coverage": 100,
+        "specifically_covers": [ "arm_elbow_r", "arm_elbow_l" ]
+      }
+    ],
+    "countdown_interval": 216000,
+    "countdown_action": { "type": "transform", "target": "elbowpad_chitin_light", "msg": "The molt chitin elbow pad has noticeably hardened." },
+    "extend": { "flags": [ "FRAGILE", "SPAWN_ACTIVE" ] },
+    "delete": { "flags": [ "STURDY" ] }
+  },
+  {
+    "id": "elbowpad_chitin_light",
+    "type": "ARMOR",
+    "copy-from": "vest_chitin",
+    "name": { "str": "light chitin elbow pad" },
+    "description": "A light and flexible epicuticle elbow sleeve with dull brown chitin plates to protect the most important parts.",
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "material": [
+          { "type": "chitin_light", "covered_by_mat": 70, "thickness": 3.25 },
+          { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 3,
+        "coverage": 100,
+        "specifically_covers": [ "arm_elbow_r", "arm_elbow_l" ]
+      }
+    ],
+    "countdown_interval": 216000,
+    "countdown_action": { "type": "transform", "target": "elbowpad_chitin", "msg": "The light chitin elbow pad has noticeably hardened." },
+    "extend": { "flags": [ "SPAWN_ACTIVE" ] },
+    "delete": { "flags": [ "STURDY" ] }
+  },
+  {
+    "id": "elbowpad_chitin",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str": "hard chitin elbow pad" },
+    "description": "A light and flexible epicuticle elbow sleeve with glossy brown chitin plates to protect the most important parts.",
+    "weight": "392 g",
+    "volume": "2500 ml",
+    "price": 20000,
+    "price_postapoc": 750,
+    "to_hit": 1,
+    "symbol": "[",
+    "looks_like": "armguard_hard",
+    "color": "brown",
+    "warmth": 2,
+    "sided": true,
+    "environmental_protection": 4,
+    "flags": [ "STURDY", "WATERPROOF" ],
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "material": [
+          { "type": "chitin", "covered_by_mat": 65, "thickness": 2.75 },
+          { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 3,
+        "coverage": 100,
+        "specifically_covers": [ "arm_elbow_r", "arm_elbow_l" ]
+      }
+    ]
+  },
+  {
+    "id": "elbowpad_sclerotin_light",
+    "type": "ARMOR",
+    "copy-from": "elbowpad_chitin",
+    "name": { "str": "light sclerotin elbow pad" },
+    "description": "A light and flexible epicuticle elbow sleeve with glossy black slerotin plates to protect the most important parts.",
+    "color": "black",
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "material": [
+          { "type": "sclerotin_light", "covered_by_mat": 70, "thickness": 3.25 },
+          { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 4,
+        "coverage": 100,
+        "specifically_covers": [ "arm_elbow_r", "arm_elbow_l" ]
+      }
+    ]
+  },
+    {
+    "id": "bracer_chitin_molt",
+    "type": "ARMOR",
+    "copy-from": "bracer_chitin",
+    "name": { "str": "molt chitin bracer" },
+    "description": "A bracer of epicuticle, wrapping the lower arm in insect leather with plates of fresh white chitin to provide additional protection.  It probably needs some time to harden.",
+    "color": "light_gray",
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "material": [
+          { "type": "chitin_molt", "covered_by_mat": 85, "thickness": 3.0 },
+          { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 5,
+        "coverage": 100,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l" ]
+      }
+    ],
+    "countdown_interval": 216000,
+    "countdown_action": { "type": "transform", "target": "bracer_chitin_light", "msg": "The molt chitin bracer has noticeably hardened." },
+    "extend": { "flags": [ "FRAGILE", "SPAWN_ACTIVE" ] },
+    "delete": { "flags": [ "STURDY" ] }
+  },
+  {
+    "id": "bracer_chitin_light",
+    "type": "ARMOR",
+    "copy-from": "vest_chitin",
+    "name": { "str": "light chitin bracer" },
+    "description": "A bracer of epicuticle, wrapping the lower arm in insect leather with plates of dull brown chitin to provide additional protection.",
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "material": [
+          { "type": "chitin_light", "covered_by_mat": 85, "thickness": 3.0 },
+          { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 2,
+        "coverage": 100,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l" ]
+      }
+    ],
+    "countdown_interval": 216000,
+    "countdown_action": { "type": "transform", "target": "bracer_chitin", "msg": "The light chitin bracer has noticeably hardened." },
+    "extend": { "flags": [ "SPAWN_ACTIVE" ] },
+    "delete": { "flags": [ "STURDY" ] }
+  },
+  {
+    "id": "bracer_chitin",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str": "hard chitin bracer" },
+    "description": "A bracer of epicuticle, wrapping the lower arm in insect leather with plates of glossy brown chitin to provide additional protection.",
+    "weight": "392 g",
+    "volume": "2500 ml",
+    "price": 20000,
+    "price_postapoc": 750,
+    "to_hit": 1,
+    "symbol": "[",
+    "looks_like": "armguard_hard",
+    "color": "brown",
+    "warmth": 4,
+    "sided": true,
+    "environmental_protection": 5,
+    "flags": [ "STURDY", "WATERPROOF" ],
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "material": [
+          { "type": "chitin", "covered_by_mat": 85, "thickness": 3.0 },
+          { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 2,
+        "coverage": 100,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l" ]
+      }
+    ]
+  },
+  {
+    "id": "bracer_sclerotin_light",
+    "type": "ARMOR",
+    "copy-from": "bracer_chitin",
+    "name": { "str": "light sclerotin bracer" },
+    "description": "A bracer of epicuticle, wrapping the lower arm in insect leather with plates of glossy black sclerotin to provide additional protection.",
+    "color": "black",
+    "armor": [
+      {
+        "covers": [ "arm_l", "arm_r" ],
+        "material": [
+          { "type": "sclerotin_light", "covered_by_mat": 85, "thickness": 3.0 },
+          { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 3,
+        "coverage": 100,
+        "specifically_covers": [ "arm_lower_r", "arm_lower_l" ]
+      }
+    ]
+  },
+  {
     "id": "armguard_chitin",
     "type": "ARMOR",
     "category": "armor",

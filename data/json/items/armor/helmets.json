@@ -226,29 +226,130 @@
     "armor": [ { "encumbrance": 15, "coverage": 75, "covers": [ "head" ] } ]
   },
   {
+    "id": "helmet_chitin_molt",
+    "type": "ARMOR",
+    "copy-from": "helmet_chitin",
+    "name": { "str": "molt chitin helmet" },
+    "description": "A helmet made from pale fresh chitin.  It probably needs some time to harden.",
+    "color": "light_gray",
+    "armor": [
+      {
+        "covers": [ "head" ],
+        "material": [
+          { "type": "chitin_molt", "covered_by_mat": 90, "thickness": 2.75 },
+          { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 15,
+        "coverage": 100
+      },
+      {
+        "covers": [ "mouth", "eyes" ],
+        "material": [
+          { "type": "chitin_molt", "covered_by_mat": 100, "thickness": 1.5 }
+        ],
+        "encumbrance": 15,
+        "coverage": 100
+      }
+    ],
+    "countdown_interval": 216000,
+    "countdown_action": { "type": "transform", "target": "helmet_chitin_light", "msg": "The molt chitin helmet has noticeably hardened." },
+    "extend": { "flags": [ "FRAGILE", "SPAWN_ACTIVE" ] },
+    "delete": { "flags": [ "STURDY" ] }
+  },
+  {
+    "id": "helmet_chitin_light",
+    "type": "ARMOR",
+    "copy-from": "helmet_chitin",
+    "name": { "str": "light chitin helmet" },
+    "description": "A helmet made from dull brown chitin.  Covers the entire head, very light.",
+    "armor": [
+      {
+        "covers": [ "head" ],
+        "material": [
+          { "type": "chitin_light", "covered_by_mat": 90, "thickness": 2.75 },
+          { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 8,
+        "coverage": 100
+      },
+      {
+        "covers": [ "mouth", "eyes" ],
+        "material": [
+          { "type": "chitin_light", "covered_by_mat": 100, "thickness": 1.5 }
+        ],
+        "encumbrance": 4,
+        "coverage": 100
+      }
+    ],
+    "countdown_interval": 216000,
+    "countdown_action": { "type": "transform", "target": "helmet_chitin", "msg": "The light chitin helmet has noticeably hardened." },
+    "extend": { "flags": [ "SPAWN_ACTIVE" ] },
+    "delete": { "flags": [ "STURDY" ] }
+  },
+  {
     "id": "helmet_chitin",
     "type": "ARMOR",
     "category": "armor",
-    "name": { "str": "chitinous helmet" },
-    "description": "A helmet made from the exoskeletons of insects.  Covers the entire head; very light and durable.",
+    "name": { "str": "hard chitin helmet" },
+    "description": "A helmet made from glossy brown chitin.  Covers the entire head; very light and durable.",
     "weight": "1447 g",
     "volume": "2500 ml",
     "price": 38000,
     "price_postapoc": 1250,
     "to_hit": -2,
-    "bashing": 2,
-    "material": [ "chitin" ],
+    "bashing": 3,
     "symbol": "[",
     "looks_like": "helmet_larmor",
-    "color": "green",
+    "color": "brown",
+    "warmth": 8,
+    "environmental_protection": 5,
+    "flags": [ "STURDY", "ONLY_ONE", "WATERPROOF" ],
     "armor": [
-      { "covers": [ "head" ], "coverage": 90, "encumbrance": 10 },
-      { "covers": [ "mouth", "eyes" ], "coverage": 90, "encumbrance": 5 }
-    ],
-    "warmth": 20,
-    "material_thickness": 4,
-    "environmental_protection": 4,
-    "flags": [ "WATERPROOF", "STURDY" ]
+      {
+        "covers": [ "head" ],
+        "material": [
+          { "type": "chitin", "covered_by_mat": 90, "thickness": 2.75 },
+          { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 10,
+        "coverage": 100
+      },
+      {
+        "covers": [ "mouth", "eyes" ],
+        "material": [
+          { "type": "chitin", "covered_by_mat": 100, "thickness": 1.5 }
+        ],
+        "encumbrance": 5,
+        "coverage": 100
+      }
+    ]
+  },
+  {
+    "id": "helmet_sclerotin_light",
+    "type": "ARMOR",
+    "copy-from": "helmet_chitin",
+    "name": { "str": "light sclerotin helmet" },
+    "color": "black",
+    "description": "A helmet made from glossy black sclerotin.  Covers the entire head, very light and durable but no longer flexible or effortless to breathe through.",
+    "armor": [
+      {
+        "covers": [ "head" ],
+        "material": [
+          { "type": "sclerotin_light", "covered_by_mat": 90, "thickness": 2.75 },
+          { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "encumbrance": 12,
+        "coverage": 100
+      },
+      {
+        "covers": [ "mouth", "eyes" ],
+        "material": [
+          { "type": "sclerotin_light", "covered_by_mat": 100, "thickness": 1.5 }
+        ],
+        "encumbrance": 10,
+        "coverage": 100
+      }
+    ]
   },
   {
     "id": "xl_helmet_chitin",

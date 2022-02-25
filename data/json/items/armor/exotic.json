@@ -1,5 +1,147 @@
 [
   {
+    "id": "sclerotin_large_plate",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str": "sclerotin resistive front plate" },
+    "description": "A large segment of incredibly thick sclerotin.  It's carved and scored into the shape of a ballistic front plate, and can just barely be stuffed into a ballistic vest.",
+    "weight": "3200 g",
+    "volume": "1566 ml",
+    "price": 0,
+    "price_postapoc": 0,
+    "material": [ "sclerotin" ],
+    "symbol": ",",
+    "color": "black",
+    "material_thickness": 26,
+    "non_functional": "cracked_sclerotin_large_plate",
+    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "TRADER_AVOID" ],
+    "armor": [
+      {
+        "encumbrance": 4,
+        "coverage": 42,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_upper" ],
+        "material": [
+          { "type": "sclerotin", "covered_by_mat": 100, "thickness": 26.0 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cracked_sclerotin_large_plate",
+    "type": "ARMOR",
+    "copy-from": "sclerotin_large_plate",
+    "name": { "str": "cracked sclerotin front plate" },
+    "description": "A sclerotin front plate that has taken structural damage and begun to break apart.  It may still protect you, but is harder to move with.",
+    "looks_like": "sclerotin_large_plate",
+    "material": [ "sclerotin" ],
+    "material_thickness": 23,
+    "non_functional": "compromised_sclerotin_large_plate",
+    "armor": [
+      {
+        "encumbrance": 5,
+        "coverage": 37,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_upper" ],
+        "material": [
+          { "type": "sclerotin", "covered_by_mat": 100, "thickness": 23.0 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "compromised_sclerotin_large_plate",
+    "type": "ARMOR",
+    "copy-from": "sclerotin_large_plate",
+    "name": { "str": "compromised sclerotin front plate" },
+    "description": "A sclerotin front plate that has undergone severe structural damage and broken into several pieces.  It could still protect you, but is difficult to carry.",
+    "looks_like": "sclerotin_large_plate",
+    "material": [ "sclerotin" ],
+    "material_thickness": 19,
+    "armor": [
+      {
+        "encumbrance": 6,
+        "coverage": 32,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_upper" ],
+        "material": [
+          { "type": "sclerotin", "covered_by_mat": 100, "thickness": 19.0 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sclerotin_medium_plate",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str": "sclerotin resistive side plate" },
+    "description": "A medium segment of incredibly thick sclerotin.  It's carved and scored into the shape of a ballistic side plate, and can just barely be stuffed into a ballistic vest.",
+    "weight": "1270 g",
+    "volume": "633 ml",
+    "price": 0,
+    "price_postapoc": 0,
+    "material": [ "sclerotin" ],
+    "symbol": ",",
+    "color": "black",
+    "material_thickness": 26,
+    "non_functional": "cracked_sclerotin_medium_plate",
+    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "TRADER_AVOID" ],
+    "armor": [
+      {
+        "encumbrance": 3,
+        "coverage": 34,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_lower" ],
+        "material": [
+          { "type": "sclerotin", "covered_by_mat": 100, "thickness": 26.0 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cracked_sclerotin_medium_plate",
+    "type": "ARMOR",
+    "copy-from": "sclerotin_medium_plate",
+    "name": { "str": "cracked sclerotin side plate" },
+    "description": "A sclerotin side plate that has taken structural damage and begun to break apart.  It may still protect you, but is harder to move with.",
+    "looks_like": "sclerotin_medium_plate",
+    "material": [ "sclerotin" ],
+    "material_thickness": 23,
+    "non_functional": "compromised_sclerotin_medium_plate",
+    "armor": [
+      {
+        "encumbrance": 4,
+        "coverage": 30,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_lower" ],
+        "material": [
+          { "type": "sclerotin", "covered_by_mat": 100, "thickness": 23.0 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "compromised_sclerotin_medium_plate",
+    "type": "ARMOR",
+    "copy-from": "sclerotin_medium_plate",
+    "name": { "str": "compromised sclerotin side plate" },
+    "description": "A sclerotin side plate that has undergone severe structural damage and broken into several pieces.  It could still protect you, but is difficult to carry.",
+    "looks_like": "sclerotin_medium_plate",
+    "material": [ "sclerotin" ],
+    "material_thickness": 19,
+    "armor": [
+      {
+        "encumbrance": 5,
+        "coverage": 25,
+        "covers": [ "torso" ],
+        "specifically_covers": [ "torso_lower" ],
+        "material": [
+          { "type": "sclerotin", "covered_by_mat": 100, "thickness": 19.0 }
+        ]
+      }
+    ]
+  },
+  {
     "id": "migo_plate_overgrown",
     "type": "ARMOR",
     "category": "armor",

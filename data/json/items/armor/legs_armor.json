@@ -31,6 +31,132 @@
     ]
   },
   {
+    "id": "faulds_chitin",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str": "chitin faulds" },
+    "description": "A set of sturdy chitin plates to protect the hips, waist, and groin.",
+    "weight": "790 g",
+    "volume": "5000 ml",
+    "price": 25000,
+    "price_postapoc": 750,
+    "to_hit": 1,
+    "material": [ "chitin" ],
+    "symbol": "[",
+    "looks_like": "legguard_hard",
+    "color": "brown",
+    "warmth": 6,
+    "environmental_protection": 4,
+    "flags": [ "STURDY", "WATERPROOF" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "chitin", "covered_by_mat": 95, "thickness": 3.5 },
+          { "type": "leather", "covered_by_mat": 100, "thickness": 1.2 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 4,
+        "coverage": 100,
+        "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
+      }
+    ]
+  },
+  {
+    "id": "cuisse_chitin",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str": "chitin cuisse" },
+    "description": "A light and sturdy protector for the upper leg, made of a wrap of ##TODO## plated with thick chitin.",
+    "weight": "790 g",
+    "volume": "5000 ml",
+    "price": 25000,
+    "price_postapoc": 750,
+    "to_hit": 1,
+    "material": [ "chitin" ],
+    "symbol": "[",
+    "looks_like": "legguard_hard",
+    "color": "brown",
+    "warmth": 6,
+    "sided": true,
+    "environmental_protection": 4,
+    "flags": [ "STURDY", "WATERPROOF" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "chitin", "covered_by_mat": 95, "thickness": 3.75 },
+          { "type": "leather", "covered_by_mat": 100, "thickness": 1.2 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 3,
+        "coverage": 100,
+        "specifically_covers": [ "leg_upper_r", "leg_upper_l" ]
+      }
+    ]
+  },
+  {
+    "id": "kneepad_chitin",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str": "chitin knee pad" },
+    "description": "A light and flexible knee sleeve of ##TODO## with chitin plates for protection.",
+    "weight": "790 g",
+    "volume": "5000 ml",
+    "price": 25000,
+    "price_postapoc": 750,
+    "to_hit": 1,
+    "material": [ "chitin" ],
+    "symbol": "[",
+    "looks_like": "legguard_hard",
+    "color": "brown",
+    "warmth": 6,
+    "sided": true,
+    "environmental_protection": 4,
+    "flags": [ "STURDY", "BLOCK_WHILE_WORN", "WATERPROOF", "ALLOWS_TAIL" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "chitin", "covered_by_mat": 65, "thickness": 4.0 },
+          { "type": "leather", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 3,
+        "coverage": 100,
+        "specifically_covers": [ "leg_knee_r", "leg_knee_l" ]
+      }
+    ]
+  },
+  {
+    "id": "greave_chitin",
+    "type": "ARMOR",
+    "category": "armor",
+    "name": { "str": "chitin greave" },
+    "description": "A light yet sturdy protector for the lower leg, made of a wrap of ##TODO## plated with chitin on the shin and calf.",
+    "weight": "790 g",
+    "volume": "5000 ml",
+    "price": 25000,
+    "price_postapoc": 750,
+    "to_hit": 1,
+    "material": [ "chitin" ],
+    "symbol": "[",
+    "looks_like": "legguard_hard",
+    "color": "brown",
+    "warmth": 6,
+    "environmental_protection": 4,
+    "flags": [ "STURDY", "BLOCK_WHILE_WORN", "WATERPROOF", "ALLOWS_TAIL" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "chitin", "covered_by_mat": 80, "thickness": 3.0 },
+          { "type": "leather", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "covers": [ "leg_l", "leg_r" ],
+        "encumbrance": 2,
+        "coverage": 100,
+        "specifically_covers": [ "leg_lower_r", "leg_lower_l" ]
+      }
+    ]
+  },
+  {
     "id": "legguard_chitin",
     "type": "ARMOR",
     "category": "armor",

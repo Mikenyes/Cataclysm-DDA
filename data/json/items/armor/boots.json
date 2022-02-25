@@ -97,6 +97,36 @@
     "armor": [ { "encumbrance": 40, "coverage": 100, "covers": [ "foot_l", "foot_r" ] } ]
   },
   {
+    "id": "boot_chitin",
+    "type": "ARMOR",
+    "name": { "str": "chitin boot" },
+    "description": "A boot made from overlapping plates of thick chitin, connected and reinforced with ##TODO##.",
+    "weight": "750 g",
+    "volume": "750 ml",
+    "price": 6000,
+    "price_postapoc": 600,
+    "to_hit": -1,
+    "bashing": 4,
+    "symbol": "[",
+    "looks_like": "boots_bone",
+    "color": "brown",
+    "warmth": 5,
+    "sided": true,
+    "environmental_protection": 5,
+    "flags": [ "STURDY", "WATERPROOF" ],
+    "armor": [
+      {
+        "material": [
+          { "type": "chitin", "covered_by_mat": 95, "thickness": 3.25 },
+          { "type": "leather", "covered_by_mat": 100, "thickness": 1.0 }
+        ],
+        "covers": [ "foot_l", "foot_r" ],
+        "coverage": 100,
+        "encumbrance": 8
+      }
+    ]
+  },
+  {
     "id": "boots_chitin",
     "type": "ARMOR",
     "category": "armor",
