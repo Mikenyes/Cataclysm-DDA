@@ -1,6 +1,18 @@
 [
   {
     "type": "GENERIC",
+    "id": "monolith_menhir",
+    "symbol": "|",
+    "color": "dark_gray",
+    "name": { "str": "breaching menhir" },
+    "description": "An imposing rectangular pillar, somehow noticeably towering over the nearby environment despite being only slightly taller than a man.  Your senses were never designed to discern it in full; it appears completely colorless, and the fractal detailing lies just barely out of comprehension.",
+    "material": [ "monolith" ],
+    "weight": "26044 kg",
+    "volume": "930130 ml",
+    "longest_side": "2184 mm"
+  },
+  {
+    "type": "GENERIC",
     "id": "monolith_disc",
     "symbol": ".",
     "color": "dark_gray",

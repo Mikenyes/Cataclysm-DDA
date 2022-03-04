@@ -622,6 +622,25 @@
       ]
     }
   },
+    {
+    "type": "furniture",
+    "id": "f_monolith_menhir",
+    "name": "breaching menhir",
+    "description": "An imposing rectangular pillar, somehow noticeably towering over the nearby environment despite being only slightly taller than a man.  Your senses were never designed to discern it in full; it appears completely colorless, and the fractal detailing lies just barely out of comprehension.",
+    "symbol": "I",
+    "color": "dark_gray",
+    "move_cost_mod": -1,
+    "coverage": 100,
+    "required_str": -1,
+    "flags": [ "NOITEM", "BLOCKSDOOR", "NO_SCENT" ],
+    "bash": {
+      "str_min": 10000,
+      "str_max": 11000,
+      "sound": "reality tearing!",
+      "sound_fail": "thud!",
+      "furn_set": "f_absence"
+    }
+  },
   {
     "type": "furniture",
     "id": "f_crystalline_flower",
