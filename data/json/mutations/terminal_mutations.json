@@ -1,0 +1,209 @@
+[
+  {
+    "type": "mutation",
+    "id": "TERM_CHANGING",
+    "name": { "str": "Aberrant Termination" },
+    "points": -10,
+    "terminus": true,
+    "description": "The light at the end of the tunnel was just an oncoming train.  This is the end of the line, nothing more.",
+    "flags": [ "CHANGING", "CHANGING_TERMINAL" ]
+  },
+  {
+    "type": "mutation",
+    "id": "TERM_SICK",
+    "name": { "str": "Sickened" },
+    "points": -3,
+    "terminus": true,
+    "description": "You constantly feel sick, like you're about to throw up.",
+    "changes_to": [ "TERM_CRUSHED_STOMACH", "TERM_SICK2" ],
+    "vomit_multiplier": 2
+  },
+  {
+    "type": "mutation",
+    "id": "TERM_SICK2",
+    "name": { "str": "Spewing" },
+    "points": -4,
+    "terminus": true,
+    "description": "You're almost incapable of keeping food in your stomach.",
+    "changes_to": [ "TERM_HEMATEMESIS" ],
+    "prereqs": [ "TERM_SICK" ],
+    "category": [ "SLIME", "MEDICAL", "ELFA", "BATRACHIAN", "CHIMERA", "ALPHA" ],
+    "vomit_multiplier": 3
+  },
+  {
+    "type": "mutation",
+    "id": "TERM_HEMATEMESIS",
+    "name": { "str": "Hematemesis" },
+    "points": -5,
+    "terminus": true,
+    "description": "You keep coughing up a near-black mix of blood and bile.",
+    "prereqs": [ "TERM_SICK2" ],
+    "threshreq": [ "THRESH_CEPHALOPOD" ],
+    "vomit_multiplier": 4
+  },
+  {
+    "type": "mutation",
+    "id": "TERM_CRUSHED_STOMACH",
+    "name": { "str": "Crushed Stomach" },
+    "points": -4,
+    "terminus": true,
+    "description": "Your chitin is squeezing down on your organs in a crushing grip.",
+    "prereqs": [ "TERM_SICK" ],
+    "prereqs2": [ "TERM_CHITIN" ],
+    "threshreq": [ "THRESH_INSECT" ],
+    "category": [ "INSECT" ],
+    "vomit_multiplier": 2,
+    "stomach_size_multiplier": 0.7
+  },
+  {
+    "type": "mutation",
+    "id": "TERM_CHITIN",
+    "name": { "str": "Carcinization" },
+    "points": -5,
+    "terminus": true,
+    "description": "Your exoskeleton is inoxerably developing, and is already rife with gnarls of sclerotin and lumps of calcium.  Increases encumbrance and armor, and reduces Dexterity by 1.",
+    "prereqs": [ "CHITIN3", "CHITIN_FUR3" ],
+    "//": "Intentionally does not remove previous chitin mutations.",
+    "threshreq": [ "THRESH_INSECT" ],
+    "category": [ "INSECT" ],
+    "encumbrance_always": [
+      [ "torso", 10 ],
+      [ "head", 10 ],
+      [ "arm_l", 10 ],
+      [ "arm_r", 10 ],
+      [ "hand_l", 10 ],
+      [ "hand_r", 10 ],
+      [ "leg_l", 10 ],
+      [ "leg_r", 10 ],
+      [ "foot_l", 10 ],
+      [ "foot_r", 10 ]
+    ],
+    "armor": [
+      { "part_types": [ "torso", "head", "arm", "hand", "leg", "foot", "mouth", "tail" ], "bash": 8, "cut": 10, "bullet": 4 }
+    ],
+    "passive_mods": { "dex_mod": -1 },
+    "vitamin_rates": [ [ "mutagen_insect", -300 ] ]
+  },
+  {
+    "type": "mutation",
+    "id": "TERM_CHITIN2",
+    "name": { "str": "Confining Carapace" },
+    "points": -1,
+    "terminus": true,
+    "description": "Your exoskeleton is large enough to slow your movement, but molting now would certainly kill you.",
+    "prereqs": [ "TERM_CHITIN" ],
+    "threshreq": [ "THRESH_INSECT" ],
+    "changes_to": [ "TERM_CHITIN3" ],
+    "category": [ "INSECT" ],
+    "vitamin_cost": 250,
+    "encumbrance_always": [
+      [ "torso", 5 ],
+      [ "head", 5 ],
+      [ "mouth", 2 ],
+      [ "arm_l", 5 ],
+      [ "arm_r", 5 ],
+      [ "hand_l", 5 ],
+      [ "hand_r", 5 ],
+      [ "leg_l", 5 ],
+      [ "leg_r", 5 ],
+      [ "foot_l", 5 ],
+      [ "foot_r", 5 ]
+    ],
+    "armor": [
+      { "part_types": [ "torso", "head", "arm", "hand", "leg", "foot", "mouth", "tail" ], "bash": 4, "cut": 8, "bullet": 1 }
+    ],
+    "movecost_modifier": 1.1
+  },
+  {
+    "type": "mutation",
+    "id": "TERM_CHITIN3",
+    "name": { "str": "Imprisoning Carapace" },
+    "points": -2,
+    "terminus": true,
+    "description": "Your exoskeleton is heavier than a suit of armor, and almost as protectve.  You struggle to move and breathe, but can't molt yet.",
+    "prereqs": [ "TERM_CHITIN2" ],
+    "threshreq": [ "THRESH_INSECT" ],
+    "changes_to": [ "TERM_CHITIN4" ],
+    "category": [ "INSECT" ],
+    "vitamin_cost": 350,
+    "encumbrance_always": [
+      [ "torso", 12 ],
+      [ "head", 12 ],
+      [ "mouth", 10 ],
+      [ "arm_l", 12 ],
+      [ "arm_r", 12 ],
+      [ "hand_l", 12 ],
+      [ "hand_r", 12 ],
+      [ "leg_l", 12 ],
+      [ "leg_r", 12 ],
+      [ "foot_l", 12 ],
+      [ "foot_r", 12 ]
+    ],
+    "armor": [
+      { "part_types": [ "torso", "head", "arm", "hand", "leg", "foot", "mouth", "tail" ], "bash": 10, "cut": 15, "bullet": 4 }
+    ],
+    "movecost_modifier": 1.25
+  },
+  {
+    "type": "mutation",
+    "id": "TERM_CHITIN4",
+    "name": { "str": "Casket Carapace" },
+    "points": -3,
+    "terminus": true,
+    "description": "Your carapace is protective, in the same sense a coffin is.  You have to fight to even take in breath.",
+    "prereqs": [ "TERM_CHITIN3" ],
+    "threshreq": [ "THRESH_INSECT" ],
+    "changes_to": [ "TERM_CHITIN5" ],
+    "category": [ "INSECT" ],
+    "vitamin_cost": 500,
+    "encumbrance_always": [
+      [ "torso", 25 ],
+      [ "head", 25 ],
+      [ "mouth", 15 ],
+      [ "arm_l", 25 ],
+      [ "arm_r", 25 ],
+      [ "hand_l", 25 ],
+      [ "hand_r", 25 ],
+      [ "leg_l", 25 ],
+      [ "leg_r", 25 ],
+      [ "foot_l", 25 ],
+      [ "foot_r", 25 ]
+    ],
+    "armor": [
+      { "part_types": [ "torso", "head", "arm", "hand", "leg", "foot", "mouth", "tail" ], "bash": 20, "cut": 30, "bullet": 9 }
+    ],
+    "movecost_modifier": 1.5
+  },
+    {
+    "type": "mutation",
+    "id": "TERM_CHITIN5",
+    "name": { "str": "Terminal Carapace" },
+    "points": -4,
+    "terminus": true,
+    "description": "Your carapace almost fully prevents you from moving.  Activate to molt, a long and arduous process best undertaken in absolute safety.",
+    "prereqs": [ "TERM_CHITIN4" ],
+    "threshreq": [ "THRESH_INSECT" ],
+    "category": [ "INSECT" ],
+    "vitamin_cost": 900,
+    "encumbrance_always": [
+      [ "torso", 30 ],
+      [ "head", 30 ],
+      [ "mouth", 20 ],
+      [ "arm_l", 30 ],
+      [ "arm_r", 30 ],
+      [ "hand_l", 30 ],
+      [ "hand_r", 30 ],
+      [ "leg_l", 30 ],
+      [ "leg_r", 30 ],
+      [ "foot_l", 30 ],
+      [ "foot_r", 30 ]
+    ],
+    "armor": [
+      { "part_types": [ "torso", "head", "arm", "hand", "leg", "foot", "mouth", "tail" ], "bash": 28, "cut": 40, "bullet": 12 }
+    ],
+    "movecost_modifier": 2.2,
+    "active": true,
+    "transform": { "target": "TERM_CHITIN2", "msg_transform": "You begin to pry your way out of the prison of chitin.", "moves": 400 },
+    "activated_eocs": [ "EOC_TERM_CHITIN5_activated" ]
+  }
+]

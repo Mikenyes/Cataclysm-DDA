@@ -61,7 +61,12 @@
           {
             "id": "changing_mutate2",
             "//": "Mutate!",
-            "condition": { "compare_int": [ { "u_val": "vitamin", "name": "mutagen" }, ">=", { "const": 300 } ] },
+            "condition": {
+              "or": [
+                { "compare_int": [ { "u_val": "vitamin", "name": "mutagen" }, ">=", { "const": 300 } ] },
+                { "u_has_flag": "CHANGING_TERMINAL" }
+              ]
+            },
             "effect": [
               { "u_message": "You feel a deep, churning sensation fill your body.", "type": "mixed" },
               { "u_mutate": 0 },

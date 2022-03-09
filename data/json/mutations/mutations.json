@@ -2519,6 +2519,7 @@
     "prereqs": [ "CHITIN2", "CHITIN_FUR2" ],
     "category": [ "SPIDER" ],
     "changes_to": [ "CHITIN_FUR3" ],
+    "leads_to": [ "TERM_CHITIN" ],
     "wet_protection": [
       { "part": "head", "ignored": 4 },
       { "part": "leg_l", "ignored": 14 },
@@ -2607,6 +2608,7 @@
     "prereqs": [ "CHITIN_FUR2", "CHITIN3" ],
     "threshreq": [ "THRESH_SPIDER" ],
     "category": [ "SPIDER" ],
+    "leads_to": [ "TERM_CHITIN" ],
     "restricts_gear": [ "head" ],
     "armor": [
       { "part_types": [ "torso", "head", "arm", "hand", "leg", "foot", "mouth", "tail" ], "bash": 8, "cut": 8, "bullet": 1 }
