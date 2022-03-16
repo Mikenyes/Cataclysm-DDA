@@ -12,7 +12,7 @@
         "run_eocs": [
           {
             "id": "eoc_thresh_troglobite_surface",
-            "condition": { "u_is_outside" },
+            "condition": [ "u_is_outside" ],
             "effect": [
               { "u_add_morale": "morale_troglobite_surface", "bonus": -20, "max_bonus": -90, "duration": "4 h", "decay_start": "1 h" }
             ]
@@ -37,7 +37,7 @@
             "effect": [
               { "u_add_morale": "morale_support", "bonus": 5, "max_bonus": 30, "duration": "4 h", "decay_start": "2 h" },
               { "arithmetic": [ { "u_val": "fatigue" }, "-=", { "const": 20 } ], "min": 0 },
-              { "arithmetic": [ { "u_val": "sleep_deprivation" }, "+=", { "const": 45 } ] }
+              { "arithmetic": [ { "u_val": "sleep_deprivation" }, "+=", { "const": 35 } ] }
             ]
           }
         ],
@@ -49,10 +49,17 @@
     "type": "effect_on_condition",
     "id": "eoc_thresh_chimera",
     "//": "Change daily with no need for catalyst.",
-    "recurrence_min": "2 h",
-    "recurrence_max": "3 h",
+    "recurrence_min": "23 h",
+    "recurrence_max": "25 h",
     "condition": { "u_has_trait": "THRESH_CHIMERA" },
     "deactivate_condition": { "not": { "u_has_trait": "THRESH_CHIMERA" } },
-    "effect": [ { "u_message": "You're changing again.  How fun!", "type": "good" }, { "u_mutate": 0, "use_vitamins": false } ]
+    "effect": [
+      { "u_message": "You're changing again.  How fun!", "type": "good" },
+      { "u_mutate_category": "ANY", "use_vitamins": false },
+      { "u_mutate_category": "ANY", "use_vitamins": false },
+      { "u_mutate_category": "ANY", "use_vitamins": false },
+      { "u_mutate": 1, "use_vitamins": false },
+      { "u_mutate": 0, "use_vitamins": false }
+    ]
   }
 ]
