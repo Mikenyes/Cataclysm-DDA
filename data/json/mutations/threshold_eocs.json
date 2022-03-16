@@ -56,10 +56,10 @@
     "effect": [
       { "u_message": "You're changing again.  How fun!", "type": "good" },
       { "u_mutate_category": "ANY", "use_vitamins": false },
-      { "u_mutate_category": "ANY", "use_vitamins": false },
-      { "u_mutate_category": "ANY", "use_vitamins": false },
+      { "u_mutate_category": "HUMAN", "use_vitamins": false },
+      { "u_mutate": 0, "use_vitamins": false },
       { "u_mutate": 1, "use_vitamins": false },
-      { "u_mutate": 0, "use_vitamins": false }
+      { "u_mutate": 1, "use_vitamins": false }
     ]
   }
 ]
