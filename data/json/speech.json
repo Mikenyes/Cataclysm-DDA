@@ -2651,5 +2651,17 @@
     "speaker": [ "mon_memory" ],
     "sound": "PLEASE SOMEONE HELP ME.",
     "volume": 20
+  },
+  {
+    "type": "speech",
+    "speaker": [ "mon_graboid" ],
+    "sound": "a deep rumble in the ground!",
+    "volume": 45
+  },
+    {
+    "type": "speech",
+    "speaker": [ "mon_graboid", "mon_worm_ambush" ],
+    "sound": "a tremor in the dirt!",
+    "volume": 15
   }
 ]
