@@ -223,14 +223,16 @@
         "u_run_npc_eocs": [
           {
             "id": "EOC_THRESH_ELFA_POLLEN_A",
-            "condition": { "not": { "or": [ { "u_has_trait": "ELFA_INTOXICATION" }, { "one_in_chance": 2 } ] } },
+            "condition": { "not": { "u_has_trait": "ELFA_INTOXICATION" } },
             "effect": [
+              { "u_make_sound": "a wet, bloody cough.", "volume": 20, "type": "combat" },
               { "u_add_trait": "ELFA_INTOXICATION" },
-              { "arithmetic": [ { "u_val": "npc_trust" }, "+=", { "const": 2 } ] },
-              { "arithmetic": [ { "u_val": "npc_fear" }, "+=", { "const": 2 } ] },
+              { "arithmetic": [ { "u_val": "npc_trust" }, "+=", { "const": 3 } ] },
+              { "arithmetic": [ { "u_val": "npc_fear" }, "+=", { "const": 3 } ] },
               { "u_mod_healthy": -10, "cap": -75 }
             ],
             "false_effect": [
+              { "u_make_sound": "a blood-choked laugh.", "volume": 20, "type": "combat" },
               { "u_lose_trait": "ELFA_INTOXICATION" },
               { "u_add_trait": "ELFA_INTOXICATION2" },
               { "arithmetic": [ { "u_val": "npc_trust" }, "+=", { "const": 5 } ] },
@@ -323,6 +325,14 @@
           }
         ]
       }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_ADRENALINE2_ACTIVATED",
+    "effect": [
+      { "arithmetic": [ { "u_val": "vitamin", "name": "mutant_toxin" }, "+=", { "const": 350 } ] },
+      { "arithmetic": [ { "u_val": "stamina" }, "*=", { "const": 2 } ] }
     ]
   },
   {
