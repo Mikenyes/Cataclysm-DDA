@@ -1,18 +1,228 @@
 [
   {
     "type": "effect_on_condition",
-    "id": "eoc_thresh_troglobite",
+    "id": "EOC_MUTATE_ALPHA",
+    "effect": [
+      { "u_mutate_category": "ALPHA", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_BATRACHIAN",
+    "effect": [
+      { "u_mutate_category": "BATRACHIAN", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_BEAST",
+    "effect": [
+      { "u_mutate_category": "BEAST", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_BIRD",
+    "effect": [
+      { "u_mutate_category": "BIRD", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_CATTLE",
+    "effect": [
+      { "u_mutate_category": "CATTLE", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_CEPHALOPOD",
+    "effect": [
+      { "u_mutate_category": "CEPHALOPOD", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_CHIMERA",
+    "effect": [
+      { "u_mutate_category": "CHIMERA", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_ELFA",
+    "effect": [
+      { "u_mutate_category": "ELFA", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_FELINE",
+    "effect": [
+      { "u_mutate_category": "FELINE", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_FISH",
+    "effect": [
+      { "u_mutate_category": "FISH", "use_vitamins": false }
+    ]
+  },
+    {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_GASTROPOD",
+    "effect": [
+      { "u_mutate_category": "GASTROPOD", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_HUMAN",
+    "effect": [
+      { "u_mutate_category": "HUMAN", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_INSECT",
+    "effect": [
+      { "u_mutate_category": "INSECT", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_LIZARD",
+    "effect": [
+      { "u_mutate_category": "LIZARD", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_LUPINE",
+    "effect": [
+      { "u_mutate_category": "LUPINE", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_MEDICAL",
+    "effect": [
+      { "u_mutate_category": "MEDICAL", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_MOUSE",
+    "effect": [
+      { "u_mutate_category": "MOUSE", "use_vitamins": false }
+    ]
+  },
+    {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_PLANT",
+    "effect": [
+      { "u_mutate_category": "PLANT", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_RAPTOR",
+    "effect": [
+      { "u_mutate_category": "RAPTOR", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_RABBIT",
+    "effect": [
+      { "u_mutate_category": "RABBIT", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_RAT",
+    "effect": [
+      { "u_mutate_category": "RAT", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_SLIME",
+    "effect": [
+      { "u_mutate_category": "SLIME", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_SPIDER",
+    "effect": [
+      { "u_mutate_category": "SPIDER", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_TROGLOBITE",
+    "effect": [
+      { "u_mutate_category": "TROGLOBITE", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_URSINE",
+    "effect": [
+      { "u_mutate_category": "URSINE", "use_vitamins": false }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATE_DDA",
+    "//": "Mutate once in any DDA sourced category, including human.  Please add new mutation categories to this list.",
+    "effect": [
+      { 
+        "weighted_list_eocs": [
+          [ "EOC_MUTATE_ALPHA", { "const": 1 } ],
+          [ "EOC_MUTATE_BATRACHIAN", { "const": 1 } ],
+          [ "EOC_MUTATE_BEAST", { "const": 1 } ],
+          [ "EOC_MUTATE_BIRD", { "const": 1 } ],
+          [ "EOC_MUTATE_CATTLE", { "const": 1 } ],
+          [ "EOC_MUTATE_CEPHALOPOD", { "const": 1 } ],
+          [ "EOC_MUTATE_CHIMERA", { "const": 1 } ],
+          [ "EOC_MUTATE_ELFA", { "const": 1 } ],
+          [ "EOC_MUTATE_FELINE", { "const": 1 } ],
+          [ "EOC_MUTATE_FISH", { "const": 1 } ],
+          [ "EOC_MUTATE_GASTROPOD", { "const": 1 } ],
+          [ "EOC_MUTATE_HUMAN", { "const": 1 } ],
+          [ "EOC_MUTATE_INSECT", { "const": 1 } ],
+          [ "EOC_MUTATE_LIZARD", { "const": 1 } ],
+          [ "EOC_MUTATE_LUPINE", { "const": 1 } ],
+          [ "EOC_MUTATE_MEDICAL", { "const": 1 } ],
+          [ "EOC_MUTATE_MOUSE", { "const": 1 } ],
+          [ "EOC_MUTATE_PLANT", { "const": 1 } ],
+          [ "EOC_MUTATE_RABBIT", { "const": 1 } ],
+          [ "EOC_MUTATE_RAPTOR", { "const": 1 } ],
+          [ "EOC_MUTATE_RAT", { "const": 1 } ],
+          [ "EOC_MUTATE_SLIME", { "const": 1 } ],
+          [ "EOC_MUTATE_SPIDER", { "const": 1 } ],
+          [ "EOC_MUTATE_TROGLOBITE", { "const": 1 } ],
+          [ "EOC_MUTATE_URSINE", { "const": 1 } ]
+        ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_THRESH_TROGLOBITE",
     "//": "Outside?  What's that?",
-    "recurrence_min": "30 m",
-    "recurrence_max": "45 m",
+    "recurrence": [ "30 m", "45 m" ],
     "condition": { "u_has_trait": "THRESH_TROGLOBITE" },
     "deactivate_condition": { "not": { "u_has_trait": "THRESH_TROGLOBITE" } },
     "effect": [
       {
         "run_eocs": [
           {
-            "id": "eoc_thresh_troglobite_surface",
-            "condition": [ "u_is_outside" ],
+            "id": "EOC_THRESH_TROGLOBITE_SURFACE",
+            "condition": "u_is_outside",
             "effect": [
               { "u_add_morale": "morale_troglobite_surface", "bonus": -20, "max_bonus": -90, "duration": "4 h", "decay_start": "1 h" }
             ]
@@ -23,17 +233,16 @@
   },
   {
     "type": "effect_on_condition",
-    "id": "eoc_thresh_elfa",
+    "id": "EOC_THRESH_ELFA",
     "//": "Happy little amphetamine spores.  NPCs that remain near you do not sleep, at the cost of sleep deprivation.",
-    "recurrence_min": "30 m",
-    "recurrence_max": "1 h",
+    "recurrence": [ "30 m", "1 h" ],
     "condition": { "u_has_trait": "THRESH_ELFA" },
     "deactivate_condition": { "not": { "u_has_trait": "THRESH_ELFA" } },
     "effect": [
       {
         "u_run_npc_eocs": [
           {
-            "id": "eoc_thresh_elfa_sleep",
+            "id": "EOC_THRESH_ELFA_SLEEP",
             "effect": [
               { "u_add_morale": "morale_support", "bonus": 5, "max_bonus": 30, "duration": "4 h", "decay_start": "2 h" },
               { "arithmetic": [ { "u_val": "fatigue" }, "-=", { "const": 20 } ], "min": 0 },
@@ -47,19 +256,61 @@
   },
   {
     "type": "effect_on_condition",
-    "id": "eoc_thresh_chimera",
-    "//": "Change daily with no need for catalyst.",
-    "recurrence_min": "23 h",
-    "recurrence_max": "25 h",
+    "id": "EOC_THRESH_ELFA_ACTIVATED",
+    "//": "Oh no.",
+    "effect": [
+      { "u_message": "Pollen, the true language.", "type": "good" },
+      {
+        "u_run_npc_eocs": [
+          {
+            "id": "EOC_THRESH_ELFA_PERSUADE",
+            "effect": [
+              { "u_add_morale": "morale_support", "bonus": 5, "max_bonus": 30, "duration": "4 h", "decay_start": "2 h" },
+              { "arithmetic": [ { "u_val": "fatigue" }, "-=", { "const": 20 } ], "min": 0 },
+              { "arithmetic": [ { "u_val": "sleep_deprivation" }, "+=", { "const": 35 } ] }
+            ]
+          }
+        ],
+        "npc_range": 10
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_THRESH_CHIMERA_ACTIVATED",
+    "effect": [
+      { "arithmetic": [ { "u_val": "pain" }, "+=", { "const": 35 } ] },
+      {
+        "run_eocs": [
+          "EOC_THRESH_CHIMERA"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_THRESH_CHIMERA",
+    "//": "Shuffle with no need for catalyst.",
+    "recurrence": [ "23 h", "25 h" ],
     "condition": { "u_has_trait": "THRESH_CHIMERA" },
     "deactivate_condition": { "not": { "u_has_trait": "THRESH_CHIMERA" } },
     "effect": [
-      { "u_message": "You're changing again.  How fun!", "type": "good" },
-      { "u_mutate_category": "ANY", "use_vitamins": false },
-      { "u_mutate_category": "HUMAN", "use_vitamins": false },
-      { "u_mutate": 0, "use_vitamins": false },
-      { "u_mutate": 1, "use_vitamins": false },
-      { "u_mutate": 1, "use_vitamins": false }
+      { "u_message": "You're changing again.  Wonderful!", "type": "good" },
+      { "arithmetic": [ { "u_val": "vitamin", "name": "instability" }, "+=", { "const": 300 } ] },
+      {
+        "run_eocs": [
+          "EOC_MUTATE_HUMAN",
+          "EOC_MUTATE_HUMAN",
+          "EOC_MUTATE_HUMAN",
+          "EOC_MUTATE_HUMAN",
+          "EOC_MUTATE_HUMAN",
+          "EOC_MUTATE_DDA",
+          "EOC_MUTATE_DDA",
+          "EOC_MUTATE_DDA",
+          "EOC_MUTATE_DDA",
+          "EOC_MUTATE_DDA"
+        ]
+      }
     ]
   }
 ]
