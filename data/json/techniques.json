@@ -409,6 +409,21 @@
   },
   {
     "type": "technique",
+    "id": "tec_bestial_frenzy_scream",
+    "name": "Screaming Swipe",
+    "messages": [ "You scream in wrathful delight as you tear into %s", "<npcname> screams as they tear into %s" ],
+    "unarmed_allowed": true,
+    "mult_bonuses": [
+      { "stat": "movecost", "scale": 1.55 },
+      { "stat": "damage", "type": "bash", "scale": 1.7 },
+      { "stat": "damage", "type": "cut", "scale": 1.7 },
+      { "stat": "damage", "type": "stab", "scale": 1.7 }
+    ],
+    "attack_vectors": [ "HAND" ],
+    "eocs": [ "EOC_TEC_BESTIAL_FRENZY_SCREAM" ]
+  },
+  {
+    "type": "technique",
     "id": "tec_boxing_cross",
     "name": "Cross",
     "messages": [ "You throw a heavy cross at %s", "<npcname> throws a cross at %s" ],

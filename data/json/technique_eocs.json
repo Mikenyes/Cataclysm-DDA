@@ -1,0 +1,18 @@
+[
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MA_BESTIAL_FRENZY_ONKILL",
+    "condition":  { "compare_int": [ { "u_val": "stamina" }, ">=", { "const": 3800 } ] },
+    "effect": [
+      { "u_cast_spell": { "id": "spell_bestial_frenzy_leap", "message": "You leap at the next enemy that needs to die!" }, "targeted": true }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_TEC_BESTIAL_FRENZY_SCREAM",
+    "effect": [
+      { "u_make_sound": "a gleeful scream!", "volume": 125, "type": "speech" },
+      { "arithmetic": [ { "u_val": "stim" }, "+=", { "rand": 1 } ], "max": 75 }
+    ]
+  }
+]

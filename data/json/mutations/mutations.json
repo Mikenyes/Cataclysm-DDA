@@ -1015,7 +1015,7 @@
     "ugliness": -2,
     "description": "You are a sight to behold.  People who care about such things will react more kindly to you.",
     "starting_trait": true,
-    "category": [ "ALPHA", "FELINE", "LUPINE", "RABBIT" ],
+    "category": [ "ALPHA", "ELFA" ],
     "cancels": [ "UGLY", "DEFORMED", "DEFORMED2", "DEFORMED3" ],
     "changes_to": [ "BEAUTIFUL" ]
   },
@@ -7028,7 +7028,7 @@
     "threshold": true,
     "active": true,
     "activated_eocs": [ "EOC_THRESH_CHIMERA_ACTIVATED" ],
-    "vitamin_rates": [ [ "instability", 240 ] ],
+    "vitamin_rates": [ [ "instability", 120 ] ],
     "vitamins_absorb_multi": [ [ "all", [
       [ "mutagen", 1.5 ],
       [ "mutagen_alpha", 0.75 ],
