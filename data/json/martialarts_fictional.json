@@ -4,10 +4,7 @@
     "id": "style_bestial_frenzy",
     "name": { "str": "Bestial Frenzy" },
     "description": "Closer to the movements of a ravenous animal than a human martial art, this fighting style is only possible for those who possess overwhelming physiological changes to manage the ravages it inflicts on their body.",
-    "initiate": [
-      "Time to feast, fight, and fight some more!",
-      "%s hunches into a bestial fighting stance."
-    ],
+    "initiate": [ "Time to feast, fight, and fight some more!", "%s hunches into a bestial fighting stance." ],
     "static_buffs": [
       {
         "id": "buff_bestial_frenzy_static1",
@@ -15,18 +12,8 @@
         "description": "Hit them hard, kill them first!\n\n+50% of Strength to unarmed bash damage, +50% of Dexterity to unarmed cut damage, -1.0 Dodge skill.",
         "unarmed_allowed": true,
         "flat_bonuses": [
-          {
-            "stat": "damage",
-            "type": "bash",
-            "scaling-stat": "str",
-            "scale": 0.5
-          },
-          {
-            "stat": "damage",
-            "type": "cut",
-            "scaling-stat": "dex",
-            "scale": 0.5
-          },
+          { "stat": "damage", "type": "bash", "scaling-stat": "str", "scale": 0.5 },
+          { "stat": "damage", "type": "cut", "scaling-stat": "dex", "scale": 0.5 },
           { "stat": "dodge", "scale": -1.0 }
         ]
       },
@@ -38,9 +25,7 @@
         "buff_duration": 90,
         "persists": true,
         "forbidden_buffs_all": [ "buff_bestial_frenzy_onkill" ],
-        "mult_bonuses": [
-          { "stat": "hit", "scaling-stat": "str", "scale": -0.1 }
-        ]
+        "mult_bonuses": [ { "stat": "hit", "scaling-stat": "str", "scale": -0.1 } ]
       }
     ],
     "onattack_buffs": [
@@ -70,12 +55,8 @@
         "max_stacks": 1
       }
     ],
-    "onkill_eocs": [
-      "EOC_MA_BESTIAL_FRENZY_ONKILL"
-    ],
-    "techniques": [
-      "tec_bestial_frenzy_scream"
-    ]
+    "onkill_eocs": [ "EOC_MA_BESTIAL_FRENZY_ONKILL" ],
+    "techniques": [ "tec_bestial_frenzy_scream" ]
   },
   {
     "type": "martial_art",

@@ -2,184 +2,134 @@
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_ALPHA",
-    "effect": [
-      { "u_mutate_category": "ALPHA", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "ALPHA", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_BATRACHIAN",
-    "effect": [
-      { "u_mutate_category": "BATRACHIAN", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "BATRACHIAN", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_BEAST",
-    "effect": [
-      { "u_mutate_category": "BEAST", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "BEAST", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_BIRD",
-    "effect": [
-      { "u_mutate_category": "BIRD", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "BIRD", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_CATTLE",
-    "effect": [
-      { "u_mutate_category": "CATTLE", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "CATTLE", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_CEPHALOPOD",
-    "effect": [
-      { "u_mutate_category": "CEPHALOPOD", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "CEPHALOPOD", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_CHIMERA",
-    "effect": [
-      { "u_mutate_category": "CHIMERA", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "CHIMERA", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_ELFA",
-    "effect": [
-      { "u_mutate_category": "ELFA", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "ELFA", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_FELINE",
-    "effect": [
-      { "u_mutate_category": "FELINE", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "FELINE", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_FISH",
-    "effect": [
-      { "u_mutate_category": "FISH", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "FISH", "use_vitamins": false } ]
   },
-    {
+  {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_GASTROPOD",
-    "effect": [
-      { "u_mutate_category": "GASTROPOD", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "GASTROPOD", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_HUMAN",
-    "effect": [
-      { "u_mutate_category": "HUMAN", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "HUMAN", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_INSECT",
-    "effect": [
-      { "u_mutate_category": "INSECT", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "INSECT", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_LIZARD",
-    "effect": [
-      { "u_mutate_category": "LIZARD", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "LIZARD", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_LUPINE",
-    "effect": [
-      { "u_mutate_category": "LUPINE", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "LUPINE", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_MEDICAL",
-    "effect": [
-      { "u_mutate_category": "MEDICAL", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "MEDICAL", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_MOUSE",
-    "effect": [
-      { "u_mutate_category": "MOUSE", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "MOUSE", "use_vitamins": false } ]
   },
-    {
+  {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_PLANT",
-    "effect": [
-      { "u_mutate_category": "PLANT", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "PLANT", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_RAPTOR",
-    "effect": [
-      { "u_mutate_category": "RAPTOR", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "RAPTOR", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_RABBIT",
-    "effect": [
-      { "u_mutate_category": "RABBIT", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "RABBIT", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_RAT",
-    "effect": [
-      { "u_mutate_category": "RAT", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "RAT", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_SLIME",
-    "effect": [
-      { "u_mutate_category": "SLIME", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "SLIME", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_SPIDER",
-    "effect": [
-      { "u_mutate_category": "SPIDER", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "SPIDER", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_TROGLOBITE",
-    "effect": [
-      { "u_mutate_category": "TROGLOBITE", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "TROGLOBITE", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_URSINE",
-    "effect": [
-      { "u_mutate_category": "URSINE", "use_vitamins": false }
-    ]
+    "effect": [ { "u_mutate_category": "URSINE", "use_vitamins": false } ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATE_DDA",
     "//": "Mutate once in any DDA sourced category, including human.  Please add new mutation categories to this list.",
     "effect": [
-      { 
+      {
         "weighted_list_eocs": [
           [ "EOC_MUTATE_ALPHA", { "const": 1 } ],
           [ "EOC_MUTATE_BATRACHIAN", { "const": 1 } ],
@@ -218,7 +168,10 @@
     "effect": [
       { "u_assign_activity": "ACT_GENERIC_EOC", "duration": "5 seconds" },
       { "arithmetic": [ { "u_val": "vitamin", "name": "mutagen_elfa" }, "-=", { "const": 350 } ] },
-      { "u_message": "Pollen, the purest language.  You focus, releasing a cloud that conveys your goodwill and kind intent.", "type": "good" },
+      {
+        "u_message": "Pollen, the purest language.  You focus, releasing a cloud that conveys your goodwill and kind intent.",
+        "type": "good"
+      },
       {
         "u_run_npc_eocs": [
           {
@@ -271,14 +224,7 @@
   {
     "type": "effect_on_condition",
     "id": "EOC_THRESH_CHIMERA_ACTIVATED",
-    "effect": [
-      { "arithmetic": [ { "u_val": "pain" }, "+=", { "const": 35 } ] },
-      {
-        "run_eocs": [
-          "EOC_THRESH_CHIMERA"
-        ]
-      }
-    ]
+    "effect": [ { "arithmetic": [ { "u_val": "pain" }, "+=", { "const": 35 } ] }, { "run_eocs": [ "EOC_THRESH_CHIMERA" ] } ]
   },
   {
     "type": "effect_on_condition",
@@ -297,6 +243,7 @@
           "EOC_MUTATE_HUMAN",
           "EOC_MUTATE_HUMAN",
           "EOC_MUTATE_HUMAN",
+          "EOC_MUTATE_HUMAN",
           "EOC_MUTATE_DDA",
           "EOC_MUTATE_DDA",
           "EOC_MUTATE_DDA",
@@ -309,8 +256,8 @@
   {
     "type": "effect_on_condition",
     "id": "EOC_THRESH_TROGLOBITE",
-    "//": "Outside?  What's that?",
-    "recurrence": [ "30 m", "45 m" ],
+    "//": "Welcome to the tunnel, we can work for days!",
+    "recurrence": "2 m",
     "condition": { "u_has_trait": "THRESH_TROGLOBITE" },
     "deactivate_condition": { "not": { "u_has_trait": "THRESH_TROGLOBITE" } },
     "effect": [
@@ -320,7 +267,21 @@
             "id": "EOC_THRESH_TROGLOBITE_SURFACE",
             "condition": "u_is_outside",
             "effect": [
-              { "u_add_morale": "morale_troglobite_surface", "bonus": -20, "max_bonus": -90, "duration": "4 h", "decay_start": "1 h" }
+              { "u_add_morale": "morale_troglobite_surface", "bonus": -10, "max_bonus": -60, "duration": "4 h", "decay_start": "3 h" }
+            ],
+            "false_effect": [
+              {
+                "run_eocs": [
+                  {
+                    "id": "EOC_THRESH_TROGLOBITE_DEEPWORK",
+                    "condition": { "compare_int": [ { "u_val": "activity_level" }, ">=", { "const": 3 } ] },
+                    "effect": [
+                      { "arithmetic": [ { "u_val": "fatigue" }, "-=", { "const": 5 } ] },
+                      { "u_add_trait": "TROGLOBITE_DEEPWORK" }
+                    ]
+                  }
+                ]
+              }
             ]
           }
         ]

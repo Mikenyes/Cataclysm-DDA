@@ -2,9 +2,12 @@
   {
     "type": "effect_on_condition",
     "id": "EOC_MA_BESTIAL_FRENZY_ONKILL",
-    "condition":  { "compare_int": [ { "u_val": "stamina" }, ">=", { "const": 3800 } ] },
+    "condition": { "compare_int": [ { "u_val": "stamina" }, ">=", { "const": 3800 } ] },
     "effect": [
-      { "u_cast_spell": { "id": "spell_bestial_frenzy_leap", "message": "You leap at the next enemy that needs to die!" }, "targeted": true }
+      {
+        "u_cast_spell": { "id": "spell_bestial_frenzy_leap", "message": "You leap at the next enemy that needs to die!" },
+        "targeted": true
+      }
     ]
   },
   {

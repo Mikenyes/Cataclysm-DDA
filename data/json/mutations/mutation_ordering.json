@@ -32,16 +32,7 @@
         "order": 500
       },
       {
-        "id": [
-          "BEAUTIFUL",
-          "BEAUTIFUL2",
-          "BEAUTIFUL3",
-          "LARGE",
-          "PRETTY",
-          "REGEN",
-          "bio_deformity",
-          "bio_face_mask"
-        ],
+        "id": [ "BEAUTIFUL", "BEAUTIFUL2", "BEAUTIFUL3", "LARGE", "PRETTY", "REGEN", "bio_deformity", "bio_face_mask" ],
         "order": 1000
       },
       { "id": [ "PALE", "SKIN_DARK", "SKIN_LIGHT", "SKIN_MEDIUM", "SKIN_PINK", "SKIN_TAN" ], "order": 1100 },
