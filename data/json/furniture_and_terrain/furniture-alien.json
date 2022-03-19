@@ -624,6 +624,68 @@
   },
   {
     "type": "furniture",
+    "id": "f_slime_wellspring",
+    "name": "slime wellspring",
+    "description": "A towering glob of incredibly intelligent slime, remaining still and slowly duplicating itself to aid in the effort to coat this planet.  Slimes can rehydrate and gain neural enhancement from its production.",
+    "symbol": "W",
+    "looks_like": "mon_blob_brain",
+    "color": "green",
+    "move_cost_mod": 10,
+    "coverage": 70,
+    "required_str": 24,
+    "flags": [ "TRANSPARENT" ],
+    "emissions": [ "emit_slime_friendly" ],
+    "bash": {
+      "str_min": 40,
+      "str_max": 300,
+      "sound": "splorch!",
+      "sound_fail": "splat!",
+      "items": [ { "item": "slime_thresh_culture", "count": [ 6, 8 ], "prob": 100 } ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_slime_ocularium",
+    "name": "slime ocularium",
+    "description": "A small spire of hardened slime, glistening with slowly rotating eyespots.  Slimes can use it as an extension of their own sight.",
+    "symbol": "O",
+    "looks_like": "mon_blob_brain",
+    "color": "dark_gray",
+    "move_cost_mod": 3,
+    "coverage": 40,
+    "required_str": 24,
+    "flags": [ "TRANSPARENT" ],
+    "bash": {
+      "str_min": 20,
+      "str_max": 40,
+      "sound": "splorch!",
+      "sound_fail": "splat!",
+      "items": [ { "item": "slime_thresh_culture", "count": [ 2, 3 ], "prob": 100 } ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_slime_glycogenerator",
+    "name": "slime glycogenerator",
+    "description": "A trembling mass of hungry semi-sapient slime, ready to absorb \"normal food\" and output slime cell cultures.",
+    "symbol": "G",
+    "looks_like": "mon_blob_brain",
+    "color": "green",
+    "move_cost_mod": 10,
+    "coverage": 70,
+    "required_str": 28,
+    "flags": [ "TRANSPARENT" ],
+    "crafting_pseudo_item": "fake_slime_glycogenerator",
+    "bash": {
+      "str_min": 40,
+      "str_max": 300,
+      "sound": "splorch!",
+      "sound_fail": "splat!",
+      "items": [ { "item": "slime_thresh_culture", "count": [ 6, 8 ], "prob": 100 } ]
+    }
+  },
+  {
+    "type": "furniture",
     "id": "f_crystalline_flower",
     "name": "crystalline flower",
     "description": "A crystalline structure that resembles a plant.",

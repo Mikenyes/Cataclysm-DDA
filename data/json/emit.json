@@ -408,6 +408,15 @@
     "chance": 50
   },
   {
+    "id": "emit_slime_friendly",
+    "type": "emit",
+    "//": "Paint the world!",
+    "field": "fd_slime_friendly",
+    "intensity": 12,
+    "qty": 27,
+    "chance": 100
+  },
+  {
     "id": "emit_sludge_puddle",
     "type": "emit",
     "//": "Infrequent emission of sludge along the ground, made because sludge trail is too frequent",

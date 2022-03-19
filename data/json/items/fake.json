@@ -24,6 +24,12 @@
     "name": { "str": "spinning wheel" }
   },
   {
+    "id": "fake_slime_glycogenerator",
+    "type": "TOOL",
+    "copy-from": "fake_item",
+    "name": { "str": "slime glycogenerator" }
+  },
+  {
     "id": "fake_burrowing",
     "copy-from": "fake_item",
     "type": "TOOL",

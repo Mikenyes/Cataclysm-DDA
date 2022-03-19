@@ -1475,6 +1475,49 @@
   },
   {
     "type": "effect_type",
+    "id": "slime_friendly_coating",
+    "name": [ "Slime Coating", "Slime Coating", "Slime Coating", "Slime Coating", "Slime Coating", "Slime Coating", "Slime Slathered", "Slime Slathered", "Slime Slathered", "Slime Slathered", "Slime Slathered", "Slime Saturated" ],
+    "desc": [
+      "You've been coating in friendly wriggling slime.",
+      "You've been coating in friendly wriggling slime.",
+      "You've been coating in friendly wriggling slime.",
+      "You've been coating in friendly wriggling slime.",
+      "You've been coating in friendly wriggling slime.",
+      "You've been coating in friendly wriggling slime.",
+      "You've been fully slathered with friendly wriggling slime.",
+      "You've been fully slathered with friendly wriggling slime.",
+      "You've been fully slathered with friendly wriggling slime.",
+      "You've been fully slathered with friendly wriggling slime.",
+      "You've been fully slathered with friendly wriggling slime.",
+      "You are completely saturated with friendly wriggling slime."
+    ],
+    "max_intensity": 12,
+    "int_dur_factor": 600,
+    "max_duration": 7260,
+    "resist_traits": [ "THRESH_SLIME" ],
+    "base_mods": {
+      "speed_mod": [ -4.34 ],
+      "int_mod": [ 0, 0.34 ],
+      "pain_min": [ -2 ],
+      "pain_max": [ -1 ],
+      "pain_chance": [ -1, 1000 ],
+      "pain_tick": [ 10 ],
+      "thirst_min": [ -1 ],
+      "thirst_max": [ -1 ],
+      "thirst_chance": [ -1, 1000 ],
+      "thirst_tick": [ 10 ]
+    },
+    "scaling_mods": {
+      "speed_mod": [ -1, -0.34 ],
+      "int_mod": [ 0, 0.34 ],
+      "pain_chance": [ -50 ],
+      "thirst_min": [ -1 ],
+      "thirst_chance": [ 0, -90 ]
+    },
+    "rating": "good"
+  },
+  {
+    "type": "effect_type",
     "id": "beartrap",
     "name": [ "Stuck in a Beartrap" ],
     "desc": [ "You can't move until you get free!" ],

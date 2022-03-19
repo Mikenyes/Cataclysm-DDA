@@ -238,7 +238,7 @@
     "encumbrance_covered": [ [ "head", 5 ] ],
     "types": [ "BIOLUM" ],
     "prereqs": [ "BIOLUM1" ],
-    "changes_to": [ "BIOLUM3" ],
+    "leads_to": [ "BIOLUM3" ],
     "category": [ "ELFA", "INSECT", "FISH" ],
     "transform": { "target": "BIOLUM2_active", "msg_transform": "Your photophore starts glowing.", "active": true, "moves": 10 }
   },
@@ -259,11 +259,34 @@
     "points": 6,
     "description": "You can spit a wad of bioluminescent goo several meters away.  There it will light up it's surroundings until it dissipates.",
     "encumbrance_covered": [ [ "head", 5 ] ],
-    "types": [ "BIOLUM" ],
     "prereqs": [ "BIOLUM2" ],
     "category": [ "INSECT" ],
     "active": true,
     "activated_eocs": [ "EOC_BIOLUM3_activated" ]
+  },
+  {
+    "type": "mutation",
+    "id": "BIOLUM_SLIME",
+    "points": -1,
+    "name": { "str": "Bioluminescence" },
+    "description": "The core of your body is glowing naturally.",
+    "types": [ "BIOLUM" ],
+    "leads_to": [ "BIOLUM2_SLIME" ],
+    "category": [ "SLIME" ],
+    "lumination": [ [ "torso", 10 ] ]
+  },
+  {
+    "type": "mutation",
+    "id": "BIOLUM2_SLIME",
+    "name": { "str": "Bioluminescent Glob" },
+    "points": 6,
+    "description": "You can spit a wad of bioluminescent goo several meters away.  There it will light up it's surroundings until it dissipates.",
+    "encumbrance_covered": [ [ "head", 5 ] ],
+    "prereqs": [ "BIOLUM_SLIME" ],
+    "category": [ "SLIME" ],
+    "threshreq": [ "THRESH_SLIME" ],
+    "active": true,
+    "activated_eocs": [ "EOC_BIOLUM2_SLIME_activated" ]
   },
   {
     "type": "mutation",
@@ -4169,7 +4192,8 @@
     "starting_trait": true,
     "types": [ "PAIN" ],
     "//": "The MORE_PAIN mutations will always increase the pain you receive by at least 1.",
-    "changes_to": [ "MORE_PAIN2" ]
+    "changes_to": [ "MORE_PAIN2" ],
+    "category": [ "SLIME" ]
   },
   {
     "type": "mutation",
@@ -4179,7 +4203,9 @@
     "description": "Your body experiences pain out of proportion to the physical causes.  Pain dealt to you is increased by 50%.",
     "types": [ "PAIN" ],
     "prereqs": [ "MORE_PAIN" ],
-    "changes_to": [ "MORE_PAIN3" ]
+    "changes_to": [ "MORE_PAIN3" ],
+    "threshreq": [ "THRESH_SLIME" ],
+    "category": [ "SLIME" ]
   },
   {
     "type": "mutation",
@@ -6762,11 +6788,12 @@
     "id": "THRESH_SLIME",
     "name": { "str": "Aqueous" },
     "points": 1,
-    "description": "What was that old advertisement?  'Paint the planet'?  That might be a good long-term goal, but for now…",
+    "description": "What was that old advertisement?  'Paint the planet'?  That's exactly what you're gonna do- activate to extrude slime cell cultures to begin your work.",
     "valid": false,
     "purifiable": false,
     "threshold": true,
     "active": true,
+    "thirst_modifier": 0.75,
     "activated_eocs": [ "EOC_THRESH_SLIME_ACTIVATED" ],
     "vitamin_rates": [ [ "mutagen_slime", -600 ] ]
   },

@@ -310,6 +310,17 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_BIOLUM2_SLIME_activated",
+    "condition": { "compare_int": [ { "u_val": "vitamin", "name": "mutagen_slime" }, ">=", { "const": 100 } ] },
+    "effect": [
+      { "u_assign_activity": "ACT_GENERIC_EOC", "duration": "2 seconds" },
+      { "arithmetic": [ { "u_val": "vitamin", "name": "mutagen_slime" }, "-=", { "const": 25 } ] },
+      { "queue_eocs": [ "EOC_BIOLUM3_cast" ], "time_in_future": 1 }
+    ],
+    "false_effect": [ { "u_message": "You don't have enough slime to activate your Bioluminescent Glob.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_BIOLUM3_activated",
     "condition": { "compare_int": [ { "u_val": "stamina" }, ">=", { "const": 3000 } ] },
     "effect": [
