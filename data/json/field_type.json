@@ -1569,6 +1569,33 @@
     "looks_like": "fd_sludge"
   },
   {
+    "id": "fd_slime_friendly",
+    "type": "field_type",
+    "intensity_levels": [
+      { "name": "tendrils of wriggling slime", "sym": "~", "color": "light_green" },
+      { "//": "repeat last entry" },
+      { "name": "carpet of wriggling slime" },
+      { "//": "repeat last entry" },
+      { "//": "repeat last entry" },
+      { "name": "puddle of wriggling slime", "color": "green" },
+      { "//": "repeat last entry" },
+      { "//": "repeat last entry" },
+      { "name": "pool of wriggling slime" },
+      { "//": "repeat last entry" },
+      { "//": "repeat last entry" },
+      { "name": "knee-high wriggling slime" }
+    ],
+    "decay_amount_factor": 2,
+    "description_affix": "covered_in",
+    "apply_slime_factor": 10,
+    "percent_spread": 100,
+    "is_splattering": true,
+    "half_life": "4 hours",
+    "phase": "liquid",
+    "display_field": true,
+    "looks_like": "fd_sludge"
+  },
+  {
     "id": "fd_electricity_unlit",
     "type": "field_type",
     "intensity_levels": [

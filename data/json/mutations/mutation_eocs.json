@@ -255,6 +255,18 @@
   },
   {
     "type": "effect_on_condition",
+    "id": "EOC_THRESH_SLIME_ACTIVATED",
+    "condition": { "compare_int": [ { "u_val": "vitamin", "name": "mutagen_slime" }, ">=", { "const": 500 } ] },
+    "effect": [
+      { "u_message": "You focus, pulling yourself apart at a molecular level and pouring part of your body into a few cultured blobs of slime.", "type": "good" },
+      { "u_assign_activity": "ACT_GENERIC_EOC", "duration": "20 seconds" },
+      { "arithmetic": [ { "u_val": "vitamin", "name": "mutagen_slime" }, "-=", { "const": 400 } ] },
+      { "u_spawn_item": "slime_thresh_culture", "count": 4 }
+    ],
+    "false_effect": [ { "u_message": "You don't have enough slime mutagen to create a slime culture.", "type": "bad" } ]
+  },
+  {
+    "type": "effect_on_condition",
     "id": "EOC_THRESH_TROGLOBITE",
     "//": "Welcome to the tunnel, we can work for days!",
     "recurrence": "2 m",

@@ -1556,7 +1556,6 @@
     "description": "You can't move as fast as most, resulting in a 15% speed penalty on flat ground.",
     "starting_trait": true,
     "types": [ "RUNNING" ],
-    "category": [ "TROGLOBITE" ],
     "movecost_flatground_modifier": 1.15
   },
   {
@@ -3280,7 +3279,8 @@
     "threshreq": [ "THRESH_SLIME" ],
     "category": [ "SLIME" ],
     "passive_mods": { "dex_mod": 4, "str_mod": -4 },
-    "hp_adjustment": 6
+    "hp_adjustment": 6,
+    "vitamin_rates": [ [ "mutagen_slime", -1800 ] ]
   },
   {
     "type": "mutation",
@@ -4888,7 +4888,8 @@
         "parts": [ "torso", "head", "arm_l", "arm_r", "hand_l", "hand_r", "leg_l", "leg_r", "foot_l", "foot_r", "mouth", "eyes" ],
         "bash": -3
       }
-    ]
+    ],
+    "vitamin_rates": [ [ "mutagen_slime", -1800 ] ]
   },
   {
     "type": "mutation",
@@ -4982,7 +4983,8 @@
     "threshreq": [ "THRESH_SLIME" ],
     "category": [ "SLIME" ],
     "flags": [ "EYE_MEMBRANE" ],
-    "passive_mods": { "per_mod": 5 }
+    "passive_mods": { "per_mod": 5 },
+    "vitamin_rates": [ [ "mutagen_slime", -1800 ] ]
   },
   {
     "type": "mutation",
@@ -5969,6 +5971,7 @@
         "bash": 4
       }
     ],
+    "vitamin_rates": [ [ "mutagen_slime", -1200 ] ],
     "movecost_modifier": 1.25
   },
   {
@@ -5988,7 +5991,9 @@
     "active": true,
     "cost": 40,
     "hunger": true,
-    "thirst": true
+    "thirst": true,
+    "activated_eocs": [ "EOC_SLIMESPAWNER_ACTIVATED" ],
+    "vitamin_rates": [ [ "mutagen_slime", -600 ] ]
   },
   {
     "type": "mutation",
@@ -6761,7 +6766,9 @@
     "valid": false,
     "purifiable": false,
     "threshold": true,
-    "vitamin_rates": [ [ "mutagen", -700 ] ]
+    "active": true,
+    "activated_eocs": [ "EOC_THRESH_SLIME_ACTIVATED" ],
+    "vitamin_rates": [ [ "mutagen_slime", -600 ] ]
   },
   {
     "type": "mutation",
@@ -6775,11 +6782,11 @@
     "enchantments": [
       {
         "condition": { "compare_int": [ { "u_val": "pos_z" }, ">=", { "const": 0 } ] },
-        "values": [ { "value": "MOD_HEALTH", "add": -2 }, { "value": "MOD_HEALTH_CAP", "add": -90 } ]
+        "values": [ { "value": "MOD_HEALTH", "add": -10 }, { "value": "MOD_HEALTH_CAP", "add": -90 } ]
       },
       {
         "condition": { "compare_int": [ { "u_val": "pos_z" }, "<", { "const": 0 } ] },
-        "values": [ { "value": "MOD_HEALTH", "add": 2 }, { "value": "MOD_HEALTH_CAP", "add": 50 } ]
+        "values": [ { "value": "MOD_HEALTH", "add": 4 }, { "value": "MOD_HEALTH_CAP", "add": 50 } ]
       }
     ]
   },

@@ -318,5 +318,19 @@
     "volume": "1 L",
     "bashing": 5,
     "to_hit": -1
+  },
+  {
+    "id": "slime_thresh_culture",
+    "type": "TOOL",
+    "category": "spare_parts",
+    "name": { "str": "slime culture" },
+    "description": "A wriggling culture of mostly non-sentient slime, occasionally forming into brick-like shapes.  It was created for the purpose of construction.",
+    "weight": "1800 g",
+    "volume": "2 L",
+    "flags": [ "TRADER_AVOID" ],
+    "price": 0,
+    "price_postapoc": 0,
+    "symbol": "O",
+    "color": "green"
   }
 ]
