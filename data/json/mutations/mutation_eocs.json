@@ -258,12 +258,12 @@
     "id": "EOC_THRESH_SLIME_ACTIVATED",
     "condition": { "compare_int": [ { "u_val": "vitamin", "name": "mutagen_slime" }, ">=", { "const": 500 } ] },
     "effect": [
-      { "u_message": "You focus, pulling yourself apart at a molecular level and pouring part of your body into a few cultured blobs of slime.", "type": "good" },
+      { "u_message": "You focus, pulling yourself apart at a molecular level and pouring part of your body into a seperate culture of slime.", "type": "good" },
       { "u_assign_activity": "ACT_GENERIC_EOC", "duration": "20 seconds" },
       { "arithmetic": [ { "u_val": "vitamin", "name": "mutagen_slime" }, "-=", { "const": 400 } ] },
-      { "u_spawn_item": "slime_thresh_culture", "count": 4 }
+      { "u_spawn_item": "slime_thresh_culture", "count": 1 }
     ],
-    "false_effect": [ { "u_message": "You don't have enough slime mutagen to create a slime culture.", "type": "bad" } ]
+    "false_effect": [ { "u_message": "You don't have enough slime mutagen to create a new culture.", "type": "bad" } ]
   },
   {
     "type": "effect_on_condition",
@@ -338,6 +338,35 @@
         "u_cast_spell": { "id": "spell_spit_flare", "message": "You launch a glob of bioluminescent material!" },
         "targeted": true
       }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_INT_SLIME_ACTIVATED",
+    "condition": { "compare_int": [ { "u_val": "vitamin", "name": "mutagen_slime" }, ">=", { "u_val": "pain" } ] },
+    "effect": [
+      { "arithmetic": [ { "u_val": "var", "var_name": "painx4", "type": "temp", "context": "slime_mutation" }, "=", { "u_val": "pain" }, "*", { "const": 4 } ] },
+      { "run_eocs": [ "EOC_INT_SLIME_ACTIVATED2" ] }
+    ],
+    "false_effect": [
+      { "u_message": "You have nowhere near the slime reserves to null the pain, and your synapses spark in agony!", "type": "bad" },
+      { "arithmetic": [ { "u_val": "pain" }, "+=", { "const": 50 } ] },
+      { "arithmetic": [ { "u_val": "var", "var_name": "painx4", "type": "temp", "context": "slime_mutation" }, "=", { "u_val": "pain" }, "*", { "const": 4 } ] }
+   ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_INT_SLIME_ACTIVATED2",
+    "condition": { "compare_int": [ { "u_val": "vitamin", "name": "mutagen_slime" }, ">=", { "u_val": "var", "var_name": "painx4", "type": "temp", "context": "slime_mutation" } ] },
+    "effect": [
+      { "u_message": "You focus, tearing your nervous system apart and removing all pain.", "type": "good" },
+      { "u_assign_activity": "ACT_GENERIC_EOC", "duration": "5 seconds" },
+      { "arithmetic": [ { "u_val": "vitamin", "name": "mutagen_slime" }, "-=", { "u_val": "var", "var_name": "painx4", "type": "temp", "context": "slime_mutation" } ] },
+      { "arithmetic": [ { "u_val": "pain" }, "=", { "const": 0 } ] }
+    ],
+    "false_effect": [
+      { "u_message": "You don't have enough slime reserves to null the pain.", "type": "bad" },
+      { "u_assign_activity": "ACT_GENERIC_EOC", "duration": "5 seconds" }
     ]
   }
 ]

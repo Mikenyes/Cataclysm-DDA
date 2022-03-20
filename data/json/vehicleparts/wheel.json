@@ -697,5 +697,36 @@
     "rolling_resistance": 2.05,
     "proportional": { "durability": 2, "damage_modifier": 2 },
     "damage_reduction": { "all": 20 }
+  },
+  {
+    "id": "wheel_arbor_large",
+    "type": "vehicle_part",
+    "name": { "str": "arbor shambling tread" },
+    "item": "plant_thresh_tread",
+    "location": "under",
+    "symbol": "@",
+    "broken_symbol": "x",
+    "categories": [ "arbor" ],
+    "color": "brown",
+    "broken_color": "brown",
+    "durability": 500,
+    "description": "A shambling mass of vines and roots, pulling the locomotive arbor along with it.",
+    "damage_modifier": 60,
+    "breaks_into": [ { "item": "splinter", "count": [ 13, 15 ] } ],
+    "requirements": {
+      "install": { "skills": [ [ "survival", 2 ] ], "time": "5 m", "using": [ [ "vehicle_locarbor", 1 ] ] },
+      "removal": { "skills": [ [ "survival", 2 ] ], "time": "15 m" },
+      "repair": { "skills": [ [ "survival", 3 ] ], "time": "15 m", "using": [ [ "vehicle_locarbor_repair", 1 ] ] }
+    },
+    "rolling_resistance": 31.0,
+    "wheel_type": "off_road",
+    "contact_area": 500,
+    "power": 6000,
+    "muscle_power_factor": 2000,
+    "m2c": 25,
+    "damaged_power_factor": 0.25,
+    "fuel_type": "muscle",
+    "flags": [ "ARBOR", "WHEEL", "UNSTABLE_WHEEL", "STEERABLE", "ENGINE", "E_STARTS_INSTANTLY", "MUSCLE_LEGS" ],
+    "damage_reduction": { "all": 35 }
   }
 ]

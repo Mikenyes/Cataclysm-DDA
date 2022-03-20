@@ -206,13 +206,13 @@
       "effect": { "id": "death_slimespring", "min_level": 2 },
       "corpse_type": "NO_CORPSE"
     },
-    "flags": [ "SEES", "HEARS", "SMELLS", "GOODHEARING", "NOHEAD", "POISON", "VENOM", "WARM", "ACIDPROOF", "GUILT" ]
+    "flags": [ "SEES", "HEARS", "SMELLS", "GOODHEARING", "NOHEAD", "POISON", "VENOM", "WARM", "ACIDPROOF", "GUILT", "SWARMS" ]
   },
   {
     "id": "mon_slime_ocularium",
     "type": "MONSTER",
     "name": { "str": "slime ocularium" },
-    "description": "A spire of hardened slime, coated in rotating eyespots and glistening ocular nerves.",
+    "description": "A powerfully bioluminescent spire of hardened slime, coated in rotating eyespots and glistening ocular nerves.",
     "default_faction": "player",
     "bodytype": "blob",
     "species": [ "MUTANT" ],
@@ -235,6 +235,8 @@
     "armor_elec": 3,
     "vision_day": 30,
     "vision_night": 10,
+    "luminance": 70,
+    "regenerates": 1,
     "harvest": "exempt",
     "special_attacks": [ { "id": "tentacle", "throw_strength": 10 } ],
     "death_function": {
@@ -243,5 +245,52 @@
       "corpse_type": "NO_CORPSE"
     },
     "flags": [ "IMMOBILE", "SEES", "NOHEAD", "POISON", "WARM", "ACIDPROOF", "GUILT" ]
+  },
+  {
+    "id": "mon_slime_caliphage",
+    "type": "MONSTER",
+    "name": { "str": "slime caliphage" },
+    "description": "A slow but massive slime not quite as intelligent as the rest of the colony, produced to protect a creature within itself.",
+    "default_faction": "player",
+    "bodytype": "blob",
+    "species": [ "MUTANT" ],
+    "looks_like": "mon_blob_brain",
+    "diff": 2,
+    "volume": "700 L",
+    "weight": "800 kg",
+    "hp": 360,
+    "speed": 60,
+    "material": [ "slime" ],
+    "symbol": "O",
+    "color": "green",
+    "phase": "LIQUID",
+    "aggression": -100,
+    "morale": 100,
+    "melee_skill": 6,
+    "melee_dice": 5,
+    "melee_dice_sides": 8,
+    "melee_cut": 0,
+    "armor_bash": 16,
+    "armor_cut": 8,
+    "armor_elec": 2,
+    "mountable_weight_ratio": 3,
+    "vision_day": 15,
+    "vision_night": 4,
+    "harvest": "exempt",
+    "regenerates": 1,
+    "death_function": {
+      "message": "The %s's body melts away",
+      "corpse_type": "NO_CORPSE"
+    },
+    "flags": [
+      "SEES", 
+      "HEARS",
+      "BASHES",
+      "DESTROYS",
+      "PUSH_MON",
+      "PUSH_VEH",
+      "PET_MOUNTABLE",
+      "MECH_DEFENSIVE"
+    ]
   }
 ]

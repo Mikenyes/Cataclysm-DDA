@@ -55,5 +55,27 @@
     "breaks_into": [ { "item": "steel_chunk", "count": [ 1, 2 ] }, { "item": "scrap", "count": [ 0, 2 ] } ],
     "extend": { "flags": [ "FOLDABLE", "MUSCLE_ARMS", "CONTROLS" ] },
     "damage_reduction": { "all": 4 }
+  },
+    {
+    "id": "arbor_integration",
+    "type": "vehicle_part",
+    "copy-from": "engine_manual",
+    "name": { "str": "arbor motive integration" },
+    "categories": [ "arbor" ],
+    "item": "plant_thresh_tangle",
+    "durability": 450,
+    "description": "The integration between a plant and their arbor, allowing for control and powering.",
+    "power": 32000,
+    "muscle_power_factor": 6000,
+    "damage_modifier": 50,
+    "m2c": 45,
+    "breaks_into": [ { "item": "splinter", "count": [ 5, 6 ] } ],
+    "requirements": {
+      "install": { "skills": [ [ "survival", 2 ] ], "time": "5 m", "using": [ [ "vehicle_locarbor", 1 ] ] },
+      "removal": { "skills": [ [ "survival", 2 ] ], "time": "15 m" },
+      "repair": { "skills": [ [ "survival", 3 ] ], "time": "15 m", "using": [ [ "vehicle_locarbor_repair", 1 ] ] }
+    },
+    "extend": { "flags": [ "CONTROLS", "ARBOR", "MUSCLE_LEGS" ] },
+    "damage_reduction": { "all": 50 }
   }
 ]

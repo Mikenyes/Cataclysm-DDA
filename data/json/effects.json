@@ -1510,7 +1510,7 @@
     "scaling_mods": {
       "speed_mod": [ -1, -0.34 ],
       "int_mod": [ 0, 0.34 ],
-      "pain_chance": [ -50 ],
+      "pain_chance": [ -40 ],
       "thirst_min": [ -1 ],
       "thirst_chance": [ 0, -90 ]
     },

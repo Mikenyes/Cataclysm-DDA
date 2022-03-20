@@ -41,5 +41,16 @@
     "type": "requirement",
     "//": "Counterpart to welding_* installation requirements",
     "qualities": [ { "id": "SAW_M", "level": 2 } ]
+  },
+  {
+    "id": "vehicle_locarbor",
+    "type": "requirement",
+    "tools": [ [ [ "fake_locarbor_tool", -1 ] ] ]
+  },
+  {
+    "id": "vehicle_locarbor_repair",
+    "type": "requirement",
+    "tools": [ [ [ "fake_locarbor_tool", -1 ] ] ],
+    "components": [ [ [ "plant_thresh_sprout", 1 ] ] ]
   }
 ]

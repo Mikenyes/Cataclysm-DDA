@@ -24,6 +24,12 @@
     "name": { "str": "spinning wheel" }
   },
   {
+    "id": "fake_locarbor_tool",
+    "type": "TOOL",
+    "copy-from": "fake_item",
+    "name": { "str": "arbor control" }
+  },
+  {
     "id": "fake_slime_glycogenerator",
     "type": "TOOL",
     "copy-from": "fake_item",

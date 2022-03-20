@@ -140,5 +140,25 @@
     },
     "flags": [ "MOUNTABLE", "INITIAL_PART" ],
     "damage_reduction": { "all": 7 }
+  },
+  {
+    "id": "arborframe",
+    "type": "vehicle_part",
+    "name": { "str": "arbor frame" },
+    "item": "plant_thresh_overgrowth",
+    "location": "structure",
+    "standard_symbols": true,
+    "categories": [ "arbor" ],
+    "color": "brown",
+    "durability": 700,
+    "description": "A heavy framework of living wood and vine.  Other components of the locomotive arbor can be mounted on it, and it can be attached to other arbor frames.",
+    "breaks_into": [ { "item": "splinter", "count": [ 12, 15 ] } ],
+    "requirements": {
+      "install": { "skills": [ [ "survival", 2 ] ], "time": "5 m", "using": [ [ "vehicle_locarbor", 1 ] ] },
+      "removal": { "skills": [ [ "survival", 2 ] ], "time": "15 m" },
+      "repair": { "skills": [ [ "survival", 3 ] ], "time": "15 m", "using": [ [ "vehicle_locarbor_repair", 1 ] ] }
+    },
+    "flags": [ "MOUNTABLE", "INITIAL_PART", "ARBOR_FRAME" ],
+    "damage_reduction": { "all": 24 }
   }
 ]

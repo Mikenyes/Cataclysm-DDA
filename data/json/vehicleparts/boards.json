@@ -205,5 +205,41 @@
     },
     "extend": { "flags": [ "HALF_BOARD" ] },
     "damage_reduction": { "all": 5 }
+  },
+  {
+    "abstract": "arbor_board_abstract",
+    "type": "vehicle_part",
+    "location": "center",
+    "categories": [ "arbor" ],
+    "standard_symbols": true,
+    "flags": [ "OBSTACLE", "NO_ROOF_NEEDED" ],
+    "item": "plant_thresh_tangle",
+    "color": "green",
+    "broken_color": "light_gray",
+    "durability": 400,
+    "breaks_into": [ { "item": "splinter", "count": [ 5, 6 ] } ],
+    "requirements": {
+      "install": { "skills": [ [ "survival", 2 ] ], "time": "5 m", "using": [ [ "vehicle_locarbor", 1 ] ] },
+      "removal": { "skills": [ [ "survival", 2 ] ], "time": "15 m" },
+      "repair": { "skills": [ [ "survival", 3 ] ], "time": "15 m", "using": [ [ "vehicle_locarbor_repair", 1 ] ] }
+    },
+    "damage_reduction": { "all": 20 }
+  },
+  {
+    "id": "arbor_board",
+    "type": "vehicle_part",
+    "copy-from": "arbor_board_abstract",
+    "name": { "str": "arbor tanglewall" },
+    "description": "A wall of thickly entangled vines and wood, blocking vision and movement alike.",
+    "extend": { "flags": [ "OPAQUE", "FULL_BOARD" ] }
+  },
+  {
+    "id": "arbor_board_half",
+    "copy-from": "arbor_board_abstract",
+    "type": "vehicle_part",
+    "name": { "str": "arbor tangleboard" },
+    "description": "A loose tangle of vines, enough gaps in it to allow vision but enough plant matter to block movement.",
+    "proportional": { "durability": 0.5 },
+    "extend": { "flags": [ "HALF_BOARD" ] }
   }
 ]

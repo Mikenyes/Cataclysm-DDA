@@ -1586,6 +1586,7 @@
       { "//": "repeat last entry" }
     ],
     "description_affix": "covered_in",
+    "immune_mtypes": [ "mon_player_blob", "mon_slime_ocularium" ],
     "apply_slime_factor": 10,
     "percent_spread": 1,
     "is_splattering": true,

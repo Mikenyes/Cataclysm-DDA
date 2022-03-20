@@ -645,26 +645,6 @@
   },
   {
     "type": "furniture",
-    "id": "f_slime_ocularium",
-    "name": "slime ocularium",
-    "description": "A small spire of hardened slime, glistening with slowly rotating eyespots.  Slimes can use it as an extension of their own sight.",
-    "symbol": "O",
-    "looks_like": "mon_blob_brain",
-    "color": "dark_gray",
-    "move_cost_mod": 3,
-    "coverage": 40,
-    "required_str": 24,
-    "flags": [ "TRANSPARENT" ],
-    "bash": {
-      "str_min": 20,
-      "str_max": 40,
-      "sound": "splorch!",
-      "sound_fail": "splat!",
-      "items": [ { "item": "slime_thresh_culture", "count": [ 2, 3 ], "prob": 100 } ]
-    }
-  },
-  {
-    "type": "furniture",
     "id": "f_slime_glycogenerator",
     "name": "slime glycogenerator",
     "description": "A trembling mass of hungry semi-sapient slime, ready to absorb \"normal food\" and output slime cell cultures.",
@@ -681,7 +661,28 @@
       "str_max": 300,
       "sound": "splorch!",
       "sound_fail": "splat!",
-      "items": [ { "item": "slime_thresh_culture", "count": [ 6, 8 ], "prob": 100 } ]
+      "items": [ { "item": "slime_thresh_culture", "count": [ 4, 5 ], "prob": 100 } ]
+    }
+  },
+  {
+    "type": "furniture",
+    "id": "f_slime_deprivat",
+    "name": "slime deprivat",
+    "description": "A cocoon of crystallized slime, designed to perfectly insulate a colony member while they rest.",
+    "symbol": "#",
+    "looks_like": "mon_blob_brain",
+    "color": "green",
+    "move_cost_mod": 14,
+    "coverage": 100,
+    "comfort": 10,
+    "floor_bedding_warmth": 2000,
+    "required_str": 14,
+    "flags": [ "TRANSPARENT", "BLOCK_WIND", "HIDE_PLACE", "INDOORS", "NO_SCENT", "MOUNTABLE", "CAN_SIT" ],
+    "bash": {
+      "str_min": 10,
+      "str_max": 100,
+      "sound": "splorch!",
+      "sound_fail": "splat!"
     }
   },
   {

@@ -23,6 +23,32 @@
     "type": "item_group"
   },
   {
+    "abstract": "arbor_seat_abstract",
+    "broken_color": "dark_gray",
+    "broken_symbol": "*",
+    "categories": [ "arbor" ],
+    "color": "brown",
+    "comfort": 3,
+    "damage_modifier": 60,
+    "damage_reduction": { "all": 20 },
+    "description": "A hollow in the vine mass for a smaller plant to rest in.",
+    "durability": 500,
+    "flags": [ "SEAT", "BOARDABLE", "BELTABLE" ],
+    "floor_bedding_warmth": 100,
+    "item": "plant_thresh_sprout",
+    "location": "center",
+    "looks_like": "reclining_seat",
+    "name": { "str": "arbor hollow" },
+    "breaks_into": [ { "item": "splinter", "count": [ 2, 3 ] } ],
+    "requirements": {
+      "install": { "skills": [ [ "survival", 2 ] ], "time": "5 m", "using": [ [ "vehicle_locarbor", 1 ] ] },
+      "removal": { "skills": [ [ "survival", 2 ] ], "time": "15 m" },
+      "repair": { "skills": [ [ "survival", 3 ] ], "time": "15 m", "using": [ [ "vehicle_locarbor_repair", 1 ] ] }
+    },
+    "symbol": "#",
+    "type": "vehicle_part"
+  },
+  {
     "abstract": "seat_abstract",
     "breaks_into": "ig_vp_seat",
     "broken_color": "red",
@@ -226,6 +252,12 @@
       "repair": { "skills": [ [ "mechanics", 2 ] ], "time": "60 m", "using": [ [ "repair_welding_standard", 3 ] ] }
     },
     "size": 25,
+    "symbol": "#",
+    "type": "vehicle_part"
+  },
+  {
+    "copy-from": "arbor_seat_abstract",
+    "id": "arbor_seat",
     "symbol": "#",
     "type": "vehicle_part"
   },

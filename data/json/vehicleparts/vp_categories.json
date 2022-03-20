@@ -92,7 +92,15 @@
     "type": "vehicle_part_category",
     "name": { "ctxt": "vp_category", "str": "Other" },
     "short_name": { "ctxt": "vp_category", "str": "~" },
-    "//": "Vehicle part category for anything not included in other categories",
+    "//": "Vehicle part category for almost anything not included in other categories",
     "priority": 100
+  },
+  {
+    "id": "arbor",
+    "type": "vehicle_part_category",
+    "name": { "ctxt": "vp_category", "str": "Arbor" },
+    "short_name": { "ctxt": "vp_category", "str": "A" },
+    "//": "Vehicle part category for the Plant mutant arbor vehicle parts",
+    "priority": 110
   }
 ]

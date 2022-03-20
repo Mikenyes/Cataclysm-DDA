@@ -16,6 +16,17 @@
     "info": "A bright light that illuminates several squares inside the vehicle."
   },
   {
+    "id": "ARBOR",
+    "type": "json_flag",
+    "info": "A non-integral part of a locomotive arbor.",
+    "requires_flag": "ARBOR_FRAME"
+  },
+  {
+    "id": "ARBOR_FRAME",
+    "type": "json_flag",
+    "info": "An integral base of a locomotive arbor."
+  },
+  {
     "id": "ARMOR",
     "type": "json_flag",
     "info": "Armor plate.  Will partially protect other components on the same frame from damage from direct attacks but not from the shock damage of a distant collision."
