@@ -37,5 +37,245 @@
       "ter_set": "t_strconc_wall",
       "items": [ { "item": "meat_tainted", "count": [ 5, 10 ] } ]
     }
+  },
+  {
+    "type": "terrain",
+    "id": "t_nemaf_meat_roof",
+    "name": "thinking meat roof",
+    "description": "Crackling nerves are set into this nutrient rich meat, slightly painful to the eyes each time they spark.",
+    "symbol": "~",
+    "color": "dark_gray",
+    "move_cost": 2,
+    "looks_like": "t_nemaf_meat_floor",
+    "flags": [ "TRANSPARENT", "FLAT" ],
+    "bash": {
+      "str_min": 100,
+      "str_max": 300,
+      "sound": "boom!",
+      "sound_fail": "whack!",
+      "ter_set": "t_open_air",
+      "bash_below": true
+    }
+  },
+    {
+    "type": "terrain",
+    "id": "t_nemaf_meat_platform",
+    "name": "pulsing meat floor",
+    "description": "Despite the squirming texture and exposed blood vessels, you can still walk easily here.  The meat parts welcomingly to accomdate your footfalls.",
+    "looks_like": "t_nemaf_meat_floor",
+    "symbol": ".",
+    "color": "red_white",
+    "move_cost": 2,
+    "flags": [ "TRANSPARENT", "COLLAPSES", "FLAT" ],
+    "bash": {
+      "str_min": 100,
+      "str_max": 300,
+      "str_min_supported": 250,
+      "sound": "the meat splatter and skitter away!",
+      "sound_fail": "squelch.",
+      "ter_set": "t_null",
+      "items": [ { "item": "human_flesh", "count": [ 5, 15 ] }, { "item": "human_lard", "count": [ 2, 8 ] }, { "item": "blood", "count": [ 30, 50 ] } ]
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_nemaf_meat_floor",
+    "name": "pulsing meat floor",
+    "description": "Despite the squirming texture and exposed blood vessels, you can still walk easily here.  The meat parts welcomingly to accomdate your footfalls.",
+    "looks_like": "t_floor_resin",
+    "symbol": ".",
+    "color": "red_white",
+    "move_cost": 2,
+    "roof": "t_nemaf_meat_roof",
+    "flags": [ "TRANSPARENT", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT" ],
+    "bash": {
+      "str_min": 100,
+      "str_max": 300,
+      "str_min_supported": 250,
+      "sound": "the meat splatter and skitter away!",
+      "sound_fail": "squelch.",
+      "ter_set": "t_null",
+      "items": [ { "item": "human_flesh", "count": [ 5, 15 ] }, { "item": "human_lard", "count": [ 2, 8 ] }, { "item": "blood", "count": [ 30, 50 ] } ]
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_nemaf_pink_slime_wall",
+    "name": "meat slurry",
+    "description": "An immense amount of nutrients are infused into this mass of slimy meat juices.  It's not completely opaque, but it will be quite difficult to move through.",
+    "looks_like": "t_slime",
+    "symbol": "LINE_OXOX",
+    "color": "magenta",
+    "move_cost": 8,
+    "coverage": 50,
+    "roof": "t_nemaf_meat_roof",
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "BLOCK_WIND", "DEEP_WATER", "SWIMMABLE" ],
+    "bash": {
+      "str_min": 40,
+      "str_max": 1000,
+      "sound": "the meat splatter!",
+      "sound_fail": "squelch.",
+      "ter_set": "t_nemaf_meat_floor",
+      "items": [ { "item": "human_flesh", "count": [ 20, 30 ] }, { "item": "human_lard", "count": [ 20, 40 ] }, { "item": "blood", "count": [ 2, 5 ] } ]
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_nemaf_meat_wall",
+    "name": "pulsing meat",
+    "description": "Nutrients pulse through this wall of meat at irregular intervals, vaguely reminescent of a dying heartbeat.",
+    "looks_like": "t_wall_resin",
+    "symbol": "LINE_OXOX",
+    "color": "light_red",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_nemaf_meat_roof",
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "BLOCK_WIND" ],
+    "bash": {
+      "str_min": 100,
+      "str_max": 200,
+      "sound": "the meat splatter and slither away!",
+      "sound_fail": "squelch.",
+      "ter_set": "t_nemaf_meat_floor",
+      "items": [ { "item": "human_flesh", "count": [ 10, 25 ] }, { "item": "human_lard", "count": [ 5, 15 ] }, { "item": "blood", "count": [ 20, 35 ] } ]
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_nemaf_bone_wall",
+    "name": "glyphic bone wall",
+    "description": "Glyphs, runes, filigree, whatever you want to call it.  Something entirely alien yet instantly recognizeable as decoration has been carved, or worse, naturally grown into this wall of living bone.",
+    "looks_like": "t_strconc_wall",
+    "symbol": "LINE_OXOX",
+    "color": "brown_white",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_nemaf_meat_roof",
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "BLOCK_WIND" ],
+    "bash": {
+      "str_min": 250,
+      "str_max": 300,
+      "sound": "the bone crack!",
+      "sound_fail": "crunch!",
+      "ter_set": "t_nemaf_meat_floor",
+      "items": [ { "item": "bone_human", "count": [ 40, 50 ] } ]
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_nemaf_ribbed_wall",
+    "name": "enriched meat wall",
+    "description": "This wall of gristled meat has an integrated bone support lattice, each calcified beam held in place by tendons and arteries.",
+    "looks_like": "t_wall_metal",
+    "symbol": "LINE_OXOX",
+    "color": "red_white",
+    "move_cost": 0,
+    "coverage": 100,
+    "roof": "t_nemaf_meat_roof",
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "BLOCK_WIND" ],
+    "bash": {
+      "str_min": 900,
+      "str_max": 1000,
+      "sound": "the meat squelch and peel away!",
+      "sound_fail": "crunch!",
+      "ter_set": "t_nemaf_lattice_wall",
+      "items": [ { "item": "human_flesh", "count": [ 10, 25 ] }, { "item": "human_lard", "count": [ 5, 15 ] }, { "item": "blood", "count": [ 20, 35 ] } ]
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_nemaf_marrow_wall",
+    "name": "wet marrow wall",
+    "description": "This wall of marrow meat is rife with pockets of fresh fluids, and every now and then sends them down a vessel to a nearby section of meat.",
+    "looks_like": "t_wall_resin_cage",
+    "symbol": "LINE_OXOX",
+    "color": "brown",
+    "move_cost": 0,
+    "coverage": 95,
+    "roof": "t_nemaf_meat_roof",
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "BLOCK_WIND" ],
+    "bash": {
+      "str_min": 30,
+      "str_max": 60,
+      "sound": "the marrow crumble!",
+      "sound_fail": "crunch!",
+      "ter_set": "t_nemaf_meat_floor",
+      "items": [ { "item": "bone_human", "count": [ 15, 20 ] }, { "item": "blood", "count": [ 20, 35 ] } ]
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_nemaf_lattice_wall",
+    "name": "bone lattice wall",
+    "description": "Thin layers of flesh lay on this lattice of bones, attempting to integrate and create a stronger structure.",
+    "symbol": "LINE_OXOX",
+    "looks_like": "t_reb_cage",
+    "color": "white",
+    "move_cost": 0,
+    "coverage": 40,
+    "roof": "t_nemaf_meat_roof",
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "BLOCK_WIND" ],
+    "bash": {
+      "str_min": 75,
+      "str_max": 120,
+      "sound": "the lattice crumble!",
+      "sound_fail": "crunch!",
+      "ter_set": "t_nemaf_meat_floor",
+      "items": [ { "item": "bone_human", "count": [ 15, 20 ] }, { "item": "human_flesh", "count": [ 2, 8 ] } ]
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_nemaf_meat_hole_tiny",
+    "name": "meat vent",
+    "description": "A tiny vent in the meat here allows movement- but nothing larger than a squirrel could get through.",
+    "looks_like": "t_resin_hole",
+    "symbol": "*",
+    "color": "red",
+    "move_cost": 4,
+    "coverage": 85,
+    "roof": "t_nemaf_meat_roof",
+    "flags": [ "SUPPORTS_ROOF", "CONNECT_TO_WALL", "SMALL_PASSAGE" ],
+    "bash": {
+      "str_min": 200,
+      "str_max": 300,
+      "sound": "the meat splatter and slither away!",
+      "sound_fail": "squelch.",
+      "ter_set": "t_nemaf_meat_floor",
+      "items": [ { "item": "human_flesh", "count": [ 10, 20 ] }, { "item": "human_lard", "count": [ 5, 12 ] }, { "item": "blood", "count": [ 15, 25 ] } ]
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_nemaf_meat_hole_small",
+    "name": "meat port",
+    "description": "A small port in the meat here allows movement- but nothing larger than a dog could get through.",
+    "symbol": "o",
+    "color": "red",
+    "copy-from": "t_nemaf_meat_hole_tiny",
+    "coverage": 70
+  },
+  {
+    "type": "terrain",
+    "id": "t_nemaf_meat_hole_medium",
+    "name": "meat gap",
+    "description": "A gap in the meat here allows movement- but nothing larger than a person could get through.",
+    "symbol": "O",
+    "color": "red",
+    "copy-from": "t_nemaf_meat_hole_tiny",
+    "coverage": 50
+  },
+    {
+    "type": "terrain",
+    "id": "t_nemaf_acid_floor",
+    "name": "stomach acid",
+    "description": "A dreadful stench arises from this corrosive fluid, which doesn't quite bubble as much as it froths angrily.",
+    "looks_like": "fd_sludge",
+    "symbol": "~",
+    "color": "yellow",
+    "move_cost": 8,
+    "emissions": [ "emit_acid_splash" ],
+    "flags": [ "TRANSPARENT", "SUPPORTS_ROOF" ],
+    "bash": { "sound": "sploosh!", "ter_set": "t_null", "str_min": 40, "str_max": 100, "str_min_supported": 500, "bash_below": true }
   }
 ]

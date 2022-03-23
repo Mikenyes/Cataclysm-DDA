@@ -1,0 +1,25 @@
+[
+  {
+    "type": "palette",
+    "id": "nemaf_meat_palette",
+    "terrain": {
+      ",": [ [ "t_null", 2 ], "t_nemaf_meat_floor" ],
+      "!": "t_nemaf_meat_wall",
+      "|": "t_nemaf_bone_wall",
+      "]": "t_nemaf_lattice_wall",
+      "[": "t_nemaf_ribbed_wall",
+      "?": "t_nemaf_marrow_wall",
+      ".": "t_nemaf_meat_hole_tiny",
+      "`": "t_nemaf_meat_hole_small",
+      "*": "t_nemaf_meat_hole_medium",
+      "~": "t_open_air_rooved",
+      "#": "t_nemaf_meat_floor",
+      ">": "t_slope_up",
+      "<": "t_slope_down",
+      "+": [ [ "t_nemaf_meat_floor", 2 ], "t_nemaf_acid_floor" ],
+      "=": [ "t_nemaf_meat_floor", [ "t_nemaf_acid_floor", 2 ] ],
+      "-": "t_nemaf_acid_floor",
+      "a": "t_nemaf_pink_slime_wall"
+    }
+  }
+]

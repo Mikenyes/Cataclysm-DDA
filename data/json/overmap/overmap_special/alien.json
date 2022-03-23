@@ -105,5 +105,24 @@
     "//": "Occurences should drop a lot once we have some breadcrumbs leading to the base, but until then this is going to be the only way to get CBMs.",
     "occurrences": [ 1, 12 ],
     "flags": [ "UNIQUE", "EXODII" ]
+  },
+  {
+    "type": "overmap_special",
+    "id": "nemaf_mini_meat",
+    "overmaps": [
+      { "point": [ 0, 0, 0 ], "overmap": "nemaf_meat_z0t1b_north" },
+      { "point": [ 1, 0, 0 ], "overmap": "nemaf_meat_z0t1a_east" },
+      { "point": [ 1, 1, 0 ], "overmap": "nemaf_meat_z0t1a_south" },
+      { "point": [ 0, 1, 0 ], "overmap": "nemaf_meat_z0t1a_west" },
+      { "point": [ 0, 0, -1 ], "overmap": "nemaf_meat_zn1t1b_north" },
+      { "point": [ 1, 0, -1 ], "overmap": "nemaf_meat_zn1t1a_east" },
+      { "point": [ 1, 1, -1 ], "overmap": "nemaf_meat_zn1t1a_south" },
+      { "point": [ 0, 1, -1 ], "overmap": "nemaf_meat_zn1t1a_west" }
+    ],
+    "locations": [ "land" ],
+    "city_distance": [ 3, 120 ],
+    "city_sizes": [ 0, 30 ],
+    "occurrences": [ 10, 10 ],
+    "flags": [ "UNIQUE", "EXODII" ]
   }
 ]
