@@ -18,7 +18,7 @@
       "<": "t_slope_down",
       "+": [ [ "t_nemaf_meat_floor", 2 ], "t_nemaf_acid_floor" ],
       "=": [ "t_nemaf_meat_floor", [ "t_nemaf_acid_floor", 2 ] ],
-      "-": "t_nemaf_acid_floor",
+      "-": [ "t_nemaf_meat_floor", [ "t_nemaf_acid_floor", 6 ] ],
       "a": "t_nemaf_pink_slime_wall"
     }
   }
