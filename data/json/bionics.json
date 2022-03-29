@@ -1,5 +1,10 @@
 [
   {
+    "type": "mutation",
+    "id": "CBM_Interface",
+    "migrate_to": "CBM_INTERFACE_1"
+  },
+  {
     "id": "bio_adrenaline",
     "type": "bionic",
     "name": { "str": "Adrenaline Pump" },
@@ -622,25 +627,7 @@
   {
     "id": "bio_climate",
     "type": "bionic",
-    "name": { "str": "Internal Climate Control" },
-    "description": "Throughout your body lies a network of thermal piping, which eases the effects of high and low ambient temperatures when activated.",
-    "occupied_bodyparts": [
-      [ "torso", 8 ],
-      [ "head", 2 ],
-      [ "arm_l", 2 ],
-      [ "arm_r", 2 ],
-      [ "hand_l", 1 ],
-      [ "hand_r", 1 ],
-      [ "leg_l", 3 ],
-      [ "leg_r", 3 ],
-      [ "foot_l", 1 ],
-      [ "foot_r", 1 ]
-    ],
-    "act_cost": "100 J",
-    "react_cost": "100 J",
-    "time": 1,
-    "flags": [ "BIONIC_TOGGLED" ],
-    "active_flags": [ "CLIMATE_CONTROL" ]
+    "migrate_to": "CBM_CLIMATE_CONTROL_1"
   },
   {
     "id": "bio_cloak",
@@ -688,11 +675,7 @@
   {
     "id": "bio_dex_enhancer",
     "type": "bionic",
-    "name": { "str": "Wired Reflexes" },
-    "description": "Your reaction time has been greatly enhanced with bionic nerve stimulators, giving you a +2 bonus to dexterity.",
-    "occupied_bodyparts": [ [ "head", 3 ], [ "torso", 6 ], [ "arm_l", 3 ], [ "arm_r", 3 ], [ "leg_l", 7 ], [ "leg_r", 7 ] ],
-    "stat_bonus": [ [ "DEX", 2 ] ],
-    "flags": [ "BIONIC_NPC_USABLE" ]
+    "migrate_to": "CBM_STAT_DEX_UP_1"
   },
   {
     "id": "bio_digestion",
@@ -810,43 +793,12 @@
   {
     "id": "bio_eye_enhancer",
     "type": "bionic",
-    "name": { "str": "Diamond Cornea" },
-    "description": "Your vision is greatly enhanced, giving you a +2 bonus to perception.",
-    "occupied_bodyparts": [ [ "eyes", 1 ] ],
-    "stat_bonus": [ [ "PER", 2 ] ],
-    "flags": [ "BIONIC_NPC_USABLE" ]
+    "migrate_to": "CBM_STAT_PER_UP_1"
   },
   {
     "id": "bio_eye_optic",
     "type": "bionic",
-    "name": { "str": "Telescopic Eyes" },
-    "description": "Much of the material in your inner eye has been surgically removed and replaced with an array of high-powered, auto-focusing lenses.  They function as integrated binoculars, letting you see much farther than before, and any vision problems you might have had are now gone.",
-    "occupied_bodyparts": [ [ "eyes", 2 ] ],
-    "flags": [ "ENHANCED_VISION" ],
-    "cant_remove_reason": "The Telescopic Lenses are part of %1$s eyes now.  Removing them would leave %2$s blind.",
-    "canceled_mutations": [
-      "HYPEROPIC",
-      "MYOPIC",
-      "URSINE_EYE",
-      "NIGHTVISION3",
-      "NIGHTVISION2",
-      "NIGHTVISION",
-      "BIRD_EYE",
-      "COMPOUND_EYES",
-      "LIZ_IR",
-      "CEPH_VISION",
-      "CEPH_EYES",
-      "ELFA_FNV",
-      "ELFA_NV",
-      "ELFAEYES",
-      "FEL_NV",
-      "FEL_EYE",
-      "INFRARED",
-      "LIZ_EYE",
-      "EYEBULGE",
-      "SEESLEEP"
-    ],
-    "mutation_conflicts": [ "EYESTALKS1", "EYESTALKS2" ]
+    "migrate_to": "CBM_TELESCOPIC_1"
   },
   {
     "id": "bio_face_mask",
@@ -978,57 +930,22 @@
   {
     "id": "bio_heatsink",
     "type": "bionic",
-    "name": { "str": "Thermal Dissipation" },
-    "description": "Powerful heatsinks and supermaterials are surgically woven into your flesh.  While powered, this system will prevent heat damage up to 2000 degrees Fahrenheit.  Note that this does not affect your internal temperature.",
-    "occupied_bodyparts": [
-      [ "torso", 10 ],
-      [ "head", 2 ],
-      [ "arm_l", 2 ],
-      [ "arm_r", 2 ],
-      [ "hand_l", 1 ],
-      [ "hand_r", 1 ],
-      [ "leg_l", 3 ],
-      [ "leg_r", 3 ],
-      [ "foot_l", 1 ],
-      [ "foot_r", 1 ]
-    ],
-    "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
-    "active_flags": [ "HEATSINK" ],
-    "act_cost": "1 kJ",
-    "react_cost": "1 kJ",
-    "time": 1
+    "migrate_to": "CBM_HEAT_SINK_1"
   },
   {
     "id": "bio_hydraulics",
     "type": "bionic",
-    "name": { "str": "Hydraulic Muscles" },
-    "description": "While activated, your muscles will be greatly enhanced, increasing your strength by 20.",
-    "occupied_bodyparts": [ [ "torso", 10 ], [ "arm_l", 8 ], [ "arm_r", 8 ], [ "leg_l", 10 ], [ "leg_r", 10 ] ],
-    "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
-    "act_cost": "10 kJ",
-    "react_cost": "10 kJ",
-    "time": 1
+    "migrate_to": "CBM_HYDRAULICS_1"
   },
   {
     "id": "bio_infrared",
     "type": "bionic",
-    "name": { "str": "Infrared Vision" },
-    "description": "Your range of vision extends into the infrared, allowing you to see warm-blooded creatures in the dark or through smoke.",
-    "occupied_bodyparts": [ [ "eyes", 1 ] ],
-    "flags": [ "BIONIC_TOGGLED" ],
-    "active_flags": [ "INFRARED" ],
-    "act_cost": "5 J",
-    "react_cost": "5 J",
-    "time": 1
+    "migrate_to": "CBM_INFRARED_1"
   },
   {
     "id": "bio_int_enhancer",
     "type": "bionic",
-    "name": { "str": "Cerebral Booster" },
-    "description": "Your brain has been enhanced with bionic coprocessors, giving you a +2 bonus to intelligence.",
-    "occupied_bodyparts": [ [ "head", 6 ] ],
-    "stat_bonus": [ [ "INT", 2 ] ],
-    "flags": [ "BIONIC_NPC_USABLE" ]
+    "migrate_to": "CBM_STAT_INT_UP_1"
   },
   {
     "id": "bio_itchy",
@@ -1059,23 +976,7 @@
   {
     "id": "bio_leukocyte",
     "type": "bionic",
-    "name": { "str": "Leukocyte Breeder System" },
-    "description": "You are equipped with bionic stimulators which augment your haematopoiesis system, allowing you to accelerate white blood cell production using bionic power.  It is supposed to run continuously and may cause unpleasant side effects when turned off.",
-    "occupied_bodyparts": [ [ "torso", 10 ] ],
-    "flags": [ "BIONIC_TOGGLED", "BIONIC_SLEEP_FRIENDLY", "BIONIC_NPC_USABLE" ],
-    "act_cost": "5 J",
-    "react_cost": "5 J",
-    "time": 1,
-    "enchantments": [
-      {
-        "condition": "ACTIVE",
-        "values": [
-          { "value": "EFFECTIVE_HEALTH_MOD", "add": 100 },
-          { "value": "MOD_HEALTH", "add": -50 },
-          { "value": "MOD_HEALTH_CAP", "add": -200 }
-        ]
-      }
-    ]
+    "migrate_to": "CBM_HEALTH_1"
   },
   {
     "id": "bio_lighter",
@@ -1481,11 +1382,7 @@
   {
     "id": "bio_str_enhancer",
     "type": "bionic",
-    "name": { "str": "Muscle Augmentation" },
-    "description": "Your muscular system has been surgically enhanced with myomer fibers, giving you a +2 bonus to strength.",
-    "occupied_bodyparts": [ [ "torso", 6 ], [ "arm_l", 4 ], [ "arm_r", 4 ], [ "leg_l", 8 ], [ "leg_r", 8 ] ],
-    "stat_bonus": [ [ "STR", 2 ] ],
-    "flags": [ "BIONIC_NPC_USABLE" ]
+    "migrate_to": "CBM_STAT_STR_UP_1"
   },
   {
     "id": "bio_surgical_razor",
@@ -1650,10 +1547,7 @@
   {
     "id": "bio_watch",
     "type": "bionic",
-    "name": { "str": "Internal Chronometer" },
-    "description": "You have been equipped with an internal atomic clock, ensuring that you will always know the current time.  Additionally, it includes a silent alarm clock function.",
-    "occupied_bodyparts": [ [ "head", 1 ] ],
-    "flags": [ "WATCH", "ALARMCLOCK" ]
+    "migrate_to": "CBM_CHRONOMETER_1"
   },
   {
     "id": "bio_water_extractor",
@@ -1688,31 +1582,7 @@
   {
     "id": "bio_weight",
     "type": "bionic",
-    "name": { "str": "Titanium Skeletal Bracing" },
-    "description": "Titanium bracing has been installed onto your elbows, knees, and spine, making them far better at handling strain.  Your carrying capacity is increased by 20 kilograms, or about 44 pounds.",
-    "occupied_bodyparts": [ [ "torso", 8 ], [ "arm_l", 3 ], [ "arm_r", 3 ], [ "leg_l", 3 ], [ "leg_r", 3 ] ],
-    "weight_capacity_bonus": "20 kg",
-    "flags": [ "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF" ],
-    "mutation_conflicts": [
-      "AMORPHOUS",
-      "BENDY2",
-      "BENDY3",
-      "LARGE",
-      "LARGE_OK",
-      "HUGE",
-      "HUGE_OK",
-      "SMALL",
-      "SMALL2",
-      "SMALL_OK",
-      "ARM_TENTACLES",
-      "ARM_TENTACLES_4",
-      "ARM_TENTACLES_8",
-      "CLAWS_TENTACLES",
-      "GASTROPOD_FOOT",
-      "GASTROPOD_BALANCE",
-      "LEG_TENTACLES",
-      "LEG_TENT_BRACE"
-    ]
+    "migrate_to": "CBM_WEIGHT_BRACING_1"
   },
   {
     "id": "bio_taste_blocker",
@@ -1725,11 +1595,7 @@
   {
     "id": "bio_soporific",
     "type": "bionic",
-    "name": { "str": "Soporific Induction" },
-    "description": "An electrode has been implanted into your brain's ventrolateral preoptic nucleus.  It turns on whenever you're trying to fall asleep, creating an artificial but effective sensation of fatigue.",
-    "occupied_bodyparts": [ [ "head", 1 ] ],
-    "flags": [ "BIONIC_TOGGLED" ],
-    "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "SLEEPY", "add": 30 } ] } ]
+    "migrate_to": "CBM_SOPORIFIC"
   },
   {
     "id": "bio_faulty_electromagnetic_leak",
