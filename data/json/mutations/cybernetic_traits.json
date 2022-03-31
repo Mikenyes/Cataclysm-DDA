@@ -6,52 +6,157 @@
     "weight": "500 g",
     "points": 1,
     "description": "You have a matrix in your central nervous system that acts as a universal control and installation bus for compact bionic modules.",
-    "bionic_slot_bonuses": [ [ "head", 40 ], [ "mouth", 30 ], [ "eyes", 30 ] ],
+    "bionic_slot_bonuses": [
+      [ "head", 10 ],
+      [ "mouth", 5 ],
+      [ "torso", 15 ],
+      [ "arm_l", 5 ],
+      [ "hand_l", 5 ],
+      [ "arm_r", 5 ],
+      [ "hand_r", 5 ],
+      [ "leg_l", 5 ],
+      [ "foot_l", 5 ],
+      [ "leg_r", 5 ],
+      [ "foot_r", 5 ]
+    ],
+    "cancels": [ "MAGOG_INTERFACE_1" ],
     "flags": [ "CBM_INTERFACE" ],
+    "enchantments": [
+      { "condition": "ALWAYS", "values": [ { "value": "REGEN_MANA", "multiply": -0.9 }, { "value": "BIONIC_POWER", "multiply": 1 } ] }
+    ],
     "cybernetic": true,
-    "//": "ALPHABETICAL SORTING WITH PRIORITIES - CBM_INTERFACE_X traits have top priority, then CBM_FRAMEWORK_FOOBAR_X traits, then all others."
+    "//": "ALPHABETICAL SORTING WITH PRIORITIES - FOO_INTERFACE_X traits have priority over FOO_FRAMEWORK_BAR_X traits which have priority over FOO_THINGY_X."
   },
   {
     "type": "mutation",
     "id": "CBM_FRAMEWORK_ARMS_1",
-    "name": { "str": "Standard Arm Framework" },
+    "name": { "str": "Standard Manipulator Framework" },
     "weight": "1500 g",
     "points": 1,
     "description": "Your arms are permanently inlaid with a bionic frame, providing a structure for further modifications to build on.",
     "bionic_slot_bonuses": [ [ "arm_l", 35 ], [ "hand_l", 30 ], [ "arm_r", 35 ], [ "hand_r", 30 ] ],
-    "prereqs": [ "CBM_FRAMEWORK_SPINE_1" ],
+    "prereqs": [ "CBM_FRAMEWORK_TORSO_1" ],
+    "encumbrance_always": [ [ "arm_l", -5 ], [ "arm_r", -5 ] ],
+    "cybernetic": true
+  },
+  {
+    "type": "mutation",
+    "id": "CBM_FRAMEWORK_EYES_1",
+    "name": { "str": "Standard Ocular Framework" },
+    "weight": "180 g",
+    "points": 1,
+    "description": "Your eye sockets have been permanently sealed with protective mirrored lenses and your tear ducts have been replaced with an interface for further modifications to build on.",
+    "bionic_slot_bonuses": [ [ "eyes", 30 ] ],
+    "prereqs": [ "CBM_FRAMEWORK_HEAD_1" ],
+    "active": true,
+    "time": 1,
+    "flags": [ "GLARE_RESIST" ],
+    "active_flags": [ "BLIND" ],
     "cybernetic": true
   },
   {
     "type": "mutation",
     "id": "CBM_FRAMEWORK_LEGS_1",
-    "name": { "str": "Standard Leg Framework" },
+    "name": { "str": "Standard Ambulator Framework" },
     "weight": "2 kg",
     "points": 1,
     "description": "Your legs are permanently inlaid with a bionic frame, providing a structure for further modifications to build on.",
     "bionic_slot_bonuses": [ [ "leg_l", 35 ], [ "foot_l", 30 ], [ "leg_r", 35 ], [ "foot_r", 30 ] ],
-    "prereqs": [ "CBM_FRAMEWORK_SPINE_1" ],
+    "prereqs": [ "CBM_FRAMEWORK_TORSO_1" ],
+    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "CARRY_WEIGHT", "add": 12000 } ] } ],
     "cybernetic": true
   },
   {
     "type": "mutation",
-    "id": "CBM_FRAMEWORK_SPINE_1",
+    "id": "CBM_FRAMEWORK_HEAD_1",
+    "name": { "str": "Standard Cranial Framework" },
+    "weight": "2 kg",
+    "points": 1,
+    "description": "Your skull is permanently reinforced with a bionic mesh, providing a structure for further modifications to build on.",
+    "bionic_slot_bonuses": [ [ "head", 30 ], [ "mouth", 25 ] ],
+    "prereqs": [ "CBM_INTERFACE_1" ],
+    "flags": [ "TWO_WAY_RADIO" ],
+    "cybernetic": true
+  },
+  {
+    "type": "mutation",
+    "id": "CBM_FRAMEWORK_TORSO_1",
     "name": { "str": "Standard Spinal Framework" },
     "weight": "3500 g",
     "points": 1,
-    "description": "Your spinal column is irrevocably entwined with a bionic support lattice, providing a structure for further modifications to build on.",
+    "description": "Your spinal column is irrevocably entwined with a bionic support lattice and battery array, providing a structure for further modifications to build on.",
     "bionic_slot_bonuses": [ [ "head", 10 ], [ "torso", 70 ], [ "arm_l", 15 ], [ "arm_r", 15 ], [ "leg_l", 15 ], [ "leg_r", 15 ] ],
-    "prereqs": [ "CBM_INTERFACE_1" ],
+    "prereqs": [ "CBM_FRAMEWORK_HEAD_1" ],
+    "enchantments": [
+      { "condition": "ALWAYS", "values": [ { "value": "CARRY_WEIGHT", "multiply": 0.25 }, { "value": "BIONIC_POWER", "add": 125000 } ] }
+    ],
     "cybernetic": true
   },
   {
     "type": "mutation",
-    "id": "CBM_CHRONOMETER_1",
-    "name": { "str": "Internal Atomic Chronometer" },
-    "description": "You have been equipped with an internal atomic clock, ensuring that you will always know the current time.  Additionally, it includes a silent alarm clock function.",
-    "bionic_slot_costs": [ [ "head", 1 ] ],
-    "prereqs": [ "CBM_INTERFACE_1" ]
-    "flags": [ "WATCH", "ALARMCLOCK" ],
+    "id": "CBM_BLOOD_FILTER_1",
+    "name": { "str": "Centralized Mutadata Service" },
+    "description": "A set of sensors integrated into major arteries constantly scan for mutagenic contaminants, sending an encoded alert if mutagenic events become likely.",
+    "bionic_slot_costs": [ [ "torso", 2 ] ],
+    "prereqs": [ "CBM_FRAMEWORK_TORSO_1" ],
+    "flags": [ "BLOOD_ANALYSIS", "CBM_MUTAGEN_DETECT" ],
+    "cybernetic": true
+  },
+  {
+    "type": "mutation",
+    "id": "CBM_BLOOD_FILTER_2",
+    "name": { "str": "Mutagenic Chelation Filters" },
+    "description": "When mutagenic contaminants are detected in the bloodstream, the filters woven into your arteries are activated, neutralizing the active toxins.",
+    "bionic_slot_costs": [ [ "torso", 3 ] ],
+    "prereqs": [ "CBM_BLOOD_FILTER_1" ],
+    "triggers": [
+      [
+        {
+          "condition": { "compare_int": [ { "u_val": "vitamin", "name": "mutagen" }, ">", { "const": 300 } ] },
+          "msg_on": { "text": "HIGH_PRIORITY_ALERT: [ MUTAGENIC CONTAMINANTS DETECTED ]", "rating": "bad" }
+        }
+      ]
+    ],
+    "active": true,
+    "active_power_draw": "50 J",
+    "active_traits": [ "CBM_BLOOD_FILTER_2_ACTIVE" ],
+    "cybernetic": true
+  },
+  {
+    "type": "mutation",
+    "id": "CBM_BLOOD_FILTER_2_ACTIVE",
+    "name": { "str": "[ ACTIVE CHELATION FILTERS ]" },
+    "description": "[ RECORDING INCIDENT ]",
+    "vitamin_rates": [
+      [ "mutagen", 8 ],
+      [ "mutagen_alpha", 4 ],
+      [ "mutagen_batrachian", 4 ],
+      [ "mutagen_beast", 4 ],
+      [ "mutagen_bird", 4 ],
+      [ "mutagen_cattle", 4 ],
+      [ "mutagen_cephalopod", 4 ],
+      [ "mutagen_chimera", 4 ],
+      [ "mutagen_elfa", 4 ],
+      [ "mutagen_feline", 4 ],
+      [ "mutagen_fish", 4 ],
+      [ "mutagen_gastropod", 4 ],
+      [ "mutagen_human", 10 ],
+      [ "mutagen_insect", 4 ],
+      [ "mutagen_lizard", 4 ],
+      [ "mutagen_lupine", 4 ],
+      [ "mutagen_medical", 4 ],
+      [ "mutagen_mouse", 4 ],
+      [ "mutagen_plant", 4 ],
+      [ "mutagen_raptor", 4 ],
+      [ "mutagen_rabbit", 4 ],
+      [ "mutagen_rat", 4 ],
+      [ "mutagen_slime", 4 ],
+      [ "mutagen_spider", 4 ],
+      [ "mutagen_troglobite", 4 ],
+      [ "mutagen_ursine", 4 ]
+    ],
+    "player_display": false,
+    "valid": false,
     "cybernetic": true
   },
   {
@@ -75,21 +180,62 @@
     ],
     "prereqs": [ "CBM_FRAMEWORK_ARMS_1" ],
     "prereqs2": [ "CBM_FRAMEWORK_LEGS_1" ],
-    "active_flags": [ "CLIMATE_CONTROL" ],
     "active": true,
-    "//": "NEEDS COST",
+    "time": 1,
+    "active_flags": [ "CLIMATE_CONTROL" ],
+    "active_power_draw": "100 J",
+    "cybernetic": true
+  },
+  {
+    "type": "mutation",
+    "id": "CBM_FLASHLIGHT_1",
+    "name": { "str": "Harmonic Light Optimizer" },
+    "description": "An array of projectors are dotted across your cranium, capable of fully illuminating the surrounding area with merely a thought.",
+    "weight": "100 g",
+    "points": 1,
+    "stages": [
+      [ [ "BASIC_0" ], 1 ],
+      [ [ "NO_SLOT_COST" ], 3 ],
+      [ [ "MORE_SLOT_COST_2" ], 1 ],
+      [ [ [ "POWER_HUNGRY_4", "NO_SLOT_COST" ] ], 7 ]
+    ],
+    "bionic_slot_costs": [ [ "head", 2 ] ],
+    "prereqs": [ "CBM_FRAMEWORK_HEAD_1" ],
+    "active": true,
+    "time": 1,
+    "active_power_draw": "3 J",
+    "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "LUMINATION", "add": 80 } ] } ],
+    "cybernetic": true
+  },
+  {
+    "type": "mutation",
+    "id": "CBM_FLASHLIGHT_2",
+    "name": { "str": "" },
+    "description": ".",
+    "weight": "1200 g",
+    "points": 3,
+    "stages": [ [ [ "BASIC_0" ], 1 ], [ [ [ "POWER_HUNGRY_2", "NO_SLOT_COST" ] ], 1 ] ],
+    "bionic_slot_costs": [ [ "torso", 8 ], [ "arm_l", 2 ], [ "arm_r", 2 ], [ "leg_l", 3 ], [ "leg_r", 3 ] ],
+    "prereqs": [ "CBM_FLASHLIGHT_1" ],
+    "prereqs2": [ "CBM_FRAMEWORK_TORSO_1" ],
+    "active": true,
+    "active_power_draw": "10 kJ",
+    "//": "NEEDS EFFECT",
+    "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "LUMINATION", "add": 1500, "multiply": 0.4 } ] } ],
     "cybernetic": true
   },
   {
     "type": "mutation",
     "id": "CBM_HEALTH_1",
     "name": { "str": "Leukocyte Breeder System" },
-    "description": "You are equipped with bionic stimulators which augment your haematopoiesis system, allowing you to accelerate white blood cell production using bionic power.  It is supposed to run continuously and may cause unpleasant side effects when turned off."
+    "description": "You are equipped with bionic stimulators which augment your haematopoiesis system, allowing you to accelerate white blood cell production using bionic power.  It is supposed to run continuously and may cause unpleasant side effects when turned off.",
     "weight": "3 kg",
     "points": 4,
     "bionic_slot_costs": [ [ "torso", 10 ] ],
-    "prereqs": [ "CBM_FRAMEWORK_SPINE_1" ],
+    "prereqs": [ "CBM_FRAMEWORK_TORSO_1" ],
     "active": true,
+    "time": 1,
+    "active_power_draw": "5 J",
     "enchantments": [
       {
         "condition": "ACTIVE",
@@ -100,14 +246,26 @@
         ]
       }
     ],
-    "//": "NEEDS COST",
+    "cybernetic": true
+  },
+  {
+    "type": "mutation",
+    "id": "CBM_HEARING_1",
+    "name": { "str": "Audio Amplification Apparatus" },
+    "description": "A rig of microphones and amplifiers mounted in the upper skull, providing a notable enhancement to hearing.",
+    "weight": "4 kg",
+    "points": 3,
+    "bionic_slot_costs": [ [ "head", 2 ] ],
+    "prereqs": [ "CBM" ],
+    "flags": [ "IMMUNE_HEARING_DAMAGE" ],
+    "hearing_modifier": 2,
     "cybernetic": true
   },
   {
     "type": "mutation",
     "id": "CBM_HEAT_SINK_1",
-    "name": { "str": "Thermal Dissipation" },
-    "description": "Powerful heatsinks and supermaterials are surgically woven into your flesh.  While powered, this system will prevent heat damage up to 2000 degrees Fahrenheit.  Note that this does not affect your internal temperature.",
+    "name": { "str": "Thermal Dissipation Sink" },
+    "description": "Powerful heatsinks and supermaterials are surgically woven into your flesh, redirecting external heat when powered.",
     "weight": "4 kg",
     "points": 3,
     "bionic_slot_costs": [
@@ -123,9 +281,10 @@
       [ "foot_r", 1 ]
     ],
     "prereqs": [ "CBM_CLIMATE_CONTROL_1" ],
-    "active_flags": [ "HEATSINK" ],
     "active": true,
-    "//": "NEEDS COST",
+    "time": 1,
+    "active_flags": [ "HEATSINK" ],
+    "active_power_draw": "1 kJ",
     "cybernetic": true
   },
   {
@@ -150,33 +309,129 @@
     "prereqs": [ "CBM_FRAMEWORK_ARMS_1" ],
     "prereqs2": [ "CBM_FRAMEWORK_LEGS_1" ],
     "active": true,
+    "time": 1,
     "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "STRENGTH", "add": 20 } ] } ],
-    "//": "NEEDS COST",
+    "active_power_draw": "10 kJ",
+    "cybernetic": true
+  },
+  {
+    "type": "mutation",
+    "id": "CBM_INFORMATION_1",
+    "name": { "str": "Atomic Chronometer Monitor" },
+    "description": "You have been equipped with an internal atomic clock, ensuring that you will always know the current time.  Additionally, it includes a silent alarm clock function.",
+    "weight": "200 g",
+    "points": 1,
+    "bionic_slot_costs": [ [ "head", 1 ] ],
+    "prereqs": [ "CBM_INTERFACE_1" ],
+    "flags": [ "WATCH", "ALARMCLOCK" ],
+    "cybernetic": true
+  },
+  {
+    "type": "mutation",
+    "id": "CBM_INFORMATION_2",
+    "name": { "str": "Atmospheric Weather Monitor" },
+    "description": "A multitude of scientific instruments and sensors collect environmental data.  The data is compiled and presented as a simple readout of the current weather.  It also passively tells you the local air temperature.",
+    "weight": "300 g",
+    "points": 1,
+    "bionic_slot_costs": [ [ "torso", 2 ], [ "head", 1 ] ],
+    "prereqs": [ "CBM_INFORMATION_1" ],
+    "flags": [ "HYGROMETER", "THERMOMETER" ],
+    "cybernetic": true
+  },
+  {
+    "type": "mutation",
+    "id": "CBM_INFORMATION_3",
+    "name": { "str": "Radiation Dosimeter Monitor" },
+    "description": "Small radiation sensors have been surgically implanted throughout your body, allowing you to analyze your level of absorbed radiation.  They will also alert you whenever exposed to environmental radiation.",
+    "weight": "400 g",
+    "points": 1,
+    "bionic_slot_costs": [ [ "torso", 2 ], [ "head", 1 ], [ "arm_l", 1 ], [ "arm_r", 1 ], [ "leg_l", 1 ], [ "leg_r", 1 ] ],
+    "prereqs": [ "CBM_INFORMATION_2" ],
+    "flags": [ "GEIGER" ],
     "cybernetic": true
   },
   {
     "type": "mutation",
     "id": "CBM_INFRARED_1",
     "name": { "str": "Infrared Sensor Suite" },
+    "description": "An infrared sensor suite has been distributed across your skull, allowing for easy detection of warm-blooded creatures when active.",
     "weight": "250 g",
     "points": 2,
-    "description": "An infrared sensor suite has been distributed across your skull, allowing for easy detection of warm-blooded creatures when active.",
     "bionic_slot_costs": [ [ "head", 2 ], [ "eyes", 3 ] ],
-    "prereqs": [ "CBM_STAT_PER_UP_1" ],
+    "prereqs": [ "CBM_FRAMEWORK_EYES_1" ],
     "active": true,
+    "time": 1,
     "active_flags": [ "INFRARED" ],
-    "//": "NEEDS COST",
+    "active_power_draw": "5 J",
+    "cybernetic": true
+  },
+  {
+    "type": "mutation",
+    "id": "CBM_MEMBRANE_1",
+    "name": { "str": "Aquatic Vision Protection" },
+    "description": "The lenses across your eye sockets have been treated with an advanced hydrophobic polymer, allowing for near-flawless vision underwater.",
+    "weight": "200 g",
+    "points": 1,
+    "bionic_slot_costs": [ [ "eyes", 3 ] ],
+    "prereqs": [ "CBM_FRAMEWORK_EYES_1" ],
+    "flags": [ "EYE_MEMBRANE" ],
+    "cybernetic": true
+  },
+  {
+    "type": "mutation",
+    "id": "CBM_MEMORY_1",
+    "name": { "str": "Enhanced Memory Banks" },
+    "description": "Your memory has been enhanced with small quantum storage drives.  While active, you learn - both through reading and practice - more quickly, and will retain knowledge of skills for longer.  They are non-volatile, and even when inactive, the layout of terrain you've explored will remain in your memory for an incredibly long time.",
+    "weight": "300 g",
+    "points": 2,
+    "stages": [ [ [ "BASIC_0" ], 1 ], [ [ "POWER_HUNGRY_4" ], 2 ] ],
+    "bionic_slot_costs": [ [ "head", 4 ] ],
+    "prereqs": [ "CBM_FRAMEWORK_HEAD_1" ],
+    "active_power_draw": "10 J",
+    "enchantments": [
+      {
+        "condition": "ALWAYS",
+        "values": [
+          { "value": "MAP_MEMORY", "add": 15 }
+        ]
+      },
+      {
+        "condition": "ACTIVE",
+        "values": [
+          { "value": "READING_EXP", "multiply": 0.1 },
+          { "value": "SKILL_RUST_RESIST", "add": 15 },
+          { "value": "LEARNING_FOCUS", "add": 4 }
+        ]
+      }
+    ]
+    "cybernetic": true
+  },
+  {
+    "type": "mutation",
+    "id": "CBM_NIGHT_VISION_1",
+    "name": { "str": "Implanted Night Vision" },
+    "description": "When active, this bionic will amplify existing light, allowing you to see in the dark.",
+    "weight": "200 g",
+    "points": 1,
+    "bionic_slot_costs": [ [ "eyes", 2 ] ],
+    "prereqs": [ "CBM_FRAMEWORK_EYES_1" ],
+    "active": true,
+    "time": 1,
+    "active_flags": [ "NIGHT_VISION" ],
+    "active_power_draw": "10 J",
     "cybernetic": true
   },
   {
     "type": "mutation",
     "id": "CBM_SOPORIFIC_1",
     "name": { "str": "Soporific Induction Electrode" },
-    "weight": "100 g",
-    "points": 2,
     "description": "An electrode has been implanted into your brain's ventrolateral preoptic nucleus.  It turns on whenever you're trying to fall asleep, creating an artificial but effective sensation of fatigue.",
+    "weight": "100 g",
+    "points": 1,
     "stages": [ [ [ "BASIC_0" ], 2 ] ],
     "bionic_slot_costs": [ [ "head", 3 ] ],
+    "prereqs": [ "CBM_INTERFACE_1" ],
+    "flags": [ "SLEEP_AID" ],
     "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "SLEEPY", "add": 30 } ] } ],
     "cybernetic": true
   },
@@ -184,9 +439,9 @@
     "type": "mutation",
     "id": "CBM_STAT_DEX_UP_1",
     "name": { "str": "Wired Reflex Mesh" },
+    "description": "A mesh of wires has replaced most of your nerves, sending precise electrical impulses and thus enhancing your dexterity.",
     "weight": "400 g",
     "points": 1,
-    "description": "A mesh of wires has replaced most of your nerves, sending precise electrical impulses and thus enhancing your dexterity.",
     "stages": [ [ [ "BASIC_0" ], 2 ], [ [ "MORE_SLOT_COST_1" ], 2 ], [ [ "MORE_SLOT_COST_3", "ENCUMBERING_1" ], 2 ] ],
     "bionic_slot_costs": [
       [ "torso", 2 ],
@@ -210,16 +465,13 @@
     "type": "mutation",
     "id": "CBM_STAT_INT_UP_1",
     "name": { "str": "Auxillary Processing Centers" },
+    "description": "Hollows in your torso have been filled with synthetic synapses, increasing your neural mass and thus enhancing your intelligence.",
     "weight": "800 g",
     "points": 1,
-    "description": "Hollows in your chest have been filled with synthetic synapses, increasing your neural mass and thus enhancing your intelligence.",
     "stages": [ [ [ "BASIC_0" ], 2 ], [ [ "HEAVY_2", "MORE_SLOT_COST_2" ], 2 ], [ [ [ "HEAVY_2", "MORE_SLOT_COST_2" ] ], 2 ] ],
-    "bionic_slot_costs": [
-      [ "torso", 2 ],
-      [ "head", 2 ]
-    ],
+    "bionic_slot_costs": [ [ "torso", 2 ], [ "head", 2 ] ],
     "types": [ "INT_UP" ],
-    "prereqs": [ "CBM_FRAMEWORK_SPINE_1" ],
+    "prereqs": [ "CBM_FRAMEWORK_TORSO_1" ],
     "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "INTELLIGENCE", "add": 1 } ] } ],
     "cybernetic": true
   },
@@ -227,13 +479,17 @@
     "type": "mutation",
     "id": "CBM_STAT_PER_UP_1",
     "name": { "str": "Motion Tracking Subroutine" },
+    "description": "Your motion tracking has been diverted to a microprocessor, aiding split attention and thus enhancing your perception.",
     "weight": "100 g",
     "points": 1,
-    "description": "Your motion tracking has been diverted to a microprocessor, aiding split attention and thus enhancing your perception.",
-    "stages": [ [ [ "BASIC_0" ], 2 ], [ [ "MORE_SLOT_COST_1" ], 2 ], [ [ [ "HEAVY_5", "MORE_SLOT_COST_1" ], "MORE_SLOT_COST_3" ], 2 ] ],
+    "stages": [
+      [ [ "BASIC_0" ], 2 ],
+      [ [ "MORE_SLOT_COST_1" ], 2 ],
+      [ [ [ "HEAVY_5", "MORE_SLOT_COST_1" ], "MORE_SLOT_COST_3" ], 2 ]
+    ],
     "bionic_slot_costs": [ [ "head", 2 ], [ "eyes", 3 ] ],
     "types": [ "PER_UP" ],
-    "prereqs": [ "CBM_INTERFACE_1" ],
+    "prereqs": [ "CBM_FRAMEWORK_EYES_1" ],
     "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "PERCEPTION", "add": 1 } ] } ],
     "cybernetic": true
   },
@@ -241,9 +497,9 @@
     "type": "mutation",
     "id": "CBM_STAT_STR_UP_1",
     "name": { "str": "Woven Muscle Reinforcement" },
+    "description": "Strands of myomer are interwoven with your muscles, preventing tears and thus enhancing your strength.",
     "weight": "400 g",
     "points": 1,
-    "description": "Strands of myomer are interwoven with your muscles, preventing tears and thus enhancing your strength.",
     "stages": [ [ [ "BASIC_0" ], 2 ], [ [ "MORE_SLOT_COST_1" ], 2 ], [ [ "MORE_SLOT_COST_3", "ENCUMBERING_1" ], 2 ] ],
     "bionic_slot_costs": [
       [ "torso", 5 ],
@@ -265,15 +521,23 @@
   },
   {
     "type": "mutation",
+    "id": "CBM_TARGETING_1",
+    "name": { "str": "Target Acquisition Coprocessor" },
+    "description": "Your eyes are surgically equipped with range finders, and their movement is synced with that of your arms, to a degree.  Shots you fire will be much more accurate, particularly at long range.",
+    "bionic_slot_costs": [ [ "torso", 8 ], [ "arm_l", 2 ], [ "arm_r", 2 ], [ "hand_l", 5 ], [ "hand_r", 5 ] ],
+    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "WEAPON_DISPERSION", "multiply": -0.25 } ] } ]
+  }
+  {
+    "type": "mutation",
     "id": "CBM_TELESCOPIC_1",
     "name": { "str": "Telescopic Vision Array" },
+    "description": "Much of the material in your inner eye has been surgically removed and replaced with an array of high-powered, auto-focusing lenses.  They function as integrated binoculars, letting you see much farther than before, and any vision problems you might have had are now gone.",
     "weight": "100 g",
     "points": 2,
-    "description": "Much of the material in your inner eye has been surgically removed and replaced with an array of high-powered, auto-focusing lenses.  They function as integrated binoculars, letting you see much farther than before, and any vision problems you might have had are now gone.",
     "stages": [ [ [ "BASIC_0" ], 1 ], [ [ "MORE_SLOT_COST_2" ], 2 ] ],
     "bionic_slot_costs": [ [ "eyes", 3 ] ],
     "types": [ "EYES" ],
-    "prereqs": [ "CBM_INTERFACE_1" ],
+    "prereqs": [ "CBM_FRAMEWORK_EYES_1" ],
     "overmap_sight": 4,
     "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "SIGHT_MAX", "add": 4 } ] } ],
     "cybernetic": true
@@ -282,9 +546,9 @@
     "type": "mutation",
     "id": "CBM_WEIGHT_BRACING_1",
     "name": { "str": "Structural Joint Bracing" },
+    "description": "Titanium bracing has been installed in your elbows and knees, making them far better at handling strain.  Your carrying capacity is increased by 25 kilograms, or about 55 pounds.",
     "weight": "5 kg",
     "points": 2,
-    "description": "Titanium bracing has been installed in your elbows and knees, making them far better at handling strain.  Your carrying capacity is increased by 25 kilograms, or about 55 pounds.",
     "stages": [
       [ [ "BASIC_0" ], 1 ],
       [ [ "ENCUMBERING_1", "MORE_SLOT_COST_1" ], 1 ],
@@ -294,7 +558,7 @@
     "types": [ "ARMS", "LEGS" ],
     "prereqs": [ "CBM_FRAMEWORK_ARMS_1" ],
     "prereqs2": [ "CBM_FRAMEWORK_LEGS_1" ],
-    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "CARRY_WEIGHT", "add": 25 } ] } ],
+    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "CARRY_WEIGHT", "add": 25000 } ] } ],
     "cybernetic": true
   },
   {
@@ -325,5 +589,20 @@
       }
     ],
     "weight_capacity_modifier": 3
+  },
+  {
+    "type": "mutation",
+    "id": "MAGOG_INTERFACE_1",
+    "name": { "str": "Eschatic Headstone" },
+    "weight": "14 kg",
+    "points": 6,
+    "description": "A bit more than the back half of your head is simply gone, the monolithic replacement less 'integrated' and more 'socketed'.  You can't shake the feeling it could be pried out with a stern tug, but it hasn't budged yet.  It is made of an absolutely colorless stone, dense with fractal engravings, and the unbalanced weight puts constant torque on your neck.  Your body feels numb and heavy, and sometimes everything goes dark.  You aren't dead, but that might be a bad thing.",
+    "bionic_slot_bonuses": [ [ "head", 100 ] ],
+    "cancels": [ "CBM_INTERFACE_1" ],
+    "flags": [ "MAGOG_INTERFACE" ],
+    "enchantments": [
+      { "condition": "ALWAYS", "values": [ { "value": "PAIN", "multiply": 0.5 }, { "value": "LEARNING_FOCUS ", "add": -15 } ] }
+    ],
+    "cybernetic": true
   }
 ]
