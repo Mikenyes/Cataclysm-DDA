@@ -421,7 +421,7 @@
     "id": "PORTAL_DEPENDENT",
     "name": { "str": "Portal Dependent" },
     "points": -8,
-    "description": "Your body is not quite there.  You feel as if part of you remained behind with the portal storm.  You will suffer severely when in lack of portal storms unless you find a way to anchor yourself in the world.",
+    "description": "You feel alien in your own body, as if part of you remained behind with the storm.  You will suffer severely when not exposed to portal storms unless you find a way to anchor yourself to the world again.",
     "valid": false,
     "starting_trait": false,
     "purifiable": false
@@ -431,7 +431,7 @@
     "id": "REALITY_GRASP",
     "name": { "str": "Stabilized in Reality" },
     "points": 0,
-    "description": "You have regained some substance and have stabilized somewhat, lack of portal storms will not affect you as strongly as before.",
+    "description": "You have regained some substance and have stabilized somewhat, if not entirely.  Portal storm withdrawal will not affect you as strongly as before.",
     "valid": false,
     "starting_trait": false,
     "purifiable": false
@@ -3348,8 +3348,8 @@
     "cancels": [ "FANGS", "MANDIBLES" ],
     "active": true,
     "attacks": {
-      "attack_text_u": "You tear into %s with your rasping tongue.",
-      "attack_text_npc": "%1$s tears into %2$s with their rasping tongue.",
+      "attack_text_u": "You tear into %s with your rasping tongue",
+      "attack_text_npc": "%1$s tears into %2$s with their rasping tongue",
       "body_part": "mouth",
       "chance": 15,
       "base_damage": { "damage_type": "cut", "amount": 15 },
@@ -3368,8 +3368,8 @@
     "category": [ "GASTROPOD" ],
     "active": true,
     "attacks": {
-      "attack_text_u": "You stab into %s with your harpoon tongue.",
-      "attack_text_npc": "%1$s stabs into %2$s with their harpoon tongue.",
+      "attack_text_u": "You stab into %s with your harpoon tongue",
+      "attack_text_npc": "%1$s stabs into %2$s with their harpoon tongue",
       "body_part": "mouth",
       "chance": 25,
       "base_damage": { "damage_type": "stab", "amount": 15 },
@@ -5053,6 +5053,21 @@
   },
   {
     "type": "mutation",
+    "id": "SLIMEMIND",
+    "name": { "str": "Slimewave" },
+    "points": 10,
+    "visibility": 2,
+    "ugliness": 10,
+    "description": "You can communicate with your extant mass without physical contact, absorbing knowledge from nearby friendly slime.",
+    "purifiable": false,
+    "prereqs": [ "PER_SLIME", "PER_SLIME_OK" ],
+    "prereqs2": [ "INT_SLIME" ],
+    "threshreq": [ "THRESH_SLIME" ],
+    "category": [ "SLIME" ],
+    "moncams": [ [ "mon_slime_ocularium", 32 ], [ "mon_player_blob", 16 ] ]
+  },
+  {
+    "type": "mutation",
     "id": "SMALL",
     "flags": [ "SMALL" ],
     "name": { "str": "Little" },
@@ -5188,8 +5203,8 @@
     "category": [ "BATRACHIAN" ],
     "active": true,
     "attacks": {
-      "attack_text_u": "You bash %s with your tongue.",
-      "attack_text_npc": "%1$s smacks into %2$s with their tongue.",
+      "attack_text_u": "You bash %s with your tongue",
+      "attack_text_npc": "%1$s smacks into %2$s with their tongue",
       "body_part": "mouth",
       "chance": 15,
       "base_damage": { "damage_type": "bash", "amount": 15 },
@@ -7432,7 +7447,7 @@
   {
     "type": "mutation",
     "id": "PROF_HUB01_ANCILLIARY",
-    "name": { "str": "Hub 01 Ancilliary" },
+    "name": { "str": "Hub 01 Ancillary" },
     "points": 0,
     "description": "You are known to be a capable and resourceful mercenary at the employ of Hub 01.",
     "cancels": [ "PROF_FED" ],
@@ -7656,7 +7671,7 @@
     "name": { "str": "Debug Tail" },
     "points": 99,
     "valid": false,
-    "description": "Gain a tail bodypart",
+    "description": "Gain a tail bodypart.",
     "enchantments": [ "ENCH_DEBUG_TAIL" ],
     "debug": true
   },
@@ -7841,7 +7856,7 @@
   {
     "type": "mutation",
     "id": "MYCUS_FRIEND",
-    "name": { "str": "mycus friend" },
+    "name": { "str": "Mycus friend" },
     "points": 0,
     "valid": false,
     "description": "NPC trait that makes fungaloid monsters see this NPC as a friend.",
@@ -7850,7 +7865,7 @@
   {
     "type": "mutation",
     "id": "MUTE",
-    "name": { "str": "mute" },
+    "name": { "str": "Mute" },
     "points": 0,
     "valid": false,
     "description": "Trait that makes it impossible to say anything."

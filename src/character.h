@@ -1253,6 +1253,8 @@ class Character : public Creature, public visitable
     public:
         /** Recalculate encumbrance for all body parts. */
         void calc_encumbrance();
+        /** Calculate any discomfort your current clothes are causing. */
+        void calc_discomfort();
         /** Recalculate encumbrance for all body parts as if `new_item` was also worn. */
         void calc_encumbrance( const item &new_item );
         // recalculates bodyparts based on enchantments modifying them and the default anatomy.
@@ -1783,7 +1785,7 @@ class Character : public Creature, public visitable
          * Check any already unsealed pockets in items pointed to by `containers`
          * and propagate the unsealed status through the container tree. In the
          * process the player may be asked to handle containers or spill contents,
-         * so make sure all unsealed containers are passed to this fucntion in a
+         * so make sure all unsealed containers are passed to this function in a
          * single batch; items (not limited to the ones listed in `containers` and
          * their contents) may be invalidated or moved after a call to this function.
          *
@@ -1949,8 +1951,10 @@ class Character : public Creature, public visitable
         bool fun_to_read( const item &book ) const;
         int book_fun_for( const item &book, const Character &p ) const;
 
-        bool can_pickVolume( const item &it, bool safe = false, const item *avoid = nullptr ) const;
-        bool can_pickVolume_partial( const item &it, bool safe = false, const item *avoid = nullptr ) const;
+        bool can_pickVolume( const item &it, bool safe = false, const item *avoid = nullptr,
+                             const bool ignore_pkt_settings = true ) const;
+        bool can_pickVolume_partial( const item &it, bool safe = false, const item *avoid = nullptr,
+                                     const bool ignore_pkt_settings = true ) const;
         bool can_pickWeight( const item &it, bool safe = true ) const;
         bool can_pickWeight_partial( const item &it, bool safe = true ) const;
 
@@ -3134,7 +3138,7 @@ class Character : public Creature, public visitable
 
         using trap_map = std::map<tripoint, std::string>;
         // Use @ref trap::can_see to check whether a character knows about a
-        // specific trap - it will consider visibile and known traps.
+        // specific trap - it will consider visible and known traps.
         bool knows_trap( const tripoint &pos ) const;
         void add_known_trap( const tripoint &pos, const trap &t );
 
@@ -3197,7 +3201,7 @@ class Character : public Creature, public visitable
         void hardcoded_effects( effect &it );
 
         /** Estimate effect duration based on player relevant skill.
-        @param error_magnitude Maximum error, with zero in the relavant skill.
+        @param error_magnitude Maximum error, with zero in the relevant skill.
         @param minimum_error Maximum error when skill is >= threshold */
         time_duration estimate_effect_dur( const skill_id &relevant_skill, const efftype_id &effect,
                                            const time_duration &error_magnitude,

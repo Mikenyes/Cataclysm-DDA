@@ -175,7 +175,7 @@
     "id": "mon_player_blob",
     "type": "MONSTER",
     "name": { "str": "slime microbian" },
-    "description": "A small wriggling slime, designed as a first line of defense for the colony.",
+    "description": "A small wriggling slime, a first line of defense for the colony.",
     "default_faction": "player",
     "bodytype": "blob",
     "species": [ "MUTANT" ],
@@ -207,7 +207,7 @@
       "effect": { "id": "death_slimespring", "min_level": 2 },
       "corpse_type": "NO_CORPSE"
     },
-    "flags": [ "SEES", "HEARS", "SMELLS", "GOODHEARING", "NOHEAD", "POISON", "VENOM", "WARM", "ACIDPROOF", "GUILT", "SWARMS" ]
+    "flags": [ "SEES", "HEARS", "SMELLS", "GOODHEARING", "NOHEAD", "POISON", "VENOM", "WARM", "ACIDPROOF", "GUILT" ]
   },
   {
     "id": "mon_slime_ocularium",
