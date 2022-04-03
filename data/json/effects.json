@@ -755,7 +755,7 @@
     ],
     "main_parts_only": true,
     "max_intensity": 3,
-    "resist_traits": [ "MUT_JUNKIE" ],
+    "resist_traits": [ "MUT_JUNKIE", "THRESH_MEDICAL" ],
     "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 30 ] },
     "scaling_mods": { "hurt_chance": [ 21, 0 ] },
     "rating": "bad",
@@ -772,7 +772,7 @@
     ],
     "main_parts_only": true,
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_ALPHA" ],
+    "resist_traits": [ "THRESH_ALPHA", "THRESH_MEDICAL" ],
     "base_mods": {
       "vomit_chance": [ 1150 ],
       "vomit_tick": [ 120 ],
@@ -782,7 +782,7 @@
       "hurt_tick": [ 150 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 90 ],
+      "pain_chance": [ -40 ],
       "pain_tick": [ 50 ]
     },
     "scaling_mods": {
@@ -793,7 +793,7 @@
       "int_mod": [ 1 ],
       "hurt_chance": [ -240, -50 ],
       "hurt_tick": [ -25 ],
-      "pain_chance": [ -30 ]
+      "pain_chance": [ 40, 0 ]
     },
     "rating": "bad",
     "blood_analysis_description": "Alpha Mutagen Contamination"
@@ -808,7 +808,7 @@
       "You feel like you're about to croak… if you don't keel over first."
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_BATRACHIAN" ],
+    "resist_traits": [ "THRESH_BATRACHIAN", "THRESH_MEDICAL" ],
     "base_mods": {
       "vomit_chance": [ 900 ],
       "vomit_tick": [ 90 ],
@@ -821,7 +821,7 @@
       "hurt_tick": [ 150 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 100 ],
+      "pain_chance": [ -80, 0 ],
       "pain_tick": [ 75 ]
     },
     "scaling_mods": {
@@ -830,7 +830,7 @@
       "speed_mod": [ 3 ],
       "per_mod": [ 1.5 ],
       "hurt_chance": [ 21, 0 ],
-      "pain_chance": [ -30 ]
+      "pain_chance": [ 80, 0 ]
     },
     "rating": "bad",
     "blood_analysis_description": "Frog Mutagen Contamination"
@@ -845,7 +845,7 @@
       "Primal instincts overwhelm your mind, and your saliva has turned to froth."
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_BEAST" ],
+    "resist_traits": [ "THRESH_BEAST", "THRESH_MEDICAL" ],
     "base_mods": {
       "hunger_min": [ 1 ],
       "hunger_max": [ 2 ],
@@ -856,7 +856,7 @@
       "hurt_tick": [ 150 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 100 ],
+      "pain_chance": [ -75 ],
       "pain_tick": [ 75 ]
     },
     "scaling_mods": {
@@ -866,7 +866,7 @@
       "dex_mod": [ 1 ],
       "int_mod": [ -2.5 ],
       "hurt_chance": [ 21, 0 ],
-      "pain_chance": [ -30 ]
+      "pain_chance": [ 75, 0 ]
     },
     "rating": "bad",
     "blood_analysis_description": "Beast Mutagen Contamination"
@@ -881,7 +881,7 @@
       "Goosebumps stand across your entire body.  You keep feeling that you're falling."
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_BIRD" ],
+    "resist_traits": [ "THRESH_BIRD", "THRESH_MEDICAL" ],
     "base_mods": {
       "hurt_min": [ 1 ],
       "hurt_max": [ 2 ],
@@ -889,10 +889,10 @@
       "hurt_tick": [ 150 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 100 ],
+      "pain_chance": [ -75 ],
       "pain_tick": [ 75 ]
     },
-    "scaling_mods": { "str_mod": [ -2 ], "per_mod": [ 1.5 ], "speed_mod": [ 3.5 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
+    "scaling_mods": { "str_mod": [ -2 ], "per_mod": [ 1.5 ], "speed_mod": [ 3.5 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ 75, 0 ] },
     "rating": "bad",
     "blood_analysis_description": "Bird Mutagen Contamination"
   },
@@ -906,7 +906,7 @@
       "Dull fog clouds your mind, and you feel close to vomiting."
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_CATTLE" ],
+    "resist_traits": [ "THRESH_CATTLE", "THRESH_MEDICAL" ],
     "base_mods": {
       "vomit_chance": [ 1200 ],
       "vomit_tick": [ 90 ],
@@ -916,7 +916,7 @@
       "hurt_tick": [ 150 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 150 ],
+      "pain_chance": [ -150 ],
       "pain_tick": [ 75 ]
     },
     "scaling_mods": {
@@ -925,7 +925,7 @@
       "dex_mod": [ -1 ],
       "int_mod": [ -1.5 ],
       "hurt_chance": [ 21, 0 ],
-      "pain_chance": [ -5 ]
+      "pain_chance": [ 150, 0 ]
     },
     "rating": "bad",
     "blood_analysis_description": "Cattle Mutagen Contamination"
@@ -940,7 +940,7 @@
       "Your skin crawls and your extremities twitch and jerk."
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_CEPHALOPOD" ],
+    "resist_traits": [ "THRESH_CEPHALOPOD", "THRESH_MEDICAL" ],
     "base_mods": {
       "thirst_min": [ 1 ],
       "thirst_max": [ 2 ],
@@ -951,10 +951,10 @@
       "hurt_tick": [ 150 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 40 ],
+      "pain_chance": [ -40 ],
       "pain_tick": [ 75 ]
     },
-    "scaling_mods": { "thirst_tick": [ -400 ], "int_mod": [ 2.5 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
+    "scaling_mods": { "thirst_tick": [ -400 ], "int_mod": [ 2.5 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ 40, 0 ] },
     "rating": "bad",
     "blood_analysis_description": "Cephalopod Mutagen Contamination"
   },
@@ -968,7 +968,7 @@
       "Your body heaving and changing is a rough time, but what doesn't kill you makes you stronger."
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_CHIMERA" ],
+    "resist_traits": [ "THRESH_CHIMERA", "THRESH_MEDICAL" ],
     "base_mods": {
       "hunger_min": [ 1 ],
       "hunger_max": [ 3 ],
@@ -979,10 +979,10 @@
       "hurt_tick": [ 150 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 100 ],
+      "pain_chance": [ -50 ],
       "pain_tick": [ 75 ]
     },
-    "scaling_mods": { "hunger_tick": [ -120 ], "str_mod": [ 2.5 ], "int_mod": [ -2 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
+    "scaling_mods": { "hunger_tick": [ -120 ], "str_mod": [ 2.5 ], "int_mod": [ -2 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ 50, 0 ] },
     "rating": "bad",
     "blood_analysis_description": "Chimera Mutagen Contamination"
   },
@@ -996,7 +996,7 @@
       "You see stars.  You see so many stars."
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_ELFA" ],
+    "resist_traits": [ "THRESH_ELFA", "THRESH_MEDICAL" ],
     "base_mods": {
       "hurt_min": [ 1 ],
       "hurt_max": [ 2 ],
@@ -1004,10 +1004,10 @@
       "hurt_tick": [ 20 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 50 ],
+      "pain_chance": [ -50 ],
       "pain_tick": [ 75 ]
     },
-    "scaling_mods": { "per_mod": [ 2.5 ], "int_mod": [ 1 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -15 ] },
+    "scaling_mods": { "per_mod": [ 2.5 ], "int_mod": [ 1 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ 50, 0 ] },
     "rating": "bad",
     "blood_analysis_description": "Elf-A Mutagen Contamination"
   },
@@ -1021,7 +1021,7 @@
       "If this overdose kills you, you've got a few more lives… right?"
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_FELINE" ],
+    "resist_traits": [ "THRESH_FELINE", "THRESH_MEDICAL" ],
     "base_mods": {
       "hurt_min": [ 1 ],
       "hurt_max": [ 2 ],
@@ -1029,7 +1029,7 @@
       "hurt_tick": [ 150 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 100 ],
+      "pain_chance": [ -75 ],
       "pain_tick": [ 75 ]
     },
     "scaling_mods": {
@@ -1038,7 +1038,7 @@
       "dex_mod": [ 1 ],
       "int_mod": [ -1.5 ],
       "hurt_chance": [ 21, 0 ],
-      "pain_chance": [ -30 ]
+      "pain_chance": [ 75, 0 ]
     },
     "rating": "bad",
     "blood_analysis_description": "Feline Mutagen Contamination"
@@ -1053,7 +1053,7 @@
       "You feel clammy yet dry, absolutely parched no matter how much you drink."
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_FISH" ],
+    "resist_traits": [ "THRESH_FISH", "THRESH_MEDICAL" ],
     "base_mods": {
       "thirst_min": [ 1 ],
       "thirst_max": [ 2 ],
@@ -1064,10 +1064,10 @@
       "hurt_tick": [ 200 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 100 ],
+      "pain_chance": [ -100 ],
       "pain_tick": [ 75 ]
     },
-    "scaling_mods": { "thirst_tick": [ -400 ], "per_mod": [ 1 ], "dex_mod": [ 1.5 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
+    "scaling_mods": { "thirst_tick": [ -400 ], "per_mod": [ 1 ], "dex_mod": [ 1.5 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ 100, 0 ] },
     "rating": "bad",
     "blood_analysis_description": "Fish Mutagen Contamination"
   },
@@ -1081,7 +1081,7 @@
       "You itch terribly, and your mouth feels salty and dry."
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_GASTROPOD" ],
+    "resist_traits": [ "THRESH_GASTROPOD", "THRESH_MEDICAL" ],
     "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 60 ] },
     "scaling_mods": { "str_mod": [ 1.5 ], "speed_mod": [ -7.5 ], "hurt_chance": [ 21, 0 ] },
     "rating": "bad",
@@ -1113,7 +1113,7 @@
       "You can't stop shivering and twitching.  Life is so short."
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_INSECT" ],
+    "resist_traits": [ "THRESH_INSECT", "THRESH_MEDICAL" ],
     "base_mods": {
       "vomit_chance": [ 900 ],
       "vomit_tick": [ 90 ],
@@ -1123,7 +1123,7 @@
       "hurt_tick": [ 150 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 100 ],
+      "pain_chance": [ -75 ],
       "pain_tick": [ 75 ]
     },
     "scaling_mods": {
@@ -1133,7 +1133,7 @@
       "dex_mod": [ 1.5 ],
       "int_mod": [ -1.5 ],
       "hurt_chance": [ 21, 0 ],
-      "pain_chance": [ -30 ]
+      "pain_chance": [ 75, 0 ]
     },
     "rating": "bad",
     "blood_analysis_description": "Insect Mutagen Contamination"
@@ -1148,7 +1148,7 @@
       "Your limbs slump, almost ready to tear right out of their sockets."
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_LIZARD" ],
+    "resist_traits": [ "THRESH_LIZARD", "THRESH_MEDICAL" ],
     "base_mods": {
       "hurt_min": [ 1 ],
       "hurt_max": [ 2 ],
@@ -1156,10 +1156,10 @@
       "hurt_tick": [ 50 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 100 ],
+      "pain_chance": [ -100 ],
       "pain_tick": [ 125 ]
     },
-    "scaling_mods": { "dex_mod": [ 1 ], "int_mod": [ -1.5 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
+    "scaling_mods": { "dex_mod": [ 1 ], "int_mod": [ -1.5 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ 100, 0 ] },
     "rating": "bad",
     "blood_analysis_description": "Lizard Mutagen Contamination"
   },
@@ -1173,7 +1173,7 @@
       "You pant, unable to stop pacing and full of hunger."
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_LUPINE" ],
+    "resist_traits": [ "THRESH_LUPINE", "THRESH_MEDICAL" ],
     "base_mods": {
       "hunger_min": [ 10 ],
       "hunger_max": [ 20 ],
@@ -1185,7 +1185,7 @@
       "hurt_tick": [ 150 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 100 ],
+      "pain_chance": [ -75 ],
       "pain_tick": [ 75 ]
     },
     "scaling_mods": {
@@ -1195,7 +1195,7 @@
       "int_mod": [ -2 ],
       "speed_mod": [ 2.5 ],
       "hurt_chance": [ 21, 0 ],
-      "pain_chance": [ -30 ]
+      "pain_chance": [ 75, 0 ]
     },
     "rating": "bad",
     "blood_analysis_description": "Lupine Mutagen Contamination"
@@ -1218,10 +1218,10 @@
       "hurt_tick": [ 150 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 40 ],
+      "pain_chance": [ -40 ],
       "pain_tick": [ 75 ]
     },
-    "scaling_mods": { "str_mod": [ 2 ], "dex_mod": [ 2 ], "int_mod": [ -2.5 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -16 ] },
+    "scaling_mods": { "str_mod": [ 2 ], "dex_mod": [ 2 ], "int_mod": [ -2.5 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ 40, 0 ] },
     "rating": "bad",
     "blood_analysis_description": "Medical Mutagen Contamination"
   },
@@ -1235,7 +1235,7 @@
       "Your heart hammers away with a rapid, irregular beat."
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_MOUSE" ],
+    "resist_traits": [ "THRESH_MOUSE", "THRESH_MEDICAL" ],
     "base_mods": {
       "speed_mod": [ 1 ],
       "hurt_min": [ 1 ],
@@ -1244,10 +1244,10 @@
       "hurt_tick": [ 150 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 100 ],
+      "pain_chance": [ -75 ],
       "pain_tick": [ 75 ]
     },
-    "scaling_mods": { "str_mod": [ -1.5 ], "dex_mod": [ 1 ], "speed_mod": [ 6.5 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
+    "scaling_mods": { "str_mod": [ -1.5 ], "dex_mod": [ 1 ], "speed_mod": [ 6.5 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ 75, 0 ] },
     "rating": "bad",
     "blood_analysis_description": "Mouse Mutagen Contamination"
   },
@@ -1261,7 +1261,7 @@
       "Your processes are slowing.  You would make great fertilizer."
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_PLANT" ],
+    "resist_traits": [ "THRESH_PLANT", "THRESH_MEDICAL" ],
     "base_mods": { "hurt_min": [ 1 ], "hurt_max": [ 2 ], "hurt_chance": [ -22 ], "hurt_tick": [ 200 ] },
     "scaling_mods": { "str_mod": [ 1.5 ], "dex_mod": [ 1.5 ], "int_mod": [ -1 ], "speed_mod": [ -7.5 ], "hurt_chance": [ 21, 0 ] },
     "rating": "bad",
@@ -1277,7 +1277,7 @@
       "Delusions fill your head… is it true?  Did you die long ago?"
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_RAPTOR" ],
+    "resist_traits": [ "THRESH_RAPTOR", "THRESH_MEDICAL" ],
     "base_mods": {
       "hunger_min": [ 5 ],
       "hunger_max": [ 15 ],
@@ -1288,7 +1288,7 @@
       "hurt_tick": [ 100 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 100 ],
+      "pain_chance": [ -75 ],
       "pain_tick": [ 75 ]
     },
     "scaling_mods": {
@@ -1298,7 +1298,7 @@
       "int_mod": [ -3 ],
       "speed_mod": [ 7.5 ],
       "hurt_chance": [ 21, 0 ],
-      "pain_chance": [ -30 ]
+      "pain_chance": [ 75, 0 ]
     },
     "rating": "bad",
     "blood_analysis_description": "Raptor Mutagen Contamination"
@@ -1313,7 +1313,7 @@
       "Will you have a future?  Will any new generations be born… your pounding head is full of worry."
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_RABBIT" ],
+    "resist_traits": [ "THRESH_RABBIT", "THRESH_MEDICAL" ],
     "base_mods": {
       "hurt_min": [ 1 ],
       "hurt_max": [ 2 ],
@@ -1321,7 +1321,7 @@
       "hurt_tick": [ 150 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 60 ],
+      "pain_chance": [ -75 ],
       "pain_tick": [ 75 ]
     },
     "scaling_mods": {
@@ -1330,7 +1330,7 @@
       "int_mod": [ -1 ],
       "speed_mod": [ 3.5 ],
       "hurt_chance": [ 21, 0 ],
-      "pain_chance": [ -15 ]
+      "pain_chance": [ 75, 0 ]
     },
     "rating": "bad",
     "blood_analysis_description": "Rabbit Mutagen Contamination"
@@ -1345,7 +1345,7 @@
       "Dull aches fill your stomach, and every smell seems offensive."
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_RAT" ],
+    "resist_traits": [ "THRESH_RAT", "THRESH_MEDICAL" ],
     "base_mods": {
       "hurt_min": [ 1 ],
       "hurt_max": [ 2 ],
@@ -1353,10 +1353,10 @@
       "hurt_tick": [ 150 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 100 ],
+      "pain_chance": [ -75 ],
       "pain_tick": [ 75 ]
     },
-    "scaling_mods": { "dex_mod": [ 1 ], "int_mod": [ -2 ], "speed_mod": [ 3.5 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
+    "scaling_mods": { "dex_mod": [ 1 ], "int_mod": [ -2 ], "speed_mod": [ 3.5 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ 75, 0 ] },
     "rating": "bad",
     "blood_analysis_description": "Rat Mutagen Contamination"
   },
@@ -1366,7 +1366,7 @@
     "name": [ "Slime Mutation", "Slime Transformation", "Slime Metamorphosis" ],
     "desc": [ "You consumed slime mutagen.", "Plop.", "Brain… melting…" ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_SLIME" ],
+    "resist_traits": [ "THRESH_SLIME", "THRESH_MEDICAL" ],
     "base_mods": {
       "hurt_min": [ 1 ],
       "hurt_max": [ 2 ],
@@ -1374,7 +1374,7 @@
       "hurt_tick": [ 90 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 10 ],
+      "pain_chance": [ -30, -100 ],
       "pain_tick": [ 75 ]
     },
     "scaling_mods": {
@@ -1383,7 +1383,7 @@
       "int_mod": [ 2.5 ],
       "speed_mod": [ -3.5 ],
       "hurt_chance": [ 21, 0 ],
-      "pain_chance": [ -30 ]
+      "pain_chance": [ 30, 100 ]
     },
     "rating": "bad",
     "blood_analysis_description": "Slime Mutagen Contamination"
@@ -1398,7 +1398,7 @@
       "Perhaps you should curl up, just curl up and give in."
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_SPIDER" ],
+    "resist_traits": [ "THRESH_SPIDER", "THRESH_MEDICAL" ],
     "base_mods": {
       "hurt_min": [ 1 ],
       "hurt_max": [ 2 ],
@@ -1406,10 +1406,10 @@
       "hurt_tick": [ 150 ],
       "pain_min": [ 1 ],
       "pain_max": [ 1 ],
-      "pain_chance": [ 60 ],
-      "pain_tick": [ 100 ]
+      "pain_chance": [ -75 ],
+      "pain_tick": [ 75 ]
     },
-    "scaling_mods": { "dex_mod": [ 1.5 ], "int_mod": [ -1 ], "speed_mod": [ 4 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -25 ] },
+    "scaling_mods": { "dex_mod": [ 1.5 ], "int_mod": [ -1 ], "speed_mod": [ 4 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ 75, 0 ] },
     "rating": "bad",
     "blood_analysis_description": "Spider Mutagen Contamination"
   },
@@ -1423,7 +1423,7 @@
       "Deep and dark, your bones ache and twist."
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_TROGLOBITE" ],
+    "resist_traits": [ "THRESH_TROGLOBITE", "THRESH_MEDICAL" ],
     "base_mods": {
       "hurt_min": [ 2 ],
       "hurt_max": [ 3 ],
@@ -1431,10 +1431,10 @@
       "hurt_tick": [ 150 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 100 ],
+      "pain_chance": [ -75 ],
       "pain_tick": [ 75 ]
     },
-    "scaling_mods": { "str_mod": [ 2 ], "per_mod": [ -2.5 ], "dex_mod": [ 1 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
+    "scaling_mods": { "str_mod": [ 2 ], "per_mod": [ -2.5 ], "dex_mod": [ 1 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ 75, 0 ] },
     "rating": "bad",
     "blood_analysis_description": "Troglobite Mutagen Contamination"
   },
@@ -1448,7 +1448,7 @@
       "Sleep sounds good.  Sleep forever, maybe."
     ],
     "max_intensity": 3,
-    "resist_traits": [ "THRESH_URSINE" ],
+    "resist_traits": [ "THRESH_URSINE", "THRESH_MEDICAL" ],
     "base_mods": {
       "str_mod": [ 1 ],
       "fatigue_min": [ 1 ],
@@ -1459,7 +1459,7 @@
       "hurt_tick": [ 150 ],
       "pain_min": [ 1 ],
       "pain_max": [ 2 ],
-      "pain_chance": [ 100 ],
+      "pain_chance": [ -75 ],
       "pain_tick": [ 75 ]
     },
     "scaling_mods": {
@@ -1468,7 +1468,7 @@
       "dex_mod": [ -1 ],
       "fatigue_chance": [ -500 ],
       "hurt_chance": [ 21, 0 ],
-      "pain_chance": [ -30 ]
+      "pain_chance": [ 75, 0 ]
     },
     "rating": "bad",
     "blood_analysis_description": "Ursine Mutagen Contamination"

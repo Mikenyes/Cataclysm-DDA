@@ -1104,7 +1104,7 @@
     "points": 1,
     "description": "Your knees are strong and capable of angles that you couldn't imagine previously.  Moving over rough terrain will slow you down less than normal.",
     "changes_to": [ "FELINE_FLEXIBILITY" ],
-    "category": [ "BATRACHIAN" ],
+    "category": [ "BATRACHIAN", "FELINE" ],
     "cancels": [ "BADKNEES" ],
     "movecost_obstacle_modifier": 0.9
   },
@@ -1221,7 +1221,6 @@
     "prereqs": [ "SLEEPY" ],
     "types": [ "SLEEP" ],
     "cancels": [ "INSOMNIA" ],
-    "leads_to": [ "MET_RAT" ],
     "threshreq": [ "THRESH_MOUSE", "THRESH_RABBIT", "THRESH_FELINE" ],
     "category": [ "MOUSE", "RABBIT", "FELINE" ],
     "fatigue_modifier": 1.0,
@@ -1521,7 +1520,7 @@
     "starting_trait": true,
     "types": [ "ANIMAL_EMPATHY" ],
     "changes_to": [ "ANIMALDISCORD2", "TERRIFYING" ],
-    "category": [ "BEAST", "RAPTOR", "INSECT", "MOUSE", "RABBIT" ]
+    "category": [ "BEAST", "RAPTOR", "INSECT", "MOUSE", "RABBIT", "CHIMERA" ]
   },
   {
     "type": "mutation",
@@ -5140,21 +5139,6 @@
     "points": 10,
     "visibility": 2,
     "ugliness": 10,
-    "description": "You can communicate with your extant mass without physical contact, using electrical impulses to absorb knowledge from nearby friendly slime.  Activate to silence the connection.",
-    "purifiable": false,
-    "prereqs": [ "PER_SLIME", "PER_SLIME_OK" ],
-    "prereqs2": [ "INT_SLIME" ],
-    "threshreq": [ "THRESH_SLIME" ],
-    "category": [ "SLIME" ],
-    "moncams": [ [ "mon_slime_ocularium", 32 ], [ "mon_player_blob", 16 ] ]
-  },
-  {
-    "type": "mutation",
-    "id": "SLIMEMIND",
-    "name": { "str": "Slimewave" },
-    "points": 10,
-    "visibility": 2,
-    "ugliness": 10,
     "description": "You can communicate with your extant mass without physical contact, absorbing knowledge from nearby friendly slime.",
     "purifiable": false,
     "prereqs": [ "PER_SLIME", "PER_SLIME_OK" ],
@@ -5786,7 +5770,6 @@
     "description": "You need about twice as much food as the average human to maintain your expanded cardiovascular and respiratory systems.  On the plus side, it doesn't take you much time to recover from any strenuous activity.",
     "prereqs": [ "HUNGER" ],
     "changes_to": [ "HUNGER3" ],
-    "leads_to": [ "MET_RAT" ],
     "types": [ "METABOLISM" ],
     "category": [ "BEAST", "SLIME", "RAPTOR", "CHIMERA" ],
     "metabolism_modifier": 1.0,
@@ -7037,47 +7020,36 @@
     "valid": false,
     "purifiable": false,
     "threshold": true,
-    "triggers": [
-      [
-        {
-          "condition": { "compare_int": [ { "u_val": "vitamin", "name": "mutagen_medical" }, ">=", { "const": 1500 } ] },
-          "msg_on": { "text": "The drugs are fixing you up.", "rating": "good" },
-          "msg_off": { "text": "You need more medicine.", "rating": "bad" }
-        }
-      ]
-    ],
-    "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "EFFECTIVE_HEALTH_MOD", "add": 120 } ] } ],
     "flags": [ "KALUPTIC" ],
     "vitamins_absorb_multi": [
       [
         "all",
         [
-          [ "mutagen", 1.2 ],
-          [ "mutagen_alpha", 0.75 ],
-          [ "mutagen_batrachian", 0.5 ],
-          [ "mutagen_beast", 0.75 ],
-          [ "mutagen_bird", 0.75 ],
-          [ "mutagen_cattle", 0.5 ],
-          [ "mutagen_cephalopod", 0.5 ],
-          [ "mutagen_chimera", 0.5 ],
-          [ "mutagen_elfa", 0.5 ],
-          [ "mutagen_feline", 0.75 ],
-          [ "mutagen_fish", 0.75 ],
-          [ "mutagen_gastropod", 0.5 ],
-          [ "mutagen_human", 0.8 ],
-          [ "mutagen_insect", 0.75 ],
-          [ "mutagen_lizard", 0.75 ],
-          [ "mutagen_lupine", 0.5 ],
-          [ "mutagen_medical", 1.5 ],
-          [ "mutagen_mouse", 0.75 ],
-          [ "mutagen_plant", 0.4 ],
-          [ "mutagen_raptor", 0.4 ],
-          [ "mutagen_rabbit", 0.75 ],
-          [ "mutagen_rat", 0.75 ],
-          [ "mutagen_slime", 1 ],
-          [ "mutagen_spider", 0.5 ],
-          [ "mutagen_troglobite", 0.75 ],
-          [ "mutagen_ursine", 0.75 ]
+          [ "mutagen", 0.05 ],
+          [ "mutagen_alpha", 2 ],
+          [ "mutagen_batrachian", 2 ],
+          [ "mutagen_beast", 2 ],
+          [ "mutagen_bird", 2 ],
+          [ "mutagen_cattle", 2 ],
+          [ "mutagen_cephalopod", 2 ],
+          [ "mutagen_chimera", 2 ],
+          [ "mutagen_elfa", 2 ],
+          [ "mutagen_feline", 2 ],
+          [ "mutagen_fish", 2 ],
+          [ "mutagen_gastropod", 2 ],
+          [ "mutagen_insect", 2 ],
+          [ "mutagen_lizard", 2 ],
+          [ "mutagen_lupine", 2 ],
+          [ "mutagen_medical", 2 ],
+          [ "mutagen_mouse", 2 ],
+          [ "mutagen_plant", 2 ],
+          [ "mutagen_raptor", 2 ],
+          [ "mutagen_rabbit", 2 ],
+          [ "mutagen_rat", 2 ],
+          [ "mutagen_slime", 2 ],
+          [ "mutagen_spider", 2 ],
+          [ "mutagen_troglobite", 2 ],
+          [ "mutagen_ursine", 2 ]
         ]
       ]
     ]

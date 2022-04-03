@@ -670,6 +670,15 @@
     "player_display": false
   },
   {
+    "type": "mutation",
+    "id": "ROT3",
+    "name": { "str": "OBSELETE - ROT3" },
+    "valid": false,
+    "description": "Obseleted, if you see this it is an error.",
+    "points": 0,
+    "player_display": false
+  },
+  {
     "id": "adv_UPS_off",
     "type": "TOOL",
     "name": { "str": "advanced UPS", "str_pl": "advanced UPS's" },
