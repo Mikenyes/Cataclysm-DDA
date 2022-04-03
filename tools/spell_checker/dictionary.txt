@@ -265,6 +265,7 @@ cannelured
 caparison
 capiche
 caprison
+carapaces
 carryin
 casehead
 castable
@@ -518,6 +519,8 @@ enjoyability
 envenomations
 eocs
 eoraptor
+epicuticle
+epicuticles
 eppies
 ergometer
 erlischt
@@ -923,6 +926,7 @@ lajatang
 lamellar
 landshark
 langourous
+latticed
 lavrae
 lawd
 layin
@@ -1240,6 +1244,8 @@ pesquisando
 peto
 petpack
 peytral
+phelloderm
+phelloderms
 phenotypes
 phenotypical
 phenotypically
@@ -1478,6 +1484,7 @@ sawteeth
 sayig
 scatterer
 scissorlimbs
+sclerotin
 scrabblin
 screecher
 screechin
