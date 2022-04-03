@@ -2739,7 +2739,6 @@
     "ugliness": 3,
     "description": "Your skin is coated in a light bark, like that of a tree.  This provides powerful armor and makes you nearly waterproof.",
     "prereqs": [ "PLANTSKIN" ],
-    "leads_to": [ "THORNS", "LEAVES" ],
     "changes_to": [ "BARK2_a", "BARK2_b", "BARK2_c" ],
     "category": [ "PLANT" ],
     "integrated_armor": [ "integrated_bark" ]
@@ -2754,7 +2753,6 @@
     "purifiable": false,
     "description": "Your warped bark can be shifted in function, and is currently spread evenly.  Activate to better protect your torso, at the cost of other areas.",
     "prereqs": [ "BARK" ],
-    "leads_to": [ "THORNS", "LEAVES" ],
     "category": [ "PLANT" ],
     "threshreq": [ "THRESH_PLANT" ],
     "active": true,
@@ -2776,7 +2774,6 @@
     "purifiable": false,
     "valid": false,
     "description": "Your warped bark can be shifted in function, and is currently consolidated on your torso.  Activate to shift your bark into a lattice, increasing bulk but providing better protection for the entire body.",
-    "leads_to": [ "THORNS", "LEAVES" ],
     "active": true,
     "integrated_armor": [ "integrated_bark2_b" ],
     "transform": {
@@ -2796,7 +2793,6 @@
     "purifiable": false,
     "valid": false,
     "description": "Your warped bark can be shifted in function, and is currently expanded into a sturdy lattice.  Activate to collapse the lattice, returning to an evenly distributed form.",
-    "leads_to": [ "THORNS", "LEAVES" ],
     "active": true,
     "integrated_armor": [ "integrated_bark2_c" ],
     "transform": {
@@ -2815,7 +2811,7 @@
     "ugliness": 4,
     "pierce_dmg_bonus": 2,
     "description": "Your skin is covered in small, woody thorns.  Whenever an unarmed opponent strikes a part of your body that is not covered by clothing, they will receive minor damage.  Your punches may also deal extra damage.",
-    "prereqs": [ "BARK" ],
+    "prereqs": [ "BARK", "BARK2_a", "BARK2_b", "BARK2_c" ],
     "category": [ "PLANT" ]
   },
   {
@@ -2826,7 +2822,7 @@
     "visibility": 8,
     "ugliness": 3,
     "description": "All the hair on your body has turned to long, grass-like leaves.  Apart from being physically striking, these provide you with a minor amount of nutrients while in sunlight when your head is uncovered.  Slightly reduces wet effects.",
-    "prereqs": [ "PLANTSKIN", "BARK" ],
+    "prereqs": [ "PLANTSKIN", "BARK", "BARK2_a", "BARK2_b", "BARK2_c" ],
     "changes_to": [ "LEAVES2" ],
     "category": [ "PLANT", "ELFA" ],
     "wet_protection": [ { "part": "head", "ignored": 1 } ]
