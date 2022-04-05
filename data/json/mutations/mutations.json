@@ -5895,7 +5895,7 @@
           { "value": "BONUS_BLOCK", "add": 1 }
         ]
       }
-    ]
+    ],
     "category": [ "LIZARD", "BEAST", "INSECT", "SLIME", "SPIDER", "BATRACHIAN", "RAT", "TROGLOBITE" ]
   },
   {
@@ -5916,7 +5916,7 @@
           { "value": "BONUS_BLOCK", "add": 1 }
         ]
       }
-    ]
+    ],
     "category": [ "RAT", "TROGLOBITE" ]
   },
   {
