@@ -1194,7 +1194,7 @@
     "points": -2,
     "description": "You could probably sleep through a firefight, but at least you recover from exhaustion 10% faster.",
     "prereqs": [ "HEAVYSLEEPER" ],
-    "category": [ "BEAST", "LUPINE" ],
+    "category": [ "PLANT", "MEDICAL", "LUPINE", "BEAST" ],
     "fatigue_regen_modifier": 0.1
   },
   {
@@ -1206,7 +1206,6 @@
     "changes_to": [ "SLEEPY2" ],
     "starting_trait": true,
     "types": [ "SLEEP" ],
-    "leads_to": [ "MET_RAT" ],
     "category": [ "BEAST", "CHIMERA", "MOUSE", "RABBIT", "FELINE", "RAT" ],
     "fatigue_modifier": 0.333,
     "fatigue_regen_modifier": 0.333,
@@ -2377,7 +2376,7 @@
     "category": [ "MOUSE", "BEAST", "CATTLE", "RAT", "FELINE", "LUPINE", "RABBIT", "URSINE" ],
     "types": [ "SKIN" ],
     "prereqs": [ "SKIN_ROUGH" ],
-    "changes_to": [ "FUR", "FELINE_FUR", "LUPINE_FUR", "URSINE_FUR", "RABBIT_FUR" ],
+    "changes_to": [ "FUR", "FELINE_FUR", "LUPINE_FUR", "RABBIT_FUR" ],
     "integrated_armor": [ "integrated_lightfur" ]
   },
   {
@@ -2392,7 +2391,7 @@
     "types": [ "SKIN" ],
     "changes_to": [ "URSINE_FUR" ],
     "prereqs": [ "LIGHTFUR" ],
-    "category": [ "BEAST", "CATTLE", "RAT", "URSINE" ],
+    "category": [ "CATTLE", "RAT", "URSINE" ],
     "integrated_armor": [ "integrated_fur" ]
   },
   {
@@ -2435,7 +2434,7 @@
     "types": [ "SKIN" ],
     "prereqs": [ "LIGHTFUR" ],
     "leads_to": [ "LYNX_FUR" ],
-    "category": [ "FELINE", "MOUSE" ],
+    "category": [ "BEAST", "FELINE", "MOUSE" ],
     "cancels": [ "OUTDOORSMAN" ],
     "wet_protection": [
       { "part": "head", "good": -12 },
@@ -2557,6 +2556,7 @@
     "description": "Your epidermis has turned into a thin, flexible layer of chitin.  It provides decent physical protection.  Slightly reduces wet effects.",
     "types": [ "SKIN" ],
     "prereqs": [ "SKIN_ROUGH" ],
+    "leads_to": [ "CHITIN2", "CHITIN_FUR" ],
     "category": [ "SPIDER", "INSECT" ],
     "integrated_armor": [ "integrated_chitin" ],
     "wet_protection": [
@@ -2636,7 +2636,6 @@
     "bodytemp_sleep": 50,
     "description": "You've developed some sort of hair growing out of your chitin.  It's a bit warmer than not having hair.",
     "prereqs": [ "CHITIN" ],
-    "prereqs2": [ "LIGHTFUR" ],
     "category": [ "SPIDER" ],
     "changes_to": [ "CHITIN_FUR2" ]
   },
@@ -4118,7 +4117,7 @@
     "mixed_effect": true,
     "description": "You have grown noticeably taller and broader.  Some of it is useful muscle mass (Strength +1), but you find it throws off your balance and you get in your own way (+10 torso and arm encumbrance).",
     "types": [ "SIZE" ],
-    "prereqs": [ "STR_UP", "STR_UP_2", "STR_UP_3", "STR_UP_4" ],
+    "prereqs": [ "STR_UP_2", "STR_UP_3", "STR_UP_4" ],
     "prereqs2": [ "TOUGH" ],
     "changes_to": [ "MUT_TOUGH2" ],
     "category": [ "URSINE", "CATTLE", "LIZARD", "CHIMERA" ],
@@ -5864,6 +5863,7 @@
     "bodytemp_modifiers": [ -750, -750 ],
     "description": "Your body is very slowly wasting away.",
     "types": [ "HEALING" ],
+    "prereqs": [ "ROT1" ],
     "category": [ "CHIMERA", "ALPHA" ],
     "healing_awake": -0.02
   },
@@ -5886,7 +5886,6 @@
     "description": "Sunlight makes you uncomfortable.  If you are outdoors and the weather is Sunny, you suffer -1 to all stats.  However, your combat capabilities are slightly enhanced at night.",
     "types": [ "SUNLIGHT" ],
     "changes_to": [ "TROGLO2" ],
-    "category": [ "LIZARD", "BEAST", "SLIME", "SPIDER", "BATRACHIAN", "RAT", "TROGLOBITE" ],
     "enchantments": [
       {
         "condition": { "not": "is_day" },
@@ -5897,6 +5896,7 @@
         ]
       }
     ]
+    "category": [ "LIZARD", "BEAST", "INSECT", "SLIME", "SPIDER", "BATRACHIAN", "RAT", "TROGLOBITE" ]
   },
   {
     "type": "mutation",
@@ -5907,7 +5907,6 @@
     "types": [ "SUNLIGHT" ],
     "prereqs": [ "TROGLO" ],
     "changes_to": [ "TROGLO3" ],
-    "category": [ "RAT", "TROGLOBITE" ],
     "enchantments": [
       {
         "condition": { "not": "is_day" },
@@ -5918,6 +5917,7 @@
         ]
       }
     ]
+    "category": [ "RAT", "TROGLOBITE" ]
   },
   {
     "type": "mutation",
