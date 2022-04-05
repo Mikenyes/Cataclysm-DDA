@@ -1,5 +1,61 @@
 [
   {
+    "type": "effect_on_condition",
+    "id": "EOC_RandEnc_Roadstop_add",
+    "global": true,
+    "eoc_type": "OM_MOVE",
+    "condition": {
+      "and": [
+        "is_day",
+        { "u_near_om_location": "roadstop_a", "range": 2 },
+        { "one_in_chance": 100 },
+        { "days_since_cataclysm": 5 },
+        {
+          "not": {
+            "or": [
+              { "u_compare_time_since_var": "RandEnc", "type": "timer", "context": "caravan", "op": "<", "time": "1 d" },
+              { "is_season": "winter" }
+            ]
+          }
+        }
+      ]
+    },
+    "effect": [
+      { "mapgen_update": "nest_RandEnc_roadstop_a_add", "om_terrain": "roadstop_a" },
+      { "u_add_var": "RandEnc", "type": "timer", "context": "caravan", "time": true }
+    ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_RandEnc_Roadstop_remove",
+    "recurrence": 200,
+    "global": true,
+    "condition": {
+      "and": [ { "u_compare_time_since_var": "RandEnc", "type": "timer", "context": "caravan", "op": ">", "time": "1 h" } ]
+    },
+    "effect": [
+      { "mapgen_update": "nest_RandEnc_roadstop_a_remove", "om_terrain": "roadstop_a" },
+      { "remove_npc": "FM_caravan_merchant_random" },
+      { "remove_npc": "FM_caravan_guard_generic" }
+    ]
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "update_mapgen_id": "nest_RandEnc_roadstop_a_add",
+    "//": "Adds a random encounter at this roadstop",
+    "object": {
+      "place_npcs": [ { "class": "FM_caravan_merchant_random", "x": 8, "y": 18 }, { "class": "FM_caravan_guard_generic", "x": 9, "y": 21 } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "method": "json",
+    "update_mapgen_id": "nest_RandEnc_roadstop_a_remove",
+    "//": "removes a random encounter at this roadstop",
+    "object": {  }
+  },
+  {
     "type": "mapgen",
     "method": "json",
     "om_terrain": [ "roadstop" ],
@@ -35,12 +91,12 @@
       "terrain": {
         " ": "t_floor",
         "#": "t_wall_log",
-        ".": "t_grass",
-        "2": "t_dirt",
+        ".": "t_region_groundcover",
+        "2": "t_region_groundcover_barren",
         "3": "t_door_c",
         "6": "t_floor",
         "7": "t_floor",
-        "8": "t_dirt",
+        "8": "t_region_groundcover_barren",
         "A": "t_floor",
         "S": "t_sidewalk"
       },
@@ -125,18 +181,18 @@
       "terrain": {
         " ": "t_floor",
         "#": "t_wall_log",
-        ".": "t_grass",
-        "2": "t_dirt",
+        ".": "t_region_groundcover",
+        "2": "t_region_groundcover_barren",
         "3": "t_door_c",
         "6": "t_floor",
         "7": "t_floor",
-        "8": "t_dirt",
+        "8": "t_region_groundcover_barren",
         "9": "t_floor",
         "A": "t_floor",
         "S": "t_sidewalk",
-        "i": "t_dirt",
-        "o": "t_dirt",
-        "t": "t_tree"
+        "i": "t_region_groundcover_barren",
+        "o": "t_region_groundcover_barren",
+        "t": "t_region_tree"
       },
       "furniture": { "6": "f_table", "7": "f_toilet", "8": "f_trashcan", "9": "f_toilet", "A": "f_sink", "i": "f_sign", "o": "f_crate_c" },
       "signs": {
