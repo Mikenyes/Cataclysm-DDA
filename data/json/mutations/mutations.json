@@ -2404,7 +2404,7 @@
     "bodytemp_sleep": 250,
     "description": "Your fur has grown out and thickened, providing great protection from attacks as well as considerable insulation.",
     "types": [ "SKIN" ],
-    "prereqs": [ "LIGHTFUR" ],
+    "prereqs": [ "FUR" ],
     "category": [ "URSINE" ],
     "integrated_armor": [ "integrated_ursine_fur" ]
   },
@@ -2556,7 +2556,7 @@
     "description": "Your epidermis has turned into a thin, flexible layer of chitin.  It provides decent physical protection.  Slightly reduces wet effects.",
     "types": [ "SKIN" ],
     "prereqs": [ "SKIN_ROUGH" ],
-    "leads_to": [ "CHITIN2", "CHITIN_FUR" ],
+    "leads_to": [ "CHITIN2", "CHITIN_FUR", "CHITIN_FUR2", "CHITIN_FUR3" ],
     "category": [ "SPIDER", "INSECT" ],
     "integrated_armor": [ "integrated_chitin" ],
     "wet_protection": [
@@ -2724,7 +2724,7 @@
     "ugliness": 2,
     "description": "Your skin is light green and has a slightly woody quality to it.  This provides armor and helps you retain moisture, resulting in less thirst.  Greatly decreases wet penalties.",
     "types": [ "SKIN" ],
-    "leads_to": [ "BARK", "LEAVES" ],
+    "leads_to": [ "BARK", "THORNS", "LEAVES" ],
     "category": [ "PLANT", "ELFA" ],
     "thirst_modifier": -0.2,
     "integrated_armor": [ "integrated_plantskin" ]
