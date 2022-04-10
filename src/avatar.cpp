@@ -1258,26 +1258,17 @@ void avatar::cycle_move_mode()
 
 bool avatar::wield( item_location target )
 {
-    return wield( *target, target.obtain_cost( *this ) );
+    return wield( target, target.obtain_cost( *this ) );
 }
 
-bool avatar::wield( item &target )
+bool avatar::wield( item_location &target, const int obtain_cost )
 {
-    invalidate_inventory_validity_cache();
-    return wield( target,
-                  item_handling_cost( target, true,
-                                      is_worn( target ) ? INVENTORY_HANDLING_PENALTY / 2 :
-                                      INVENTORY_HANDLING_PENALTY ) );
-}
-
-bool avatar::wield( item &target, const int obtain_cost )
-{
-    if( is_wielding( target ) ) {
+    if( is_wielding( *target ) ) {
         return true;
     }
 
     item &weapon = get_wielded_item();
-    if( weapon.has_item( target ) ) {
+    if( weapon.has_item( *target ) ) {
         add_msg( m_info, _( "You need to put the bag away before trying to wield something from it." ) );
         return false;
     }
@@ -1286,12 +1277,12 @@ bool avatar::wield( item &target, const int obtain_cost )
         return false;
     }
 
-    bool combine_stacks = target.can_combine( weapon );
+    bool combine_stacks = target->can_combine( weapon );
     if( !combine_stacks && !unwield() ) {
         return false;
     }
     cached_info.erase( "weapon_value" );
-    if( target.is_null() ) {
+    if( target->is_null() ) {
         return true;
     }
 
@@ -1300,18 +1291,18 @@ bool avatar::wield( item &target, const int obtain_cost )
     // than a skilled player with a holster.
     // There is an additional penalty when wielding items from the inventory whilst currently grabbed.
 
-    bool worn = is_worn( target );
+    bool worn = is_worn( *target );
     const int mv = obtain_cost;
 
     if( worn ) {
-        target.on_takeoff( *this );
+        target->on_takeoff( *this );
     }
 
     add_msg_debug( debugmode::DF_AVATAR, "wielding took %d moves", mv );
     moves -= mv;
 
-    if( has_item( target ) ) {
-        item removed = i_rem( &target );
+    if( has_item( *target ) ) {
+        item removed = i_rem( &*target );
         if( combine_stacks ) {
             weapon.combine( removed );
         } else {
@@ -1320,9 +1311,9 @@ bool avatar::wield( item &target, const int obtain_cost )
         }
     } else {
         if( combine_stacks ) {
-            weapon.combine( target );
+            weapon.combine( *target );
         } else {
-            set_wielded_item( target );
+            set_wielded_item( *target );
         }
     }
 

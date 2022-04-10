@@ -443,7 +443,7 @@ void recipe::finalize()
     reqs_external.clear();
     reqs_internal.clear();
 
-    deduped_requirements_ = deduped_requirement_data( requirements_, ident() );
+    deduped_requirements_ = deduped_requirement_data( requirements_, ident().str() );
 
     if( contained && container.is_null() ) {
         container = item::find_type( result_ )->default_container.value_or( "null" );

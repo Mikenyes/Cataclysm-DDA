@@ -100,7 +100,9 @@ static std::string keys_text()
         colorize( "c", c_light_green ) + _( " category, " ) +
         colorize( "w", c_light_green ) + _( " whitelist, " ) +
         colorize( "b", c_light_green ) + _( " blacklist, " ) +
-        colorize( "x", c_light_green ) + _( " clear" );
+        colorize( "x", c_light_green ) + _( " clear, " ) +
+        colorize( "e", c_light_green ) + _( " seal, " ) +
+        colorize( "n", c_light_green ) + _( " unseal" );
 }
 
 bool pocket_favorite_callback::key( const input_context &, const input_event &event, int,
@@ -253,6 +255,26 @@ bool pocket_favorite_callback::key( const input_context &, const input_event &ev
         const int pocket_num = menu->selected + 1;
         if( query_yn( _( "Are you sure you want to clear settings for pocket %d?" ), pocket_num ) ) {
             selected_pocket->settings.clear();
+        }
+    } else if( input == 'e' ) {
+        if( selected_pocket->sealed() ) {
+            popup( std::string( _( "This pocket is already sealed." ) ), PF_GET_KEY );
+        } else if( selected_pocket->empty() ) {
+            popup( std::string( _( "Empty pockets cannot be sealed." ) ), PF_GET_KEY );
+        } else if( !selected_pocket->resealable() || !selected_pocket->sealable() ) {
+            popup( std::string( _( "This pocket is not sealable." ) ), PF_GET_KEY );
+        } else if( selected_pocket->seal( get_player_character() ) ) {
+            popup( std::string( _( "Sealing pocket." ) ), PF_GET_KEY );
+        } else {
+            popup( std::string( _( "Sealing requirements not met." ) ), PF_GET_KEY );
+        }
+    } else if( input == 'n' ) {
+        if( !selected_pocket->sealed() ) {
+            popup( std::string( _( "This pocket is already unsealed." ) ), PF_GET_KEY );
+        } else if( selected_pocket->unseal( get_player_character() ) ) {
+            popup( std::string( _( "Unsealing pocket." ) ), PF_GET_KEY );
+        } else {
+            popup( std::string( _( "Unsealing requirements not met." ) ), PF_GET_KEY );
         }
     }
 
@@ -415,7 +437,7 @@ void item_contents::combine( const item_contents &read_input, const bool convert
             }
 
             if( pocket.saved_sealed() ) {
-                current_pocket_iter->seal();
+                current_pocket_iter->force_seal();
             }
             current_pocket_iter->settings = pocket.settings;
         } else {
@@ -451,6 +473,9 @@ struct item_contents::item_contents_helper {
         int num_pockets_of_type = 0;
 
         for( my_pocket_type &pocket : contents.contents ) {
+            if( !pocket.will_unseal() ) {
+                continue;
+            }
             if( !pocket.is_type( pk_type ) ) {
                 continue;
             }
@@ -567,9 +592,11 @@ std::pair<item_location, item_pocket *> item_contents::best_pocket( const item &
             // containers are the only pockets that are available for such
             continue;
         }
-        if( !allow_sealed && pocket.sealed() ) {
+        if( pocket.sealed() && ( !allow_sealed || !pocket.will_unseal() ) ) {
             // we don't want to unseal a pocket to put something in it automatically
             // that needs to be something a player explicitly does
+            // Additionally, a pocket that takes time or tools to unseal should always
+            // be done externally
             continue;
         }
         valid_pockets.emplace_back( &pocket );
@@ -1014,7 +1041,7 @@ void item_contents::update_open_pockets()
 {
     for( item_pocket &pocket : contents ) {
         if( pocket.empty() ) {
-            pocket.unseal();
+            pocket.force_unseal();
         }
     }
 }
@@ -1035,7 +1062,7 @@ bool item_contents::seal_all_pockets()
 {
     bool any_sealed = false;
     for( item_pocket &pocket : contents ) {
-        any_sealed = pocket.seal() || any_sealed;
+        any_sealed = pocket.force_seal() || any_sealed;
     }
     return any_sealed;
 }
@@ -1068,6 +1095,22 @@ bool item_contents::any_pockets_sealed() const
     }
 
     return false;
+}
+
+bool item_contents::all_pockets_well_sealed() const
+{
+    bool all_sealed = false;
+    for( const item_pocket &pocket : contents ) {
+        if( pocket.is_type( item_pocket::pocket_type::CONTAINER ) ) {
+            if( pocket.will_unseal() ) {
+                return false;
+            } else {
+                all_sealed = true;
+            }
+        }
+    }
+
+    return all_sealed;
 }
 
 bool item_contents::has_pocket_type( const item_pocket::pocket_type pk_type ) const

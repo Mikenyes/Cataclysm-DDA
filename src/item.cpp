@@ -1408,7 +1408,7 @@ ret_val<bool> item::put_in( const item &payload, item_pocket::pocket_type pk_typ
         update_modified_pockets();
     }
     if( unseal_pockets && result.success() ) {
-        result.value()->unseal();
+        result.value()->force_unseal();
     }
     on_contents_changed();
     if( result.success() ) {
@@ -9150,6 +9150,11 @@ bool item::any_pockets_sealed() const
     return contents.any_pockets_sealed();
 }
 
+bool item::all_pockets_well_sealed() const
+{
+    return contents.all_pockets_well_sealed();
+}
+
 bool item::is_container() const
 {
     return contents.has_pocket_type( item_pocket::pocket_type::CONTAINER );
@@ -11327,7 +11332,7 @@ int item::fill_with( const item &contained, const int amount,
             num_contained++;
         }
         if( unseal_pockets ) {
-            pocket->unseal();
+            pocket->force_unseal();
         }
     }
     if( num_contained == 0 ) {

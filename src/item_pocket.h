@@ -15,6 +15,7 @@
 #include "enums.h"
 #include "flat_set.h"
 #include "optional.h"
+#include "requirements.h"
 #include "ret_val.h"
 #include "type_id.h"
 #include "units.h"
@@ -257,10 +258,18 @@ class item_pocket
         // will the items inside this pocket fall out of this pocket if it is placed into another item?
         bool will_spill() const;
         bool will_spill_if_unsealed() const;
-        // seal the pocket. returns false if it fails (pocket does not seal)
-        bool seal();
-        // unseal the pocket.
-        void unseal();
+        // seal the pocket. returns false if pocket does not seal instantly
+        bool seal( Character &you );
+        // unseal the pocket. returns false if pocket does not unseal instantly
+        bool unseal( Character &you );
+        // seal the pocket instantly unless it is not a sealable pocket
+        bool force_seal();
+        // unseal the pocket instantly
+        void force_unseal();
+        // returns if the pocket requires time and/or tools to unseal
+        bool will_unseal() const;
+        // returns if the pocket requires time and/or tools to unseal
+        bool resealable() const;
         /**
          * A pocket is sealable IFF it has "sealed_data". Sealable pockets are sealed by calling seal().
          * If a pocket is not sealable, it is never considered "sealed".
@@ -479,6 +488,20 @@ class pocket_data
         bool airtight = false;
         // the pocket will spill its contents if placed in another container
         bool open_container = false;
+        // requirements to seal the pocket
+        std::vector<std::pair<requirement_id, int>> seal_requirements;
+        // requirements to unseal the pocket
+        std::vector<std::pair<requirement_id, int>> unseal_requirements;
+        // parsed requirements to seal
+        requirement_data seal_data;
+        // parsed requirements to unseal
+        requirement_data unseal_data;
+        // moves to seal
+        int seal_moves = 0;
+        // moves to unseal
+        int unseal_moves = 0;
+        // can the pocket be resealed
+        bool resealable = false;
 
         // a description of the pocket
         translation description;

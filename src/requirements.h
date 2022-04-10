@@ -455,7 +455,7 @@ class deduped_requirement_data
         using alter_item_comp_vector = requirement_data::alter_item_comp_vector;
 
         deduped_requirement_data() = default;
-        deduped_requirement_data( const requirement_data &, const recipe_id &context );
+        deduped_requirement_data( const requirement_data &, const std::string &context );
 
         std::vector<requirement_data> const &alternatives() const {
             return alternatives_;

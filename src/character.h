@@ -1004,7 +1004,12 @@ class Character : public Creature, public visitable
         void handle_skill_warning( const skill_id &id, bool force_warning = false );
 
         /**
-         * Check player capable of wielding an item.
+         * Check player capable of wielding an item at location.
+         * @param loc Item location to be wielded
+         */
+        ret_val<bool> can_wield( const item_location &loc ) const;
+        /**
+         * Check player capable of wielding an item, without check for
          * @param it Thing to be wielded
          */
         ret_val<bool> can_wield( const item &it ) const;

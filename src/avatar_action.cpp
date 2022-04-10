@@ -971,7 +971,7 @@ void avatar_action::plthrow( avatar &you, item_location loc,
         return;
     }
 
-    const ret_val<bool> ret = you.can_wield( *loc );
+    const ret_val<bool> ret = you.can_wield( loc );
     if( !ret.success() ) {
         add_msg( m_info, "%s", ret.c_str() );
         return;
@@ -1016,7 +1016,7 @@ void avatar_action::plthrow( avatar &you, item_location loc,
     }
     // you must wield the item to throw it
     if( !you.is_wielding( *orig ) ) {
-        if( !you.wield( *orig ) ) {
+        if( !you.wield( loc ) ) {
             return;
         }
     }
@@ -1120,7 +1120,7 @@ void avatar_action::use_item( avatar &you, item_location &loc )
     if( loc->has_flag( flag_ALLOWS_REMOTE_USE ) || you.is_worn( *loc ) ) {
         use_in_place = true;
         // Activate holster on map only if hands are free.
-    } else if( you.can_wield( *loc ).success() && loc->is_holster() && !loc.held_by( you ) ) {
+    } else if( you.can_wield( loc ).success() && loc->is_holster() && !loc.held_by( you ) ) {
         use_in_place = true;
         // Adjustment because in player::wield_contents this amount is refunded.
         you.mod_moves( -loc.obtain_cost( you ) );

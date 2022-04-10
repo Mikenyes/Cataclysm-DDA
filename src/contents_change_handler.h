@@ -23,12 +23,12 @@ class contents_change_handler
          */
         void add_unsealed( const item_location &loc );
         /**
-         * Unseal the pocket containing `loc` and add `loc`'s parent to the list.
+         * Attempts to unseal the pocket containing `loc` and add `loc`'s parent to the list.
          * Does nothing if `loc` does not have a parent container. The parent of
          * `loc` should remain valid when `handle_by` is called, but `loc` only
          * needs to be valid here (for example, the item may be consumed afterwards).
          */
-        void unseal_pocket_containing( const item_location &loc );
+        bool unseal_pocket_containing( const item_location &loc );
         /**
          * Let the guy handle any container that needs spilling. This may invalidate
          * items in and out of the list of containers. The list is cleared after handling.

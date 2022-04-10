@@ -6957,7 +6957,15 @@ void Character::did_hit( Creature &target )
     enchantment_cache->cast_hit_you( *this, target );
 }
 
-ret_val<bool> Character::can_wield( const item &it ) const
+ret_val<bool> Character::can_wield( const item_location &loc ) const
+{
+    if( loc.is_well_sealed() ) {
+        return ret_val<bool>::make_failure( _( "You can't wield something from inside a well sealed pocket." ) );
+    }
+    return can_wield( &*loc );
+}
+
+ret_val<bool> Character::can_wield( const item &it,  ) const
 {
     if( has_effect( effect_incorporeal ) ) {
         return ret_val<bool>::make_failure( _( "You can't wield anything while incorporeal." ) );
@@ -10955,6 +10963,11 @@ bool Character::wield_contents( item &container, item *internal_item, bool penal
 
     if( !container.has_item( *internal_item ) ) {
         debugmsg( "Tried to wield non-existent item from container (Character::wield_contents)" );
+        return false;
+    }
+
+    if( !container.contained_where( *internal_item )->will_unseal() ) {
+        debugmsg( "Tried to wield item from well sealed pocket (Character::wield_contents)" );
         return false;
     }
 

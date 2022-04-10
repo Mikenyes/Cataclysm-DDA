@@ -116,6 +116,7 @@ static const activity_id ACT_OXYTORCH( "ACT_OXYTORCH" );
 static const activity_id ACT_PICKUP( "ACT_PICKUP" );
 static const activity_id ACT_PICKUP_MENU( "ACT_PICKUP_MENU" );
 static const activity_id ACT_PLAY_WITH_PET( "ACT_PLAY_WITH_PET" );
+static const activity_id ACT_POCKET_SEAL( "ACT_POCKET_SEAL" );
 static const activity_id ACT_PRYING( "ACT_PRYING" );
 static const activity_id ACT_READ( "ACT_READ" );
 static const activity_id ACT_RELOAD( "ACT_RELOAD" );
@@ -2931,7 +2932,9 @@ void unload_activity_actor::unload( Character &who, item_location &target )
             const bool consumed = who.add_or_drop_with_msg( *contained, true, &it, contained );
             if( consumed || contained->charges != old_charges ) {
                 changed = true;
-                handler.unseal_pocket_containing( item_location( target, contained ) );
+                if( !handler.unseal_pocket_containing( item_location( target, contained ) ) ) {
+                    return;
+                }
             }
             if( consumed ) {
                 it.remove_item( *contained );
@@ -3495,20 +3498,23 @@ static std::list<item> obtain_activity_items(
             break;
         }
 
-        who.mod_moves( -consumed_moves );
-
         // If item is inside another (container/pocket), unseal it, and update encumbrance
         if( loc.has_parent() ) {
             // Save parent items to be handled when finishing or canceling activity,
             // in case there are still other items to drop from the same container.
             // This assumes that an item and any of its parents/ancestors are not
             // dropped at the same time.
-            handler.unseal_pocket_containing( loc );
+            if( !handler.unseal_pocket_containing( loc ) ) {
+                who.add_msg_if_player( _( "The %s is inside a sealed container." ), loc->display_name() );
+                continue;
+            }
         } else {
             // when parent's encumbrance cannot be marked as dirty,
             // mark character's encumbrance as dirty instead (correctness over performance)
             who.set_check_encumbrance( true );
         }
+
+        who.mod_moves( -consumed_moves );
 
         // Take off the item or remove it from the player's inventory
         if( who.is_worn( *loc ) ) {
@@ -4119,7 +4125,7 @@ void reload_activity_actor::finish( player_activity &act, Character &who )
 
     // Build prompt
     uilist reload_query;
-    const bool wield_check = who.can_wield( reloadable ).success();
+    const bool wield_check = who.can_wield( reload_targets[ 0 ] ).success();
     reload_query.text = string_format( _( "The %s no longer fits in your inventory" ),
                                        reloadable_name );
     if( who.has_wield_conflicts( reloadable ) ) {
@@ -5840,6 +5846,75 @@ std::unique_ptr<activity_actor> forage_activity_actor::deserialize( JsonValue &j
     return actor.clone();
 }
 
+void pocket_seal_activity_actor::start( player_activity &act, Character & )
+{
+    act.moves_total = moves;
+    act.moves_left = moves;
+    act.name = name;
+}
+
+void pocket_seal_activity_actor::finish( player_activity &act, Character &who )
+{
+    item_pocket *pocket = act.pocket_targets[0];
+    const std::string sealing = act.name;
+    const deduped_requirement_data seal_requirements = act.requirements;
+    auto reqs_filter = [ ]( const item & ) {
+        return true;
+    };
+    if( !seal_requirements.alternatives().empty() ) {
+        inventory sealing_inv = who.crafting_inventory();
+        if( seal_requirements.can_make_with_inventory( sealing_inv, reqs_filter, 1 ) ) {
+            inventory map_inv;
+            map_inv.form_from_map( who.pos(), PICKUP_RANGE, &who );
+
+            std::vector<comp_selection<item_comp>> item_selections;
+            for( const auto &it : seal_requirements.select_alternative( who, sealing_inv,
+                    reqs_filter )->get_components() ) {
+                comp_selection<item_comp> is = who.select_item_component( it, 1, map_inv, true, reqs_filter, true );
+                if( is.use_from == usage_from::cancel ) {
+                    add_msg( _( "You stop %s the pocket." ), sealing );
+                    return;
+                }
+                item_selections.push_back( is );
+            }
+            for( const auto &it : item_selections ) {
+                who.consume_items( it, 1, reqs_filter );
+            }
+        } else {
+            add_msg( _( "You no longer have the tools to finish %s the pocket." ), sealing );
+            return;
+        }
+    }
+    if( sealing == "sealing" ) {
+        pocket->force_seal();
+    } else {
+        pocket->force_unseal();
+    }
+    act.set_to_null();
+}
+
+void pocket_seal_activity_actor::serialize( JsonOut &jsout ) const
+{
+    jsout.start_object();
+
+    jsout.member( "moves", moves );
+    jsout.member( "name", name );
+
+    jsout.end_object();
+}
+
+std::unique_ptr<activity_actor> pocket_seal_activity_actor::deserialize( JsonValue &jsin )
+{
+    pocket_seal_activity_actor actor( {}, {} );
+
+    JsonObject data = jsin.get_object();
+
+    data.read( "moves", actor.moves );
+    data.read( "name", actor.name );
+
+    return actor.clone();
+}
+
 void gunmod_add_activity_actor::start( player_activity &act, Character & )
 {
     act.moves_total = moves;
@@ -6063,6 +6138,7 @@ deserialize_functions = {
     { ACT_PICKUP, &pickup_activity_actor::deserialize },
     { ACT_PICKUP_MENU, &pickup_menu_activity_actor::deserialize },
     { ACT_PLAY_WITH_PET, &play_with_pet_activity_actor::deserialize },
+    { ACT_POCKET_SEAL, &pocket_seal_activity_actor::deserialize },
     { ACT_PRYING, &prying_activity_actor::deserialize },
     { ACT_READ, &read_activity_actor::deserialize },
     { ACT_RELOAD, &reload_activity_actor::deserialize },

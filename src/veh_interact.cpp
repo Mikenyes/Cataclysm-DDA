@@ -3357,10 +3357,13 @@ void veh_interact::complete_vehicle( Character &you )
             struct vehicle_part &pt = veh->part( vehicle_part );
             if( pt.is_tank() && src->is_container() && !src->empty() ) {
                 item_location contained( src, &src->only_item() );
-                contained->charges -= pt.base.fill_with( *contained, contained->charges );
 
                 contents_change_handler handler;
-                handler.unseal_pocket_containing( contained );
+                if( !handler.unseal_pocket_containing( contained ) ) {
+                    add_msg( m_info, _( "You can't easily unseal the pocket containing %s." ), contained->tname() );
+                    break;
+                }
+                contained->charges -= pt.base.fill_with( *contained, contained->charges );
 
                 // if code goes here, we can assume "pt" has already refilled with "contained" something.
                 int remaining_ammo_capacity = pt.ammo_capacity( contained->ammo_type() ) - pt.ammo_remaining();
@@ -3384,7 +3387,10 @@ void veh_interact::complete_vehicle( Character &you )
                 handler.handle_by( you );
             } else if( pt.is_fuel_store() ) {
                 contents_change_handler handler;
-                handler.unseal_pocket_containing( src );
+                if( !handler.unseal_pocket_containing( src ) ) {
+                    add_msg( m_info, _( "You can't easily unseal the pocket containing %s." ), src->tname() );
+                    break;
+                }
 
                 int qty = src->charges;
                 pt.base.reload( you, std::move( src ), qty );

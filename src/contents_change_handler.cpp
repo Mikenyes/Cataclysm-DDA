@@ -8,7 +8,7 @@ void contents_change_handler::add_unsealed( const item_location &loc )
     }
 }
 
-void contents_change_handler::unseal_pocket_containing( const item_location &loc )
+bool contents_change_handler::unseal_pocket_containing( const item_location &loc )
 {
     if( loc.has_parent() ) {
         item_location parent = loc.parent_item();
@@ -16,13 +16,18 @@ void contents_change_handler::unseal_pocket_containing( const item_location &loc
         if( pocket ) {
             // on_contents_changed restacks the pocket and should be called later
             // in Character::handle_contents_changed
-            pocket->unseal();
+            if( !loc.is_well_sealed() ) {
+                pocket->force_unseal();
+            } else {
+                return false;
+            }
         } else {
             debugmsg( "parent container does not contain item" );
         }
         parent.on_contents_changed();
         add_unsealed( parent );
     }
+    return true;
 }
 
 void contents_change_handler::handle_by( Character &guy )

@@ -265,9 +265,8 @@ class avatar : public Character
         // Activate crouch mode if not in crouch mode.
         void activate_crouch_mode();
 
-        bool wield( item_location target );
-        bool wield( item &target ) override;
-        bool wield( item &target, int obtain_cost );
+        bool wield( item_location &target ) override;
+        bool wield( item_location &target, int obtain_cost );
 
         /** gets the inventory from the avatar that is interactible via advanced inventory management */
         std::vector<advanced_inv_listitem> get_AIM_inventory( const advanced_inventory_pane &pane,

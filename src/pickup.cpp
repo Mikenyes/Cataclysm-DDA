@@ -172,6 +172,10 @@ static bool pick_one_up( item_location &loc, int quantity, bool &got_water, Pick
     //new item (copy)
     item newit = it;
 
+    if( newloc.is_well_sealed() ) {
+        add_msg( m_bad, _( "Cannot pick up item in sealed pocket." ) );
+        return true;
+    }
     if( !newit.is_owned_by( player_character, true ) ) {
         // Has the player given input on if stealing is ok?
         if( player_character.get_value( "THIEF_MODE" ) == "THIEF_ASK" ) {

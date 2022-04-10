@@ -1811,6 +1811,10 @@ trinary Character::consume( item_location loc, bool force, bool refuel )
         return trinary::NONE;
     }
     contents_change_handler handler;
+    if( loc.is_well_sealed() ) {
+        add_msg_if_player( m_info, _( "You can't do that while the item is in a sealed pocket." ) );
+        return trinary::NONE;
+    }
     item &target = *loc;
     trinary result = consume( target, force, refuel );
     if( result != trinary::NONE ) {
