@@ -90,7 +90,9 @@ void Character::handle_contents_changed( const std::vector<item_location> &conta
             item_location parent_loc = loc.parent_item();
             item_loc_with_depth parent( parent_loc );
             item_pocket *const pocket = parent_loc->contained_where( *loc );
-            pocket->unseal();
+            if( pocket->unseal( *this ) ) {
+                continue;
+            }
             bool exists = false;
             auto it = sorted_containers.lower_bound( parent );
             for( ; it != sorted_containers.end() && it->depth() == parent.depth(); ++it ) {

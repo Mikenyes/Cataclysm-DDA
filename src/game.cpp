@@ -1817,10 +1817,9 @@ static hint_rating rate_action_wield( const avatar &you, const item &it )
 
 static hint_rating rate_action_insert( const avatar &you, const item_location &loc )
 {
-    if( loc->will_spill_if_unsealed()
+    if( ( loc->will_spill_if_unsealed()
         && loc.where() != item_location::type::map
-        && !you.is_wielding( *loc ) ) {
-
+        && !you.is_wielding( *loc ) ) || loc->all_pockets_well_sealed() ) {
         return hint_rating::cant;
     }
     return hint_rating::good;
@@ -1859,10 +1858,18 @@ int game::inventory_item_menu( item_location locThisItem,
 
         uilist action_menu;
         action_menu.allow_anykey = true;
+        const bool fully_sealed = locThisItem.is_well_sealed();
+        if( fully_sealed ) {
+            add_msg( m_bad, _( "You can't interact with the %s while it is in a sealed pocket." ), locThisItem->display_name() );
+        }
         const auto addentry = [&]( const char key, const std::string & text, const hint_rating hint ) {
             // The char is used as retval from the uilist *and* as hotkey.
             action_menu.addentry( key, true, key, text );
             auto &entry = action_menu.entries.back();
+            if( fully_sealed ) {
+                entry.text_color = c_red;
+                return;
+            }
             switch( hint ) {
                 case hint_rating::cant:
                     entry.text_color = c_light_gray;
@@ -1879,8 +1886,8 @@ int game::inventory_item_menu( item_location locThisItem,
         addentry( 'R', pgettext( "action", "read" ), rate_action_read( u, oThisItem ) );
         addentry( 'E', pgettext( "action", "eat" ), rate_action_eat( u, oThisItem ) );
         addentry( 'W', pgettext( "action", "wear" ), rate_action_wear( u, oThisItem ) );
-        addentry( 'w', pgettext( "action", "wield" ), rate_action_wield( u, oThisItem ) );
-        addentry( 't', pgettext( "action", "throw" ), rate_action_wield( u, oThisItem ) );
+        addentry( 'w', pgettext( "action", "wield" ), rate_action_wield( u, locThisItem ) );
+        addentry( 't', pgettext( "action", "throw" ), rate_action_wield( u, locThisItem ) );
         addentry( 'c', pgettext( "action", "change side" ), rate_action_change_side( u, oThisItem ) );
         addentry( 'T', pgettext( "action", "take off" ), rate_action_take_off( u, oThisItem ) );
         addentry( 'd', pgettext( "action", "drop" ), rate_drop_item );
@@ -1894,7 +1901,7 @@ int game::inventory_item_menu( item_location locThisItem,
             if( oThisItem.num_item_stacks() > 0 ) {
                 addentry( 'o', pgettext( "action", "open" ), hint_rating::good );
             }
-            addentry( 'v', pgettext( "action", "pocket autopickup settings" ), hint_rating::good );
+            addentry( 'v', pgettext( "action", "pocket settings" ), hint_rating::good );
         }
 
         if( oThisItem.is_favorite ) {
@@ -1985,160 +1992,164 @@ int game::inventory_item_menu( item_location locThisItem,
                 ui = nullptr;
             }
 
-            switch( cMenu ) {
-                case 'a': {
-                    contents_change_handler handler;
-                    handler.unseal_pocket_containing( locThisItem );
-                    if( locThisItem.get_item()->type->has_use() &&
-                        !locThisItem.get_item()->item_has_uses_recursive( true ) ) { // NOLINT(bugprone-branch-clone)
-                        // Item has uses and none of its contents (if any) has uses.
-                        avatar_action::use_item( u, locThisItem );
-                    } else if( locThisItem.get_item()->item_has_uses_recursive() ) {
-                        game::item_action_menu( locThisItem );
-                    } else if( locThisItem.get_item()->has_relic_activation() ) {
-                        avatar_action::use_item( u, locThisItem );
-                    } else {
-                        add_msg( m_info, _( "You can't use a %s there." ), locThisItem->tname() );
-                        break;
-                    }
-                    handler.handle_by( u );
-                    break;
-                }
-                case 'E':
-                    if( !locThisItem.get_item()->is_container() ) {
-                        avatar_action::eat( u, locThisItem );
-                    } else {
-                        avatar_action::eat( u, game_menus::inv::consume( u, locThisItem ) );
-                    }
-                    break;
-                case 'W': {
-                    contents_change_handler handler;
-                    handler.unseal_pocket_containing( locThisItem );
-                    u.wear( locThisItem );
-                    handler.handle_by( u );
-                    break;
-                }
-                case 'w':
-                    if( u.can_wield( *locThisItem ).success() ) {
+            if( !fully_sealed ) {
+                switch( cMenu ) {
+                    case 'a': {
                         contents_change_handler handler;
                         handler.unseal_pocket_containing( locThisItem );
-                        wield( locThisItem );
-                        handler.handle_by( u );
-                    } else {
-                        add_msg( m_info, "%s", u.can_wield( *locThisItem ).c_str() );
-                    }
-                    break;
-                case 't': {
-                    contents_change_handler handler;
-                    handler.unseal_pocket_containing( locThisItem );
-                    avatar_action::plthrow( u, locThisItem );
-                    handler.handle_by( u );
-                    break;
-                }
-                case 'c':
-                    u.change_side( locThisItem );
-                    break;
-                case 'T':
-                    u.takeoff( locThisItem );
-                    break;
-                case 'd':
-                    u.drop( locThisItem, u.pos() );
-                    break;
-                case 'U':
-                    u.unload( locThisItem );
-                    break;
-                case 'r':
-                    reload( locThisItem );
-                    break;
-                case 'p':
-                    reload( locThisItem, true );
-                    break;
-                case 'm':
-                    avatar_action::mend( u, locThisItem );
-                    break;
-                case 'R':
-                    u.read( locThisItem );
-                    break;
-                case 'D':
-                    u.disassemble( locThisItem, false );
-                    break;
-                case 'f':
-                    oThisItem.is_favorite = !oThisItem.is_favorite;
-                    if( locThisItem.has_parent() ) {
-                        item_location parent = locThisItem.parent_item();
-                        item_pocket *const pocket = parent->contained_where( oThisItem );
-                        if( pocket ) {
-                            pocket->restack();
+                        if( locThisItem.get_item()->type->has_use() &&
+                            !( locThisItem.get_item()->item_has_uses_recursive( true ) && !locThisItem->all_pockets_well_sealed() ) ) { // NOLINT(bugprone-branch-clone)
+                            // Item has uses and none of its contents (if any) has uses.
+                            avatar_action::use_item( u, locThisItem );
+                        } else if( locThisItem.get_item()->item_has_uses_recursive() && !locThisItem->all_pockets_well_sealed() ) {
+                            game::item_action_menu( locThisItem );
+                        } else if( locThisItem.get_item()->has_relic_activation() ) {
+                            avatar_action::use_item( u, locThisItem );
                         } else {
-                            debugmsg( "parent container does not contain item" );
+                            add_msg( m_info, _( "You can't use a %s there." ), locThisItem->tname() );
+                            break;
                         }
+                        handler.handle_by( u );
+                        break;
                     }
-                    break;
-                case 'v':
-                    if( oThisItem.is_container() ) {
-                        oThisItem.favorite_settings_menu( oThisItem.tname( 1, false ) );
+                    case 'E':
+                        if( !locThisItem.get_item()->is_container() ) {
+                            avatar_action::eat( u, locThisItem );
+                        } else if ( !locThisItem->all_pockets_well_sealed() ) {
+                            avatar_action::eat( u, game_menus::inv::consume( u, locThisItem ) );
+                        } else {
+                            add_msg( m_bad, _( "You can't easily unseal the %s." ), locThisItem->display_name() );
+                        }
+                        break;
+                    case 'W': {
+                        contents_change_handler handler;
+                        handler.unseal_pocket_containing( locThisItem );
+                        u.wear( locThisItem );
+                        handler.handle_by( u );
+                        break;
                     }
-                    break;
-                case 'V': {
-                    int is_recipe = 0;
-                    std::string this_itype = oThisItem.typeId().str();
-                    if( oThisItem.is_craft() ) {
-                        this_itype = oThisItem.get_making().ident().str();
-                        is_recipe = 1;
+                    case 'w':
+                        if( u.can_wield( locThisItem ).success() ) {
+                            contents_change_handler handler;
+                            handler.unseal_pocket_containing( locThisItem );
+                            wield( locThisItem );
+                            handler.handle_by( u );
+                        } else {
+                            add_msg( m_info, "%s", u.can_wield( locThisItem ).c_str() );
+                        }
+                        break;
+                    case 't': {
+                        contents_change_handler handler;
+                        handler.unseal_pocket_containing( locThisItem );
+                        avatar_action::plthrow( u, locThisItem );
+                        handler.handle_by( u );
+                        break;
                     }
-                    player_activity recipe_act = player_activity( ACT_VIEW_RECIPE, 0, is_recipe, 0, this_itype );
-                    u.assign_activity( recipe_act );
-                    break;
+                    case 'c':
+                        u.change_side( locThisItem );
+                        break;
+                    case 'T':
+                        u.takeoff( locThisItem );
+                        break;
+                    case 'd':
+                        u.drop( locThisItem, u.pos() );
+                        break;
+                    case 'U':
+                        u.unload( locThisItem );
+                        break;
+                    case 'r':
+                        reload( locThisItem );
+                        break;
+                    case 'p':
+                        reload( locThisItem, true );
+                        break;
+                    case 'm':
+                        avatar_action::mend( u, locThisItem );
+                        break;
+                    case 'R':
+                        u.read( locThisItem );
+                        break;
+                    case 'D':
+                        u.disassemble( locThisItem, false );
+                        break;
+                    case 'f':
+                        oThisItem.is_favorite = !oThisItem.is_favorite;
+                        if( locThisItem.has_parent() ) {
+                            item_location parent = locThisItem.parent_item();
+                            item_pocket *const pocket = parent->contained_where( oThisItem );
+                            if( pocket ) {
+                                pocket->restack();
+                            } else {
+                                debugmsg( "parent container does not contain item" );
+                            }
+                        }
+                        break;
+                    case 'v':
+                        if( oThisItem.is_container() ) {
+                            oThisItem.favorite_settings_menu( oThisItem.tname( 1, false ) );
+                        }
+                        break;
+                    case 'V': {
+                        int is_recipe = 0;
+                        std::string this_itype = oThisItem.typeId().str();
+                        if( oThisItem.is_craft() ) {
+                            this_itype = oThisItem.get_making().ident().str();
+                            is_recipe = 1;
+                        }
+                        player_activity recipe_act = player_activity( ACT_VIEW_RECIPE, 0, is_recipe, 0, this_itype );
+                        u.assign_activity( recipe_act );
+                        break;
+                    }
+                    case 'i':
+                        if( oThisItem.is_container() && !oThisItem.all_pockets_well_sealed() ) {
+                            game_menus::inv::insert_items( u, locThisItem );
+                        }
+                        break;
+                    case 'o':
+                        if( oThisItem.is_container() && oThisItem.num_item_stacks() > 0 ) {
+                            game_menus::inv::common( locThisItem, u );
+                        }
+                        break;
+                    case '=':
+                        game_menus::inv::reassign_letter( u, oThisItem );
+                        break;
+                    case KEY_PPAGE:
+                        iScrollPos -= iScrollHeight;
+                        if( ui ) {
+                            ui->invalidate_ui();
+                        }
+                        break;
+                    case KEY_NPAGE:
+                        iScrollPos += iScrollHeight;
+                        if( ui ) {
+                            ui->invalidate_ui();
+                        }
+                        break;
+                    case '+':
+                        if( !bHPR ) {
+                            get_auto_pickup().add_rule( &oThisItem, true );
+                            add_msg( m_info, _( "'%s' added to character pickup rules." ), oThisItem.tname( 1,
+                                     false ) );
+                        }
+                        break;
+                    case '-':
+                        if( bHPR ) {
+                            get_auto_pickup().remove_rule( &oThisItem );
+                            add_msg( m_info, _( "'%s' removed from character pickup rules." ), oThisItem.tname( 1,
+                                     false ) );
+                        }
+                        break;
+                    case '<':
+                    case '>':
+                        if( oThisItem.is_container() ) {
+                            for( item_pocket *pocket : oThisItem.get_all_contained_pockets().value() ) {
+                                pocket->settings.set_collapse( cMenu == '>' );
+                            }
+                        }
+                        break;
+                    default:
+                        break;
                 }
-                case 'i':
-                    if( oThisItem.is_container() ) {
-                        game_menus::inv::insert_items( u, locThisItem );
-                    }
-                    break;
-                case 'o':
-                    if( oThisItem.is_container() && oThisItem.num_item_stacks() > 0 ) {
-                        game_menus::inv::common( locThisItem, u );
-                    }
-                    break;
-                case '=':
-                    game_menus::inv::reassign_letter( u, oThisItem );
-                    break;
-                case KEY_PPAGE:
-                    iScrollPos -= iScrollHeight;
-                    if( ui ) {
-                        ui->invalidate_ui();
-                    }
-                    break;
-                case KEY_NPAGE:
-                    iScrollPos += iScrollHeight;
-                    if( ui ) {
-                        ui->invalidate_ui();
-                    }
-                    break;
-                case '+':
-                    if( !bHPR ) {
-                        get_auto_pickup().add_rule( &oThisItem, true );
-                        add_msg( m_info, _( "'%s' added to character pickup rules." ), oThisItem.tname( 1,
-                                 false ) );
-                    }
-                    break;
-                case '-':
-                    if( bHPR ) {
-                        get_auto_pickup().remove_rule( &oThisItem );
-                        add_msg( m_info, _( "'%s' removed from character pickup rules." ), oThisItem.tname( 1,
-                                 false ) );
-                    }
-                    break;
-                case '<':
-                case '>':
-                    if( oThisItem.is_container() ) {
-                        for( item_pocket *pocket : oThisItem.get_all_contained_pockets().value() ) {
-                            pocket->settings.set_collapse( cMenu == '>' );
-                        }
-                    }
-                    break;
-                default:
-                    break;
             }
         } while( !exit );
     }

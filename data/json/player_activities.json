@@ -1111,6 +1111,20 @@
     "interruptable_with_kb": false
   },
   {
+    "id": "ACT_POCKET_SEAL",
+    "type": "activity_type",
+    "activity_level": "NO_EXERCISE",
+    "verb": "sealing",
+    "based_on": "time"
+  },
+  {
+    "id": "ACT_POCKET_UNSEAL",
+    "type": "activity_type",
+    "activity_level": "NO_EXERCISE",
+    "verb": "unsealing",
+    "based_on": "time"
+  },
+  {
     "id": "ACT_CBM_SURGERY",
     "type": "activity_type",
     "activity_level": "NO_EXERCISE",

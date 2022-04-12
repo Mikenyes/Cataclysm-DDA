@@ -777,11 +777,12 @@ class item : public visitable
         /** Permits filthy components, should only be used as a helper in creating filters */
         bool allow_crafting_component() const;
 
-        // seal the item's pockets. used for crafting and spawning items.
+        // force seal the item's pockets. used for crafting and spawning items.
         bool seal();
 
         bool all_pockets_sealed() const;
         bool any_pockets_sealed() const;
+        bool all_pockets_well_sealed() const;
         /** Whether this is container. Note that container does not necessarily means it's
          * suitable for liquids. */
         bool is_container() const;

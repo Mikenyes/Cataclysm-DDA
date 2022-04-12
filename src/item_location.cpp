@@ -815,6 +815,22 @@ bool item_location::has_parent() const
     return false;
 }
 
+bool item_location::is_well_sealed() const
+{
+    if( !has_parent() ) {
+        return false;
+    }
+
+    item_location parent = parent_item();
+    item_pocket *pocket = parent->contained_where( *get_item() );
+
+    if( pocket->will_unseal() ) {
+        return parent.is_well_sealed();
+    }
+
+    return true;
+}
+
 bool item_location::parents_can_contain_recursive( item *it ) const
 {
     if( !has_parent() ) {

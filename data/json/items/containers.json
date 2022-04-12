@@ -957,7 +957,10 @@
         "open_container": true,
         "max_contains_volume": "500 ml",
         "max_contains_weight": "1 kg",
-        "sealed_data": { "spoil_multiplier": 0.0 }
+        "resealable": true,
+        "seal_moves": 12000,
+        "unseal_moves": 500,
+        "sealed_data": { "spoil_multiplier": 0.01 }
       }
     ]
   },
@@ -984,7 +987,7 @@
         "open_container": true,
         "max_contains_volume": "250 ml",
         "max_contains_weight": "1 kg",
-        "sealed_data": { "spoil_multiplier": 0.0 }
+        "sealed_data": { "spoil_multiplier": 0.01 }
       }
     ],
     "qualities": [ [ "BOIL", 1 ] ]
@@ -1006,7 +1009,7 @@
         "open_container": true,
         "max_contains_volume": "500 ml",
         "max_contains_weight": "2 kg",
-        "sealed_data": { "spoil_multiplier": 0.0 }
+        "sealed_data": { "spoil_multiplier": 0.01 }
       }
     ],
     "qualities": [ [ "BOIL", 1 ] ],
@@ -1175,7 +1178,7 @@
         "rigid": true,
         "watertight": true,
         "open_container": true,
-        "sealed_data": { "spoil_multiplier": 0.0 },
+        "sealed_data": { "spoil_multiplier": 0.01 },
         "max_contains_volume": "250 ml",
         "max_contains_weight": "1 kg"
       }
@@ -1410,7 +1413,7 @@
         "watertight": true,
         "max_contains_volume": "3 L",
         "max_contains_weight": "6 kg",
-        "sealed_data": { "spoil_multiplier": 0.0 }
+        "sealed_data": { "spoil_multiplier": 0.01 }
       }
     ],
     "qualities": [ [ "CONTAIN", 1 ], [ "BOIL", 1 ] ]
@@ -1436,7 +1439,7 @@
         "watertight": true,
         "max_contains_volume": "500 ml",
         "max_contains_weight": "1 kg",
-        "sealed_data": { "spoil_multiplier": 0.0 }
+        "sealed_data": { "spoil_multiplier": 0.01 }
       }
     ],
     "qualities": [ [ "CONTAIN", 1 ], [ "BOIL", 1 ] ]
@@ -2102,7 +2105,7 @@
         "open_container": true,
         "max_contains_volume": "3 L",
         "max_contains_weight": "6 kg",
-        "sealed_data": { "spoil_multiplier": 0.0 }
+        "sealed_data": { "spoil_multiplier": 0.01 }
       }
     ],
     "qualities": [ [ "BOIL", 1 ] ]

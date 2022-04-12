@@ -6,6 +6,7 @@
 #include <string>
 #include <utility>
 
+#include "activity_actor_definitions.h"
 #include "ammo.h"
 #include "calendar.h"
 #include "cata_utility.h"
@@ -173,6 +174,31 @@ void pocket_data::load( const JsonObject &jo )
     optional( jo, was_loaded, "rigid", rigid, false );
     optional( jo, was_loaded, "holster", holster );
     optional( jo, was_loaded, "ablative", ablative );
+    optional( jo, was_loaded, "resealable", resealable, false );
+    optional( jo, was_loaded, "seal_moves", seal_moves, 0 );
+    optional( jo, was_loaded, "unseal_moves", unseal_moves, 0 );
+    if( jo.has_string( "seal_requirements" ) ) {
+        seal_requirements = { { requirement_id( jo.get_string( "seal_requirements" ) ), 1 } };
+        seal_data = std::accumulate( seal_requirements.begin(), seal_requirements.end(), seal_data );
+    } else if( jo.has_array( "seal_requirements" ) ) {
+        seal_requirements.clear();
+        for( JsonArray cur : jo.get_array( "seal_requirements" ) ) {
+            seal_requirements.emplace_back( requirement_id( cur.get_string( 0 ) ), cur.get_int( 1 ) );
+            seal_data = std::accumulate( seal_requirements.begin(), seal_requirements.end(), seal_data );
+        }
+    }
+    if( jo.has_string( "unseal_requirements" ) ) {
+        unseal_requirements = { { requirement_id( jo.get_string( "unseal_requirements" ) ), 1 } };
+        unseal_data = std::accumulate( unseal_requirements.begin(), unseal_requirements.end(),
+                                       unseal_data );
+    } else if( jo.has_array( "unseal_requirements" ) ) {
+        unseal_requirements.clear();
+        for( JsonArray cur : jo.get_array( "unseal_requirements" ) ) {
+            unseal_requirements.emplace_back( requirement_id( cur.get_string( 0 ) ), cur.get_int( 1 ) );
+            unseal_data = std::accumulate( unseal_requirements.begin(), unseal_requirements.end(),
+                                           unseal_data );
+        }
+    }
     // if ablative also flag as a holster so it only holds 1 item
     if( ablative ) {
         holster = true;
@@ -806,18 +832,51 @@ bool item_pocket::will_spill_if_unsealed() const
     return data->open_container;
 }
 
-bool item_pocket::seal()
+bool item_pocket::seal( Character &you )
 {
     if( !sealable() || empty() ) {
+        return false;
+    }
+    if( !_sealed && ( !data->seal_requirements.empty() || data->seal_moves > 0 ) ) {
+        you.assign_activity( player_activity( pocket_seal_activity_actor( data->seal_moves, "sealing" ) ) );
+        you.activity.requirements = deduped_requirement_data( data->seal_data, "item_pocket_seal" );
+        you.activity.pocket_targets.push_back( this );
+        return true;
+    }
+    _sealed = true;
+    return true;
+}
+
+bool item_pocket::unseal( Character &you )
+{
+    if( _sealed && ( !data->unseal_requirements.empty() || data->unseal_moves > 0 ) ) {
+        you.assign_activity( player_activity( pocket_seal_activity_actor( data->unseal_moves,
+                                              "unsealing" ) ) );
+        you.activity.requirements = deduped_requirement_data( data->unseal_data, "item_pocket_unseal" );
+        you.activity.pocket_targets.push_back( this );
+        return true;
+    }
+    _sealed = false;
+    return true;
+}
+
+bool item_pocket::force_seal()
+{
+    if( !sealable() ) {
         return false;
     }
     _sealed = true;
     return true;
 }
 
-void item_pocket::unseal()
+void item_pocket::force_unseal()
 {
     _sealed = false;
+}
+
+bool item_pocket::will_unseal() const
+{
+    return _sealed ? data->unseal_requirements.empty() && data->unseal_moves == 0 : true;
 }
 
 bool item_pocket::sealed() const
@@ -828,6 +887,12 @@ bool item_pocket::sealed() const
         return _sealed;
     }
 }
+
+bool item_pocket::resealable() const
+{
+    return data->resealable;
+}
+
 bool item_pocket::sealable() const
 {
     // if it has sealed data it is understood that the
@@ -1019,6 +1084,17 @@ void item_pocket::general_info( std::vector<iteminfo> &info, int pocket_number,
 
     info.emplace_back( base_type_str, _( "Base moves to remove item: " ),
                        "<num>", iteminfo::lower_is_better, data->moves );
+
+    if( data->seal_moves > 0 ) {
+        info.emplace_back( base_type_str, _( "Base moves to seal pocket: " ),
+                           "<num>", iteminfo::lower_is_better, data->seal_moves );
+    }
+
+    if( data->unseal_moves > 0 ) {
+        info.emplace_back( base_type_str, _( "Base moves to unseal pocket: " ),
+                           "<num>", iteminfo::lower_is_better, data->unseal_moves );
+    }
+
     if( data->rigid ) {
         info.emplace_back( "DESCRIPTION", _( "This pocket is <info>rigid</info>." ) );
     }
@@ -1079,6 +1155,14 @@ void item_pocket::general_info( std::vector<iteminfo> &info, int pocket_number,
                            string_format(
                                _( "This pocket expands at <neutral>%.0f%%</neutral> of the rate of volume of items inside." ),
                                data->volume_multiplier * 100 ) );
+    }
+    if( !data->seal_requirements.empty() ) {
+        info.emplace_back( "DESCRIPTION",
+                           _( "This pocket <good>can be sealed</good> with additional equipment." ) );
+    }
+    if( !data->unseal_requirements.empty() ) {
+        info.emplace_back( "DESCRIPTION",
+                           _( "This pocket <bad>cannot be unsealed</bad> without additional equipment." ) );
     }
 
     // Display flags items need to be stored in this pocket
@@ -1642,7 +1726,7 @@ void item_pocket::on_pickup( Character &guy )
 
 void item_pocket::on_contents_changed()
 {
-    unseal();
+    force_unseal();
     restack();
 }
 

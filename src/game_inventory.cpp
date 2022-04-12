@@ -1631,7 +1631,7 @@ class weapon_inventory_preset: public inventory_selector_preset
         }
 
         std::string get_denial( const item_location &loc ) const override {
-            const auto ret = you.can_wield( *loc );
+            const auto ret = you.can_wield( loc );
 
             if( !ret.success() ) {
                 return trim_trailing_punctuations( ret.str() );

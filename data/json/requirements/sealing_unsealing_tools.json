@@ -1,0 +1,7 @@
+[
+  {
+    "id": "vacuum_sealing_single",
+    "type": "requirement",
+    "tools": [ [ [ "vac_sealer", 1 ], [ "makeshift_sealer", 2 ] ] ]
+  }
+]

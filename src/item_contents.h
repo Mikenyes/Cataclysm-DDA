@@ -263,6 +263,7 @@ class item_contents
         bool seal_all_pockets();
         bool all_pockets_sealed() const;
         bool any_pockets_sealed() const;
+        bool all_pockets_well_sealed() const;
         // heats up the contents if they have temperature
         void heat_up();
         // returns amount of ammo consumed

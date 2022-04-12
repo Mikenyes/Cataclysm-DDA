@@ -1570,7 +1570,7 @@ static void expand_item_in_reqs(
 }
 
 deduped_requirement_data::deduped_requirement_data( const requirement_data &in,
-        const recipe_id &context )
+        const std::string &context )
 {
     // This constructor works through a requirement_data, converting it into an
     // equivalent set of requirement_data alternatives, where each alternative
@@ -1655,7 +1655,7 @@ deduped_requirement_data::deduped_requirement_data( const requirement_data &in,
         if( alternatives_.size() + pending.size() > max_alternatives ) {
             debugmsg( "Construction of deduped_requirement_data generated too many alternatives.  "
                       "The recipe %s should be simplified.  See the Recipe section in "
-                      "doc/JSON_INFO.md for more details.", context.str() );
+                      "doc/JSON_INFO.md for more details.", context );
             is_too_complex_ = true;
             alternatives_ = { in };
             return;
