@@ -1113,6 +1113,13 @@ bool item_contents::all_pockets_well_sealed() const
     return all_sealed;
 }
 
+void item_contents::recalculate_sealing( const bool external_seal )
+{
+    for( item_pocket &pocket : contents ) {
+        pocket.recalculate_sealing( external_seal );
+    }
+}
+
 bool item_contents::has_pocket_type( const item_pocket::pocket_type pk_type ) const
 {
     for( const item_pocket &pocket : contents ) {

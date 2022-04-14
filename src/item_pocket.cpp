@@ -844,6 +844,7 @@ bool item_pocket::seal( Character &you )
         return true;
     }
     _sealed = true;
+    recalculate_sealing( false );
     return true;
 }
 
@@ -857,7 +858,19 @@ bool item_pocket::unseal( Character &you )
         return true;
     }
     _sealed = false;
+    recalculate_sealing( false );
     return true;
+}
+
+void item_pocket::recalculate_sealing( const bool external_seal )
+{
+    const bool well_sealed = external_seal || ( _sealed && ( !data->unseal_requirements.empty() ||
+                             data->unseal_moves > 0 ) );
+    for( auto iter = contents.begin(); iter != contents.end(); ) {
+        iter->is_well_sealed = well_sealed;
+        iter->recalculate_sealing( well_sealed );
+        ++iter;
+    }
 }
 
 bool item_pocket::force_seal()
@@ -866,12 +879,14 @@ bool item_pocket::force_seal()
         return false;
     }
     _sealed = true;
+    recalculate_sealing( false );
     return true;
 }
 
 void item_pocket::force_unseal()
 {
     _sealed = false;
+    recalculate_sealing( false );
 }
 
 bool item_pocket::will_unseal() const

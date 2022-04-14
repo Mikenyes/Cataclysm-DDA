@@ -2904,6 +2904,19 @@ bool Character::can_use( const item &it, const item &context ) const
     }
     const auto &ctx = !context.is_null() ? context : it;
 
+    if( &it.is_well_sealed ) {
+        add_msg_player_or_npc( m_bad, _( "You can't use the %1$s when it is in a well sealed pocket." ),
+                               _( "<npcname> can't use the %1$s when it is in a well sealed pocket." ),
+                               it.tname() );
+        return false;
+    } else {
+        add_msg_player_or_npc( m_bad,
+                               _( "You can't use the %1$s on the %2$s when the %2&$s is in a well sealed pocket." ),
+                               _( "<npcname> can't use the %1$s on the %2$s when the %2&$s is in a well sealed pocket." ),
+                               it.tname(), ctx.tname() );
+        return false;
+    }
+
     if( !meets_requirements( it, ctx ) ) {
         const std::string unmet( enumerate_unmet_requirements( it, ctx ) );
 
@@ -6953,6 +6966,10 @@ void Character::did_hit( Creature &target )
 
 ret_val<bool> Character::can_wield( const item &it ) const
 {
+    if( it.is_well_sealed ) {
+        return ret_val<bool>::make_failure(
+                   _( "You can't wield something from inside a well sealed pocket." ) );
+    }
     if( has_effect( effect_incorporeal ) ) {
         return ret_val<bool>::make_failure( _( "You can't wield anything while incorporeal." ) );
     }
@@ -11065,6 +11082,10 @@ void Character::use( int inventory_position )
 
 void Character::use( item_location loc, int pre_obtain_moves )
 {
+    if( loc.is_well_sealed() ) {
+        add_msg_if_player( m_bad, _( "You can't interact with an item in a well sealed pocket." ) );
+        return;
+    }
     // if -1 is passed in we don't want to change moves at all
     if( pre_obtain_moves == -1 ) {
         pre_obtain_moves = moves;

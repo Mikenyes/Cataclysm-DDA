@@ -1769,6 +1769,10 @@ static bool consume_med( item &target, Character &you )
 
 trinary Character::consume( item &target, bool force, bool refuel )
 {
+    if( target.is_well_sealed ) {
+        add_msg_if_player( m_bad, _( "You can't eat an item inside a well sealed bag." ) );
+        return trinary::NONE;
+    }
     if( target.is_null() ) {
         add_msg_if_player( m_info, _( "You do not have that item." ) );
         return trinary::NONE;

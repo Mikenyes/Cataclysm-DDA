@@ -9161,6 +9161,11 @@ bool item::all_pockets_well_sealed() const
     return contents.all_pockets_well_sealed();
 }
 
+void item::recalculate_sealing( const bool external_seal )
+{
+    contents.recalculate_sealing( external_seal );
+}
+
 bool item::is_container() const
 {
     return contents.has_pocket_type( item_pocket::pocket_type::CONTAINER );

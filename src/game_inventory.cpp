@@ -478,7 +478,9 @@ class pickup_inventory_preset : public inventory_selector_preset
 
         std::string get_denial( const item_location &loc ) const override {
             if( !you.has_item( *loc ) ) {
-                if( loc->made_of_from_type( phase_id::LIQUID ) ) {
+                if( loc->is_well_sealed ) {
+                    return _( "Can't pick up well sealed item!" );
+                } else if( loc->made_of_from_type( phase_id::LIQUID ) ) {
                     if( loc.has_parent() ) {
                         return _( "Can't pick up liquids." );
                     } else {
@@ -693,6 +695,10 @@ class comestible_inventory_preset : public inventory_selector_preset
         std::string get_denial( const item_location &loc ) const override {
             const item &med = *loc;
 
+            if( loc->is_well_sealed ) {
+                return _( "This is in a well sealed pocket." );
+            }
+
             if(
                 ( loc->made_of_from_type( phase_id::LIQUID ) &&
                   loc.where() != item_location::type::container ) &&
@@ -893,6 +899,10 @@ class fuel_inventory_preset : public inventory_selector_preset
         }
 
         std::string get_denial( const item_location &loc ) const override {
+
+            if( loc->is_well_sealed ) {
+                return _( "This is in a well sealed pocket." );
+            }
 
             if( loc->made_of_from_type( phase_id::LIQUID ) && loc.where() != item_location::type::container ) {
                 return _( "Can't use spilt liquids." );
@@ -1168,6 +1178,10 @@ class activatable_inventory_preset : public pickup_inventory_preset
             const item &it = *loc;
             const auto &uses = it.type->use_methods;
 
+            if( it.is_well_sealed ) {
+                return _( "This is in a well sealed pocket." );
+            }
+
             const auto &comest = it.get_comestible();
             if( comest && !comest->tool.is_null() ) {
                 const bool has = item::count_by_charges( comest->tool )
@@ -1282,6 +1296,11 @@ class gunmod_inventory_preset : public inventory_selector_preset
         }
 
         std::string get_denial( const item_location &loc ) const override {
+
+            if( loc->is_well_sealed ) {
+                return _( "This is in a well sealed pocket." );
+            }
+
             const auto ret = loc->is_gunmod_compatible( gunmod );
 
             if( !ret.success() ) {
@@ -1400,6 +1419,10 @@ class read_inventory_preset: public pickup_inventory_preset
         }
 
         std::string get_denial( const item_location &loc ) const override {
+            if( loc->is_well_sealed ) {
+                return _( "This is in a well sealed pocket." );
+            }
+
             std::vector<std::string> denials;
             if( you.get_book_reader( *loc, denials ) == nullptr && !denials.empty() &&
                 !loc->type->can_use( "learn_spell" ) ) {
@@ -1494,6 +1517,10 @@ class ebookread_inventory_preset : public read_inventory_preset
             you( you ) {
         }
         std::string get_denial( const item_location &loc ) const override {
+            if( loc->is_well_sealed ) {
+                return _( "This is in a well sealed pocket." );
+            }
+
             std::vector<std::string> denials;
             if( you.get_book_reader( *loc, denials ) == nullptr && !denials.empty() &&
                 !loc->type->can_use( "learn_spell" ) ) {
@@ -1631,7 +1658,7 @@ class weapon_inventory_preset: public inventory_selector_preset
         }
 
         std::string get_denial( const item_location &loc ) const override {
-            const auto ret = you.can_wield( loc );
+            const auto ret = you.can_wield( *loc );
 
             if( !ret.success() ) {
                 return trim_trailing_punctuations( ret.str() );
@@ -1842,6 +1869,10 @@ class attach_molle_inventory_preset : public inventory_selector_preset
         }
 
         std::string get_denial( const item_location &loc ) const override {
+
+            if( loc->is_well_sealed ) {
+                return _( "This is in a well sealed pocket." );
+            }
 
             if( !loc.get_item()->empty() ) {
                 return "item needs to be empty.";
@@ -2327,6 +2358,10 @@ class bionic_install_preset: public inventory_selector_preset
 
         std::string get_denial( const item_location &loc ) const override {
 
+            if( loc->is_well_sealed ) {
+                return _( "This is in a well sealed pocket." );
+            }
+
             const ret_val<bool> installable = pa.is_installable( loc, true );
             if( installable.success() && !you.has_enough_anesth( *loc.get_item()->type, pa ) ) {
                 const int weight = units::to_kilogram( pa.bodyweight() ) / 10;
@@ -2414,6 +2449,10 @@ class bionic_install_surgeon_preset : public inventory_selector_preset
         }
 
         std::string get_denial( const item_location &loc ) const override {
+            if( loc->is_well_sealed ) {
+                return _( "This is in a well sealed pocket." );
+            }
+
             const ret_val<bool> installable = pa.is_installable( loc, false );
             return installable.str();
         }

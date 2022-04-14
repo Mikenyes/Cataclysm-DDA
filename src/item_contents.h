@@ -264,6 +264,8 @@ class item_contents
         bool all_pockets_sealed() const;
         bool any_pockets_sealed() const;
         bool all_pockets_well_sealed() const;
+        // sets the is_well_sealed tag on all contents of all pockets
+        void recalculate_sealing( const bool external_seal );
         // heats up the contents if they have temperature
         void heat_up();
         // returns amount of ammo consumed

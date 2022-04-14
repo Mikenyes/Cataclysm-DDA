@@ -262,6 +262,8 @@ class item_pocket
         bool seal( Character &you );
         // unseal the pocket. returns false if pocket does not unseal instantly
         bool unseal( Character &you );
+        // recursively sets the is_well_sealed flag on contents of the pocket
+        void recalculate_sealing( const bool external_seal );
         // seal the pocket instantly unless it is not a sealable pocket
         bool force_seal();
         // unseal the pocket instantly

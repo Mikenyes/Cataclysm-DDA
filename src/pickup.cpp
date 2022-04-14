@@ -173,7 +173,7 @@ static bool pick_one_up( item_location &loc, int quantity, bool &got_water, Pick
     item newit = it;
 
     if( newit.is_well_sealed ) {
-        add_msg( m_bad, _( "Cannot pick up item in sealed pocket." ) );
+        add_msg( m_bad, _( "Cannot pick up item in well sealed pocket." ) );
         return true;
     }
     if( !newit.is_owned_by( player_character, true ) ) {

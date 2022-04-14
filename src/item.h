@@ -783,6 +783,8 @@ class item : public visitable
         bool all_pockets_sealed() const;
         bool any_pockets_sealed() const;
         bool all_pockets_well_sealed() const;
+        // sets the is_well_sealed tag on all contents of all pockets of the item
+        void recalculate_sealing( const bool external_seal );
         /** Whether this is container. Note that container does not necessarily means it's
          * suitable for liquids. */
         bool is_container() const;
@@ -2828,6 +2830,8 @@ class item : public visitable
         int player_id = -1;        // Only give a mission to the right player!
         bool ethereal = false;
         int wetness = 0;           // Turns until this item is completely dry.
+        bool is_well_sealed =
+            false;  // is the item in a well sealed container, preventing interaction until unsealed
 
         int seed = rng( 0, INT_MAX );  // A random seed for layering and other options
 
